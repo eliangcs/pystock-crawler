@@ -5,7 +5,8 @@
 
 from scrapy.item import Item, Field
 
-class StockcrawlerItem(Item):
-    # define the fields for your item here like:
-    # name = Field()
-    pass
+
+class DomzItem(Item):
+    title = Field()
+    link = Field()
+    desc = Field()
