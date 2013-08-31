@@ -1,4 +1,7 @@
+from scrapy.selector import HtmlXPathSelector
 from scrapy.spider import BaseSpider
+
+from stockcrawler.items import DmozItem
 
 
 class DomzSpider(BaseSpider):
@@ -10,5 +13,14 @@ class DomzSpider(BaseSpider):
     ]
 
     def parse(self, response):
-        filename = response.url.split('/')[-2]
-        open(filename, 'wb').write(response.body)
+        hxs = HtmlXPathSelector(response)
+        sites = hxs.select('//ul[@class="directory-url"]/li')
+        items = []
+        for site in sites:
+            item = DmozItem()
+            item['title'] = site.select('a/text()').extract()
+            item['link'] = site.select('a/@href').extract()
+            item['desc'] = site.select('text()').re('-\s([^\n]*?)\\n')
+            items.append(item)
+
+        return items
