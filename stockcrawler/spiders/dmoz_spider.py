@@ -5,6 +5,7 @@ from stockcrawler.items import DmozItem
 
 
 class DomzSpider(BaseSpider):
+
     name = 'dmoz'
     allowed_domains = ['dmoz.org']
     start_urls = [
