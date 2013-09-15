@@ -79,7 +79,20 @@ class EdgarSpider(CrawlSpider):
                 else:
                     stock_class = 'A'
 
-            f.write('%s: %s shares (class %s)\n' % (date, num_shares, stock_class))
+            f.write('%s: %s outstanding shares (class %s)\n' % (date, num_shares, stock_class))
+
+        # extract EPS
+        for s in xxs.select('//us-gaap:EarningsPerShareBasic'):
+            eps = float(s.select('text()')[0].extract())
+
+            context_id = s.select('@contextRef')[0].extract()
+            context = xxs.select('//*[@id="%s"]' % context_id)[0]
+
+            start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
+            end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
+
+            f.write('%s-%s: $%.2f EPS\n' % (start_date, end_date, eps))
+
         f.close()
 
         # print '--------------------------------------------'
