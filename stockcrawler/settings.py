@@ -13,3 +13,5 @@ NEWSPIDER_MODULE = 'stockcrawler.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'stockcrawler (+http://www.yourdomain.com)'
+
+LOG_LEVEL = 'DEBUG'

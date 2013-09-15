@@ -3,34 +3,45 @@ from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.selector import XmlXPathSelector
 
 
-def _find_namespace(xxs, name):
+def find_namespace(xxs, name):
     name_re = name.replace('-', '\-')
     if not name_re.startswith('xmlns'):
         name_re = 'xmlns:' + name_re
     return xxs.re('%s=\"([^\"]+)\"' % name_re)[0]
 
 
-def _register_namespace(xxs, name):
-    ns = _find_namespace(xxs, name)
+def register_namespace(xxs, name):
+    ns = find_namespace(xxs, name)
     xxs.register_namespace(name, ns)
 
 
-def _register_namespaces(xxs):
+def register_namespaces(xxs):
     names = ('xmlns', 'xbrli', 'dei', 'us-gaap')
     for name in names:
         try:
-            _register_namespace(xxs, name)
+            register_namespace(xxs, name)
         except IndexError:
             pass
 
 
+def load_symbols(file_path):
+    symbols = []
+    with open(file_path) as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                symbols.append(line)
+    return symbols
+
+
 class URLGenerator(object):
 
-    def __iter__(self):
-        symbols = ('GOOG',)
-        url = 'http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=%s&type=10-Q&dateb=&owner=exclude&count=100'
+    def __init__(self, symbols):
+        self.symbols = symbols
 
-        for symbol in symbols:
+    def __iter__(self):
+        url = 'http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=%s&type=10-Q&dateb=&owner=exclude&count=100'
+        for symbol in self.symbols:
             yield (url % symbol)
 
 # http://www.sec.gov/Archives/edgar/data/1326801/000132680113000019/0001326801-13-000019-index.htm
@@ -47,18 +58,28 @@ class EdgarSpider(CrawlSpider):
 
     name = 'edgar'
     allowed_domains = ['sec.gov']
-    start_urls = URLGenerator()
 
     rules = (
         Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\"]+\-index\.htm',))),
         Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\"]+\-\d{8}\.xml',)), callback='parse_10q'),
     )
 
+    def __init__(self, **kwargs):
+        super(EdgarSpider, self).__init__(**kwargs)
+
+        symbol_file_path = kwargs.get('symbols')
+        symbols = load_symbols(symbol_file_path)
+
+        self.start_urls = URLGenerator(symbols)
+
     def parse_10q(self, response):
         xxs = XmlXPathSelector(response)
-        _register_namespaces(xxs)
+        register_namespaces(xxs)
 
         f = open('E:/_debug.txt', 'a')
+
+        # extract symbol
+        symbol = xxs.select('//dei:TradingSymbol/text()')[0].extract().uppper()
 
         # extract outstanding shares
         for s in xxs.select('//dei:EntityCommonStockSharesOutstanding'):
@@ -79,7 +100,7 @@ class EdgarSpider(CrawlSpider):
                 else:
                     stock_class = 'A'
 
-            f.write('%s: %s outstanding shares (class %s)\n' % (date, num_shares, stock_class))
+            f.write('[%s] %s: %s outstanding shares (class %s)\n' % (symbol, date, num_shares, stock_class))
 
         # extract EPS
         for s in xxs.select('//us-gaap:EarningsPerShareBasic'):
@@ -91,10 +112,6 @@ class EdgarSpider(CrawlSpider):
             start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
             end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
 
-            f.write('%s-%s: $%.2f EPS\n' % (start_date, end_date, eps))
+            f.write('[%s] %s ~ %s: EPS $%.2f\n' % (symbol, start_date, end_date, eps))
 
         f.close()
-
-        # print '--------------------------------------------'
-        # print xxs.select('//dei:EntityCommonStockSharesOutstanding/text()').extract()
-        # print xxs.select('//us-gaap:EarningsPerShareBasic/text()').extract()
