@@ -3,6 +3,27 @@ from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.selector import XmlXPathSelector
 
 
+def _find_namespace(xxs, name):
+    name_re = name.replace('-', '\-')
+    if not name_re.startswith('xmlns'):
+        name_re = 'xmlns:' + name_re
+    return xxs.re('%s=\"([^\"]+)\"' % name_re)[0]
+
+
+def _register_namespace(xxs, name):
+    ns = _find_namespace(xxs, name)
+    xxs.register_namespace(name, ns)
+
+
+def _register_namespaces(xxs):
+    names = ('xmlns', 'xbrli', 'dei', 'us-gaap')
+    for name in names:
+        try:
+            _register_namespace(xxs, name)
+        except IndexError:
+            pass
+
+
 class URLGenerator(object):
 
     def __iter__(self):
@@ -35,11 +56,32 @@ class EdgarSpider(CrawlSpider):
 
     def parse_10q(self, response):
         xxs = XmlXPathSelector(response)
-        try:
-            dei_namespace = xxs.re('xmlns:dei=\"([^\"]+)\"')[0]
-        except IndexError:
-            return
+        _register_namespaces(xxs)
 
-        xxs.register_namespace('dei', dei_namespace)
-        print '--------------------------------------------'
-        print xxs.select('//dei:EntityCommonStockSharesOutstanding/text()').extract()
+        f = open('E:/_debug.txt', 'a')
+
+        # extract outstanding shares
+        for s in xxs.select('//dei:EntityCommonStockSharesOutstanding'):
+            num_shares = int(s.select('text()')[0].extract())
+
+            context_id = s.select('@contextRef')[0].extract()
+            context = xxs.select('//*[@id="%s"]' % context_id)[0]
+
+            date = context.select('.//*[local-name()="instant"]/text()')[0].extract()
+
+            try:
+                class_str = context.select('.//*[local-name()="explicitMember"]/text()')[0].extract()
+            except IndexError:
+                stock_class = 'A'
+            else:
+                if 'ClassB' in class_str:
+                    stock_class = 'B'
+                else:
+                    stock_class = 'A'
+
+            f.write('%s: %s shares (class %s)\n' % (date, num_shares, stock_class))
+        f.close()
+
+        # print '--------------------------------------------'
+        # print xxs.select('//dei:EntityCommonStockSharesOutstanding/text()').extract()
+        # print xxs.select('//us-gaap:EarningsPerShareBasic/text()').extract()
