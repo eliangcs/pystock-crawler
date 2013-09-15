@@ -29,7 +29,7 @@ def load_symbols(file_path):
     with open(file_path) as f:
         for line in f:
             line = line.strip()
-            if line:
+            if line and not line.startswith('#'):
                 symbols.append(line)
     return symbols
 
@@ -40,7 +40,7 @@ class URLGenerator(object):
         self.symbols = symbols
 
     def __iter__(self):
-        url = 'http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=%s&type=10-Q&dateb=&owner=exclude&count=100'
+        url = 'http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=%s&type=10-&dateb=&owner=exclude&count=300'
         for symbol in self.symbols:
             yield (url % symbol)
 
@@ -79,7 +79,7 @@ class EdgarSpider(CrawlSpider):
         f = open('E:/_debug.txt', 'a')
 
         # extract symbol
-        symbol = xxs.select('//dei:TradingSymbol/text()')[0].extract().uppper()
+        symbol = xxs.select('//dei:TradingSymbol/text()')[0].extract().upper()
 
         # extract outstanding shares
         for s in xxs.select('//dei:EntityCommonStockSharesOutstanding'):
@@ -100,7 +100,7 @@ class EdgarSpider(CrawlSpider):
                 else:
                     stock_class = 'A'
 
-            f.write('[%s] %s: %s outstanding shares (class %s)\n' % (symbol, date, num_shares, stock_class))
+            f.write('%s\tShares (%s)\t%s\t%s\n' % (symbol, stock_class, num_shares, date))
 
         # extract EPS
         for s in xxs.select('//us-gaap:EarningsPerShareBasic'):
@@ -112,6 +112,6 @@ class EdgarSpider(CrawlSpider):
             start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
             end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
 
-            f.write('[%s] %s ~ %s: EPS $%.2f\n' % (symbol, start_date, end_date, eps))
+            f.write('%s\tEPS\t\t%.2f\t\t%s-%s\n' % (symbol, eps, start_date, end_date))
 
         f.close()
