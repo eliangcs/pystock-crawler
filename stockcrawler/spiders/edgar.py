@@ -2,6 +2,8 @@ from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.selector import XmlXPathSelector
 
+from stockcrawler.items import StockItem
+
 
 def find_namespace(xxs, name):
     name_re = name.replace('-', '\-')
@@ -76,7 +78,7 @@ class EdgarSpider(CrawlSpider):
         xxs = XmlXPathSelector(response)
         register_namespaces(xxs)
 
-        f = open('E:/_debug.txt', 'a')
+        items = []
 
         # extract symbol
         symbol = xxs.select('//dei:TradingSymbol/text()')[0].extract().upper()
@@ -100,7 +102,12 @@ class EdgarSpider(CrawlSpider):
                 else:
                     stock_class = 'A'
 
-            f.write('%s\tShares (%s)\t%s\t%s\n' % (symbol, stock_class, num_shares, date))
+            item = StockItem()
+            item['symbol'] = symbol
+            item['key'] = 'NUM_SHARES_' + stock_class
+            item['value'] = num_shares
+            item['date'] = date
+            items.append(item)
 
         # extract EPS
         for s in xxs.select('//us-gaap:EarningsPerShareBasic'):
@@ -112,6 +119,11 @@ class EdgarSpider(CrawlSpider):
             start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
             end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
 
-            f.write('%s\tEPS\t\t%.2f\t\t%s-%s\n' % (symbol, eps, start_date, end_date))
+            item = StockItem()
+            item['symbol'] = symbol
+            item['key'] = 'EPS_BASIC'
+            item['value'] = eps
+            item['date'] = '%s:%s' % (start_date, end_date)
+            items.append(item)
 
-        f.close()
+        return items
