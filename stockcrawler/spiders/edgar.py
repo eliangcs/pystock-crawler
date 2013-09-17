@@ -126,4 +126,37 @@ class EdgarSpider(CrawlSpider):
             item['date'] = '%s:%s' % (start_date, end_date)
             items.append(item)
 
+        for s in xxs.select('//us-gaap:EarningsPerShareDiluted'):
+            eps = float(s.select('text()')[0].extract())
+
+            context_id = s.select('@contextRef')[0].extract()
+            context = xxs.select('//*[@id="%s"]' % context_id)[0]
+
+            start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
+            end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
+
+            item = StockItem()
+            item['symbol'] = symbol
+            item['key'] = 'EPS_DILUTED'
+            item['value'] = eps
+            item['date'] = '%s:%s' % (start_date, end_date)
+            items.append(item)
+
+        # extract dividend
+        for s in xxs.select('//us-gaap:CommonStockDividendsPerShareDeclared'):
+            div = float(s.select('text()')[0].extract())
+
+            context_id = s.select('@contextRef')[0].extract()
+            context = xxs.select('//*[@id="%s"]' % context_id)[0]
+
+            start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
+            end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
+
+            item = StockItem()
+            item['symbol'] = symbol
+            item['key'] = 'DIVIDEND'
+            item['value'] = div
+            item['date'] = '%s:%s' % (start_date, end_date)
+            items.append(item)
+
         return items
