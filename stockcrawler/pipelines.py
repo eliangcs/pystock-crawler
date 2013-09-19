@@ -6,20 +6,19 @@
 from scrapy.exceptions import DropItem
 
 
-def stringify(stock_item):
-    return '%(symbol)s,%(key)s,%(value)s,%(date)s' % stock_item
-
-
 class DuplicatesPipeline(object):
 
     def __init__(self):
         self.ids_seen = set()
 
     def process_item(self, item, spider):
-        sid = stringify(item)
+        sid = self._stringify(item)
 
         if sid in self.ids_seen:
             raise DropItem('Duplicate item found: %s' % item)
 
         self.ids_seen.add(sid)
         return item
+
+    def _stringify(self, stock_item):
+        return '%(symbol)s,%(key)s,%(value)s,%(date)s' % stock_item

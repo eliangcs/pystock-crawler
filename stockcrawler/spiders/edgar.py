@@ -159,4 +159,54 @@ class EdgarSpider(CrawlSpider):
             item['date'] = '%s:%s' % (start_date, end_date)
             items.append(item)
 
+        # extract revenue
+        all_revs = {}
+        for s in xxs.select('//us-gaap:Revenues'):
+            rev = float(s.select('text()')[0].extract())
+
+            context_id = s.select('@contextRef')[0].extract()
+            context = xxs.select('//*[@id="%s"]' % context_id)[0]
+
+            start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
+            end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
+
+            date = '%s:%s' % (start_date, end_date)
+
+            existing_rev = all_revs.get(date)
+            if rev > existing_rev:
+                all_revs[date] = rev
+
+        for date, rev in all_revs.iteritems():
+            item = StockItem()
+            item['symbol'] = symbol
+            item['key'] = 'REVENUES'
+            item['value'] = rev
+            item['date'] = date
+            items.append(item)
+
+        # extract net income
+        all_incomes = {}
+        for s in xxs.select('//us-gaap:NetIncomeLoss'):
+            income = float(s.select('text()')[0].extract())
+
+            context_id = s.select('@contextRef')[0].extract()
+            context = xxs.select('//*[@id="%s"]' % context_id)[0]
+
+            start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
+            end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
+
+            date = '%s:%s' % (start_date, end_date)
+
+            existing_income = all_incomes.get(date)
+            if income > existing_income:
+                all_incomes[date] = income
+
+        for date, income in all_incomes.iteritems():
+            item = StockItem()
+            item['symbol'] = symbol
+            item['key'] = 'NET_INCOME'
+            item['value'] = income
+            item['date'] = date
+            items.append(item)
+
         return items
