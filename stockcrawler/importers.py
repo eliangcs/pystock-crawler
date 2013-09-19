@@ -21,9 +21,7 @@ class CSVImporter(object):
         return items
 
 
-def parse(file_path, format=None):
-    format = format or file_path.split('.')[-1].lower()
-
+def parse(file_path, format):
     importer_classes = {
         'csv': CSVImporter
     }

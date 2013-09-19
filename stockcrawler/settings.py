@@ -19,3 +19,5 @@ LOG_LEVEL = 'DEBUG'
 ITEM_PIPELINES = [
     'stockcrawler.pipelines.DuplicatesPipeline'
 ]
+
+COMMANDS_MODULE = 'stockcrawler.commands'
