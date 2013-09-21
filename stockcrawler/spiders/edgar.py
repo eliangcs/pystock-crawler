@@ -70,9 +70,11 @@ class EdgarSpider(CrawlSpider):
         super(EdgarSpider, self).__init__(**kwargs)
 
         symbol_file_path = kwargs.get('symbols')
-        symbols = load_symbols(symbol_file_path)
-
-        self.start_urls = URLGenerator(symbols)
+        if symbol_file_path:
+            symbols = load_symbols(symbol_file_path)
+            self.start_urls = URLGenerator(symbols)
+        else:
+            self.start_urls = []
 
     def parse_10q(self, response):
         xxs = XmlXPathSelector(response)
