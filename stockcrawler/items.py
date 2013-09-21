@@ -17,3 +17,32 @@ class StockItem(Item):
     key = Field()
     value = Field()
     date = Field()
+
+
+class ReportItem(Item):
+    # Trading symbol
+    symbol = Field()
+
+    # Quarterly (10-Q) or annual (10-K) report
+    doc_type = Field()
+
+    # Q1, Q2, Q3, or FY for annual report
+    period_focus = Field()
+
+    end_date = Field()
+
+    revenues = Field()
+    net_income = Field()
+
+    shares_a = Field()
+    shares_b = Field()
+
+    eps_basic = Field()
+    eps_diluted = Field()
+
+    dividend = Field()
+
+    assets = Field()
+    debt = Field()
+    equity = Field()
+    cash = Field()
