@@ -20,6 +20,9 @@ class MatchEndDate(object):
         self.data_type = data_type
 
     def __call__(self, value, loader_context):
+        if not hasattr(value, 'select'):
+            return value
+
         doc_end_date = loader_context['end_date']
         doc_type = loader_context['doc_type']
         selector = loader_context['selector']
@@ -65,6 +68,12 @@ class FindSum(object):
                 return value
 
         return None
+
+
+class ZeroIfNone(object):
+
+    def __call__(self, value):
+        return 0.0 if value is None else value
 
 
 def find_namespace(xxs, name):
@@ -158,6 +167,7 @@ class ReportLoader(XmlXPathItemLoader):
         self.add_xpath('eps_diluted', '//us-gaap:EarningsPerShareDiluted')
 
         self.add_xpath('dividend', '//us-gaap:CommonStockDividendsPerShareDeclared')
+        self.add_value('dividend', 0.0)
 
         self.add_xpath('assets', '//us-gaap:Assets')
         self.add_xpath('equity', '//us-gaap:StockholdersEquity')

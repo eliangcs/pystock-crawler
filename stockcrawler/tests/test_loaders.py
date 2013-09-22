@@ -13,15 +13,13 @@ def create_response(filename):
     return XmlResponse('file://%s' % path, body=body)
 
 
+def parse_xml(filename):
+    response = create_response(filename)
+    loader = ReportLoader(response=response)
+    return loader.load_item()
+
+
 class TestReportLoader(unittest.TestCase):
-
-    def setUp(self):
-        self.abc = 1
-
-    def parse_xml(self, filename):
-        response = create_response('msft-20110630.xml')
-        loader = ReportLoader(response=response)
-        return loader.load_item()
 
     def assert_item(self, item, expected):
         self.assertEqual(item['symbol'], expected['symbol'])
@@ -38,8 +36,26 @@ class TestReportLoader(unittest.TestCase):
         self.assertEqual(item['equity'], expected['equity'])
         self.assertEqual(item['cash'], expected['cash'])
 
+    def test_goog_20130630(self):
+        item = parse_xml('goog-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'GOOG',
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 14105000000.0,
+            'net_income': 3228000000.0,
+            'num_shares': 332480000,
+            'eps_basic': 9.71,
+            'eps_diluted': 9.54,
+            'dividend': 0.0,
+            'assets': 101182000000.0,
+            'equity': 78852000000.0,
+            'cash': 16164000000.0
+        })
+
     def test_msft_20110630(self):
-        item = self.parse_xml('msft-20110630.xml')
+        item = parse_xml('msft-20110630.xml')
         self.assert_item(item, {
             'symbol': 'MSFT',
             'doc_type': '10-K',
