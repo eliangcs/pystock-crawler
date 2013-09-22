@@ -34,8 +34,7 @@ class ReportItem(Item):
     revenues = Field()
     net_income = Field()
 
-    shares_a = Field()
-    shares_b = Field()
+    num_shares = Field()
 
     eps_basic = Field()
     eps_diluted = Field()

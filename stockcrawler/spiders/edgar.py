@@ -1,29 +1,7 @@
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
-from scrapy.selector import XmlXPathSelector
 
-from stockcrawler.items import StockItem
-
-
-def find_namespace(xxs, name):
-    name_re = name.replace('-', '\-')
-    if not name_re.startswith('xmlns'):
-        name_re = 'xmlns:' + name_re
-    return xxs.re('%s=\"([^\"]+)\"' % name_re)[0]
-
-
-def register_namespace(xxs, name):
-    ns = find_namespace(xxs, name)
-    xxs.register_namespace(name, ns)
-
-
-def register_namespaces(xxs):
-    names = ('xmlns', 'xbrli', 'dei', 'us-gaap')
-    for name in names:
-        try:
-            register_namespace(xxs, name)
-        except IndexError:
-            pass
+from stockcrawler.loaders import ReportLoader
 
 
 def load_symbols(file_path):
@@ -54,6 +32,7 @@ class URLGenerator(object):
 # http://www.sec.gov/Archives/edgar/data/1288776/000119312504142809/d10qa.htm
 # http://www.sec.gov/Archives/edgar/data/1288776/000128877613000055/goog-20130630.xml
 # http://www.sec.gov/Archives/edgar/data/1288776/000119312512182401/goog-20120331.xml
+# http://www.sec.gov/Archives/edgar/data/789019/000119312511200680/msft-20110630.xml
 
 
 class EdgarSpider(CrawlSpider):
@@ -63,7 +42,7 @@ class EdgarSpider(CrawlSpider):
 
     rules = (
         Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\"]+\-index\.htm',))),
-        Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\"]+\-\d{8}\.xml',)), callback='parse_10q'),
+        Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\"]+\-\d{8}\.xml',)), callback='parse_10qk'),
     )
 
     def __init__(self, **kwargs):
@@ -76,139 +55,7 @@ class EdgarSpider(CrawlSpider):
         else:
             self.start_urls = []
 
-    def parse_10q(self, response):
-        xxs = XmlXPathSelector(response)
-        register_namespaces(xxs)
-
-        items = []
-
-        # extract symbol
-        symbol = xxs.select('//dei:TradingSymbol/text()')[0].extract().upper()
-
-        # extract outstanding shares
-        for s in xxs.select('//dei:EntityCommonStockSharesOutstanding'):
-            num_shares = int(s.select('text()')[0].extract())
-
-            context_id = s.select('@contextRef')[0].extract()
-            context = xxs.select('//*[@id="%s"]' % context_id)[0]
-
-            date = context.select('.//*[local-name()="instant"]/text()')[0].extract()
-
-            try:
-                class_str = context.select('.//*[local-name()="explicitMember"]/text()')[0].extract()
-            except IndexError:
-                stock_class = 'A'
-            else:
-                if 'ClassB' in class_str:
-                    stock_class = 'B'
-                else:
-                    stock_class = 'A'
-
-            item = StockItem()
-            item['symbol'] = symbol
-            item['key'] = 'NUM_SHARES_' + stock_class
-            item['value'] = num_shares
-            item['date'] = date
-            items.append(item)
-
-        # extract EPS
-        for s in xxs.select('//us-gaap:EarningsPerShareBasic'):
-            eps = float(s.select('text()')[0].extract())
-
-            context_id = s.select('@contextRef')[0].extract()
-            context = xxs.select('//*[@id="%s"]' % context_id)[0]
-
-            start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
-            end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
-
-            item = StockItem()
-            item['symbol'] = symbol
-            item['key'] = 'EPS_BASIC'
-            item['value'] = eps
-            item['date'] = '%s:%s' % (start_date, end_date)
-            items.append(item)
-
-        for s in xxs.select('//us-gaap:EarningsPerShareDiluted'):
-            eps = float(s.select('text()')[0].extract())
-
-            context_id = s.select('@contextRef')[0].extract()
-            context = xxs.select('//*[@id="%s"]' % context_id)[0]
-
-            start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
-            end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
-
-            item = StockItem()
-            item['symbol'] = symbol
-            item['key'] = 'EPS_DILUTED'
-            item['value'] = eps
-            item['date'] = '%s:%s' % (start_date, end_date)
-            items.append(item)
-
-        # extract dividend
-        for s in xxs.select('//us-gaap:CommonStockDividendsPerShareDeclared'):
-            div = float(s.select('text()')[0].extract())
-
-            context_id = s.select('@contextRef')[0].extract()
-            context = xxs.select('//*[@id="%s"]' % context_id)[0]
-
-            start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
-            end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
-
-            item = StockItem()
-            item['symbol'] = symbol
-            item['key'] = 'DIVIDEND'
-            item['value'] = div
-            item['date'] = '%s:%s' % (start_date, end_date)
-            items.append(item)
-
-        # extract revenue
-        all_revs = {}
-        for s in xxs.select('//us-gaap:Revenues'):
-            rev = float(s.select('text()')[0].extract())
-
-            context_id = s.select('@contextRef')[0].extract()
-            context = xxs.select('//*[@id="%s"]' % context_id)[0]
-
-            start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
-            end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
-
-            date = '%s:%s' % (start_date, end_date)
-
-            existing_rev = all_revs.get(date)
-            if rev > existing_rev:
-                all_revs[date] = rev
-
-        for date, rev in all_revs.iteritems():
-            item = StockItem()
-            item['symbol'] = symbol
-            item['key'] = 'REVENUES'
-            item['value'] = rev
-            item['date'] = date
-            items.append(item)
-
-        # extract net income
-        all_incomes = {}
-        for s in xxs.select('//us-gaap:NetIncomeLoss'):
-            income = float(s.select('text()')[0].extract())
-
-            context_id = s.select('@contextRef')[0].extract()
-            context = xxs.select('//*[@id="%s"]' % context_id)[0]
-
-            start_date = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
-            end_date = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
-
-            date = '%s:%s' % (start_date, end_date)
-
-            existing_income = all_incomes.get(date)
-            if income > existing_income:
-                all_incomes[date] = income
-
-        for date, income in all_incomes.iteritems():
-            item = StockItem()
-            item['symbol'] = symbol
-            item['key'] = 'NET_INCOME'
-            item['value'] = income
-            item['date'] = date
-            items.append(item)
-
-        return items
+    def parse_10qk(self, response):
+        '''Parse 10-Q or 10-K XML report.'''
+        loader = ReportLoader(response=response)
+        return loader.load_item()

@@ -1,5 +1,5 @@
 #AAPL
 #FB
-GOOG
-#MSFT
+#GOOG
+MSFT
 #YHOO

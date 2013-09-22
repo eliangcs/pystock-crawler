@@ -16,8 +16,8 @@ NEWSPIDER_MODULE = 'stockcrawler.spiders'
 
 LOG_LEVEL = 'DEBUG'
 
-ITEM_PIPELINES = [
-    'stockcrawler.pipelines.DuplicatesPipeline'
-]
+# ITEM_PIPELINES = [
+#     'stockcrawler.pipelines.DuplicatesPipeline'
+# ]
 
 COMMANDS_MODULE = 'stockcrawler.commands'
