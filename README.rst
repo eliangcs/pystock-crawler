@@ -1,6 +1,12 @@
 UNDER DEVELOPMENT
 =================
 
+.. image:: https://travis-ci.org/eliangcs/stockcrawler.png?branch=master
+    :target: https://travis-ci.org/eliangcs/stockcrawler
+
+.. image:: https://coveralls.io/repos/eliangcs/stockcrawler/badge.png?branch=master
+    :target: https://coveralls.io/r/eliangcs/stockcrawler
+
 ``stockcralwer`` is a utility for scraping stock historical data including
 daily prices and fundamental figures such as EPS.
 
