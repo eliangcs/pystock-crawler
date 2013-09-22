@@ -10,12 +10,21 @@ Usage
 
 Crawl data from `SEC EDGAR`_ database::
 
-    scrapy crawl edgar -a symbols=./symbols.txt -o output.csv -t csv
+    scrapy crawl edgar -a symbols=./symbols.txt -o output.json -t json
 
-where ``symbols.txt`` stores a list of trading symbols you want crawl. The
-crawled data stored in ``output.csv`` is raw and hard to read. To sort them
-out, use the following command::
-
-    scrapy aggregate ./output.csv -o output2.csv
+where ``symbols.txt`` stores a list of trading symbols you want crawl.
 
 .. _SEC EDGAR: http://www.sec.gov/edgar/searchedgar/companysearch.html
+
+
+Running Tests
+-------------
+
+Install ``nose`` and ``coverage`` if you don't have them::
+
+    pip install nose
+    pip install coverage
+
+Run the test suites::
+
+    nosetests -c scrapy.cfg
