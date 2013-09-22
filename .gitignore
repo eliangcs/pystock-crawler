@@ -1,4 +1,4 @@
 *.pyc
 *.log
-sample_data/
 output.csv
+.coverage
