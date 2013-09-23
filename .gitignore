@@ -2,3 +2,4 @@
 *.log
 output.csv
 .coverage
+stockcrawler.egg-info/

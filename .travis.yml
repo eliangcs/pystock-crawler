@@ -10,4 +10,5 @@ script:
   - nosetests -c scrapy.cfg
 after_success:
   - pip install python-coveralls --use-mirrors
+  - coverage run --source=stockcrawler setup.py -q nosetests
   - coveralls
