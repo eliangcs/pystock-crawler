@@ -10,7 +10,7 @@ def create_response(filename):
     path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'sample_data', filename)
     with open(path) as f:
         body = f.read()
-    return XmlResponse('file://%s' % path, body=body)
+    return XmlResponse('file://%s' % path.replace('\\', '/'), body=body)
 
 
 def parse_xml(filename):
@@ -70,4 +70,22 @@ class TestReportLoader(unittest.TestCase):
             'assets': 108704000000.0,
             'equity': 57083000000.0,
             'cash': 9610000000.0
+        })
+
+    def test_ko_20120928(self):
+        item = parse_xml('ko-20120928.xml')
+        self.assert_item(item, {
+            'symbol': 'KO',
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-28',
+            'revenues': 12340000000.0,
+            'net_income': 2311000000.0,
+            'num_shares': 4502000000,
+            'eps_basic': 0.51,
+            'eps_diluted': 0.50,
+            'dividend': 0.255,
+            'assets': 86654000000.0,
+            'equity': 33590000000.0,
+            'cash': 9615000000.0
         })

@@ -11,7 +11,9 @@ from stockcrawler.items import ReportItem
 class ExtractText(object):
 
     def __call__(self, value):
-        return value.select('./text()')[0].extract()
+        if hasattr(value, 'select'):
+            return value.select('./text()')[0].extract()
+        return unicode(value)
 
 
 class MatchEndDate(object):
@@ -105,6 +107,11 @@ class XmlXPathItemLoader(XPathItemLoader):
         super(XmlXPathItemLoader, self).__init__(*args, **kwargs)
         register_namespaces(self.selector)
 
+    def add_xpath(self, field_name, xpath, *processors, **kw):
+        values = self._get_values(xpath, **kw)
+        self.add_value(field_name, values, *processors, **kw)
+        return len(values)
+
     def _get_values(self, xpaths, **kw):
         xpaths = arg_to_iter(xpaths)
         return flatten([self.selector.select(xpath) for xpath in xpaths])
@@ -145,6 +152,7 @@ class ReportLoader(XmlXPathItemLoader):
     def __init__(self, *args, **kwargs):
         super(ReportLoader, self).__init__(*args, **kwargs)
 
+        symbol = self._get_symbol()
         end_date = self._get_doc_end_date()
         doc_type = self._get_doc_type()
 
@@ -153,13 +161,17 @@ class ReportLoader(XmlXPathItemLoader):
             'doc_type': doc_type
         })
 
+        self.add_xpath('symbol', '//dei:TradingSymbol')
+        self.add_value('symbol', symbol)
+
         self.add_value('end_date', end_date)
         self.add_value('doc_type', doc_type)
-        self.add_xpath('symbol', '//dei:TradingSymbol')
         self.add_xpath('period_focus', '//dei:DocumentFiscalPeriodFocus')
 
         self.add_xpath('revenues', '//us-gaap:Revenues')
         self.add_xpath('revenues', '//us-gaap:SalesRevenueNet')
+        self.add_xpath('revenues', '//us-gaap:SalesRevenueGoodsNet')
+
         self.add_xpath('net_income', '//us-gaap:NetIncomeLoss')
         self.add_xpath('num_shares', '//us-gaap:WeightedAverageNumberOfSharesOutstandingBasic')
 
@@ -170,8 +182,18 @@ class ReportLoader(XmlXPathItemLoader):
         self.add_value('dividend', 0.0)
 
         self.add_xpath('assets', '//us-gaap:Assets')
-        self.add_xpath('equity', '//us-gaap:StockholdersEquity')
+
+        if not self.add_xpath('equity', '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'):
+            self.add_xpath('equity', '//us-gaap:StockholdersEquity')
+
         self.add_xpath('cash', '//us-gaap:CashAndCashEquivalentsAtCarryingValue')
+
+    def _get_symbol(self):
+        try:
+            filename = self.context['response'].url.split('/')[-1]
+            return filename.split('-')[0].upper()
+        except IndexError:
+            return None
 
     def _get_doc_end_date(self):
         return self.selector.select('//dei:DocumentPeriodEndDate/text()')[0].extract()
