@@ -89,3 +89,21 @@ class TestReportLoader(unittest.TestCase):
             'equity': 33590000000.0,
             'cash': 9615000000.0
         })
+
+    def test_jpm_20090630(self):
+        item = parse_xml('jpm-20090630.xml')
+        self.assert_item(item, {
+            'symbol': 'JPM',
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2009-06-30',
+            'revenues': 25623000000.0,
+            'net_income': 1072000000.0,
+            'num_shares': 3811500000,
+            'eps_basic': 0.28,
+            'eps_diluted': 0.28,
+            'dividend': 0.05,
+            'assets': 2026642000000.0,
+            'equity': 154766000000.0,
+            'cash': 25133000000.0
+        })

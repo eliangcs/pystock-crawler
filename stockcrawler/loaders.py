@@ -112,6 +112,13 @@ class XmlXPathItemLoader(XPathItemLoader):
         self.add_value(field_name, values, *processors, **kw)
         return len(values)
 
+    def add_xpaths(self, name_path_pairs):
+        for name, path in name_path_pairs:
+            match_count = self.add_xpath(name, path)
+            if match_count > 0:
+                return match_count
+        return 0
+
     def _get_values(self, xpaths, **kw):
         xpaths = arg_to_iter(xpaths)
         return flatten([self.selector.select(xpath) for xpath in xpaths])
@@ -166,27 +173,42 @@ class ReportLoader(XmlXPathItemLoader):
 
         self.add_value('end_date', end_date)
         self.add_value('doc_type', doc_type)
-        self.add_xpath('period_focus', '//dei:DocumentFiscalPeriodFocus')
+
+        if not self.add_xpath('period_focus', '//dei:DocumentFiscalPeriodFocus'):
+            period_focus = self._get_period_focus(end_date)
+            self.add_value('period_focus', period_focus)
 
         self.add_xpath('revenues', '//us-gaap:Revenues')
         self.add_xpath('revenues', '//us-gaap:SalesRevenueNet')
         self.add_xpath('revenues', '//us-gaap:SalesRevenueGoodsNet')
 
-        self.add_xpath('net_income', '//us-gaap:NetIncomeLoss')
+        self.add_xpaths([
+            ('net_income', '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic'),
+            ('net_income', '//us-gaap:NetIncomeLoss')
+        ])
+
         self.add_xpath('num_shares', '//us-gaap:WeightedAverageNumberOfSharesOutstandingBasic')
 
         self.add_xpath('eps_basic', '//us-gaap:EarningsPerShareBasic')
         self.add_xpath('eps_diluted', '//us-gaap:EarningsPerShareDiluted')
 
-        self.add_xpath('dividend', '//us-gaap:CommonStockDividendsPerShareDeclared')
+        self.add_xpaths([
+            ('dividend', '//us-gaap:CommonStockDividendsPerShareCashPaid'),
+            ('dividend', '//us-gaap:CommonStockDividendsPerShareDeclared')
+        ])
         self.add_value('dividend', 0.0)
 
         self.add_xpath('assets', '//us-gaap:Assets')
 
-        if not self.add_xpath('equity', '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'):
-            self.add_xpath('equity', '//us-gaap:StockholdersEquity')
+        self.add_xpaths([
+            ('equity', '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'),
+            ('equity', '//us-gaap:StockholdersEquity')
+        ])
 
-        self.add_xpath('cash', '//us-gaap:CashAndCashEquivalentsAtCarryingValue')
+        self.add_xpaths([
+            ('cash', '//us-gaap:CashAndDueFromBanks'),
+            ('cash', '//us-gaap:CashAndCashEquivalentsAtCarryingValue')
+        ])
 
     def _get_symbol(self):
         try:
@@ -200,3 +222,26 @@ class ReportLoader(XmlXPathItemLoader):
 
     def _get_doc_type(self):
         return self.selector.select('//dei:DocumentType/text()')[0].extract().upper()
+
+    def _get_period_focus(self, doc_end_date):
+        try:
+            doc_yr = doc_end_date.split('-')[0]
+            yr_end_date = self.selector.select('//dei:CurrentFiscalYearEndDate/text()')[0].extract()
+            yr_end_date = yr_end_date.replace('--', doc_yr + '-')
+        except IndexError:
+            return None
+
+        doc_end_date = datetime.strptime(doc_end_date, '%Y-%m-%d')
+        yr_end_date = datetime.strptime(yr_end_date, '%Y-%m-%d')
+        delta_days = (yr_end_date - doc_end_date).days
+
+        if delta_days > -45 and delta_days < 45:
+            return 'FY'
+        elif delta_days > -135 and delta_days < 135:
+            return 'Q3'
+        elif delta_days > -225 and delta_days < 225:
+            return 'Q2'
+        elif delta_days > -315 and delta_days < 315:
+            return 'Q1'
+
+        return 'FY'
