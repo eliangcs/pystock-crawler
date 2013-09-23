@@ -6,8 +6,9 @@ install:
   - pip install -r requirements.txt --use-mirrors
   - pip install nose --use-mirrors
   - pip install coverage --use-mirrors
-  - pip install coveralls --use-mirrors
+  - pip install python-coveralls --use-mirrors
 script:
   - nosetests -c scrapy.cfg
 after_success:
   - coveralls
+
