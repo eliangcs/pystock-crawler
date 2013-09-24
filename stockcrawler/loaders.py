@@ -18,8 +18,9 @@ class ExtractText(object):
 
 class MatchEndDate(object):
 
-    def __init__(self, data_type=str):
+    def __init__(self, data_type=str, context_filter=None):
         self.data_type = data_type
+        self.context_filter = context_filter
 
     def __call__(self, value, loader_context):
         if not hasattr(value, 'select'):
@@ -31,6 +32,9 @@ class MatchEndDate(object):
 
         context_id = value.select('@contextRef')[0].extract()
         context = selector.select('//*[@id="%s"]' % context_id)[0]
+
+        if self.context_filter and not self.context_filter(context):
+            return None
 
         date = None
         try:
@@ -58,6 +62,8 @@ class MatchEndDate(object):
 class FindSum(object):
 
     def __call__(self, values):
+        print 'values: %s' % str(values)
+
         size = len(values)
         if size == 1:
             return values[0]
@@ -76,6 +82,14 @@ class ZeroIfNone(object):
 
     def __call__(self, value):
         return 0.0 if value is None else value
+
+
+def exclude_member(context):
+    try:
+        context.select('.//*[local-name()="explicitMember"]/text()')[0]
+    except IndexError:
+        return True
+    return False
 
 
 def find_namespace(xxs, name):
@@ -147,11 +161,11 @@ class ReportLoader(XmlXPathItemLoader):
 
     dividend_in = MapCompose(MatchEndDate(float))
 
-    assets_in = MapCompose(MatchEndDate(float))
+    assets_in = MapCompose(MatchEndDate(float, context_filter=exclude_member))
     assets_out = Compose(max)
 
-    equity_in = MapCompose(MatchEndDate(float))
-    equity_out = FindSum()
+    equity_in = MapCompose(MatchEndDate(float), context_filter=exclude_member)
+    equity_out = TakeFirst()
 
     cash_in = MapCompose(MatchEndDate(float))
     cash_out = Compose(max)
