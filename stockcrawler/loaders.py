@@ -33,6 +33,9 @@ class MatchEndDate(object):
         context_id = value.select('@contextRef')[0].extract()
         context = selector.select('//*[@id="%s"]' % context_id)[0]
 
+        if context_id == 'As_Of_9_24_2011':
+            print value.extract()
+
         if self.context_filter and not self.context_filter(context):
             return None
 
@@ -164,7 +167,7 @@ class ReportLoader(XmlXPathItemLoader):
     assets_in = MapCompose(MatchEndDate(float, context_filter=exclude_member))
     assets_out = Compose(max)
 
-    equity_in = MapCompose(MatchEndDate(float), context_filter=exclude_member)
+    equity_in = MapCompose(MatchEndDate(float, context_filter=exclude_member))
     equity_out = TakeFirst()
 
     cash_in = MapCompose(MatchEndDate(float))
@@ -214,10 +217,8 @@ class ReportLoader(XmlXPathItemLoader):
 
         self.add_xpath('assets', '//us-gaap:Assets')
 
-        self.add_xpaths([
-            ('equity', '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest'),
-            ('equity', '//us-gaap:StockholdersEquity')
-        ])
+        self.add_xpath('equity', '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest')
+        self.add_xpath('equity', '//us-gaap:StockholdersEquity')
 
         self.add_xpaths([
             ('cash', '//us-gaap:CashAndDueFromBanks'),

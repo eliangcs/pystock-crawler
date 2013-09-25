@@ -137,6 +137,23 @@ class TestReportLoader(unittest.TestCase):
             'cash': 5684000000.0
         })
 
+    def test_ko_20101231(self):
+        item = parse_xml('ko-20101231.xml')
+        self.assert_item(item, {
+            'symbol': 'KO',
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2010-12-31',
+            'revenues': 35119000000.0,
+            'net_income': 11809000000.0,
+            'eps_basic': 5.12,
+            'eps_diluted': 5.06,
+            'dividend': 1.76,
+            'assets': 72921000000.0,
+            'equity': 31317000000.0,
+            'cash': 8517000000.0
+        })
+
     def test_ko_20120928(self):
         item = parse_xml('ko-20120928.xml')
         self.assert_item(item, {
