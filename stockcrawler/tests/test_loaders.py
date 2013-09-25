@@ -161,3 +161,21 @@ class TestReportLoader(unittest.TestCase):
             'equity': 43111000000.0,
             'cash': 9705000000.0
         })
+
+    def test_jnj_20120930(self):
+        item = parse_xml('jnj-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'JNJ',
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': 17052000000.0,
+            'net_income': 2968000000.0,
+            'num_shares': 2757400000,
+            'eps_basic': 1.08,
+            'eps_diluted': 1.05,
+            'dividend': 0.61,
+            'assets': 118951000000.0,
+            'equity': 63761000000.0,
+            'cash': 15486000000.0
+        })
