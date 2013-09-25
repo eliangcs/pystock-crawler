@@ -69,6 +69,23 @@ class TestReportLoader(unittest.TestCase):
             'cash': 16260000000.0
         })
 
+    def test_goog_20121231(self):
+        item = parse_xml('goog-20121231.xml')
+        self.assert_item(item, {
+            'symbol': 'GOOG',
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-12-31',
+            'revenues': 50175000000.0,
+            'net_income': 10737000000.0,
+            'eps_basic': 32.81,
+            'eps_diluted': 32.31,
+            'dividend': 0.0,
+            'assets': 93798000000.0,
+            'equity': 71715000000.0,
+            'cash': 14778000000.0
+        })
+
     def test_goog_20130630(self):
         item = parse_xml('goog-20130630.xml')
         self.assert_item(item, {
