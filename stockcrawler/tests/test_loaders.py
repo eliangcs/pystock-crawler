@@ -125,3 +125,21 @@ class TestReportLoader(unittest.TestCase):
             'equity': 160744000000.0,
             'cash': 12664000000.0
         })
+
+    def test_omx_20110924(self):
+        item = parse_xml('omx-20110924.xml')
+        self.assert_item(item, {
+            'symbol': 'OMX',
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2011-09-24',
+            'revenues': 1774767000.0,
+            'net_income': 21518000.0,
+            'num_shares': 86033000,
+            'eps_basic': 0.25,
+            'eps_diluted': 0.25,
+            'dividend': 0.0,
+            'assets': 4002981000.0,
+            'equity': 657636000.0,
+            'cash': 485426000.0
+        })

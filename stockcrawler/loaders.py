@@ -54,7 +54,10 @@ class MatchEndDate(object):
                 pass
 
         if doc_end_date == date:
-            return self.data_type(value.select('./text()')[0].extract())
+            try:
+                return self.data_type(value.select('./text()')[0].extract())
+            except IndexError:
+                pass
 
         return None
 
