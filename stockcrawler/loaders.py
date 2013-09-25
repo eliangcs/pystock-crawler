@@ -204,7 +204,10 @@ class ReportLoader(XmlXPathItemLoader):
             ('net_income', '//us-gaap:NetIncomeLoss')
         ])
 
-        self.add_xpath('num_shares', '//us-gaap:WeightedAverageNumberOfSharesOutstandingBasic')
+        self.add_xpaths([
+            ('num_shares', '//us-gaap:WeightedAverageNumberOfSharesOutstandingBasic'),
+            ('num_shares', '//us-gaap:CommonStockSharesOutstanding')
+        ])
 
         self.add_xpath('eps_basic', '//us-gaap:EarningsPerShareBasic')
         self.add_xpath('eps_diluted', '//us-gaap:EarningsPerShareDiluted')

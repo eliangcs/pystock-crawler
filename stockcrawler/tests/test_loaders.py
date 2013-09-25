@@ -36,6 +36,24 @@ class TestReportLoader(unittest.TestCase):
         self.assertEqual(item['equity'], expected['equity'])
         self.assertEqual(item['cash'], expected['cash'])
 
+    def test_goog_20090930(self):
+        item = parse_xml('goog-20090930.xml')
+        self.assert_item(item, {
+            'symbol': 'GOOG',
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2009-09-30',
+            'revenues': 5944851000.0,
+            'net_income': 1638975000.0,
+            'num_shares': 316935000,
+            'eps_basic': 5.18,
+            'eps_diluted': 5.13,
+            'dividend': 0.0,
+            'assets': 37702845000.0,
+            'equity': 33721753000.0,
+            'cash': 12087115000.0
+        })
+
     def test_goog_20130630(self):
         item = parse_xml('goog-20130630.xml')
         self.assert_item(item, {
