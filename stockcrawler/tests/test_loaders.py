@@ -28,7 +28,6 @@ class TestReportLoader(unittest.TestCase):
         self.assertEqual(item['end_date'], expected['end_date'])
         self.assertEqual(item['revenues'], expected['revenues'])
         self.assertEqual(item['net_income'], expected['net_income'])
-        self.assertEqual(item['num_shares'], expected['num_shares'])
         self.assertEqual(item['eps_basic'], expected['eps_basic'])
         self.assertEqual(item['eps_diluted'], expected['eps_diluted'])
         self.assertEqual(item['dividend'], expected['dividend'])
@@ -45,13 +44,29 @@ class TestReportLoader(unittest.TestCase):
             'end_date': '2009-09-30',
             'revenues': 5944851000.0,
             'net_income': 1638975000.0,
-            'num_shares': 316935000,
             'eps_basic': 5.18,
             'eps_diluted': 5.13,
             'dividend': 0.0,
             'assets': 37702845000.0,
             'equity': 33721753000.0,
             'cash': 12087115000.0
+        })
+
+    def test_goog_20120930(self):
+        item = parse_xml('goog-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'GOOG',
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': 14101000000.0,
+            'net_income': 2176000000.0,
+            'eps_basic': 6.64,
+            'eps_diluted': 6.53,
+            'dividend': 0.0,
+            'assets': 89730000000.0,
+            'equity': 68028000000.0,
+            'cash': 16260000000.0
         })
 
     def test_goog_20130630(self):
@@ -63,7 +78,6 @@ class TestReportLoader(unittest.TestCase):
             'end_date': '2013-06-30',
             'revenues': 14105000000.0,
             'net_income': 3228000000.0,
-            'num_shares': 332480000,
             'eps_basic': 9.71,
             'eps_diluted': 9.54,
             'dividend': 0.0,
@@ -81,7 +95,6 @@ class TestReportLoader(unittest.TestCase):
             'end_date': '2011-06-30',
             'revenues': 69943000000.0,
             'net_income': 23150000000.0,
-            'num_shares': 8490000000,
             'eps_basic': 2.73,
             'eps_diluted': 2.69,
             'dividend': 0.64,
@@ -99,7 +112,6 @@ class TestReportLoader(unittest.TestCase):
             'end_date': '2012-09-28',
             'revenues': 12340000000.0,
             'net_income': 2311000000.0,
-            'num_shares': 4502000000,
             'eps_basic': 0.51,
             'eps_diluted': 0.50,
             'dividend': 0.255,
@@ -117,7 +129,6 @@ class TestReportLoader(unittest.TestCase):
             'end_date': '2009-06-30',
             'revenues': 25623000000.0,
             'net_income': 1072000000.0,
-            'num_shares': 3811500000,
             'eps_basic': 0.28,
             'eps_diluted': 0.28,
             'dividend': 0.05,
@@ -135,7 +146,6 @@ class TestReportLoader(unittest.TestCase):
             'end_date': '2011-12-31',
             'revenues': 467029000000.0,
             'net_income': 41060000000.0,
-            'num_shares': 4870000000,
             'eps_basic': 8.43,
             'eps_diluted': 8.42,
             'dividend': 1.85,
@@ -153,7 +163,6 @@ class TestReportLoader(unittest.TestCase):
             'end_date': '2011-09-24',
             'revenues': 1774767000.0,
             'net_income': 21518000.0,
-            'num_shares': 86033000,
             'eps_basic': 0.25,
             'eps_diluted': 0.25,
             'dividend': 0.0,
@@ -171,7 +180,6 @@ class TestReportLoader(unittest.TestCase):
             'end_date': '2010-06-26',
             'revenues': 15700000000.0,
             'net_income': 3253000000.0,
-            'num_shares': 912197000,
             'eps_basic': 3.57,
             'eps_diluted': 3.51,
             'dividend': 0.0,
@@ -189,7 +197,6 @@ class TestReportLoader(unittest.TestCase):
             'end_date': '2012-09-30',
             'revenues': 17052000000.0,
             'net_income': 2968000000.0,
-            'num_shares': 2757400000,
             'eps_basic': 1.08,
             'eps_diluted': 1.05,
             'dividend': 0.61,

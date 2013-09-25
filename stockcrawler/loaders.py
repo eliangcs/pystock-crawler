@@ -46,7 +46,7 @@ class MatchEndDate(object):
                 start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
                 end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
                 delta_days = (end_date - start_date).days
-                if doc_type == '10-Q' and delta_days < 95 and delta_days > 85:
+                if doc_type == '10-Q' and delta_days < 110 and delta_days > 70:
                     date = end_date_str
                 elif doc_type == '10-K' and delta_days < 380 and delta_days > 350:
                     date = end_date_str
@@ -155,9 +155,6 @@ class ReportLoader(XmlXPathItemLoader):
     net_income_in = MapCompose(MatchEndDate(float))
     net_income_out = Compose(max)
 
-    num_shares_in = MapCompose(MatchEndDate(int))
-    num_shares_out = Compose(max)
-
     eps_basic_in = MapCompose(MatchEndDate(float))
 
     eps_diluted_in = MapCompose(MatchEndDate(float))
@@ -195,18 +192,15 @@ class ReportLoader(XmlXPathItemLoader):
             period_focus = self._get_period_focus(end_date)
             self.add_value('period_focus', period_focus)
 
-        self.add_xpath('revenues', '//us-gaap:Revenues')
-        self.add_xpath('revenues', '//us-gaap:SalesRevenueNet')
-        self.add_xpath('revenues', '//us-gaap:SalesRevenueGoodsNet')
+        self.add_xpaths([
+            ('revenues', '//us-gaap:Revenues'),
+            ('revenues', '//us-gaap:SalesRevenueNet'),
+            ('revenues', '//us-gaap:SalesRevenueGoodsNet')
+        ])
 
         self.add_xpaths([
             ('net_income', '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic'),
             ('net_income', '//us-gaap:NetIncomeLoss')
-        ])
-
-        self.add_xpaths([
-            ('num_shares', '//us-gaap:WeightedAverageNumberOfSharesOutstandingBasic'),
-            ('num_shares', '//us-gaap:CommonStockSharesOutstanding')
         ])
 
         self.add_xpath('eps_basic', '//us-gaap:EarningsPerShareBasic')
