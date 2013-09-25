@@ -143,3 +143,21 @@ class TestReportLoader(unittest.TestCase):
             'equity': 657636000.0,
             'cash': 485426000.0
         })
+
+    def test_aapl_20100626(self):
+        item = parse_xml('aapl-20100626.xml')
+        self.assert_item(item, {
+            'symbol': 'AAPL',
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2010-06-26',
+            'revenues': 15700000000.0,
+            'net_income': 3253000000.0,
+            'num_shares': 912197000,
+            'eps_basic': 3.57,
+            'eps_diluted': 3.51,
+            'dividend': 0.0,
+            'assets': 64725000000.0,
+            'equity': 43111000000.0,
+            'cash': 9705000000.0
+        })
