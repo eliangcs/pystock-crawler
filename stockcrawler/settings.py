@@ -15,9 +15,3 @@ NEWSPIDER_MODULE = 'stockcrawler.spiders'
 #USER_AGENT = 'stockcrawler (+http://www.yourdomain.com)'
 
 LOG_LEVEL = 'DEBUG'
-
-# ITEM_PIPELINES = [
-#     'stockcrawler.pipelines.DuplicatesPipeline'
-# ]
-
-COMMANDS_MODULE = 'stockcrawler.commands'
