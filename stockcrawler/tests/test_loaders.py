@@ -273,6 +273,23 @@ class TestReportLoader(unittest.TestCase):
             'cash': 427111000.0
         })
 
+    def test_omx_20121229(self):
+        item = parse_xml('omx-20121229.xml')
+        self.assert_item(item, {
+            'symbol': 'OMX',
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-12-29',
+            'revenues': 6920384000.0,
+            'net_income': 414694000.0,
+            'eps_basic': 4.79,
+            'eps_diluted': 4.74,
+            'dividend': 0.0,
+            'assets': 3784315000.0,
+            'equity': 1034373000.0,
+            'cash': 495056000.0
+        })
+
     def test_aapl_20100626(self):
         item = parse_xml('aapl-20100626.xml')
         self.assert_item(item, {
