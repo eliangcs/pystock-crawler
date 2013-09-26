@@ -152,10 +152,10 @@ class ReportLoader(XmlXPathItemLoader):
     symbol_in = MapCompose(ExtractText(), unicode.upper)
     period_focus_in = MapCompose(ExtractText(), unicode.upper)
 
-    revenues_in = MapCompose(MatchEndDate(float))
+    revenues_in = MapCompose(MatchEndDate(float, context_filter=exclude_member))
     revenues_out = Compose(max)
 
-    net_income_in = MapCompose(MatchEndDate(float))
+    net_income_in = MapCompose(MatchEndDate(float, context_filter=exclude_member))
     net_income_out = Compose(max)
 
     eps_basic_in = MapCompose(MatchEndDate(float))
@@ -198,7 +198,8 @@ class ReportLoader(XmlXPathItemLoader):
         self.add_xpaths([
             ('revenues', '//us-gaap:Revenues'),
             ('revenues', '//us-gaap:SalesRevenueNet'),
-            ('revenues', '//us-gaap:SalesRevenueGoodsNet')
+            ('revenues', '//us-gaap:SalesRevenueGoodsNet'),
+            ('revenues', '//*[contains(local-name(), "TotalRevenues")]')
         ])
 
         self.add_xpaths([
