@@ -26,11 +26,10 @@ where ``symbols.txt`` stores a list of trading symbols you want crawl.
 Running Tests
 -------------
 
-Install ``nose`` and ``coverage`` if you don't have them::
+Install ``pytest`` and ``pytest-cov`` if you don't have them::
 
-    pip install nose
-    pip install coverage
+    pip install pytest pytest-cov
 
 Run the test suites::
 
-    nosetests -c scrapy.cfg
+    py.test
