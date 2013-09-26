@@ -222,6 +222,23 @@ class TestReportLoader(unittest.TestCase):
             'cash': 12664000000.0
         })
 
+    def test_xom_20130630(self):
+        item = parse_xml('xom-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'XOM',
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 106469000000.0,
+            'net_income': 6860000000.0,
+            'eps_basic': 1.55,
+            'eps_diluted': 1.55,
+            'dividend': 0.63,
+            'assets': 341615000000.0,
+            'equity': 171588000000.0,
+            'cash': 4609000000.0
+        })
+
     def test_omx_20110924(self):
         item = parse_xml('omx-20110924.xml')
         self.assert_item(item, {
