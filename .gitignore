@@ -3,3 +3,4 @@
 output.csv
 .coverage
 stockcrawler.egg-info/
+/stockcrawler/tests/sample_data/
