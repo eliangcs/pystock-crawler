@@ -360,6 +360,24 @@ class TestReportItemLoader(unittest.TestCase):
             'cash': 15486000000.0
         })
 
+    def test_tsla_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312512137560/tsla-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'TSLA',
+            'amend': True,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-12-31',
+            'revenues': 204242000.0,
+            'net_income': -254411000.0,
+            'eps_basic': -2.53,
+            'eps_diluted': -2.53,
+            'dividend': 0.0,
+            'assets': 713448000.0,
+            'equity': 224045000.0,
+            'cash': 255266000.0
+        })
+
     def test_tsla_20130630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312513327916/tsla-20130630.xml')
         self.assert_item(item, {
