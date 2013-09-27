@@ -208,7 +208,9 @@ class ReportLoader(XmlXPathItemLoader):
         ])
 
         self.add_xpath('eps_basic', '//us-gaap:EarningsPerShareBasic')
+        self.add_xpath('eps_basic', '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare')
         self.add_xpath('eps_diluted', '//us-gaap:EarningsPerShareDiluted')
+        self.add_xpath('eps_diluted', '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare')
 
         self.add_xpaths([
             ('dividend', '//us-gaap:CommonStockDividendsPerShareCashPaid'),
