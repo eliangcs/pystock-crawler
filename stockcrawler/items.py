@@ -6,19 +6,6 @@
 from scrapy.item import Item, Field
 
 
-class DmozItem(Item):
-    title = Field()
-    link = Field()
-    desc = Field()
-
-
-class StockItem(Item):
-    symbol = Field()
-    key = Field()
-    value = Field()
-    date = Field()
-
-
 class ReportItem(Item):
     # Trading symbol
     symbol = Field()
