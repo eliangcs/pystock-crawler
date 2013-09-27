@@ -149,7 +149,7 @@ class XmlXPathItemLoader(XPathItemLoader):
         return flatten([self.selector.select(xpath) for xpath in xpaths])
 
 
-class ReportLoader(XmlXPathItemLoader):
+class ReportItemLoader(XmlXPathItemLoader):
 
     default_item_class = ReportItem
     default_output_processor = TakeFirst()
@@ -182,7 +182,7 @@ class ReportLoader(XmlXPathItemLoader):
     cash_out = Compose(max)
 
     def __init__(self, *args, **kwargs):
-        super(ReportLoader, self).__init__(*args, **kwargs)
+        super(ReportItemLoader, self).__init__(*args, **kwargs)
 
         symbol = self._get_symbol()
         end_date = self._get_doc_end_date()

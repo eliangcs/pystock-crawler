@@ -1,7 +1,7 @@
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 
-from stockcrawler.loaders import ReportLoader
+from stockcrawler.loaders import ReportItemLoader
 
 
 def load_symbols(file_path):
@@ -57,5 +57,5 @@ class EdgarSpider(CrawlSpider):
 
     def parse_10qk(self, response):
         '''Parse 10-Q or 10-K XML report.'''
-        loader = ReportLoader(response=response)
+        loader = ReportItemLoader(response=response)
         return loader.load_item()
