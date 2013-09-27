@@ -26,10 +26,13 @@ where ``symbols.txt`` stores a list of trading symbols you want crawl.
 Running Tests
 -------------
 
-Install ``pytest`` and ``pytest-cov`` if you don't have them::
+Install ``pytest``, ``pytest-cov``, and ``requests`` if you don't have them::
 
-    pip install pytest pytest-cov
+    pip install pytest pytest-cov requests
 
-Run the test suites::
+Then running the tests is a simple command::
 
     py.test
+
+This downloads the test data from the internet on the fly, so it will take
+some time and disk space.
