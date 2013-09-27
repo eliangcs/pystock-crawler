@@ -1,4 +1,5 @@
 import os
+import requests
 import unittest
 
 from scrapy.http.response.xml import XmlResponse
@@ -6,15 +7,32 @@ from scrapy.http.response.xml import XmlResponse
 from stockcrawler.loaders import ReportLoader
 
 
-def create_response(filename):
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'sample_data', filename)
-    with open(path) as f:
+def create_response(file_path):
+    with open(file_path) as f:
         body = f.read()
-    return XmlResponse('file://%s' % path.replace('\\', '/'), body=body)
+    return XmlResponse('file://%s' % file_path.replace('\\', '/'), body=body)
 
 
-def parse_xml(filename):
-    response = create_response(filename)
+def download(url, local_path):
+    if not os.path.exists(local_path):
+        dir_path = os.path.dirname(local_path)
+        if not os.path.exists(dir_path):
+            try:
+                os.mkdir(dir_path)
+            except OSError:
+                pass
+
+        with open(local_path, 'wb') as f:
+            r = requests.get(url, stream=True)
+            for chunk in r.iter_content(chunk_size=4096):
+                f.write(chunk)
+
+
+def parse_xml(url):
+    filename = url.split('/')[-1]
+    local_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'sample_data', filename)
+    download(url, local_path)
+    response = create_response(local_path)
     loader = ReportLoader(response=response)
     return loader.load_item()
 
@@ -36,7 +54,7 @@ class TestReportLoader(unittest.TestCase):
         self.assertEqual(item['cash'], expected['cash'])
 
     def test_goog_20090930(self):
-        item = parse_xml('goog-20090930.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312509222384/goog-20090930.xml')
         self.assert_item(item, {
             'symbol': 'GOOG',
             'doc_type': '10-Q',
@@ -53,7 +71,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_goog_20120930(self):
-        item = parse_xml('goog-20120930.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312512440217/goog-20120930.xml')
         self.assert_item(item, {
             'symbol': 'GOOG',
             'doc_type': '10-Q',
@@ -70,7 +88,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_goog_20121231(self):
-        item = parse_xml('goog-20121231.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312513028362/goog-20121231.xml')
         self.assert_item(item, {
             'symbol': 'GOOG',
             'doc_type': '10-K',
@@ -87,7 +105,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_goog_20130630(self):
-        item = parse_xml('goog-20130630.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000128877613000055/goog-20130630.xml')
         self.assert_item(item, {
             'symbol': 'GOOG',
             'doc_type': '10-Q',
@@ -104,7 +122,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_msft_20110630(self):
-        item = parse_xml('msft-20110630.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312511200680/msft-20110630.xml')
         self.assert_item(item, {
             'symbol': 'MSFT',
             'doc_type': '10-K',
@@ -121,7 +139,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_ko_20100402(self):
-        item = parse_xml('ko-20100402.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000104746910004416/ko-20100402.xml')
         self.assert_item(item, {
             'symbol': 'KO',
             'doc_type': '10-Q',
@@ -138,7 +156,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_ko_20101231(self):
-        item = parse_xml('ko-20101231.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000104746911001506/ko-20101231.xml')
         self.assert_item(item, {
             'symbol': 'KO',
             'doc_type': '10-K',
@@ -155,7 +173,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_ko_20120928(self):
-        item = parse_xml('ko-20120928.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000002134412000051/ko-20120928.xml')
         self.assert_item(item, {
             'symbol': 'KO',
             'doc_type': '10-Q',
@@ -172,7 +190,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_jpm_20090630(self):
-        item = parse_xml('jpm-20090630.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/19617/000095012309032832/jpm-20090630.xml')
         self.assert_item(item, {
             'symbol': 'JPM',
             'doc_type': '10-Q',
@@ -189,7 +207,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_xom_20110331(self):
-        item = parse_xml('xom-20110331.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312511127973/xom-20110331.xml')
         self.assert_item(item, {
             'symbol': 'XOM',
             'doc_type': '10-Q',
@@ -206,7 +224,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_xom_20111231(self):
-        item = parse_xml('xom-20111231.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312512078102/xom-20111231.xml')
         self.assert_item(item, {
             'symbol': 'XOM',
             'doc_type': '10-K',
@@ -223,7 +241,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_xom_20130630(self):
-        item = parse_xml('xom-20130630.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000003408813000035/xom-20130630.xml')
         self.assert_item(item, {
             'symbol': 'XOM',
             'doc_type': '10-Q',
@@ -240,7 +258,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_omx_20110924(self):
-        item = parse_xml('omx-20110924.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312511286448/omx-20110924.xml')
         self.assert_item(item, {
             'symbol': 'OMX',
             'doc_type': '10-Q',
@@ -257,7 +275,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_omx_20111231(self):
-        item = parse_xml('omx-20111231.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312512077611/omx-20111231.xml')
         self.assert_item(item, {
             'symbol': 'OMX',
             'doc_type': '10-K',
@@ -274,7 +292,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_omx_20121229(self):
-        item = parse_xml('omx-20121229.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312513073972/omx-20121229.xml')
         self.assert_item(item, {
             'symbol': 'OMX',
             'doc_type': '10-K',
@@ -291,7 +309,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_aapl_20100626(self):
-        item = parse_xml('aapl-20100626.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/320193/000119312510162840/aapl-20100626.xml')
         self.assert_item(item, {
             'symbol': 'AAPL',
             'doc_type': '10-Q',
@@ -308,7 +326,7 @@ class TestReportLoader(unittest.TestCase):
         })
 
     def test_jnj_20120930(self):
-        item = parse_xml('jnj-20120930.xml')
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000020040612000140/jnj-20120930.xml')
         self.assert_item(item, {
             'symbol': 'JNJ',
             'doc_type': '10-Q',
