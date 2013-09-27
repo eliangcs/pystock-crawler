@@ -40,6 +40,5 @@ class ReportItem(Item):
     dividend = Field()
 
     assets = Field()
-    debt = Field()
     equity = Field()
     cash = Field()
