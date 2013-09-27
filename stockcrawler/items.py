@@ -23,6 +23,9 @@ class ReportItem(Item):
     # Trading symbol
     symbol = Field()
 
+    # If this doc is an amendment to previously filed doc
+    amend = Field()
+
     # Quarterly (10-Q) or annual (10-K) report
     doc_type = Field()
 

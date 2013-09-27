@@ -41,6 +41,7 @@ class TestReportItemLoader(unittest.TestCase):
 
     def assert_item(self, item, expected):
         self.assertEqual(item['symbol'], expected['symbol'])
+        self.assertEqual(item['amend'], expected['amend'])
         self.assertEqual(item['doc_type'], expected['doc_type'])
         self.assertEqual(item['period_focus'], expected['period_focus'])
         self.assertEqual(item['end_date'], expected['end_date'])
@@ -57,6 +58,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312509222384/goog-20090930.xml')
         self.assert_item(item, {
             'symbol': 'GOOG',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2009-09-30',
@@ -74,6 +76,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312512440217/goog-20120930.xml')
         self.assert_item(item, {
             'symbol': 'GOOG',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
@@ -91,6 +94,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312513028362/goog-20121231.xml')
         self.assert_item(item, {
             'symbol': 'GOOG',
+            'amend': False,
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-12-31',
@@ -108,6 +112,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000128877613000055/goog-20130630.xml')
         self.assert_item(item, {
             'symbol': 'GOOG',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
@@ -125,6 +130,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312511200680/msft-20110630.xml')
         self.assert_item(item, {
             'symbol': 'MSFT',
+            'amend': False,
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-06-30',
@@ -142,6 +148,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000104746910004416/ko-20100402.xml')
         self.assert_item(item, {
             'symbol': 'KO',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-04-02',
@@ -159,6 +166,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000104746911001506/ko-20101231.xml')
         self.assert_item(item, {
             'symbol': 'KO',
+            'amend': False,
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2010-12-31',
@@ -176,6 +184,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000002134412000051/ko-20120928.xml')
         self.assert_item(item, {
             'symbol': 'KO',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-28',
@@ -193,6 +202,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/19617/000095012309032832/jpm-20090630.xml')
         self.assert_item(item, {
             'symbol': 'JPM',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
@@ -210,6 +220,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312511127973/xom-20110331.xml')
         self.assert_item(item, {
             'symbol': 'XOM',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2011-03-31',
@@ -227,6 +238,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312512078102/xom-20111231.xml')
         self.assert_item(item, {
             'symbol': 'XOM',
+            'amend': False,
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-12-31',
@@ -244,6 +256,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000003408813000035/xom-20130630.xml')
         self.assert_item(item, {
             'symbol': 'XOM',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
@@ -261,6 +274,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312511286448/omx-20110924.xml')
         self.assert_item(item, {
             'symbol': 'OMX',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2011-09-24',
@@ -278,6 +292,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312512077611/omx-20111231.xml')
         self.assert_item(item, {
             'symbol': 'OMX',
+            'amend': False,
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-12-31',
@@ -295,6 +310,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312513073972/omx-20121229.xml')
         self.assert_item(item, {
             'symbol': 'OMX',
+            'amend': False,
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-12-29',
@@ -312,6 +328,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/320193/000119312510162840/aapl-20100626.xml')
         self.assert_item(item, {
             'symbol': 'AAPL',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2010-06-26',
@@ -329,6 +346,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000020040612000140/jnj-20120930.xml')
         self.assert_item(item, {
             'symbol': 'JNJ',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
@@ -346,6 +364,7 @@ class TestReportItemLoader(unittest.TestCase):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312513327916/tsla-20130630.xml')
         self.assert_item(item, {
             'symbol': 'TSLA',
+            'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',

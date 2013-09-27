@@ -98,6 +98,11 @@ def exclude_member(context):
     return False
 
 
+def str_to_bool(value):
+    value = value.lower()
+    return value and value != 'false' and value != '0'
+
+
 def find_namespace(xxs, name):
     name_re = name.replace('-', '\-')
     if not name_re.startswith('xmlns'):
@@ -150,6 +155,9 @@ class ReportLoader(XmlXPathItemLoader):
     default_output_processor = TakeFirst()
 
     symbol_in = MapCompose(ExtractText(), unicode.upper)
+
+    amend_in = MapCompose(ExtractText(), str_to_bool)
+
     period_focus_in = MapCompose(ExtractText(), unicode.upper)
 
     revenues_in = MapCompose(MatchEndDate(float, context_filter=exclude_member))
@@ -187,6 +195,8 @@ class ReportLoader(XmlXPathItemLoader):
 
         self.add_xpath('symbol', '//dei:TradingSymbol')
         self.add_value('symbol', symbol)
+
+        self.add_xpath('amend', '//dei:AmendmentFlag')
 
         self.add_value('end_date', end_date)
         self.add_value('doc_type', doc_type)
