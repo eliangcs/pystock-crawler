@@ -432,6 +432,24 @@ class TestReportItemLoader(unittest.TestCase):
             'cash': 15486000000.0
         })
 
+    def test_jnj_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000020040613000091/jnj-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'JNJ',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 17877000000.0,
+            'net_income': 3833000000.0,
+            'eps_basic': 1.36,
+            'eps_diluted': 1.33,
+            'dividend': 0.66,
+            'assets': 124325000000.0,
+            'equity': 69665000000.0,
+            'cash': 17307000000.0
+        })
+
     def test_tsla_20110630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312511221497/tsla-20110630.xml')
         self.assert_item(item, {
