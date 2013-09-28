@@ -378,6 +378,24 @@ class TestReportItemLoader(unittest.TestCase):
             'cash': 9705000000.0
         })
 
+    def test_aapl_20110326(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/320193/000119312511104388/aapl-20110326.xml')
+        self.assert_item(item, {
+            'symbol': 'AAPL',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2011-03-26',
+            'revenues': 24667000000.0,
+            'net_income': 5987000000.0,
+            'eps_basic': 6.49,
+            'eps_diluted': 6.40,
+            'dividend': 0.0,
+            'assets': 94904000000.0,
+            'equity': 61477000000.0,
+            'cash': 15978000000.0
+        })
+
     def test_jnj_20120930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000020040612000140/jnj-20120930.xml')
         self.assert_item(item, {
