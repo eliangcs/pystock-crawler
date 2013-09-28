@@ -144,6 +144,24 @@ class TestReportItemLoader(unittest.TestCase):
             'cash': 9610000000.0
         })
 
+    def test_msft_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312512026864/msft-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'MSFT',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2011-12-31',
+            'revenues': 20885000000.0,
+            'net_income': 6624000000.0,
+            'eps_basic': 0.79,
+            'eps_diluted': 0.78,
+            'dividend': 0.20,
+            'assets': 112243000000.0,
+            'equity': 64121000000.0,
+            'cash': 10610000000.0
+        })
+
     def test_msft_20130331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312513160748/msft-20130331.xml')
         self.assert_item(item, {
