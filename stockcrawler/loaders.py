@@ -33,9 +33,6 @@ class MatchEndDate(object):
         context_id = value.select('@contextRef')[0].extract()
         context = selector.select('//*[@id="%s"]' % context_id)[0]
 
-        if context_id == 'As_Of_9_24_2011':
-            print value.extract()
-
         if self.context_filter and not self.context_filter(context):
             return None
 
@@ -68,8 +65,6 @@ class MatchEndDate(object):
 class FindSum(object):
 
     def __call__(self, values):
-        print 'values: %s' % str(values)
-
         size = len(values)
         if size == 1:
             return values[0]
@@ -135,13 +130,18 @@ class XmlXPathItemLoader(XPathItemLoader):
     def add_xpath(self, field_name, xpath, *processors, **kw):
         values = self._get_values(xpath, **kw)
         self.add_value(field_name, values, *processors, **kw)
-        return len(values)
+        return len(self._values[field_name])
 
     def add_xpaths(self, name_path_pairs):
-        for name, path in name_path_pairs:
-            match_count = self.add_xpath(name, path)
+        for args in name_path_pairs:
+            name = args[0]
+            path = args[1]
+            processors = [args[i] for i in xrange(2, len(args))]
+
+            match_count = self.add_xpath(name, path, *processors)
             if match_count > 0:
                 return match_count
+
         return 0
 
     def _get_values(self, xpaths, **kw):
@@ -214,7 +214,8 @@ class ReportItemLoader(XmlXPathItemLoader):
 
         self.add_xpaths([
             ('net_income', '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic'),
-            ('net_income', '//us-gaap:NetIncomeLoss')
+            ('net_income', '//us-gaap:NetIncomeLoss'),
+            ('net_income', '//us-gaap:ProfitLoss')
         ])
 
         self.add_xpath('eps_basic', '//us-gaap:EarningsPerShareBasic')
