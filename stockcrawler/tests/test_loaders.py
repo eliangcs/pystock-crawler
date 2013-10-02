@@ -252,6 +252,42 @@ class TestReportItemLoader(unittest.TestCase):
             'cash': 25133000000.0
         })
 
+    def test_jpm_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/19617/000001961712000163/jpm-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'JPM',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-12-31',
+            'revenues': 97234000000.0,
+            'net_income': 17568000000.0,
+            'eps_basic': 4.50,
+            'eps_diluted': 4.48,
+            'dividend': 1.0,
+            'assets': 2265792000000.0,
+            'equity': 183573000000.0,
+            'cash': 59602000000.0
+        })
+
+    def test_jpm_20130331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/19617/000001961713000300/jpm-20130331.xml')
+        self.assert_item(item, {
+            'symbol': 'JPM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2013-03-31',
+            'revenues': 25122000000.0,
+            'net_income': 6131000000.0,
+            'eps_basic': 1.61,
+            'eps_diluted': 1.59,
+            'dividend': 0.30,
+            'assets': 2389349000000.0,
+            'equity': 207086000000.0,
+            'cash': 45524000000.0
+        })
+
     def test_xom_20110331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312511127973/xom-20110331.xml')
         self.assert_item(item, {
