@@ -575,3 +575,21 @@ class TestReportItemLoader(unittest.TestCase):
             'equity': 13309000000.0,
             'cash': 2098000000.0
         })
+
+    def test_fb_20121231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1326801/000132680113000003/fb-20121231.xml')
+        self.assert_item(item, {
+            'symbol': 'FB',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-12-31',
+            'revenues': 5089000000.0,
+            'net_income': 32000000.0,
+            'eps_basic': 0.02,
+            'eps_diluted': 0.01,
+            'dividend': 0.0,
+            'assets': 15103000000.0,
+            'equity': 11755000000.0,
+            'cash': 2384000000.0
+        })
