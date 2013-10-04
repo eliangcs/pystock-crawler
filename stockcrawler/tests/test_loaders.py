@@ -45,14 +45,14 @@ class TestReportItemLoader(unittest.TestCase):
         self.assertEqual(item['doc_type'], expected['doc_type'])
         self.assertEqual(item['period_focus'], expected['period_focus'])
         self.assertEqual(item['end_date'], expected['end_date'])
-        self.assertEqual(item['revenues'], expected['revenues'])
-        self.assertEqual(item['net_income'], expected['net_income'])
-        self.assertEqual(item['eps_basic'], expected['eps_basic'])
-        self.assertEqual(item['eps_diluted'], expected['eps_diluted'])
-        self.assertEqual(item['dividend'], expected['dividend'])
-        self.assertEqual(item['assets'], expected['assets'])
-        self.assertEqual(item['equity'], expected['equity'])
-        self.assertEqual(item['cash'], expected['cash'])
+        self.assertAlmostEqual(item['revenues'], expected['revenues'])
+        self.assertAlmostEqual(item['net_income'], expected['net_income'])
+        self.assertAlmostEqual(item['eps_basic'], expected['eps_basic'])
+        self.assertAlmostEqual(item['eps_diluted'], expected['eps_diluted'])
+        self.assertAlmostEqual(item['dividend'], expected['dividend'])
+        self.assertAlmostEqual(item['assets'], expected['assets'])
+        self.assertAlmostEqual(item['equity'], expected['equity'])
+        self.assertAlmostEqual(item['cash'], expected['cash'])
 
     def test_goog_20090930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312509222384/goog-20090930.xml')
@@ -592,4 +592,22 @@ class TestReportItemLoader(unittest.TestCase):
             'assets': 15103000000.0,
             'equity': 11755000000.0,
             'cash': 2384000000.0
+        })
+
+    def test_lcapa_20110930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793411000006/lcapa-20110930.xml')
+        self.assert_item(item, {
+            'symbol': 'LCAPA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2011-09-30',
+            'revenues': 540000000.0,
+            'net_income': -42000000.0,
+            'eps_basic': -0.07,
+            'eps_diluted': -0.12,
+            'dividend': 0.0,
+            'assets': 8915000000.0,
+            'equity': 5078000000.0,
+            'cash': 1937000000.0
         })
