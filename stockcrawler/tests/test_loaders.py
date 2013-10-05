@@ -819,6 +819,24 @@ class TestReportItemLoader(unittest.TestCase):
             'cash': 8335000000.0
         })
 
+    def test_cbs_20100331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/813828/000104746910004823/cbs-20100331.xml')
+        self.assert_item(item, {
+            'symbol': 'CBS',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-03-31',
+            'revenues': 3530900000.0,
+            'net_income': -26200000.0,
+            'eps_basic': -0.04,
+            'eps_diluted': -0.04,
+            'dividend': 0.05,
+            'assets': 26756100000.0,
+            'equity': 9046100000.0,
+            'cash': 872700000.0
+        })
+
     def test_cbs_20111231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/813828/000104746912001373/cbs-20111231.xml')
         self.assert_item(item, {
