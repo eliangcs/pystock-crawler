@@ -1,9 +1,6 @@
 language: python
 python:
   - 2.7
-  - 3.2
-  - 3.3
-  - pypy
 install:
   - pip install -r requirements.txt --use-mirrors
   - pip install pytest pytest-cov requests --use-mirrors
