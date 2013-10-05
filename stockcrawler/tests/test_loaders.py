@@ -710,3 +710,21 @@ class TestReportItemLoader(unittest.TestCase):
             'equity': 18319000000.0,
             'cash': 2942000000.0
         })
+
+    def test_axp_20100930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/4962/000095012310100214/axp-20100930.xml')
+        self.assert_item(item, {
+            'symbol': 'AXP',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2010-09-30',
+            'revenues': 6660000000.0,
+            'net_income': 1093000000.0,
+            'eps_basic': 0.91,
+            'eps_diluted': 0.9,
+            'dividend': 0.18,
+            'assets': 146056000000.0,
+            'equity': 15920000000.0,
+            'cash': 2159000000.0
+        })
