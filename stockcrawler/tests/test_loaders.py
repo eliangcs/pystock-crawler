@@ -692,3 +692,21 @@ class TestReportItemLoader(unittest.TestCase):
             'equity': 16619000000.0,
             'cash': 2332000000.0
         })
+
+    def test_mmm_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/66740/000110465913058961/mmm-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'MMM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 7752000000.0,
+            'net_income': 1197000000.0,
+            'eps_basic': 1.74,
+            'eps_diluted': 1.71,
+            'dividend': 0.635,
+            'assets': 34130000000.0,
+            'equity': 18319000000.0,
+            'cash': 2942000000.0
+        })
