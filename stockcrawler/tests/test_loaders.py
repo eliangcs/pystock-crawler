@@ -782,3 +782,21 @@ class TestReportItemLoader(unittest.TestCase):
             'equity': 7560000000.0,
             'cash': 8335000000.0
         })
+
+    def test_ba_20110930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12927/000119312511281613/ba-20110930.xml')
+        self.assert_item(item, {
+            'symbol': 'BA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2011-09-30',
+            'revenues': 17727000000.0,
+            'net_income': 1098000000.0,
+            'eps_basic': 1.47,
+            'eps_diluted': 1.46,
+            'dividend': 0.42,
+            'assets': 74163000000.0,
+            'equity': 6061000000.0,
+            'cash': 5954000000.0
+        })
