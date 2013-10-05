@@ -765,24 +765,6 @@ class TestReportItemLoader(unittest.TestCase):
             'cash': 22250000000.0
         })
 
-    def test_ba_20130331(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12927/000001292713000023/ba-20130331.xml')
-        self.assert_item(item, {
-            'symbol': 'BA',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q1',
-            'end_date': '2013-03-31',
-            'revenues': 18893000000.0,
-            'net_income': 1106000000.0,
-            'eps_basic': 1.45,
-            'eps_diluted': 1.44,
-            'dividend': 0.49,
-            'assets': 90447000000.0,
-            'equity': 7560000000.0,
-            'cash': 8335000000.0
-        })
-
     def test_ba_20110930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/12927/000119312511281613/ba-20110930.xml')
         self.assert_item(item, {
@@ -799,4 +781,40 @@ class TestReportItemLoader(unittest.TestCase):
             'assets': 74163000000.0,
             'equity': 6061000000.0,
             'cash': 5954000000.0
+        })
+
+    def test_ba_20091231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12927/000119312510024406/ba-20091231.xml')
+        self.assert_item(item, {
+            'symbol': 'BA',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2009-12-31',
+            'revenues': 68281000000.0,
+            'net_income': 1312000000.0,
+            'eps_basic': 1.86,
+            'eps_diluted': 1.84,
+            'dividend': 1.68,
+            'assets': 62053000000.0,
+            'equity': 2225000000.0,
+            'cash': 9215000000.0
+        })
+
+    def test_ba_20130331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12927/000001292713000023/ba-20130331.xml')
+        self.assert_item(item, {
+            'symbol': 'BA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2013-03-31',
+            'revenues': 18893000000.0,
+            'net_income': 1106000000.0,
+            'eps_basic': 1.45,
+            'eps_diluted': 1.44,
+            'dividend': 0.49,
+            'assets': 90447000000.0,
+            'equity': 7560000000.0,
+            'cash': 8335000000.0
         })
