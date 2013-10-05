@@ -99,7 +99,7 @@ def imd_sum_members_or_take_first(imd_values):
         if imd_value.is_member():
             member_values.append(imd_value.value)
 
-    if len(member_values) == len(imd_values):
+    if member_values and len(member_values) == len(imd_values):
         return sum(member_values)
 
     if imd_values:
@@ -279,7 +279,10 @@ class ReportItemLoader(XmlXPathItemLoader):
         self.add_xpath('assets', '//us-gaap:Assets')
 
         self.add_xpath('equity', '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest')
-        self.add_xpath('equity', '//us-gaap:StockholdersEquity')
+        self.add_xpaths([
+            ('equity', '//us-gaap:StockholdersEquity'),
+            ('equity', '//*[contains(local-name(), "MembersEquityIncludingPortionAttributableToNoncontrollingInterest")]')
+        ])
 
         self.add_xpaths([
             ('cash', '//us-gaap:CashAndDueFromBanks'),

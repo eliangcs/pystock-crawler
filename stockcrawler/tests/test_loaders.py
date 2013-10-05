@@ -47,8 +47,17 @@ class TestReportItemLoader(unittest.TestCase):
         self.assertEqual(item['end_date'], expected['end_date'])
         self.assertAlmostEqual(item['revenues'], expected['revenues'])
         self.assertAlmostEqual(item['net_income'], expected['net_income'])
-        self.assertAlmostEqual(item['eps_basic'], expected['eps_basic'])
-        self.assertAlmostEqual(item['eps_diluted'], expected['eps_diluted'])
+
+        if expected['eps_basic'] is None:
+            self.assertIsNone(item['eps_basic'])
+        else:
+            self.assertAlmostEqual(item['eps_basic'], expected['eps_basic'])
+
+        if expected['eps_basic'] is None:
+            self.assertIsNone(item['eps_diluted'])
+        else:
+            self.assertAlmostEqual(item['eps_diluted'], expected['eps_diluted'])
+
         self.assertAlmostEqual(item['dividend'], expected['dividend'])
         self.assertAlmostEqual(item['assets'], expected['assets'])
         self.assertAlmostEqual(item['equity'], expected['equity'])
@@ -610,4 +619,40 @@ class TestReportItemLoader(unittest.TestCase):
             'assets': 8915000000.0,
             'equity': 5078000000.0,
             'cash': 1937000000.0
+        })
+
+    def test_lmca_20120331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793412000012/lmca-20120331.xml')
+        self.assert_item(item, {
+            'symbol': 'LMCA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-03-31',
+            'revenues': 440000000.0,
+            'net_income': 137000000.0,
+            'eps_basic': 1.13,
+            'eps_diluted': 1.10,
+            'dividend': 0.0,
+            'assets': 7122000000.0,
+            'equity': 5321000000.0,
+            'cash': 1915000000.0
+        })
+
+    def test_strza_20121231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793413000015/strza-20121231.xml')
+        self.assert_item(item, {
+            'symbol': 'STRZA',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-12-31',
+            'revenues': 1630696000.0,
+            'net_income': 254484000.0,
+            'eps_basic': None,
+            'eps_diluted': None,
+            'dividend': 0.0,
+            'assets': 2176050000.0,
+            'equity': 1302144000.0,
+            'cash': 749774000.0
         })
