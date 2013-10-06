@@ -39,29 +39,26 @@ def parse_xml(url):
 
 class ReportItemLoaderTest(unittest.TestCase):
 
+    def assert_none_or_almost_equal(self, value, expected_value):
+        if expected_value is None:
+            self.assertIsNone(value)
+        else:
+            self.assertAlmostEqual(value, expected_value)
+
     def assert_item(self, item, expected):
         self.assertEqual(item['symbol'], expected['symbol'])
         self.assertEqual(item['amend'], expected['amend'])
         self.assertEqual(item['doc_type'], expected['doc_type'])
         self.assertEqual(item['period_focus'], expected['period_focus'])
         self.assertEqual(item['end_date'], expected['end_date'])
-        self.assertAlmostEqual(item['revenues'], expected['revenues'])
-        self.assertAlmostEqual(item['net_income'], expected['net_income'])
-
-        if expected['eps_basic'] is None:
-            self.assertIsNone(item['eps_basic'])
-        else:
-            self.assertAlmostEqual(item['eps_basic'], expected['eps_basic'])
-
-        if expected['eps_basic'] is None:
-            self.assertIsNone(item['eps_diluted'])
-        else:
-            self.assertAlmostEqual(item['eps_diluted'], expected['eps_diluted'])
-
+        self.assert_none_or_almost_equal(item['revenues'], expected['revenues'])
+        self.assert_none_or_almost_equal(item['net_income'], expected['net_income'])
+        self.assert_none_or_almost_equal(item['eps_basic'], expected['eps_basic'])
+        self.assert_none_or_almost_equal(item['eps_diluted'], expected['eps_diluted'])
         self.assertAlmostEqual(item['dividend'], expected['dividend'])
-        self.assertAlmostEqual(item['assets'], expected['assets'])
-        self.assertAlmostEqual(item['equity'], expected['equity'])
-        self.assertAlmostEqual(item['cash'], expected['cash'])
+        self.assert_none_or_almost_equal(item['assets'], expected['assets'])
+        self.assert_none_or_almost_equal(item['equity'], expected['equity'])
+        self.assert_none_or_almost_equal(item['cash'], expected['cash'])
 
     def test_aapl_20100626(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/320193/000119312510162840/aapl-20100626.xml')
@@ -295,6 +292,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'assets': 25693000000.0,
             'equity': 9601000000.0,
             'cash': 282000000.0
+        })
+
+    def test_ccmm_20110630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1091667/000109166711000103/ccmm-20110630.xml')
+        self.assert_item(item, {
+            'symbol': 'CCMM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2011-06-30',
+            'revenues': 1791000000.0,
+            'net_income': -107000000.0,
+            'eps_basic': -0.98,
+            'eps_diluted': -0.98,
+            'dividend': 0.0,
+            'assets': None,
+            'equity': None,
+            'cash': None
         })
 
     def test_dltr_20130504(self):
