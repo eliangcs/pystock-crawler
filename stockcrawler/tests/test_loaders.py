@@ -297,6 +297,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 282000000.0
         })
 
+    def test_ebay_20100630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1065088/000119312510164115/ebay-20100630.xml')
+        self.assert_item(item, {
+            'symbol': 'EBAY',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2010-06-30',
+            'revenues': 2215379000.0,
+            'net_income': 412192000.0,
+            'eps_basic': 0.31,
+            'eps_diluted': 0.31,
+            'dividend': 0.0,
+            'assets': 18747584000.0,
+            'equity': 14169291000.0,
+            'cash': 4037442000.0
+        })
+
     def test_fb_20120630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1326801/000119312512325997/fb-20120630.xml')
         self.assert_item(item, {

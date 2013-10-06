@@ -252,6 +252,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             ('revenues', '//us-gaap:Revenues'),
             ('revenues', '//us-gaap:SalesRevenueNet'),
             ('revenues', '//us-gaap:SalesRevenueGoodsNet'),
+            ('revenues', '//us-gaap:SalesRevenueServicesNet'),
             ('revenues', '//*[contains(local-name(), "TotalRevenues") and contains(local-name(), "After")]'),
             ('revenues', '//*[contains(local-name(), "TotalRevenues")]')
         ])
