@@ -926,3 +926,21 @@ class ReportItemLoaderTest(unittest.TestCase):
             'equity': 171588000000.0,
             'cash': 4609000000.0
         })
+
+    def test_xray_20091231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/818479/000114420410009164/xray-20091231.xml')
+        self.assert_item(item, {
+            'symbol': 'XRAY',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2009-12-31',
+            'revenues': 2159916000.0,
+            'net_income': 274258000.0,
+            'eps_basic': 1.85,
+            'eps_diluted': 1.83,
+            'dividend': 0.2,
+            'assets': 3087932000.0,
+            'equity': 1906958000.0,
+            'cash': 450348000.0
+        })

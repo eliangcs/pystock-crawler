@@ -302,7 +302,11 @@ class ReportItemLoader(XmlXPathItemLoader):
             return None
 
     def _get_doc_end_date(self):
-        return self.selector.select('//dei:DocumentPeriodEndDate/text()')[0].extract()
+        try:
+            date_str = self.context['response'].url.split('-')[-1].split('.')[0]
+            return datetime.strptime(date_str, '%Y%m%d').strftime('%Y-%m-%d')
+        except IndexError, ValueError:
+            return self.selector.select('//dei:DocumentPeriodEndDate/text()')[0].extract()
 
     def _get_doc_type(self):
         return self.selector.select('//dei:DocumentType/text()')[0].extract().upper()
