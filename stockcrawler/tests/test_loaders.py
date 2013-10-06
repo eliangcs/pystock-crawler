@@ -63,348 +63,6 @@ class ReportItemLoaderTest(unittest.TestCase):
         self.assertAlmostEqual(item['equity'], expected['equity'])
         self.assertAlmostEqual(item['cash'], expected['cash'])
 
-    def test_goog_20090930(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312509222384/goog-20090930.xml')
-        self.assert_item(item, {
-            'symbol': 'GOOG',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q3',
-            'end_date': '2009-09-30',
-            'revenues': 5944851000.0,
-            'net_income': 1638975000.0,
-            'eps_basic': 5.18,
-            'eps_diluted': 5.13,
-            'dividend': 0.0,
-            'assets': 37702845000.0,
-            'equity': 33721753000.0,
-            'cash': 12087115000.0
-        })
-
-    def test_goog_20120930(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312512440217/goog-20120930.xml')
-        self.assert_item(item, {
-            'symbol': 'GOOG',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q3',
-            'end_date': '2012-09-30',
-            'revenues': 14101000000.0,
-            'net_income': 2176000000.0,
-            'eps_basic': 6.64,
-            'eps_diluted': 6.53,
-            'dividend': 0.0,
-            'assets': 89730000000.0,
-            'equity': 68028000000.0,
-            'cash': 16260000000.0
-        })
-
-    def test_goog_20121231(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312513028362/goog-20121231.xml')
-        self.assert_item(item, {
-            'symbol': 'GOOG',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2012-12-31',
-            'revenues': 50175000000.0,
-            'net_income': 10737000000.0,
-            'eps_basic': 32.81,
-            'eps_diluted': 32.31,
-            'dividend': 0.0,
-            'assets': 93798000000.0,
-            'equity': 71715000000.0,
-            'cash': 14778000000.0
-        })
-
-    def test_goog_20130630(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000128877613000055/goog-20130630.xml')
-        self.assert_item(item, {
-            'symbol': 'GOOG',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q2',
-            'end_date': '2013-06-30',
-            'revenues': 14105000000.0,
-            'net_income': 3228000000.0,
-            'eps_basic': 9.71,
-            'eps_diluted': 9.54,
-            'dividend': 0.0,
-            'assets': 101182000000.0,
-            'equity': 78852000000.0,
-            'cash': 16164000000.0
-        })
-
-    def test_msft_20110630(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312511200680/msft-20110630.xml')
-        self.assert_item(item, {
-            'symbol': 'MSFT',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2011-06-30',
-            'revenues': 69943000000.0,
-            'net_income': 23150000000.0,
-            'eps_basic': 2.73,
-            'eps_diluted': 2.69,
-            'dividend': 0.64,
-            'assets': 108704000000.0,
-            'equity': 57083000000.0,
-            'cash': 9610000000.0
-        })
-
-    def test_msft_20111231(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312512026864/msft-20111231.xml')
-        self.assert_item(item, {
-            'symbol': 'MSFT',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q2',
-            'end_date': '2011-12-31',
-            'revenues': 20885000000.0,
-            'net_income': 6624000000.0,
-            'eps_basic': 0.79,
-            'eps_diluted': 0.78,
-            'dividend': 0.20,
-            'assets': 112243000000.0,
-            'equity': 64121000000.0,
-            'cash': 10610000000.0
-        })
-
-    def test_msft_20130331(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312513160748/msft-20130331.xml')
-        self.assert_item(item, {
-            'symbol': 'MSFT',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q3',
-            'end_date': '2013-03-31',
-            'revenues': 20489000000.0,
-            'net_income': 6055000000.0,
-            'eps_basic': 0.72,
-            'eps_diluted': 0.72,
-            'dividend': 0.23,
-            'assets': 134105000000.0,
-            'equity': 76688000000.0,
-            'cash': 5240000000.0
-        })
-
-    def test_ko_20100402(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000104746910004416/ko-20100402.xml')
-        self.assert_item(item, {
-            'symbol': 'KO',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q1',
-            'end_date': '2010-04-02',
-            'revenues': 7525000000.0,
-            'net_income': 1614000000.0,
-            'eps_basic': 0.70,
-            'eps_diluted': 0.69,
-            'dividend': 0.44,
-            'assets': 47403000000.0,
-            'equity': 25157000000.0,
-            'cash': 5684000000.0
-        })
-
-    def test_ko_20101231(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000104746911001506/ko-20101231.xml')
-        self.assert_item(item, {
-            'symbol': 'KO',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2010-12-31',
-            'revenues': 35119000000.0,
-            'net_income': 11809000000.0,
-            'eps_basic': 5.12,
-            'eps_diluted': 5.06,
-            'dividend': 1.76,
-            'assets': 72921000000.0,
-            'equity': 31317000000.0,
-            'cash': 8517000000.0
-        })
-
-    def test_ko_20120928(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000002134412000051/ko-20120928.xml')
-        self.assert_item(item, {
-            'symbol': 'KO',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q3',
-            'end_date': '2012-09-28',
-            'revenues': 12340000000.0,
-            'net_income': 2311000000.0,
-            'eps_basic': 0.51,
-            'eps_diluted': 0.50,
-            'dividend': 0.255,
-            'assets': 86654000000.0,
-            'equity': 33590000000.0,
-            'cash': 9615000000.0
-        })
-
-    def test_jpm_20090630(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/19617/000095012309032832/jpm-20090630.xml')
-        self.assert_item(item, {
-            'symbol': 'JPM',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q2',
-            'end_date': '2009-06-30',
-            'revenues': 25623000000.0,
-            'net_income': 1072000000.0,
-            'eps_basic': 0.28,
-            'eps_diluted': 0.28,
-            'dividend': 0.05,
-            'assets': 2026642000000.0,
-            'equity': 154766000000.0,
-            'cash': 25133000000.0
-        })
-
-    def test_jpm_20111231(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/19617/000001961712000163/jpm-20111231.xml')
-        self.assert_item(item, {
-            'symbol': 'JPM',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2011-12-31',
-            'revenues': 97234000000.0,
-            'net_income': 17568000000.0,
-            'eps_basic': 4.50,
-            'eps_diluted': 4.48,
-            'dividend': 1.0,
-            'assets': 2265792000000.0,
-            'equity': 183573000000.0,
-            'cash': 59602000000.0
-        })
-
-    def test_jpm_20130331(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/19617/000001961713000300/jpm-20130331.xml')
-        self.assert_item(item, {
-            'symbol': 'JPM',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q1',
-            'end_date': '2013-03-31',
-            'revenues': 25122000000.0,
-            'net_income': 6131000000.0,
-            'eps_basic': 1.61,
-            'eps_diluted': 1.59,
-            'dividend': 0.30,
-            'assets': 2389349000000.0,
-            'equity': 207086000000.0,
-            'cash': 45524000000.0
-        })
-
-    def test_xom_20110331(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312511127973/xom-20110331.xml')
-        self.assert_item(item, {
-            'symbol': 'XOM',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q1',
-            'end_date': '2011-03-31',
-            'revenues': 114004000000.0,
-            'net_income': 10650000000.0,
-            'eps_basic': 2.14,
-            'eps_diluted': 2.14,
-            'dividend': 0.44,
-            'assets': 319533000000.0,
-            'equity': 157531000000.0,
-            'cash': 12833000000.0
-        })
-
-    def test_xom_20111231(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312512078102/xom-20111231.xml')
-        self.assert_item(item, {
-            'symbol': 'XOM',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2011-12-31',
-            'revenues': 467029000000.0,
-            'net_income': 41060000000.0,
-            'eps_basic': 8.43,
-            'eps_diluted': 8.42,
-            'dividend': 1.85,
-            'assets': 331052000000.0,
-            'equity': 160744000000.0,
-            'cash': 12664000000.0
-        })
-
-    def test_xom_20130630(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000003408813000035/xom-20130630.xml')
-        self.assert_item(item, {
-            'symbol': 'XOM',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q2',
-            'end_date': '2013-06-30',
-            'revenues': 106469000000.0,
-            'net_income': 6860000000.0,
-            'eps_basic': 1.55,
-            'eps_diluted': 1.55,
-            'dividend': 0.63,
-            'assets': 341615000000.0,
-            'equity': 171588000000.0,
-            'cash': 4609000000.0
-        })
-
-    def test_omx_20110924(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312511286448/omx-20110924.xml')
-        self.assert_item(item, {
-            'symbol': 'OMX',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q3',
-            'end_date': '2011-09-24',
-            'revenues': 1774767000.0,
-            'net_income': 21518000.0,
-            'eps_basic': 0.25,
-            'eps_diluted': 0.25,
-            'dividend': 0.0,
-            'assets': 4002981000.0,
-            'equity': 657636000.0,
-            'cash': 485426000.0
-        })
-
-    def test_omx_20111231(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312512077611/omx-20111231.xml')
-        self.assert_item(item, {
-            'symbol': 'OMX',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2011-12-31',
-            'revenues': 7121167000.0,
-            'net_income': 32771000.0,
-            'eps_basic': 0.38,
-            'eps_diluted': 0.38,
-            'dividend': 0.0,
-            'assets': 4069275000.0,
-            'equity': 568993000.0,
-            'cash': 427111000.0
-        })
-
-    def test_omx_20121229(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312513073972/omx-20121229.xml')
-        self.assert_item(item, {
-            'symbol': 'OMX',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2012-12-29',
-            'revenues': 6920384000.0,
-            'net_income': 414694000.0,
-            'eps_basic': 4.79,
-            'eps_diluted': 4.74,
-            'dividend': 0.0,
-            'assets': 3784315000.0,
-            'equity': 1034373000.0,
-            'cash': 495056000.0
-        })
-
     def test_aapl_20100626(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/320193/000119312510162840/aapl-20100626.xml')
         self.assert_item(item, {
@@ -457,258 +115,6 @@ class ReportItemLoaderTest(unittest.TestCase):
             'assets': 176064000000.0,
             'equity': 118210000000.0,
             'cash': 10746000000.0
-        })
-
-    def test_jnj_20120101(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000119312512075565/jnj-20120101.xml')
-        self.assert_item(item, {
-            'symbol': 'JNJ',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2012-01-01',
-            'revenues': 65030000000.0,
-            'net_income': 9672000000.0,
-            'eps_basic': 3.54,
-            'eps_diluted': 3.49,
-            'dividend': 2.25,
-            'assets': 113644000000.0,
-            'equity': 57080000000.0,
-            'cash': 24542000000.0
-        })
-
-    def test_jnj_20120930(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000020040612000140/jnj-20120930.xml')
-        self.assert_item(item, {
-            'symbol': 'JNJ',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q3',
-            'end_date': '2012-09-30',
-            'revenues': 17052000000.0,
-            'net_income': 2968000000.0,
-            'eps_basic': 1.08,
-            'eps_diluted': 1.05,
-            'dividend': 0.61,
-            'assets': 118951000000.0,
-            'equity': 63761000000.0,
-            'cash': 15486000000.0
-        })
-
-    def test_jnj_20130630(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000020040613000091/jnj-20130630.xml')
-        self.assert_item(item, {
-            'symbol': 'JNJ',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q2',
-            'end_date': '2013-06-30',
-            'revenues': 17877000000.0,
-            'net_income': 3833000000.0,
-            'eps_basic': 1.36,
-            'eps_diluted': 1.33,
-            'dividend': 0.66,
-            'assets': 124325000000.0,
-            'equity': 69665000000.0,
-            'cash': 17307000000.0
-        })
-
-    def test_tsla_20110630(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312511221497/tsla-20110630.xml')
-        self.assert_item(item, {
-            'symbol': 'TSLA',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q2',
-            'end_date': '2011-06-30',
-            'revenues': 58171000.0,
-            'net_income': -58903000.0,
-            'eps_basic': -0.60,
-            'eps_diluted': -0.60,
-            'dividend': 0.0,
-            'assets': 646155000.0,
-            'equity': 348452000.0,
-            'cash': 319380000.0
-        })
-
-    def test_tsla_20111231(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312512137560/tsla-20111231.xml')
-        self.assert_item(item, {
-            'symbol': 'TSLA',
-            'amend': True,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2011-12-31',
-            'revenues': 204242000.0,
-            'net_income': -254411000.0,
-            'eps_basic': -2.53,
-            'eps_diluted': -2.53,
-            'dividend': 0.0,
-            'assets': 713448000.0,
-            'equity': 224045000.0,
-            'cash': 255266000.0
-        })
-
-    def test_tsla_20130630(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312513327916/tsla-20130630.xml')
-        self.assert_item(item, {
-            'symbol': 'TSLA',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q2',
-            'end_date': '2013-06-30',
-            'revenues': 405139000.0,
-            'net_income': -30502000.0,
-            'eps_basic': -0.26,
-            'eps_diluted': -0.26,
-            'dividend': 0.0,
-            'assets': 1887844000.0,
-            'equity': 629426000.0,
-            'cash': 746057000.0
-        })
-
-    def test_fb_20120630(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1326801/000119312512325997/fb-20120630.xml')
-        self.assert_item(item, {
-            'symbol': 'FB',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q2',
-            'end_date': '2012-06-30',
-            'revenues': 1184000000.0,
-            'net_income': -157000000.0,
-            'eps_basic': -0.08,
-            'eps_diluted': -0.08,
-            'dividend': 0.0,
-            'assets': 14928000000.0,
-            'equity': 13309000000.0,
-            'cash': 2098000000.0
-        })
-
-    def test_fb_20121231(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1326801/000132680113000003/fb-20121231.xml')
-        self.assert_item(item, {
-            'symbol': 'FB',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2012-12-31',
-            'revenues': 5089000000.0,
-            'net_income': 32000000.0,
-            'eps_basic': 0.02,
-            'eps_diluted': 0.01,
-            'dividend': 0.0,
-            'assets': 15103000000.0,
-            'equity': 11755000000.0,
-            'cash': 2384000000.0
-        })
-
-    def test_lcapa_20110930(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793411000006/lcapa-20110930.xml')
-        self.assert_item(item, {
-            'symbol': 'LCAPA',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q3',
-            'end_date': '2011-09-30',
-            'revenues': 540000000.0,
-            'net_income': -42000000.0,
-            'eps_basic': -0.07,
-            'eps_diluted': -0.12,
-            'dividend': 0.0,
-            'assets': 8915000000.0,
-            'equity': 5078000000.0,
-            'cash': 1937000000.0
-        })
-
-    def test_lmca_20120331(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793412000012/lmca-20120331.xml')
-        self.assert_item(item, {
-            'symbol': 'LMCA',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q1',
-            'end_date': '2012-03-31',
-            'revenues': 440000000.0,
-            'net_income': 137000000.0,
-            'eps_basic': 1.13,
-            'eps_diluted': 1.10,
-            'dividend': 0.0,
-            'assets': 7122000000.0,
-            'equity': 5321000000.0,
-            'cash': 1915000000.0
-        })
-
-    def test_strza_20121231(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793413000015/strza-20121231.xml')
-        self.assert_item(item, {
-            'symbol': 'STRZA',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2012-12-31',
-            'revenues': 1630696000.0,
-            'net_income': 254484000.0,
-            'eps_basic': None,
-            'eps_diluted': None,
-            'dividend': 0.0,
-            'assets': 2176050000.0,
-            'equity': 1302144000.0,
-            'cash': 749774000.0
-        })
-
-    def test_mmm_20091231(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/66740/000110465910007295/mmm-20091231.xml')
-        self.assert_item(item, {
-            'symbol': 'MMM',
-            'amend': False,
-            'doc_type': '10-K',
-            'period_focus': 'FY',
-            'end_date': '2009-12-31',
-            'revenues': 23123000000.0,
-            'net_income': 3193000000.0,
-            'eps_basic': 4.56,
-            'eps_diluted': 4.52,
-            'dividend': 2.04,
-            'assets': 27250000000.0,
-            'equity': 13302000000.0,
-            'cash': 3040000000.0
-        })
-
-    def test_mmm_20120331(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/66740/000110465912032441/mmm-20120331.xml')
-        self.assert_item(item, {
-            'symbol': 'MMM',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q1',
-            'end_date': '2012-03-31',
-            'revenues': 7486000000.0,
-            'net_income': 1125000000.0,
-            'eps_basic': 1.61,
-            'eps_diluted': 1.59,
-            'dividend': 0.59,
-            'assets': 32015000000.0,
-            'equity': 16619000000.0,
-            'cash': 2332000000.0
-        })
-
-    def test_mmm_20130630(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/66740/000110465913058961/mmm-20130630.xml')
-        self.assert_item(item, {
-            'symbol': 'MMM',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q2',
-            'end_date': '2013-06-30',
-            'revenues': 7752000000.0,
-            'net_income': 1197000000.0,
-            'eps_basic': 1.74,
-            'eps_diluted': 1.71,
-            'dividend': 0.635,
-            'assets': 34130000000.0,
-            'equity': 18319000000.0,
-            'cash': 2942000000.0
         })
 
     def test_axp_20100930(self):
@@ -765,24 +171,6 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 22250000000.0
         })
 
-    def test_ba_20110930(self):
-        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12927/000119312511281613/ba-20110930.xml')
-        self.assert_item(item, {
-            'symbol': 'BA',
-            'amend': False,
-            'doc_type': '10-Q',
-            'period_focus': 'Q3',
-            'end_date': '2011-09-30',
-            'revenues': 17727000000.0,
-            'net_income': 1098000000.0,
-            'eps_basic': 1.47,
-            'eps_diluted': 1.46,
-            'dividend': 0.42,
-            'assets': 74163000000.0,
-            'equity': 6061000000.0,
-            'cash': 5954000000.0
-        })
-
     def test_ba_20091231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/12927/000119312510024406/ba-20091231.xml')
         self.assert_item(item, {
@@ -799,6 +187,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'assets': 62053000000.0,
             'equity': 2225000000.0,
             'cash': 9215000000.0
+        })
+
+    def test_ba_20110930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12927/000119312511281613/ba-20110930.xml')
+        self.assert_item(item, {
+            'symbol': 'BA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2011-09-30',
+            'revenues': 17727000000.0,
+            'net_income': 1098000000.0,
+            'eps_basic': 1.47,
+            'eps_diluted': 1.46,
+            'dividend': 0.42,
+            'assets': 74163000000.0,
+            'equity': 6061000000.0,
+            'cash': 5954000000.0
         })
 
     def test_ba_20130331(self):
@@ -871,4 +277,598 @@ class ReportItemLoaderTest(unittest.TestCase):
             'assets': 25693000000.0,
             'equity': 9601000000.0,
             'cash': 282000000.0
+        })
+
+    def test_fb_20120630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1326801/000119312512325997/fb-20120630.xml')
+        self.assert_item(item, {
+            'symbol': 'FB',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2012-06-30',
+            'revenues': 1184000000.0,
+            'net_income': -157000000.0,
+            'eps_basic': -0.08,
+            'eps_diluted': -0.08,
+            'dividend': 0.0,
+            'assets': 14928000000.0,
+            'equity': 13309000000.0,
+            'cash': 2098000000.0
+        })
+
+    def test_fb_20121231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1326801/000132680113000003/fb-20121231.xml')
+        self.assert_item(item, {
+            'symbol': 'FB',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-12-31',
+            'revenues': 5089000000.0,
+            'net_income': 32000000.0,
+            'eps_basic': 0.02,
+            'eps_diluted': 0.01,
+            'dividend': 0.0,
+            'assets': 15103000000.0,
+            'equity': 11755000000.0,
+            'cash': 2384000000.0
+        })
+
+    def test_goog_20090930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312509222384/goog-20090930.xml')
+        self.assert_item(item, {
+            'symbol': 'GOOG',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2009-09-30',
+            'revenues': 5944851000.0,
+            'net_income': 1638975000.0,
+            'eps_basic': 5.18,
+            'eps_diluted': 5.13,
+            'dividend': 0.0,
+            'assets': 37702845000.0,
+            'equity': 33721753000.0,
+            'cash': 12087115000.0
+        })
+
+    def test_goog_20120930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312512440217/goog-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'GOOG',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': 14101000000.0,
+            'net_income': 2176000000.0,
+            'eps_basic': 6.64,
+            'eps_diluted': 6.53,
+            'dividend': 0.0,
+            'assets': 89730000000.0,
+            'equity': 68028000000.0,
+            'cash': 16260000000.0
+        })
+
+    def test_goog_20121231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312513028362/goog-20121231.xml')
+        self.assert_item(item, {
+            'symbol': 'GOOG',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-12-31',
+            'revenues': 50175000000.0,
+            'net_income': 10737000000.0,
+            'eps_basic': 32.81,
+            'eps_diluted': 32.31,
+            'dividend': 0.0,
+            'assets': 93798000000.0,
+            'equity': 71715000000.0,
+            'cash': 14778000000.0
+        })
+
+    def test_goog_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000128877613000055/goog-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'GOOG',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 14105000000.0,
+            'net_income': 3228000000.0,
+            'eps_basic': 9.71,
+            'eps_diluted': 9.54,
+            'dividend': 0.0,
+            'assets': 101182000000.0,
+            'equity': 78852000000.0,
+            'cash': 16164000000.0
+        })
+
+    def test_jnj_20120101(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000119312512075565/jnj-20120101.xml')
+        self.assert_item(item, {
+            'symbol': 'JNJ',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-01-01',
+            'revenues': 65030000000.0,
+            'net_income': 9672000000.0,
+            'eps_basic': 3.54,
+            'eps_diluted': 3.49,
+            'dividend': 2.25,
+            'assets': 113644000000.0,
+            'equity': 57080000000.0,
+            'cash': 24542000000.0
+        })
+
+    def test_jnj_20120930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000020040612000140/jnj-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'JNJ',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': 17052000000.0,
+            'net_income': 2968000000.0,
+            'eps_basic': 1.08,
+            'eps_diluted': 1.05,
+            'dividend': 0.61,
+            'assets': 118951000000.0,
+            'equity': 63761000000.0,
+            'cash': 15486000000.0
+        })
+
+    def test_jnj_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000020040613000091/jnj-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'JNJ',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 17877000000.0,
+            'net_income': 3833000000.0,
+            'eps_basic': 1.36,
+            'eps_diluted': 1.33,
+            'dividend': 0.66,
+            'assets': 124325000000.0,
+            'equity': 69665000000.0,
+            'cash': 17307000000.0
+        })
+
+    def test_jpm_20090630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/19617/000095012309032832/jpm-20090630.xml')
+        self.assert_item(item, {
+            'symbol': 'JPM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2009-06-30',
+            'revenues': 25623000000.0,
+            'net_income': 1072000000.0,
+            'eps_basic': 0.28,
+            'eps_diluted': 0.28,
+            'dividend': 0.05,
+            'assets': 2026642000000.0,
+            'equity': 154766000000.0,
+            'cash': 25133000000.0
+        })
+
+    def test_jpm_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/19617/000001961712000163/jpm-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'JPM',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-12-31',
+            'revenues': 97234000000.0,
+            'net_income': 17568000000.0,
+            'eps_basic': 4.50,
+            'eps_diluted': 4.48,
+            'dividend': 1.0,
+            'assets': 2265792000000.0,
+            'equity': 183573000000.0,
+            'cash': 59602000000.0
+        })
+
+    def test_jpm_20130331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/19617/000001961713000300/jpm-20130331.xml')
+        self.assert_item(item, {
+            'symbol': 'JPM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2013-03-31',
+            'revenues': 25122000000.0,
+            'net_income': 6131000000.0,
+            'eps_basic': 1.61,
+            'eps_diluted': 1.59,
+            'dividend': 0.30,
+            'assets': 2389349000000.0,
+            'equity': 207086000000.0,
+            'cash': 45524000000.0
+        })
+
+    def test_ko_20100402(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000104746910004416/ko-20100402.xml')
+        self.assert_item(item, {
+            'symbol': 'KO',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-04-02',
+            'revenues': 7525000000.0,
+            'net_income': 1614000000.0,
+            'eps_basic': 0.70,
+            'eps_diluted': 0.69,
+            'dividend': 0.44,
+            'assets': 47403000000.0,
+            'equity': 25157000000.0,
+            'cash': 5684000000.0
+        })
+
+    def test_ko_20101231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000104746911001506/ko-20101231.xml')
+        self.assert_item(item, {
+            'symbol': 'KO',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2010-12-31',
+            'revenues': 35119000000.0,
+            'net_income': 11809000000.0,
+            'eps_basic': 5.12,
+            'eps_diluted': 5.06,
+            'dividend': 1.76,
+            'assets': 72921000000.0,
+            'equity': 31317000000.0,
+            'cash': 8517000000.0
+        })
+
+    def test_ko_20120928(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/21344/000002134412000051/ko-20120928.xml')
+        self.assert_item(item, {
+            'symbol': 'KO',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-28',
+            'revenues': 12340000000.0,
+            'net_income': 2311000000.0,
+            'eps_basic': 0.51,
+            'eps_diluted': 0.50,
+            'dividend': 0.255,
+            'assets': 86654000000.0,
+            'equity': 33590000000.0,
+            'cash': 9615000000.0
+        })
+
+    def test_lcapa_20110930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793411000006/lcapa-20110930.xml')
+        self.assert_item(item, {
+            'symbol': 'LCAPA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2011-09-30',
+            'revenues': 540000000.0,
+            'net_income': -42000000.0,
+            'eps_basic': -0.07,
+            'eps_diluted': -0.12,
+            'dividend': 0.0,
+            'assets': 8915000000.0,
+            'equity': 5078000000.0,
+            'cash': 1937000000.0
+        })
+
+    def test_lmca_20120331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793412000012/lmca-20120331.xml')
+        self.assert_item(item, {
+            'symbol': 'LMCA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-03-31',
+            'revenues': 440000000.0,
+            'net_income': 137000000.0,
+            'eps_basic': 1.13,
+            'eps_diluted': 1.10,
+            'dividend': 0.0,
+            'assets': 7122000000.0,
+            'equity': 5321000000.0,
+            'cash': 1915000000.0
+        })
+
+    def test_mmm_20091231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/66740/000110465910007295/mmm-20091231.xml')
+        self.assert_item(item, {
+            'symbol': 'MMM',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2009-12-31',
+            'revenues': 23123000000.0,
+            'net_income': 3193000000.0,
+            'eps_basic': 4.56,
+            'eps_diluted': 4.52,
+            'dividend': 2.04,
+            'assets': 27250000000.0,
+            'equity': 13302000000.0,
+            'cash': 3040000000.0
+        })
+
+    def test_mmm_20120331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/66740/000110465912032441/mmm-20120331.xml')
+        self.assert_item(item, {
+            'symbol': 'MMM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-03-31',
+            'revenues': 7486000000.0,
+            'net_income': 1125000000.0,
+            'eps_basic': 1.61,
+            'eps_diluted': 1.59,
+            'dividend': 0.59,
+            'assets': 32015000000.0,
+            'equity': 16619000000.0,
+            'cash': 2332000000.0
+        })
+
+    def test_mmm_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/66740/000110465913058961/mmm-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'MMM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 7752000000.0,
+            'net_income': 1197000000.0,
+            'eps_basic': 1.74,
+            'eps_diluted': 1.71,
+            'dividend': 0.635,
+            'assets': 34130000000.0,
+            'equity': 18319000000.0,
+            'cash': 2942000000.0
+        })
+
+    def test_msft_20110630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312511200680/msft-20110630.xml')
+        self.assert_item(item, {
+            'symbol': 'MSFT',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-06-30',
+            'revenues': 69943000000.0,
+            'net_income': 23150000000.0,
+            'eps_basic': 2.73,
+            'eps_diluted': 2.69,
+            'dividend': 0.64,
+            'assets': 108704000000.0,
+            'equity': 57083000000.0,
+            'cash': 9610000000.0
+        })
+
+    def test_msft_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312512026864/msft-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'MSFT',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2011-12-31',
+            'revenues': 20885000000.0,
+            'net_income': 6624000000.0,
+            'eps_basic': 0.79,
+            'eps_diluted': 0.78,
+            'dividend': 0.20,
+            'assets': 112243000000.0,
+            'equity': 64121000000.0,
+            'cash': 10610000000.0
+        })
+
+    def test_msft_20130331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312513160748/msft-20130331.xml')
+        self.assert_item(item, {
+            'symbol': 'MSFT',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2013-03-31',
+            'revenues': 20489000000.0,
+            'net_income': 6055000000.0,
+            'eps_basic': 0.72,
+            'eps_diluted': 0.72,
+            'dividend': 0.23,
+            'assets': 134105000000.0,
+            'equity': 76688000000.0,
+            'cash': 5240000000.0
+        })
+
+    def test_omx_20110924(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312511286448/omx-20110924.xml')
+        self.assert_item(item, {
+            'symbol': 'OMX',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2011-09-24',
+            'revenues': 1774767000.0,
+            'net_income': 21518000.0,
+            'eps_basic': 0.25,
+            'eps_diluted': 0.25,
+            'dividend': 0.0,
+            'assets': 4002981000.0,
+            'equity': 657636000.0,
+            'cash': 485426000.0
+        })
+
+    def test_omx_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312512077611/omx-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'OMX',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-12-31',
+            'revenues': 7121167000.0,
+            'net_income': 32771000.0,
+            'eps_basic': 0.38,
+            'eps_diluted': 0.38,
+            'dividend': 0.0,
+            'assets': 4069275000.0,
+            'equity': 568993000.0,
+            'cash': 427111000.0
+        })
+
+    def test_omx_20121229(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312513073972/omx-20121229.xml')
+        self.assert_item(item, {
+            'symbol': 'OMX',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-12-29',
+            'revenues': 6920384000.0,
+            'net_income': 414694000.0,
+            'eps_basic': 4.79,
+            'eps_diluted': 4.74,
+            'dividend': 0.0,
+            'assets': 3784315000.0,
+            'equity': 1034373000.0,
+            'cash': 495056000.0
+        })
+
+    def test_strza_20121231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793413000015/strza-20121231.xml')
+        self.assert_item(item, {
+            'symbol': 'STRZA',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-12-31',
+            'revenues': 1630696000.0,
+            'net_income': 254484000.0,
+            'eps_basic': None,
+            'eps_diluted': None,
+            'dividend': 0.0,
+            'assets': 2176050000.0,
+            'equity': 1302144000.0,
+            'cash': 749774000.0
+        })
+
+    def test_tsla_20110630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312511221497/tsla-20110630.xml')
+        self.assert_item(item, {
+            'symbol': 'TSLA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2011-06-30',
+            'revenues': 58171000.0,
+            'net_income': -58903000.0,
+            'eps_basic': -0.60,
+            'eps_diluted': -0.60,
+            'dividend': 0.0,
+            'assets': 646155000.0,
+            'equity': 348452000.0,
+            'cash': 319380000.0
+        })
+
+    def test_tsla_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312512137560/tsla-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'TSLA',
+            'amend': True,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-12-31',
+            'revenues': 204242000.0,
+            'net_income': -254411000.0,
+            'eps_basic': -2.53,
+            'eps_diluted': -2.53,
+            'dividend': 0.0,
+            'assets': 713448000.0,
+            'equity': 224045000.0,
+            'cash': 255266000.0
+        })
+
+    def test_tsla_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312513327916/tsla-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'TSLA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 405139000.0,
+            'net_income': -30502000.0,
+            'eps_basic': -0.26,
+            'eps_diluted': -0.26,
+            'dividend': 0.0,
+            'assets': 1887844000.0,
+            'equity': 629426000.0,
+            'cash': 746057000.0
+        })
+
+    def test_xom_20110331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312511127973/xom-20110331.xml')
+        self.assert_item(item, {
+            'symbol': 'XOM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2011-03-31',
+            'revenues': 114004000000.0,
+            'net_income': 10650000000.0,
+            'eps_basic': 2.14,
+            'eps_diluted': 2.14,
+            'dividend': 0.44,
+            'assets': 319533000000.0,
+            'equity': 157531000000.0,
+            'cash': 12833000000.0
+        })
+
+    def test_xom_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312512078102/xom-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'XOM',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-12-31',
+            'revenues': 467029000000.0,
+            'net_income': 41060000000.0,
+            'eps_basic': 8.43,
+            'eps_diluted': 8.42,
+            'dividend': 1.85,
+            'assets': 331052000000.0,
+            'equity': 160744000000.0,
+            'cash': 12664000000.0
+        })
+
+    def test_xom_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000003408813000035/xom-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'XOM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 106469000000.0,
+            'net_income': 6860000000.0,
+            'eps_basic': 1.55,
+            'eps_diluted': 1.55,
+            'dividend': 0.63,
+            'assets': 341615000000.0,
+            'equity': 171588000000.0,
+            'cash': 4609000000.0
         })
