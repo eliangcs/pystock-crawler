@@ -37,7 +37,7 @@ def parse_xml(url):
     return loader.load_item()
 
 
-class TestReportItemLoader(unittest.TestCase):
+class ReportItemLoaderTest(unittest.TestCase):
 
     def assert_item(self, item, expected):
         self.assertEqual(item['symbol'], expected['symbol'])

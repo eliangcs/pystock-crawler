@@ -1,6 +1,6 @@
 *.pyc
 *.log
-output.csv
+*.csv
 .coverage
 stockcrawler.egg-info/
-/stockcrawler/tests/sample_data/
+stockcrawler/tests/sample_data/

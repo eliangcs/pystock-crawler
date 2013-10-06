@@ -1,3 +1,4 @@
+from datetime import datetime
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 
@@ -14,15 +15,25 @@ def load_symbols(file_path):
     return symbols
 
 
+def check_date_arg(value, arg_name):
+    if value:
+        try:
+            datetime.strptime(value, '%Y%m%d')
+        except ValueError:
+            raise ValueError("Option '%s' must be in YYYYMMDD format, input is '%s'" % (arg_name, value))
+
+
 class URLGenerator(object):
 
-    def __init__(self, symbols):
+    def __init__(self, symbols, start_date='', end_date=''):
         self.symbols = symbols
+        self.start_date = start_date
+        self.end_date = end_date
 
     def __iter__(self):
-        url = 'http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=%s&type=10-&dateb=&owner=exclude&count=300'
+        url = 'http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=%s&type=10-&dateb=%s&datea=%s&owner=exclude&count=300'
         for symbol in self.symbols:
-            yield (url % symbol)
+            yield (url % (symbol, self.end_date, self.start_date))
 
 # http://www.sec.gov/Archives/edgar/data/1326801/000132680113000019/0001326801-13-000019-index.htm
 # http://www.sec.gov/Archives/edgar/data/1326801/000132680113000019/fb-6302013x10q.htm
@@ -49,9 +60,15 @@ class EdgarSpider(CrawlSpider):
         super(EdgarSpider, self).__init__(**kwargs)
 
         symbol_file_path = kwargs.get('symbols')
+        start_date = kwargs.get('startdate', '')
+        end_date = kwargs.get('enddate', '')
+
+        check_date_arg(start_date, 'startdate')
+        check_date_arg(end_date, 'enddate')
+
         if symbol_file_path:
             symbols = load_symbols(symbol_file_path)
-            self.start_urls = URLGenerator(symbols)
+            self.start_urls = URLGenerator(symbols, start_date, end_date)
         else:
             self.start_urls = []
 
