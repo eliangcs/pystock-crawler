@@ -117,9 +117,12 @@ def imd_max(imd_values):
 def is_member(context):
     if context:
         try:
-            context.select('.//*[local-name()="explicitMember"]/text()')[0]
+            text = context.select('.//*[local-name()="explicitMember"]/text()')[0].extract()
         except IndexError:
             return False
+        else:
+            if 'member' not in text.lower():
+                return False
     return True
 
 

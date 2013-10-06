@@ -117,6 +117,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 10746000000.0
         })
 
+    def test_adbe_20090227(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/796343/000079634309000021/adbe-20090227.xml')
+        self.assert_item(item, {
+            'symbol': 'ADBE',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2009-02-27',
+            'revenues': 786390000.0,
+            'net_income': 156435000.0,
+            'eps_basic': 0.3,
+            'eps_diluted': 0.3,
+            'dividend': 0.0,
+            'assets': 5887596000.0,
+            'equity': 4611160000.0,
+            'cash': 1148925000.0
+        })
+
     def test_axp_20100930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/4962/000095012310100214/axp-20100930.xml')
         self.assert_item(item, {
