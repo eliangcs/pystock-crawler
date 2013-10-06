@@ -169,13 +169,9 @@ class XmlXPathItemLoader(XPathItemLoader):
         self.add_value(field_name, values, *processors, **kw)
         return len(self._values[field_name])
 
-    def add_xpaths(self, name_path_pairs):
-        for args in name_path_pairs:
-            name = args[0]
-            path = args[1]
-            processors = [args[i] for i in xrange(2, len(args))]
-
-            match_count = self.add_xpath(name, path, *processors)
+    def add_xpaths(self, name, paths):
+        for path in paths:
+            match_count = self.add_xpath(name, path)
             if match_count > 0:
                 return match_count
 
@@ -248,51 +244,54 @@ class ReportItemLoader(XmlXPathItemLoader):
             period_focus = self._get_period_focus(end_date)
             self.add_value('period_focus', period_focus)
 
-        self.add_xpaths([
-            ('revenues', '//us-gaap:Revenues'),
-            ('revenues', '//us-gaap:SalesRevenueNet'),
-            ('revenues', '//us-gaap:SalesRevenueGoodsNet'),
-            ('revenues', '//us-gaap:SalesRevenueServicesNet'),
-            ('revenues', '//*[contains(local-name(), "TotalRevenues") and contains(local-name(), "After")]'),
-            ('revenues', '//*[contains(local-name(), "TotalRevenues")]')
+        self.add_xpaths('revenues', [
+            '//us-gaap:Revenues',
+            '//us-gaap:SalesRevenueNet',
+            '//us-gaap:SalesRevenueGoodsNet',
+            '//us-gaap:SalesRevenueServicesNet',
+            '//*[contains(local-name(), "TotalRevenues") and contains(local-name(), "After")]',
+            '//*[contains(local-name(), "TotalRevenues")]'
         ])
 
-        self.add_xpaths([
-            ('net_income', '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic'),
-            ('net_income', '//us-gaap:NetIncomeLoss'),
-            ('net_income', '//us-gaap:ProfitLoss')
+        self.add_xpaths('net_income', [
+            '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
+            '//us-gaap:NetIncomeLoss',
+            '//us-gaap:ProfitLoss'
         ])
 
-        self.add_xpath('eps_basic', '//us-gaap:EarningsPerShareBasic')
-        self.add_xpaths([
-            ('eps_basic', '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare'),
-            ('eps_basic', '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic')
+        self.add_xpaths('eps_basic', [
+            '//us-gaap:EarningsPerShareBasic',
+            '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
+            '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic'
         ])
 
-        self.add_xpath('eps_diluted', '//us-gaap:EarningsPerShareDiluted')
-        self.add_xpaths([
-            ('eps_diluted', '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare'),
-            ('eps_diluted', '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted')
+        self.add_xpaths('eps_diluted', [
+            '//us-gaap:EarningsPerShareDiluted',
+            '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
+            '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted'
         ])
 
-        self.add_xpaths([
-            ('dividend', '//us-gaap:CommonStockDividendsPerShareCashPaid'),
-            ('dividend', '//us-gaap:CommonStockDividendsPerShareDeclared')
+        self.add_xpaths('dividend', [
+            '//us-gaap:CommonStockDividendsPerShareCashPaid',
+            '//us-gaap:CommonStockDividendsPerShareDeclared'
         ])
+
+        # if dividend isn't found in doc, assume it's 0
         self.add_value('dividend', 0.0)
 
         self.add_xpath('assets', '//us-gaap:Assets')
 
-        self.add_xpath('equity', '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest')
-        self.add_xpaths([
-            ('equity', '//us-gaap:StockholdersEquity'),
-            ('equity', '//*[contains(local-name(), "MembersEquityIncludingPortionAttributableToNoncontrollingInterest")]')
+        self.add_xpaths('equity', [
+            '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest',
+            '//us-gaap:StockholdersEquity',
+            '//us-gaap:RetainedEarningsAccumulatedDeficit',
+            '//*[contains(local-name(), "MembersEquityIncludingPortionAttributableToNoncontrollingInterest")]'
         ])
 
-        self.add_xpaths([
-            ('cash', '//us-gaap:CashCashEquivalentsAndFederalFundsSold'),
-            ('cash', '//us-gaap:CashAndDueFromBanks'),
-            ('cash', '//us-gaap:CashAndCashEquivalentsAtCarryingValue')
+        self.add_xpaths('cash', [
+            '//us-gaap:CashCashEquivalentsAndFederalFundsSold',
+            '//us-gaap:CashAndDueFromBanks',
+            '//us-gaap:CashAndCashEquivalentsAtCarryingValue'
         ])
 
     def _get_symbol(self):

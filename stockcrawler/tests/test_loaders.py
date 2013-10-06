@@ -297,6 +297,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 282000000.0
         })
 
+    def test_dltr_20130504(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/935703/000093570313000029/dltr-20130504.xml')
+        self.assert_item(item, {
+            'symbol': 'DLTR',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2013-05-04',
+            'revenues': 1865800000.0,
+            'net_income': 133500000.0,
+            'eps_basic': 0.6,
+            'eps_diluted': 0.59,
+            'dividend': 0.0,
+            'assets': 2811800000.0,
+            'equity': 1739700000.0,
+            'cash': 383300000.0
+        })
+
     def test_ebay_20100630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1065088/000119312510164115/ebay-20100630.xml')
         self.assert_item(item, {
