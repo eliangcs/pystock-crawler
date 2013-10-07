@@ -636,6 +636,42 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 1937000000.0
         })
 
+    def test_linta_20120331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1355096/000135509612000008/linta-20120331.xml')
+        self.assert_item(item, {
+            'symbol': 'LINTA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-03-31',
+            'revenues': 2314000000.0,
+            'net_income': 91000000.0,
+            'eps_basic': 0.16,
+            'eps_diluted': 0.16,
+            'dividend': 0.0,
+            'assets': 17144000000.0,
+            'equity': 6505000000.0,
+            'cash': 794000000.0
+        })
+
+    def test_lltc_20110102(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/791907/000079190711000016/lltc-20110102.xml')
+        self.assert_item(item, {
+            'symbol': 'LLTC',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2011-01-02',
+            'revenues': 383621000.0,
+            'net_income': 143743000.0,
+            'eps_basic': 0.62,
+            'eps_diluted': 0.62,
+            'dividend': 0.23,
+            'assets': 1446186000.0,
+            'equity': 278793000.0,
+            'cash': 203308000.0
+        })
+
     def test_lmca_20120331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793412000012/lmca-20120331.xml')
         self.assert_item(item, {
