@@ -888,6 +888,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 495056000.0
         })
 
+    def test_orly_20130331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/898173/000089817313000028/orly-20130331.xml')
+        self.assert_item(item, {
+            'symbol': 'ORLY',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2013-03-31',
+            'revenues': 1585009000.0,
+            'net_income': 154329000.0,
+            'eps_basic': 1.38,
+            'eps_diluted': 1.36,
+            'dividend': 0.0,
+            'assets': 5789541000.0,
+            'equity': 2072525000.0,
+            'cash': 205410000.0
+        })
+
     def test_strza_20121231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793413000015/strza-20121231.xml')
         self.assert_item(item, {
