@@ -942,6 +942,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 205410000.0
         })
 
+    def test_pcar_20100331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/75362/000119312510108284/pcar-20100331.xml')
+        self.assert_item(item, {
+            'symbol': 'PCAR',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-03-31',
+            'revenues': 2230700000.0,
+            'net_income': 68300000.0,
+            'eps_basic': 0.19,
+            'eps_diluted': 0.19,
+            'dividend': 0.09,
+            'assets': 13990000000.0,
+            'equity': 5092600000.0,
+            'cash': 1854700000.0
+        })
+
     def test_sial_20101231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/90185/000119312511028579/sial-20101231.xml')
         self.assert_item(item, {

@@ -100,15 +100,29 @@ class ImdTakeFirst(object):
         return None
 
 
-def imd_sum_members_or_take_first(imd_values):
-    member_values = []
-    for imd_value in imd_values:
-        if imd_value.is_member():
-            member_values.append(imd_value.value)
+class ImdSumMembersOr(object):
 
-    if member_values and len(member_values) == len(imd_values):
-        return sum(member_values)
+    def __init__(self, second_func=None):
+        self.second_func = second_func
 
+    def __call__(self, imd_values):
+        member_values = []
+        non_members = []
+        for imd_value in imd_values:
+            if imd_value.is_member():
+                member_values.append(imd_value.value)
+            else:
+                non_members.append(imd_value)
+
+        if member_values and len(member_values) == len(imd_values):
+            return sum(member_values)
+
+        if imd_values:
+            return self.second_func(non_members)
+        return None
+
+
+def imd_first(imd_values):
     if imd_values:
         return imd_values[0].value
     return None
@@ -203,17 +217,17 @@ class ReportItemLoader(XmlXPathItemLoader):
     period_focus_in = MapCompose(ExtractText(), unicode.upper)
     period_focus_out = TakeFirst()
 
-    revenues_in = MapCompose(MatchEndDate(float, context_filter=is_not_member))
-    revenues_out = Compose(imd_max)
+    revenues_in = MapCompose(MatchEndDate(float))
+    revenues_out = ImdSumMembersOr(imd_max)
 
     net_income_in = MapCompose(MatchEndDate(float, context_filter=is_not_member))
     net_income_out = Compose(imd_max)
 
     eps_basic_in = MapCompose(MatchEndDate(float))
-    eps_basic_out = Compose(imd_sum_members_or_take_first)
+    eps_basic_out = ImdSumMembersOr(imd_first)
 
     eps_diluted_in = MapCompose(MatchEndDate(float))
-    eps_diluted_out = Compose(imd_sum_members_or_take_first)
+    eps_diluted_out = ImdSumMembersOr(imd_first)
 
     dividend_in = MapCompose(MatchEndDate(float))
     dividend_out = ImdTakeFirst()
@@ -259,6 +273,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//*[contains(local-name(), "TotalRevenues") and contains(local-name(), "After")]',
             '//*[contains(local-name(), "TotalRevenues")]'
         ])
+        self.add_xpath('revenues', '//us-gaap:FinancialServicesRevenue')
 
         self.add_xpaths('net_income', [
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
