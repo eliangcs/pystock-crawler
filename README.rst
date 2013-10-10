@@ -43,9 +43,23 @@ Usage
 
 Crawl data from `SEC EDGAR`_ database::
 
-    scrapy crawl edgar -a symbols=./symbols.txt -o output.json -t json
+    scrapy crawl edgar -a symbols=SYMBOL_LIST_FILE
+                       -a startdate=YYYYMMDD
+                       -a enddate=YYYYMMDD
+                       -o OUTPUT_FILE
+                       -t OUTPUT_FORMAT
 
-where ``symbols.txt`` stores a list of trading symbols you want to crawl.
+* ``-a symbols``: A text file that lists the trading symbols you want to
+  crawl.
+* ``-a startdate`` and ``-a enddate``: Optional. If specified, the crawler
+  only collects the documents that were filed within
+  this period.
+* ``-o``: Output file path.
+* ``-t``: Output file format, e.g., ``csv`` and ``json``.
+
+Usage example::
+
+    scrapy crawl edgar -a symbols=./symbols.txt -a startdate=20130101 -a enddate=20130930 -o output.json -t json
 
 
 Running Tests
@@ -67,3 +81,8 @@ some time and disk space.
 .. _virtualenvwrapper: http://virtualenvwrapper.readthedocs.org/
 .. _Scrapy: http://scrapy.org/
 .. _SEC EDGAR: http://www.sec.gov/edgar/searchedgar/companysearch.html
+
+
+.. image:: https://d2weczhvl823v0.cloudfront.net/eliangcs/stockcrawler/trend.png
+    :target: https://bitdeli.com/free
+    :alt: Bitdeli Badge
