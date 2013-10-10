@@ -942,6 +942,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 205410000.0
         })
 
+    def test_sial_20101231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/90185/000119312511028579/sial-20101231.xml')
+        self.assert_item(item, {
+            'symbol': 'SIAL',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2010-12-31',
+            'revenues': 2271000000.0,
+            'net_income': 384000000.0,
+            'eps_basic': 3.17,
+            'eps_diluted': 3.12,
+            'dividend': 0.0,
+            'assets': 3014000000.0,
+            'equity': 1976000000.0,
+            'cash': 569000000.0
+        })
+
     def test_siri_20120331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/908937/000090893712000003/siri-20120331.xml')
         self.assert_item(item, {
