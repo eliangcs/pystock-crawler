@@ -261,6 +261,7 @@ class ReportItemLoader(XmlXPathItemLoader):
 
         self.add_xpaths('eps_basic', [
             '//us-gaap:EarningsPerShareBasic',
+            '//us-gaap:IncomeLossFromContinuingOperationsPerBasicShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
             '//us-gaap:EarningsPerShareBasicAndDiluted'
@@ -268,6 +269,7 @@ class ReportItemLoader(XmlXPathItemLoader):
 
         self.add_xpaths('eps_diluted', [
             '//us-gaap:EarningsPerShareDiluted',
+            '//us-gaap:IncomeLossFromContinuingOperationsPerDilutedShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted',
             '//us-gaap:EarningsPerShareBasicAndDiluted'

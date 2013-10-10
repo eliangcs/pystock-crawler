@@ -744,6 +744,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 2942000000.0
         })
 
+    def test_mnst_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/865752/000110465913062263/mnst-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'MNST',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 630934000.0,
+            'net_income': 106873000.0,
+            'eps_basic': 0.64,
+            'eps_diluted': 0.62,
+            'dividend': 0.0,
+            'assets': 1317842000.0,
+            'equity': 856021000.0,
+            'cash': 283839000.0
+        })
+
     def test_msft_20110630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/789019/000119312511200680/msft-20110630.xml')
         self.assert_item(item, {
