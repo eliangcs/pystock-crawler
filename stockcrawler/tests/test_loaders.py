@@ -1050,6 +1050,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 746057000.0
         })
 
+    def test_via_20090930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1339947/000119312509221448/via-20090930.xml')
+        self.assert_item(item, {
+            'symbol': 'VIA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2009-09-30',
+            'revenues': 3317000000.0,
+            'net_income': 463000000.0,
+            'eps_basic': 0.76,
+            'eps_diluted': 0.76,
+            'dividend': 0.0,
+            'assets': 21307000000.0,
+            'equity': 8044000000.0,
+            'cash': 249000000.0
+        })
+
     def test_xom_20110331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312511127973/xom-20110331.xml')
         self.assert_item(item, {
