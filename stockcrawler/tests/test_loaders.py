@@ -1068,6 +1068,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 249000000.0
         })
 
+    def test_vrsk_20120930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1442145/000119312512441544/vrsk-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'VRSK',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': 398863000.0,
+            'net_income': 82911000.0,
+            'eps_basic': 0.5,
+            'eps_diluted': 0.48,
+            'dividend': 0.0,
+            'assets': 2303433000.0,
+            'equity': 142048000.0,
+            'cash': 97770000.0
+        })
+
     def test_wfm_20120115(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/865436/000144530512000434/wfm-20120115.xml')
         self.assert_item(item, {
