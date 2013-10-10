@@ -834,6 +834,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 2102000000.0
         })
 
+    def test_nflx_20120930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1065280/000106528012000020/nflx-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'NFLX',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': 905089000.0,
+            'net_income': 7675000.0,
+            'eps_basic': 0.14,
+            'eps_diluted': 0.13,
+            'dividend': 0.0,
+            'assets': 3808833000.0,
+            'equity': 716840000.0,
+            'cash': 370298000.0
+        })
+
     def test_nvda_20130127(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1045810/000104581013000008/nvda-20130127.xml')
         self.assert_item(item, {
