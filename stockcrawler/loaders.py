@@ -39,6 +39,8 @@ class ExtractText(object):
 
 class MatchEndDate(object):
 
+    DATE_FORMAT = '%Y-%m-%d'
+
     def __init__(self, data_type=str, context_filter=None):
         self.data_type = data_type
         self.context_filter = context_filter
@@ -47,7 +49,7 @@ class MatchEndDate(object):
         if not hasattr(value, 'select'):
             return IntermediateValue(0.0, None)
 
-        doc_end_date = loader_context['end_date']
+        doc_end_date_str = loader_context['end_date']
         doc_type = loader_context['doc_type']
         selector = loader_context['selector']
 
@@ -64,23 +66,28 @@ class MatchEndDate(object):
             try:
                 start_date_str = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
                 end_date_str = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
-                start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
-                end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
+                start_date = datetime.strptime(start_date_str, self.DATE_FORMAT)
+                end_date = datetime.strptime(end_date_str, self.DATE_FORMAT)
                 delta_days = (end_date - start_date).days
-                if doc_type == '10-Q' and delta_days < 110 and delta_days > 70:
-                    date = end_date_str
+                if doc_type == '10-Q' and delta_days < 120 and delta_days > 60:
+                    date = end_date
                 elif doc_type == '10-K' and delta_days < 380 and delta_days > 350:
-                    date = end_date_str
+                    date = end_date
             except IndexError:
                 pass
+        else:
+            date = datetime.strptime(date, self.DATE_FORMAT)
 
-        if doc_end_date == date:
-            try:
-                val = self.data_type(value.select('./text()')[0].extract())
-            except IndexError:
-                pass
-            else:
-                return IntermediateValue(val, context)
+        if date:
+            doc_end_date = datetime.strptime(doc_end_date_str, self.DATE_FORMAT)
+            delta_days = (doc_end_date - date).days
+            if abs(delta_days) < 3:
+                try:
+                    val = self.data_type(value.select('./text()')[0].extract())
+                except IndexError:
+                    pass
+                else:
+                    return IntermediateValue(val, context)
 
         return None
 

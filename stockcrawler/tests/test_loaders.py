@@ -1068,6 +1068,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 249000000.0
         })
 
+    def test_wfm_20120115(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/865436/000144530512000434/wfm-20120115.xml')
+        self.assert_item(item, {
+            'symbol': 'WFM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-01-15',
+            'revenues': 3390940000.0,
+            'net_income': 118327000.0,
+            'eps_basic': 0.66,
+            'eps_diluted': 0.65,
+            'dividend': 0.14,
+            'assets': 4528241000.0,
+            'equity': 3182747000.0,
+            'cash': 529954000.0
+        })
+
     def test_xom_20110331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312511127973/xom-20110331.xml')
         self.assert_item(item, {
