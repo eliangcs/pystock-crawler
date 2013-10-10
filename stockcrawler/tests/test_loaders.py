@@ -816,6 +816,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 5240000000.0
         })
 
+    def test_mu_20121129(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/723125/000072312513000007/mu-20121129.xml')
+        self.assert_item(item, {
+            'symbol': 'MU',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-11-29',
+            'revenues': 1834000000.0,
+            'net_income': -275000000.0,
+            'eps_basic': -0.27,
+            'eps_diluted': -0.27,
+            'dividend': 0.0,
+            'assets': 14067000000.0,
+            'equity': 8186000000.0,
+            'cash': 2102000000.0
+        })
+
     def test_omx_20110924(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312511286448/omx-20110924.xml')
         self.assert_item(item, {
