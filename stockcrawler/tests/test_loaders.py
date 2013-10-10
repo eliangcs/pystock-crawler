@@ -834,6 +834,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 2102000000.0
         })
 
+    def test_nvda_20130127(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1045810/000104581013000008/nvda-20130127.xml')
+        self.assert_item(item, {
+            'symbol': 'NVDA',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2013-01-27',
+            'revenues': 4280159000.0,
+            'net_income': 562536000.0,
+            'eps_basic': 0.91,
+            'eps_diluted': 0.9,
+            'dividend': 0.075,
+            'assets': 6412245000.0,
+            'equity': 4827703000.0,
+            'cash': 732786000.0
+        })
+
     def test_omx_20110924(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312511286448/omx-20110924.xml')
         self.assert_item(item, {
