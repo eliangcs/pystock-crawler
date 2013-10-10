@@ -942,6 +942,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 205410000.0
         })
 
+    def test_siri_20120331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/908937/000090893712000003/siri-20120331.xml')
+        self.assert_item(item, {
+            'symbol': 'SIRI',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-03-31',
+            'revenues': 804722000.0,
+            'net_income': 107774000.0,
+            'eps_basic': 0.03,
+            'eps_diluted': 0.02,
+            'dividend': 0.0,
+            'assets': 7501724000.0,
+            'equity': 849579000.0,
+            'cash': 746576000.0
+        })
+
     def test_strza_20121231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793413000015/strza-20121231.xml')
         self.assert_item(item, {
