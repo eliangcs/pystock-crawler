@@ -286,7 +286,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
-            '//us-gaap:EarningsPerShareBasicAndDiluted'
+            '//us-gaap:EarningsPerShareBasicAndDiluted',
+            '//*[contains(local-name(), "EarningsPerShareBasic")]'
         ])
 
         self.add_xpaths('eps_diluted', [
@@ -294,7 +295,9 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:IncomeLossFromContinuingOperationsPerDilutedShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted',
-            '//us-gaap:EarningsPerShareBasicAndDiluted'
+            '//us-gaap:EarningsPerShareBasicAndDiluted',
+            '//*[contains(local-name(), "EarningsPerShareDiluted")]',
+            '//*[contains(local-name(), "EarningsPerShareBasicAndDiluted")]'
         ])
 
         self.add_xpaths('dividend', [
@@ -331,7 +334,7 @@ class ReportItemLoader(XmlXPathItemLoader):
         try:
             date_str = self.context['response'].url.split('-')[-1].split('.')[0]
             return datetime.strptime(date_str, '%Y%m%d').strftime('%Y-%m-%d')
-        except IndexError, ValueError:
+        except (IndexError, ValueError):
             return self.selector.select('//dei:DocumentPeriodEndDate/text()')[0].extract()
 
     def _get_doc_type(self):

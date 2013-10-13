@@ -870,6 +870,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 732786000.0
         })
 
+    def test_nws_20090930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1308161/000119312509224062/nws-20090930.xml')
+        self.assert_item(item, {
+            'symbol': 'NWS',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2009-09-30',
+            'revenues': 7199000000.0,
+            'net_income': 571000000.0,
+            'eps_basic': 0.22,
+            'eps_diluted': 0.22,
+            'dividend': 0.06,
+            'assets': 55316000000.0,
+            'equity': 24479000000.0,
+            'cash': 7832000000.0
+        })
+
     def test_omx_20110924(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/12978/000119312511286448/omx-20110924.xml')
         self.assert_item(item, {
