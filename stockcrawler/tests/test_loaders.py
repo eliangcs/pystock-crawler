@@ -312,6 +312,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': None
         })
 
+    def test_chtr_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1091667/000109166712000026/chtr-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'CHTR',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-12-31',
+            'revenues': 7204000000.0,
+            'net_income': -369000000.0,
+            'eps_basic': -3.39,
+            'eps_diluted': -3.39,
+            'dividend': 0.0,
+            'assets': 15605000000,
+            'equity': 409000000,
+            'cash': 2000000
+        })
+
     def test_dltr_20130504(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/935703/000093570313000029/dltr-20130504.xml')
         self.assert_item(item, {

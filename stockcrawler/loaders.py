@@ -25,6 +25,9 @@ class IntermediateValue(object):
             return 1
         return 0
 
+    def __repr__(self):
+        return '(%s, %s)' % (self.value, self.context.select('@id')[0].extract())
+
     def is_member(self):
         return is_member(self.context)
 
@@ -106,16 +109,16 @@ class ImdSumMembersOr(object):
         self.second_func = second_func
 
     def __call__(self, imd_values):
-        member_values = []
+        members = []
         non_members = []
         for imd_value in imd_values:
             if imd_value.is_member():
-                member_values.append(imd_value.value)
+                members.append(imd_value)
             else:
                 non_members.append(imd_value)
 
-        if member_values and len(member_values) == len(imd_values):
-            return sum(member_values)
+        if members and len(members) == len(imd_values):
+            return sum([m.value for m in members])
 
         if imd_values:
             return self.second_func(non_members)
@@ -135,15 +138,21 @@ def imd_max(imd_values):
     return None
 
 
+def imd_min(imd_values):
+    if imd_values:
+        imd_value = min(imd_values)
+        return imd_value.value
+    return None
+
+
 def is_member(context):
     if context:
-        try:
-            text = context.select('.//*[local-name()="explicitMember"]/text()')[0].extract()
-        except IndexError:
+        texts = context.select('.//*[local-name()="explicitMember"]/text()').extract()
+        text = str(texts).lower()
+
+        # 'SuccessorMember' is a rare case that shouldn't be treated as member
+        if 'member' not in text or 'successormember' in text:
             return False
-        else:
-            if 'member' not in text.lower():
-                return False
     return True
 
 
@@ -221,7 +230,7 @@ class ReportItemLoader(XmlXPathItemLoader):
     revenues_out = ImdSumMembersOr(imd_max)
 
     net_income_in = MapCompose(MatchEndDate(float, context_filter=is_not_member))
-    net_income_out = Compose(imd_max)
+    net_income_out = Compose(imd_min)
 
     eps_basic_in = MapCompose(MatchEndDate(float))
     eps_basic_out = ImdSumMembersOr(imd_first)
