@@ -708,6 +708,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 244000000.0
         })
 
+    def test_lbtya_20100331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1316631/000119312510111069/lbtya-20100331.xml')
+        self.assert_item(item, {
+            'symbol': 'LBTYA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-03-31',
+            'revenues': 2178900000.0,
+            'net_income': 736600000.0,
+            'eps_basic': 2.75,
+            'eps_diluted': 2.75,
+            'dividend': 0.0,
+            'assets': 33083500000.0,
+            'equity': 4066000000.0,
+            'cash': 4184200000.0
+        })
+
     def test_lcapa_20110930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793411000006/lcapa-20110930.xml')
         self.assert_item(item, {
