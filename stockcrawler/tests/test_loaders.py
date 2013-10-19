@@ -1212,6 +1212,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 112000000.0
         })
 
+    def test_shld_20101030(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1310067/000119312510263486/shld-20101030.xml')
+        self.assert_item(item, {
+            'symbol': 'SHLD',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2010-10-30',
+            'revenues': 9678000000.0,
+            'net_income': -218000000.0,
+            'eps_basic': -1.98,
+            'eps_diluted': -1.98,
+            'dividend': 0.0,
+            'assets': 26045000000.0,
+            'equity': 8378000000.0,
+            'cash': 790000000.0
+        })
+
     def test_sial_20101231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/90185/000119312511028579/sial-20101231.xml')
         self.assert_item(item, {
