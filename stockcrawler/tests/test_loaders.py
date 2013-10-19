@@ -528,6 +528,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 16164000000.0
         })
 
+    def test_intu_20101031(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/896878/000095012310111135/intu-20101031.xml')
+        self.assert_item(item, {
+            'symbol': 'INTU',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-10-31',
+            'revenues': 532000000.0,
+            'net_income': -70000000.0,
+            'eps_basic': -0.22,
+            'eps_diluted': -0.22,
+            'dividend': 0.0,
+            'assets': 4943000000.0,
+            'equity': 2615000000.0,
+            'cash': 112000000.0
+        })
+
     def test_jnj_20120101(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/200406/000119312512075565/jnj-20120101.xml')
         self.assert_item(item, {

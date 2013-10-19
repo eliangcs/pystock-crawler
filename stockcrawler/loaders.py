@@ -310,7 +310,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//*[local-name()="IncomePerShareFromContinuingOperationsAvailableToCompanyStockholdersBasicAndDiluted"]',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
             '//us-gaap:EarningsPerShareBasicAndDiluted',
-            '//*[contains(local-name(), "EarningsPerShareBasic")]'
+            '//*[contains(local-name(), "EarningsPerShareBasic")]',
+            '//*[contains(local-name(), "NetLossPerShare")]'
         ])
 
         self.add_xpaths('eps_diluted', [
@@ -322,7 +323,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted',
             '//us-gaap:EarningsPerShareBasicAndDiluted',
             '//*[contains(local-name(), "EarningsPerShareDiluted")]',
-            '//*[contains(local-name(), "EarningsPerShareBasicAndDiluted")]'
+            '//*[contains(local-name(), "EarningsPerShareBasicAndDiluted")]',
+            '//*[contains(local-name(), "NetLossPerShare")]'
         ])
 
         self.add_xpaths('dividend', [
