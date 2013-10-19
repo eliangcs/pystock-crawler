@@ -690,6 +690,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 9615000000.0
         })
 
+    def test_krft_20120930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1545158/000119312512495570/krft-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'KRFT',
+            'amend': True,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': 4606000000.0,
+            'net_income': 470000000.0,
+            'eps_basic': 0.79,
+            'eps_diluted': 0.79,
+            'dividend': 0.0,
+            'assets': 22284000000.0,
+            'equity': 7458000000.0,
+            'cash': 244000000.0
+        })
+
     def test_lcapa_20110930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793411000006/lcapa-20110930.xml')
         self.assert_item(item, {

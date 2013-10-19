@@ -161,8 +161,10 @@ def is_not_member(context):
 
 
 def str_to_bool(value):
-    value = value.lower()
-    return value and value != 'false' and value != '0'
+    if hasattr(value, 'lower'):
+        value = value.lower()
+        return value and value != 'false' and value != '0'
+    return bool(value)
 
 
 def find_namespace(xxs, name):
@@ -257,6 +259,13 @@ class ReportItemLoader(XmlXPathItemLoader):
         end_date = self._get_doc_end_date()
         doc_type = self._get_doc_type()
 
+        # some documents set their amendment flag in DocumentType, e.g., '10-Q/A',
+        # instead of setting it in AmendmentFlag
+        amend = None
+        if doc_type.endswith('/A'):
+            amend = True
+            doc_type = doc_type[0:-2]
+
         self.context.update({
             'end_date': end_date,
             'doc_type': doc_type
@@ -265,7 +274,10 @@ class ReportItemLoader(XmlXPathItemLoader):
         self.add_xpath('symbol', '//dei:TradingSymbol')
         self.add_value('symbol', symbol)
 
-        self.add_xpath('amend', '//dei:AmendmentFlag')
+        if amend:
+            self.add_value('amend', True)
+        else:
+            self.add_xpath('amend', '//dei:AmendmentFlag')
 
         self.add_value('end_date', end_date)
         self.add_value('doc_type', doc_type)
