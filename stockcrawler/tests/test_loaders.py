@@ -402,6 +402,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 4037442000.0
         })
 
+    def test_fast_20090930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/815556/000119312509212481/fast-20090930.xml')
+        self.assert_item(item, {
+            'symbol': 'FAST',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2009-09-30',
+            'revenues': 489339000.0,
+            'net_income': 47589000.0,
+            'eps_basic': 0.32,
+            'eps_diluted': 0.32,
+            'dividend': 0.0,
+            'assets': 1337764000.0,
+            'equity': 1185140000.0,
+            'cash': 193744000.0
+        })
+
     def test_fb_20120630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1326801/000119312512325997/fb-20120630.xml')
         self.assert_item(item, {
