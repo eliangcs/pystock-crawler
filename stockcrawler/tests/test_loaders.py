@@ -834,6 +834,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 203308000.0
         })
 
+    def test_lltc_20111007(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/791907/000079190711000080/lltc-20111007.xml')
+        self.assert_item(item, {
+            'symbol': 'LLTC',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2011-10-07',
+            'revenues': 329920000.0,
+            'net_income': 108401000.0,
+            'eps_basic': 0.47,
+            'eps_diluted': 0.47,
+            'dividend': 0.24,
+            'assets': 1659341000.0,
+            'equity': 543199000.0,
+            'cash': 163414000.0
+        })
+
     def test_lmca_20120331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793412000012/lmca-20120331.xml')
         self.assert_item(item, {
