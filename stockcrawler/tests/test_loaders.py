@@ -1194,6 +1194,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 1854700000.0
         })
 
+    def test_regn_20100630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/872589/000120677410001689/regn-20100630.xml')
+        self.assert_item(item, {
+            'symbol': 'REGN',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2010-06-30',
+            'revenues': 115886000.0,
+            'net_income': -25474000.0,
+            'eps_basic': -0.31,
+            'eps_diluted': -0.31,
+            'dividend': 0.0,
+            'assets': 790641000.0,
+            'equity': 371216000.0,
+            'cash': 112000000.0
+        })
+
     def test_sial_20101231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/90185/000119312511028579/sial-20101231.xml')
         self.assert_item(item, {
