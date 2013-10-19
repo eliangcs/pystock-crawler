@@ -852,6 +852,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 1915000000.0
         })
 
+    def test_mchp_20120630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/827054/000082705412000230/mchp-20120630.xml')
+        self.assert_item(item, {
+            'symbol': 'MCHP',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-06-30',
+            'revenues': 352134000.0,
+            'net_income': 78710000.0,
+            'eps_basic': 0.41,
+            'eps_diluted': 0.39,
+            'dividend': 0.35,
+            'assets': 3144840000.0,
+            'equity': 2017990000.0,
+            'cash': 779848000.0
+        })
+
     def test_mmm_20091231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/66740/000110465910007295/mmm-20091231.xml')
         self.assert_item(item, {
