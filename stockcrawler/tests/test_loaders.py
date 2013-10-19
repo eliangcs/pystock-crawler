@@ -330,6 +330,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 2000000
         })
 
+    def test_disca_20090930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1437107/000095012309056946/disca-20090930.xml')
+        self.assert_item(item, {
+            'symbol': 'DISCA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2009-09-30',
+            'revenues': 854000000.0,
+            'net_income': 95000000.0,
+            'eps_basic': 0.22,
+            'eps_diluted': 0.22,
+            'dividend': 0.0,
+            'assets': 10741000000.0,
+            'equity': 6042000000.0,
+            'cash': 401000000.0
+        })
+
     def test_dltr_20130504(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/935703/000093570313000029/dltr-20130504.xml')
         self.assert_item(item, {

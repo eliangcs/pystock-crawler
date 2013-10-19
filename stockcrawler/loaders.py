@@ -295,6 +295,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
             '//*[local-name()="BasicEarningsAttributableToStockholdersPerCommonShare"]',
+            '//*[local-name()="IncomePerShareFromContinuingOperationsAvailableToCompanyStockholdersBasicAndDiluted"]',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
             '//us-gaap:EarningsPerShareBasicAndDiluted',
             '//*[contains(local-name(), "EarningsPerShareBasic")]'
@@ -305,6 +306,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:IncomeLossFromContinuingOperationsPerDilutedShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
             '//*[local-name()="DilutedEarningsAttributableToStockholdersPerCommonShare"]',
+            '//*[local-name()="IncomePerShareFromContinuingOperationsAvailableToCompanyStockholdersBasicAndDiluted"]',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted',
             '//us-gaap:EarningsPerShareBasicAndDiluted',
             '//*[contains(local-name(), "EarningsPerShareDiluted")]',
