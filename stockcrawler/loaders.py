@@ -84,7 +84,7 @@ class MatchEndDate(object):
         if date:
             doc_end_date = datetime.strptime(doc_end_date_str, self.DATE_FORMAT)
             delta_days = (doc_end_date - date).days
-            if abs(delta_days) < 7:
+            if abs(delta_days) < 30:
                 try:
                     val = self.data_type(value.select('./text()')[0].extract())
                 except IndexError:

@@ -1014,6 +1014,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 2102000000.0
         })
 
+    def test_mxim_20110422(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/743316/000144530511000751/mxim-20110422.xml')
+        self.assert_item(item, {
+            'symbol': 'MXIM',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2011-04-22',
+            'revenues': 606775000.0,
+            'net_income': 136276000.0,
+            'eps_basic': 0.46,
+            'eps_diluted': 0.45,
+            'dividend': 0.21,
+            'assets': 3452417000.0,
+            'equity': 2465040000.0,
+            'cash': 868923000.0
+        })
+
     def test_nflx_20120930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1065280/000106528012000020/nflx-20120930.xml')
         self.assert_item(item, {
