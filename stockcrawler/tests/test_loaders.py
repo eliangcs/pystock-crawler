@@ -528,6 +528,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 16164000000.0
         })
 
+    def test_intc_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/50863/000119312512075534/intc-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'INTC',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-12-31',
+            'revenues': 53999000000.0,
+            'net_income': 12942000000.0,
+            'eps_basic': 2.46,
+            'eps_diluted': 2.39,
+            'dividend': 0.7824,
+            'assets': 71119000000.0,
+            'equity': 45911000000.0,
+            'cash': 5065000000.0
+        })
+
     def test_intu_20101031(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/896878/000095012310111135/intu-20101031.xml')
         self.assert_item(item, {
