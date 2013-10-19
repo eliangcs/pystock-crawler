@@ -1212,6 +1212,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 112000000.0
         })
 
+    def test_sbac_20110331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1034054/000119312511130220/sbac-20110331.xml')
+        self.assert_item(item, {
+            'symbol': 'SBAC',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2011-03-31',
+            'revenues': 167749000.0,
+            'net_income': -34251000.0,
+            'eps_basic': -0.3,
+            'eps_diluted': -0.3,
+            'dividend': 0.0,
+            'assets': 3466258000.0,
+            'equity': 213078000.0,
+            'cash': 95104000.0
+        })
+
     def test_shld_20101030(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1310067/000119312510263486/shld-20101030.xml')
         self.assert_item(item, {
