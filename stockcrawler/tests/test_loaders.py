@@ -1032,14 +1032,14 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 2102000000.0
         })
 
-    def test_mxim_20110422(self):
+    def test_mxim_20110326(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/743316/000144530511000751/mxim-20110422.xml')
         self.assert_item(item, {
             'symbol': 'MXIM',
             'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q3',
-            'end_date': '2011-04-22',
+            'end_date': '2011-03-26',
             'revenues': 606775000.0,
             'net_income': 136276000.0,
             'eps_basic': 0.46,
@@ -1390,6 +1390,25 @@ class ReportItemLoaderTest(unittest.TestCase):
             'assets': 21307000000.0,
             'equity': 8044000000.0,
             'cash': 249000000.0
+        })
+
+    def test_via_20120630(self):
+        # 'via-20120401.xml' is misnamed
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1339947/000119312512333732/via-20120401.xml')
+        self.assert_item(item, {
+            'symbol': 'VIA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-06-30',
+            'revenues': 3241000000.0,
+            'net_income': 534000000.0,
+            'eps_basic': 1.02,
+            'eps_diluted': 1.01,
+            'dividend': 0.275,
+            'assets': 21958000000.0,
+            'equity': 7473000000.0,
+            'cash': 774000000.0
         })
 
     def test_vrsk_20120930(self):

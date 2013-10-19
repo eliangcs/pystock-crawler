@@ -8,6 +8,9 @@ from scrapy.utils.python import flatten
 from stockcrawler.items import ReportItem
 
 
+DATE_FORMAT = '%Y-%m-%d'
+
+
 class IntermediateValue(object):
     '''
     Intermediate data that serves as output of input processors, i.e., input
@@ -42,8 +45,6 @@ class ExtractText(object):
 
 class MatchEndDate(object):
 
-    DATE_FORMAT = '%Y-%m-%d'
-
     def __init__(self, data_type=str, context_filter=None):
         self.data_type = data_type
         self.context_filter = context_filter
@@ -69,8 +70,8 @@ class MatchEndDate(object):
             try:
                 start_date_str = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
                 end_date_str = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
-                start_date = datetime.strptime(start_date_str, self.DATE_FORMAT)
-                end_date = datetime.strptime(end_date_str, self.DATE_FORMAT)
+                start_date = datetime.strptime(start_date_str, DATE_FORMAT)
+                end_date = datetime.strptime(end_date_str, DATE_FORMAT)
                 delta_days = (end_date - start_date).days
                 if doc_type == '10-Q' and delta_days < 120 and delta_days > 60:
                     date = end_date
@@ -79,10 +80,10 @@ class MatchEndDate(object):
             except IndexError:
                 pass
         else:
-            date = datetime.strptime(date, self.DATE_FORMAT)
+            date = datetime.strptime(date, DATE_FORMAT)
 
         if date:
-            doc_end_date = datetime.strptime(doc_end_date_str, self.DATE_FORMAT)
+            doc_end_date = datetime.strptime(doc_end_date_str, DATE_FORMAT)
             delta_days = (doc_end_date - date).days
             if abs(delta_days) < 30:
                 try:
@@ -358,11 +359,21 @@ class ReportItemLoader(XmlXPathItemLoader):
             return None
 
     def _get_doc_end_date(self):
-        try:
-            date_str = self.context['response'].url.split('-')[-1].split('.')[0]
-            return datetime.strptime(date_str, '%Y%m%d').strftime('%Y-%m-%d')
-        except (IndexError, ValueError):
-            return self.selector.select('//dei:DocumentPeriodEndDate/text()')[0].extract()
+        # the document end date could come from URL or document
+        # in most cases, the date on URL is correct, but when the date on URL is not correct,
+        # try to guess which one is more correct by checking the month
+        date_str = self.context['response'].url.split('-')[-1].split('.')[0]
+        date_on_url = datetime.strptime(date_str, '%Y%m%d')
+
+        date_str = self.selector.select('//dei:DocumentPeriodEndDate/text()')[0].extract()
+        date_in_doc = datetime.strptime(date_str, DATE_FORMAT)
+
+        quarter_months = (3, 6, 9, 12)
+        date = date_on_url
+        if date_on_url.month not in quarter_months and date_in_doc.month in quarter_months:
+            date = date_in_doc
+
+        return date.strftime(DATE_FORMAT)
 
     def _get_doc_type(self):
         return self.selector.select('//dei:DocumentType/text()')[0].extract().upper()
