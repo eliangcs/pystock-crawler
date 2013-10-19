@@ -456,6 +456,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 2384000000.0
         })
 
+    def test_gmcr_20110630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/909954/000119312511214253/gmcr-20110630.xml')
+        self.assert_item(item, {
+            'symbol': 'GMCR',
+            'amend': False,  # it's actually amended, but not marked in XML
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2011-06-30',
+            'revenues': 717210000.0,
+            'net_income': 56348000.0,
+            'eps_basic': 0.38,
+            'eps_diluted': 0.37,
+            'dividend': 0.0,
+            'assets': 2874422000.0,
+            'equity': 1816646000.0,
+            'cash': 76138000.0
+        })
+
     def test_goog_20090930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000119312509222384/goog-20090930.xml')
         self.assert_item(item, {
