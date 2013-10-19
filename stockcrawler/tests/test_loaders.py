@@ -1302,6 +1302,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 749774000.0
         })
 
+    def test_stx_20120928(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1137789/000110465912072744/stx-20120928.xml')
+        self.assert_item(item, {
+            'symbol': 'STX',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-09-28',
+            'revenues': 3732000000.0,
+            'net_income': 582000000.0,
+            'eps_basic': 1.48,
+            'eps_diluted': 1.42,
+            'dividend': 0.32,
+            'assets': 9522000000.0,
+            'equity': 3535000000.0,
+            'cash': 1894000000.0
+        })
+
     def test_tsla_20110630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312511221497/tsla-20110630.xml')
         self.assert_item(item, {
