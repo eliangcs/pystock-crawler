@@ -372,6 +372,17 @@ class ReportItemLoader(XmlXPathItemLoader):
         date = date_on_url
         if date_on_url.month not in quarter_months and date_in_doc.month in quarter_months:
             date = date_in_doc
+        elif date_on_url.year != date_in_doc.year:
+            # some documents have wrong year on URL, for instance,
+            # on URL it's abc-20140630.xml, but it's 2013-06-30 in doc,
+            # in this case, we count the year occurences in the document
+            # to determine which one to use
+            body = self.context['response'].body
+            url_year_count = body.count(str(date_on_url.year))
+            doc_year_count = body.count(str(date_in_doc.year))
+
+            if doc_year_count > url_year_count:
+                date = date_in_doc
 
         return date.strftime(DATE_FORMAT)
 

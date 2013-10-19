@@ -1338,6 +1338,25 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 1894000000.0
         })
 
+    def test_symc_20130628(self):
+        # 'symc-20140628.xml' is misnamed
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/849399/000119312513312695/symc-20140628.xml')
+        self.assert_item(item, {
+            'symbol': 'SYMC',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2013-06-28',
+            'revenues': 1709000000.0,
+            'net_income': 157000000.0,
+            'eps_basic': 0.23,
+            'eps_diluted': 0.22,
+            'dividend': 0.15,
+            'assets': 13151000000.0,
+            'equity': 5497000000.0,
+            'cash': 3749000000.0
+        })
+
     def test_tsla_20110630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312511221497/tsla-20110630.xml')
         self.assert_item(item, {
