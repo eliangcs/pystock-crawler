@@ -35,16 +35,6 @@ class URLGenerator(object):
         for symbol in self.symbols:
             yield (url % (symbol, self.end_date, self.start_date))
 
-# http://www.sec.gov/Archives/edgar/data/1326801/000132680113000019/0001326801-13-000019-index.htm
-# http://www.sec.gov/Archives/edgar/data/1326801/000132680113000019/fb-6302013x10q.htm
-# http://www.sec.gov/Archives/edgar/data/1288776/000119312509101727/d10q.htm
-# http://www.sec.gov/Archives/edgar/data/1288776/000119312504142809/0001193125-04-142809-index.htm
-# http://www.sec.gov/Archives/edgar/data/1288776/000119312504141838/0001193125-04-141838-index.htm
-# http://www.sec.gov/Archives/edgar/data/1288776/000119312504142809/d10qa.htm
-# http://www.sec.gov/Archives/edgar/data/1288776/000128877613000055/goog-20130630.xml
-# http://www.sec.gov/Archives/edgar/data/1288776/000119312512182401/goog-20120331.xml
-# http://www.sec.gov/Archives/edgar/data/789019/000119312511200680/msft-20110630.xml
-
 
 class EdgarSpider(CrawlSpider):
 
@@ -53,7 +43,7 @@ class EdgarSpider(CrawlSpider):
 
     rules = (
         Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\"]+\-index\.htm',))),
-        Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\"]+\-\d{8}\.xml',)), callback='parse_10qk'),
+        Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\d]+\-\d{8}\.xml',)), callback='parse_10qk'),
     )
 
     def __init__(self, **kwargs):
