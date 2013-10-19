@@ -348,6 +348,24 @@ class ReportItemLoaderTest(unittest.TestCase):
             'cash': 383300000.0
         })
 
+    def test_dtv_20110331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1465112/000104746911004655/dtv-20110331.xml')
+        self.assert_item(item, {
+            'symbol': 'DTV',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2011-03-31',
+            'revenues': 6319000000.0,
+            'net_income': 674000000.0,
+            'eps_basic': 0.85,
+            'eps_diluted': 0.85,
+            'dividend': 0.0,
+            'assets': 20593000000.0,
+            'equity': -902000000.0,
+            'cash': 4295000000.0
+        })
+
     def test_ebay_20100630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1065088/000119312510164115/ebay-20100630.xml')
         self.assert_item(item, {
