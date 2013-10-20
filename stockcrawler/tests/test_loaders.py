@@ -1,10 +1,10 @@
 import os
 import requests
-import unittest
 
 from scrapy.http.response.xml import XmlResponse
 
 from stockcrawler.loaders import ReportItemLoader
+from stockcrawler.tests.base import TestCaseBase
 
 
 def create_response(file_path):
@@ -37,28 +37,7 @@ def parse_xml(url):
     return loader.load_item()
 
 
-class ReportItemLoaderTest(unittest.TestCase):
-
-    def assert_none_or_almost_equal(self, value, expected_value):
-        if expected_value is None:
-            self.assertIsNone(value)
-        else:
-            self.assertAlmostEqual(value, expected_value)
-
-    def assert_item(self, item, expected):
-        self.assertEqual(item['symbol'], expected['symbol'])
-        self.assertEqual(item['amend'], expected['amend'])
-        self.assertEqual(item['doc_type'], expected['doc_type'])
-        self.assertEqual(item['period_focus'], expected['period_focus'])
-        self.assertEqual(item['end_date'], expected['end_date'])
-        self.assert_none_or_almost_equal(item['revenues'], expected['revenues'])
-        self.assert_none_or_almost_equal(item['net_income'], expected['net_income'])
-        self.assert_none_or_almost_equal(item['eps_basic'], expected['eps_basic'])
-        self.assert_none_or_almost_equal(item['eps_diluted'], expected['eps_diluted'])
-        self.assertAlmostEqual(item['dividend'], expected['dividend'])
-        self.assert_none_or_almost_equal(item['assets'], expected['assets'])
-        self.assert_none_or_almost_equal(item['equity'], expected['equity'])
-        self.assert_none_or_almost_equal(item['cash'], expected['cash'])
+class ReportItemLoaderTest(TestCaseBase):
 
     def test_aapl_20100626(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/320193/000119312510162840/aapl-20100626.xml')

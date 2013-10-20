@@ -1,10 +1,10 @@
 import os
 import tempfile
-import unittest
 
-from scrapy.http import HtmlResponse
+from scrapy.http import HtmlResponse, XmlResponse
 
 from stockcrawler.spiders.edgar import EdgarSpider, URLGenerator
+from stockcrawler.tests.base import TestCaseBase
 
 
 def make_url(symbol, start_date='', end_date=''):
@@ -17,7 +17,7 @@ def make_link_html(href, text=u'Link'):
     return u'<a href="%s">%s</a>' % (href, text)
 
 
-class URLGeneratorTest(unittest.TestCase):
+class URLGeneratorTest(TestCaseBase):
 
     def test_no_dates(self):
         urls = URLGenerator(('FB', 'GOOG'))
@@ -50,7 +50,7 @@ class URLGeneratorTest(unittest.TestCase):
         ])
 
 
-class EdgarSpiderTest(unittest.TestCase):
+class EdgarSpiderTest(TestCaseBase):
 
     def test_empty_creation(self):
         spider = EdgarSpider()
@@ -149,10 +149,11 @@ class EdgarSpiderTest(unittest.TestCase):
             <a href="http://example.com">Useless Link</a>
             <a href="/Archives/edgar/data/123/abc-20130630.xml">Link</a>
             <a href="/Archives/edgar/123/456/abc123-20130630.xml">Useless Link</a>
-            <a href="/Archives/edgar/data/123/456/hello-20130630.xml">Link</a>
+            <a href="/Archives/edgar/data/456/789/hello-20130630.xml">Link</a>
             <a href="/Archives/edgar/123/456/hello-20130630.xml">Useless Link</a>
             <a href="/Archives/data/123/456/hello-20130630.xml">Useless Link</a>
-            <a href="/Archives/edgar/data/123/456/hello-201306300.xml">Link</a>
+            <a href="/Archives/edgar/data/123/456/hello-201306300.xml">Useless Link</a>
+            <a href="/Archives/edgar/data/123/456/xyz-20130630.html">Link</a>
             </body></html>
         '''
 
@@ -162,5 +163,58 @@ class EdgarSpiderTest(unittest.TestCase):
 
         self.assertEqual(urls, [
             'http://sec.gov/Archives/edgar/data/123/abc-20130630.xml',
-            'http://sec.gov/Archives/edgar/data/123/456/hello-20130630.xml'
+            'http://sec.gov/Archives/edgar/data/456/789/hello-20130630.xml'
         ])
+
+    def test_parse_xml_report(self):
+        '''Parse XML 10-Q or 10-K report.'''
+        spider = EdgarSpider()
+        spider._follow_links = True  # HACK
+
+        body = '''
+            <?xml version="1.0">
+            <xbrl xmlns="http://www.xbrl.org/2003/instance"
+                  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+                  xmlns:dei="http://xbrl.sec.gov/dei/2011-01-31"
+                  xmlns:us-gaap="http://fasb.org/us-gaap/2011-01-31">
+
+              <context id="c1">
+                <startDate>2013-03-31</startDate>
+                <endDate>2013-06-28</endDate>
+              </context>
+
+              <dei:AmendmentFlag contextRef="c1">false</dei:AmendmentFlag>
+              <dei:DocumentType contextRef="c1">10-Q</dei:DocumentType>
+              <dei:DocumentFiscalPeriodFocus contextRef="c1">Q2</dei:DocumentFiscalPeriodFocus>
+              <dei:DocumentPeriodEndDate contextRef="c1">2013-06-28</dei:DocumentPeriodEndDate>
+
+              <us-gaap:Revenues contextRef="c1">100</us-gaap:Revenues>
+              <us-gaap:NetIncomeLoss contextRef="c1">200</us-gaap:NetIncomeLoss>
+              <us-gaap:EarningsPerShareBasic contextRef="c1">0.2</us-gaap:EarningsPerShareBasic>
+              <us-gaap:EarningsPerShareDiluted contextRef="c1">0.19</us-gaap:EarningsPerShareDiluted>
+              <us-gaap:CommonStockDividendsPerShareDeclared contextRef="c1">0.07</us-gaap:CommonStockDividendsPerShareDeclared>
+
+              <us-gaap:Assets contextRef="c1">1600</us-gaap:Assets>
+              <us-gaap:StockholdersEquity contextRef="c1">300</us-gaap:StockholdersEquity>
+              <us-gaap:CashAndCashEquivalentsAtCarryingValue contextRef="c1">150</us-gaap:CashAndCashEquivalentsAtCarryingValue>
+            </xbrl>
+        '''
+
+        response = XmlResponse('http://sec.gov/Archives/edgar/data/123/abc-20130720.xml', body=body)
+        item = spider.parse_10qk(response)
+
+        self.assert_item(item, {
+            'symbol': 'ABC',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-28',
+            'revenues': 100.0,
+            'net_income': 200.0,
+            'eps_basic': 0.2,
+            'eps_diluted': 0.19,
+            'dividend': 0.07,
+            'assets': 1600.0,
+            'equity': 300.0,
+            'cash': 150.0
+        })
