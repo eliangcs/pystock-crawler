@@ -43,7 +43,7 @@ class EdgarSpider(CrawlSpider):
 
     rules = (
         Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\"]+\-index\.htm',))),
-        Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\d]+\-\d{8}\.xml',)), callback='parse_10qk'),
+        Rule(SgmlLinkExtractor(allow=('/Archives/edgar/data/[^\"]+/[A-Za-z]+\-\d{8}\.xml',)), callback='parse_10qk'),
     )
 
     def __init__(self, **kwargs):

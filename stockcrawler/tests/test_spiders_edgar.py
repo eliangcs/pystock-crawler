@@ -98,7 +98,9 @@ class EdgarSpiderTest(unittest.TestCase):
 
     def test_parse_company_filing_page(self):
         '''
-        Parse the page that lists all filings of a company. Example:
+        Parse the page that lists all filings of a company.
+
+        Example:
         http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001288776&type=10-&dateb=&owner=exclude&count=40
 
         '''
@@ -129,4 +131,36 @@ class EdgarSpiderTest(unittest.TestCase):
             'http://sec.gov/Archives/edgar/data/123/abc-index.htm',
             'http://sec.gov/Archives/edgar/data/123/456/abc123-index.htm',
             'http://sec.gov/Archives/edgar/data/123/456/789/HELLO-index.htm'
+        ])
+
+    def test_parse_quarter_or_annual_page(self):
+        '''
+        Parse the page that lists filings of a quater or a year of a company.
+
+        Example:
+        http://www.sec.gov/Archives/edgar/data/1288776/000128877613000055/0001288776-13-000055-index.htm
+
+        '''
+        spider = EdgarSpider()
+        spider._follow_links = True  # HACK
+
+        body = '''
+            <html><body>
+            <a href="http://example.com">Useless Link</a>
+            <a href="/Archives/edgar/data/123/abc-20130630.xml">Link</a>
+            <a href="/Archives/edgar/123/456/abc123-20130630.xml">Useless Link</a>
+            <a href="/Archives/edgar/data/123/456/hello-20130630.xml">Link</a>
+            <a href="/Archives/edgar/123/456/hello-20130630.xml">Useless Link</a>
+            <a href="/Archives/data/123/456/hello-20130630.xml">Useless Link</a>
+            <a href="/Archives/edgar/data/123/456/hello-201306300.xml">Link</a>
+            </body></html>
+        '''
+
+        response = HtmlResponse('http://sec.gov/mock', body=body)
+        requests = spider.parse(response)
+        urls = [r.url for r in requests]
+
+        self.assertEqual(urls, [
+            'http://sec.gov/Archives/edgar/data/123/abc-20130630.xml',
+            'http://sec.gov/Archives/edgar/data/123/456/hello-20130630.xml'
         ])
