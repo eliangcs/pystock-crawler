@@ -15,3 +15,5 @@ NEWSPIDER_MODULE = 'stockcrawler.spiders'
 #USER_AGENT = 'stockcrawler (+http://www.yourdomain.com)'
 
 LOG_LEVEL = 'DEBUG'
+
+HTTPCACHE_ENABLED = True
