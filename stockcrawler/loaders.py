@@ -66,7 +66,7 @@ class MatchEndDate(object):
         date = None
         try:
             date = context.select('.//*[local-name()="instant"]/text()')[0].extract()
-        except IndexError:
+        except (IndexError, ValueError):
             try:
                 start_date_str = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
                 end_date_str = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
@@ -77,7 +77,7 @@ class MatchEndDate(object):
                     date = end_date
                 elif doc_type == '10-K' and delta_days < 380 and delta_days > 350:
                     date = end_date
-            except IndexError:
+            except (IndexError, ValueError):
                 pass
         else:
             date = datetime.strptime(date, DATE_FORMAT)
@@ -88,7 +88,7 @@ class MatchEndDate(object):
             if abs(delta_days) < 30:
                 try:
                     val = self.data_type(value.select('./text()')[0].extract())
-                except IndexError:
+                except (IndexError, ValueError):
                     pass
                 else:
                     return IntermediateValue(val, context)
@@ -307,12 +307,10 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:EarningsPerShareBasic',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
-            '//*[local-name()="BasicEarningsPerShare"]',
+            '//*[contains(local-name(), "EarningsPerShare") and contains(local-name(), "Basic")]',
             '//*[local-name()="BasicEarningsAttributableToStockholdersPerCommonShare"]',
             '//*[local-name()="IncomePerShareFromContinuingOperationsAvailableToCompanyStockholdersBasicAndDiluted"]',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
-            '//us-gaap:EarningsPerShareBasicAndDiluted',
-            '//*[contains(local-name(), "EarningsPerShareBasic")]',
             '//*[contains(local-name(), "NetLossPerShare")]'
         ])
 
@@ -320,13 +318,10 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:EarningsPerShareDiluted',
             '//us-gaap:IncomeLossFromContinuingOperationsPerDilutedShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
-            '//*[local-name()="DilutedEarningsPerShare"]',
+            '//*[contains(local-name(), "EarningsPerShare") and contains(local-name(), "Diluted")]',
             '//*[local-name()="DilutedEarningsAttributableToStockholdersPerCommonShare"]',
             '//*[local-name()="IncomePerShareFromContinuingOperationsAvailableToCompanyStockholdersBasicAndDiluted"]',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted',
-            '//us-gaap:EarningsPerShareBasicAndDiluted',
-            '//*[contains(local-name(), "EarningsPerShareDiluted")]',
-            '//*[contains(local-name(), "EarningsPerShareBasicAndDiluted")]',
             '//*[contains(local-name(), "NetLossPerShare")]'
         ])
 
