@@ -2,12 +2,19 @@ import os
 import tempfile
 import unittest
 
+from scrapy.http import HtmlResponse
+
 from stockcrawler.spiders.edgar import EdgarSpider, URLGenerator
 
 
 def make_url(symbol, start_date='', end_date=''):
+    '''A URL that lists all 10-Q and 10-K filings of a company.'''
     return 'http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=%s&type=10-&dateb=%s&datea=%s&owner=exclude&count=300' \
            % (symbol, end_date, start_date)
+
+
+def make_link_html(href, text=u'Link'):
+    return u'<a href="%s">%s</a>' % (href, text)
 
 
 class URLGeneratorTest(unittest.TestCase):
@@ -88,3 +95,38 @@ class EdgarSpiderTest(unittest.TestCase):
         ])
 
         os.remove(f.name)
+
+    def test_parse_company_filing_page(self):
+        '''
+        Parse the page that lists all filings of a company. Example:
+        http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001288776&type=10-&dateb=&owner=exclude&count=40
+
+        '''
+        spider = EdgarSpider()
+        spider._follow_links = True  # HACK
+
+        body = '''
+            <html><body>
+            <a href="http://example.com/">Useless Link</a>
+            <a href="/Archives/edgar/data/abc-index.htm">Link</a>
+            <a href="/Archives/edgar/data/123-index.htm">Link</a>
+            <a href="/Archives/edgar/data/123.htm">Useless Link</a>
+            <a href="/Archives/edgar/data/123/abc-index.htm">Link</a>
+            <a href="/Archives/edgar/data/123/456/abc123-index.htm">Link</a>
+            <a href="/Archives/edgar/123/abc-index.htm">Uselss Link</a>
+            <a href="/Archives/edgar/data/123/456/789/HELLO-index.htm">Link</a>
+            <a href="/Archives/hello-index.html">Useless Link</a>
+            </body></html>
+        '''
+
+        response = HtmlResponse('http://sec.gov/mock', body=body)
+        requests = spider.parse(response)
+        urls = [r.url for r in requests]
+
+        self.assertEqual(urls, [
+            'http://sec.gov/Archives/edgar/data/abc-index.htm',
+            'http://sec.gov/Archives/edgar/data/123-index.htm',
+            'http://sec.gov/Archives/edgar/data/123/abc-index.htm',
+            'http://sec.gov/Archives/edgar/data/123/456/abc123-index.htm',
+            'http://sec.gov/Archives/edgar/data/123/456/789/HELLO-index.htm'
+        ])
