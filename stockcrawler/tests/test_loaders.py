@@ -93,6 +93,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 10746000000.0
         })
 
+    def test_aes_20100331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/874761/000119312510111183/aes-20100331.xml')
+        self.assert_item(item, {
+            'symbol': 'AES',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-03-31',
+            'revenues': 4112000000.0,
+            'net_income': 187000000.0,
+            'eps_basic': 0.27,
+            'eps_diluted': 0.27,
+            'dividend': 0.0,
+            'assets': 41882000000.0,
+            'equity': 10536000000.0,
+            'cash': 3392000000.0
+        })
+
     def test_adbe_20090227(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/796343/000079634309000021/adbe-20090227.xml')
         self.assert_item(item, {

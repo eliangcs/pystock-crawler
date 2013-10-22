@@ -293,7 +293,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:SalesRevenueGoodsNet',
             '//us-gaap:SalesRevenueServicesNet',
             '//*[contains(local-name(), "TotalRevenues") and contains(local-name(), "After")]',
-            '//*[contains(local-name(), "TotalRevenues")]'
+            '//*[contains(local-name(), "TotalRevenues")]',
+            '//us-gaap:ElectricUtilityRevenue'
         ])
         self.add_xpath('revenues', '//us-gaap:FinancialServicesRevenue')
 
