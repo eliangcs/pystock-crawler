@@ -39,6 +39,24 @@ def parse_xml(url):
 
 class ReportItemLoaderTest(TestCaseBase):
 
+    def test_a_20110131(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1090872/000110465911013291/a-20110131.xml')
+        self.assert_item(item, {
+            'symbol': 'A',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-01-31',
+            'revenues': 1519000000.0,
+            'net_income': 193000000.0,
+            'eps_basic': 0.56,
+            'eps_diluted': 0.54,
+            'dividend': 0.0,
+            'assets': 8044000000.0,
+            'equity': 3339000000.0,
+            'cash': 2638000000.0
+        })
+
     def test_aapl_20100626(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/320193/000119312510162840/aapl-20100626.xml')
         self.assert_item(item, {
