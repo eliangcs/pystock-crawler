@@ -60,6 +60,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 2638000000.0
         })
 
+    def test_aa_20120630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/4281/000119312512317135/aa-20120630.xml')
+        self.assert_item(item, {
+            'symbol': 'AA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2012-06-30',
+            'revenues': 5963000000.0,
+            'net_income': -2000000.0,
+            'eps_basic': None,  # EPS is 0 actually, but got no data in XML
+            'eps_diluted': None,
+            'dividend': 0.03,
+            'assets': 39498000000.0,
+            'equity': 16914000000.0,
+            'cash': 1712000000.0
+        })
+
     def test_aapl_20100626(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/320193/000119312510162840/aapl-20100626.xml')
         self.assert_item(item, {

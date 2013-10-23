@@ -236,10 +236,10 @@ class ReportItemLoader(XmlXPathItemLoader):
     net_income_out = Compose(imd_min)
 
     eps_basic_in = MapCompose(MatchEndDate(float))
-    eps_basic_out = ImdSumMembersOr(imd_first)
+    eps_basic_out = Compose(ImdSumMembersOr(imd_first), lambda x: x if x < 1000.0 else None)
 
     eps_diluted_in = MapCompose(MatchEndDate(float))
-    eps_diluted_out = ImdSumMembersOr(imd_first)
+    eps_diluted_out = Compose(ImdSumMembersOr(imd_first), lambda x: x if x < 1000.0 else None)
 
     dividend_in = MapCompose(MatchEndDate(float))
     dividend_out = ImdTakeFirst()
