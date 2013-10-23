@@ -357,30 +357,24 @@ class ReportItemLoader(XmlXPathItemLoader):
             return None
 
     def _get_doc_end_date(self):
-        # the document end date could come from URL or document
-        # in most cases, the date on URL is correct, but when the date on URL is not correct,
-        # try to guess which one is more correct by checking the month
-        date_str = self.context['response'].url.split('-')[-1].split('.')[0]
-        date_on_url = datetime.strptime(date_str, '%Y%m%d')
+        # the document end date could come from URL or document content
+        # we need to guess which one is correct
+        url_date_str = self.context['response'].url.split('-')[-1].split('.')[0]
+        url_date = datetime.strptime(url_date_str, '%Y%m%d')
+        url_date_str = url_date.strftime(DATE_FORMAT)
 
-        date_str = self.selector.select('//dei:DocumentPeriodEndDate/text()')[0].extract()
-        date_in_doc = datetime.strptime(date_str, DATE_FORMAT)
+        try:
+            doc_date_str = self.selector.select('//dei:DocumentPeriodEndDate/text()')[0].extract()
+            doc_date = datetime.strptime(doc_date_str, DATE_FORMAT)
+        except (IndexError, ValueError):
+            return url_date.strftime(DATE_FORMAT)
 
-        quarter_months = (3, 6, 9, 12)
-        date = date_on_url
-        if date_on_url.month not in quarter_months and date_in_doc.month in quarter_months:
-            date = date_in_doc
-        elif date_on_url.year != date_in_doc.year:
-            # some documents have wrong year on URL, for instance,
-            # on URL it's abc-20140630.xml, but it's 2013-06-30 in doc,
-            # in this case, we count the year occurences in the document
-            # to determine which one to use
-            body = self.context['response'].body
-            url_year_count = body.count(str(date_on_url.year))
-            doc_year_count = body.count(str(date_in_doc.year))
+        # count occurences of the date on url appearing in doc
+        url_date_count = len(self.selector.select('//*[local-name()="context"]//*[local-name()="endDate" and text()="%s"]' % url_date_str))
 
-            if doc_year_count > url_year_count:
-                date = date_in_doc
+        date = url_date
+        if url_date_count == 0:
+            date = doc_date
 
         return date.strftime(DATE_FORMAT)
 

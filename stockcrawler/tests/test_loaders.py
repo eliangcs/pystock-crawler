@@ -46,7 +46,7 @@ class ReportItemLoaderTest(TestCaseBase):
             'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q1',
-            'end_date': '2010-01-31',
+            'end_date': '2011-01-31',
             'revenues': 1519000000.0,
             'net_income': 193000000.0,
             'eps_basic': 0.56,
@@ -507,14 +507,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 2384000000.0
         })
 
-    def test_gmcr_20110630(self):
+    def test_gmcr_20110625(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/909954/000119312511214253/gmcr-20110630.xml')
         self.assert_item(item, {
             'symbol': 'GMCR',
             'amend': False,  # it's actually amended, but not marked in XML
             'doc_type': '10-Q',
             'period_focus': 'Q3',
-            'end_date': '2011-06-30',
+            'end_date': '2011-06-25',
             'revenues': 717210000.0,
             'net_income': 56348000.0,
             'eps_basic': 0.38,
@@ -885,14 +885,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 203308000.0
         })
 
-    def test_lltc_20111007(self):
+    def test_lltc_20111002(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/791907/000079190711000080/lltc-20111007.xml')
         self.assert_item(item, {
             'symbol': 'LLTC',
             'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q1',
-            'end_date': '2011-10-07',
+            'end_date': '2011-10-02',
             'revenues': 329920000.0,
             'net_income': 108401000.0,
             'eps_basic': 0.47,
