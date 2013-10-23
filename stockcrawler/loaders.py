@@ -369,11 +369,11 @@ class ReportItemLoader(XmlXPathItemLoader):
         except (IndexError, ValueError):
             return url_date.strftime(DATE_FORMAT)
 
-        # count occurences of the date on url appearing in doc
-        url_date_count = len(self.selector.select('//*[local-name()="context"]//*[local-name()="endDate" and text()="%s"]' % url_date_str))
+        context_date_strs = set(self.selector.select('//*[local-name()="context"]//*[local-name()="endDate"]/text()').extract())
+        context_dates = [datetime.strptime(s, DATE_FORMAT) for s in context_date_strs]
 
         date = url_date
-        if url_date_count == 0:
+        if doc_date in context_dates:
             date = doc_date
 
         return date.strftime(DATE_FORMAT)

@@ -1407,7 +1407,7 @@ class ReportItemLoaderTest(TestCaseBase):
             'eps_diluted': 1.3,
             'dividend': 0.7,
             'assets': 8742000000,
-            'equity': 2911000000.0,
+            'equity': 2925000000.0,
             'cash': 1383000000.0
         })
 
