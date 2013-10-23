@@ -370,10 +370,9 @@ class ReportItemLoader(XmlXPathItemLoader):
             return url_date.strftime(DATE_FORMAT)
 
         context_date_strs = set(self.selector.select('//*[local-name()="context"]//*[local-name()="endDate"]/text()').extract())
-        context_dates = [datetime.strptime(s, DATE_FORMAT) for s in context_date_strs]
 
         date = url_date
-        if doc_date in context_dates:
+        if doc_date_str in context_date_strs:
             date = doc_date
 
         return date.strftime(DATE_FORMAT)
