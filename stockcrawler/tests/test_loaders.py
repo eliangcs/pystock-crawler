@@ -1,5 +1,6 @@
 import os
 import requests
+import urlparse
 
 from scrapy.http.response.xml import XmlResponse
 
@@ -18,9 +19,11 @@ def download(url, local_path):
         dir_path = os.path.dirname(local_path)
         if not os.path.exists(dir_path):
             try:
-                os.mkdir(dir_path)
+                os.makedirs(dir_path)
             except OSError:
                 pass
+
+        assert os.path.exists(dir_path)
 
         with open(local_path, 'wb') as f:
             r = requests.get(url, stream=True)
@@ -29,8 +32,8 @@ def download(url, local_path):
 
 
 def parse_xml(url):
-    filename = url.split('/')[-1]
-    local_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'sample_data', filename)
+    url_path = urlparse.urlparse(url).path
+    local_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'sample_data', url_path[1:])
     download(url, local_path)
     response = create_response(local_path)
     loader = ReportItemLoader(response=response)
@@ -1387,6 +1390,25 @@ class ReportItemLoaderTest(TestCaseBase):
             'assets': 9522000000.0,
             'equity': 3535000000.0,
             'cash': 1894000000.0
+        })
+
+    def test_stx_20121228(self):
+        # 'stx-20120928' is misnamed
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1137789/000110465913005497/stx-20120928.xml')
+        self.assert_item(item, {
+            'symbol': 'STX',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2012-12-28',
+            'revenues': 3668000000.0,
+            'net_income': 492000000.0,
+            'eps_basic': 1.33,
+            'eps_diluted': 1.3,
+            'dividend': 0.7,
+            'assets': 8742000000,
+            'equity': 2911000000.0,
+            'cash': 1383000000.0
         })
 
     def test_symc_20130628(self):
