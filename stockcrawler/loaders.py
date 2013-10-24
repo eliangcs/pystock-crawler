@@ -346,7 +346,8 @@ class ReportItemLoader(XmlXPathItemLoader):
         self.add_xpaths('cash', [
             '//us-gaap:CashCashEquivalentsAndFederalFundsSold',
             '//us-gaap:CashAndDueFromBanks',
-            '//us-gaap:CashAndCashEquivalentsAtCarryingValue'
+            '//us-gaap:CashAndCashEquivalentsAtCarryingValue',
+            '//us-gaap:Cash'
         ])
 
     def _get_symbol(self):
