@@ -250,7 +250,7 @@ class ReportItemLoader(XmlXPathItemLoader):
     equity_in = MapCompose(MatchEndDate(float, context_filter=is_not_member))
     equity_out = ImdTakeFirst()
 
-    cash_in = MapCompose(MatchEndDate(float))
+    cash_in = MapCompose(MatchEndDate(float, context_filter=is_not_member))
     cash_out = Compose(imd_max)
 
     def __init__(self, *args, **kwargs):
@@ -301,7 +301,8 @@ class ReportItemLoader(XmlXPathItemLoader):
         self.add_xpaths('net_income', [
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
             '//us-gaap:NetIncomeLoss',
-            '//us-gaap:ProfitLoss'
+            '//us-gaap:ProfitLoss',
+            '//us-gaap:IncomeLossFromContinuingOperations'
         ])
 
         self.add_xpaths('eps_basic', [
