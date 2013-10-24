@@ -222,6 +222,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 820000000.0
         })
 
+    def test_apa_20120930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/6769/000119312512457830/apa-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'APA',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': 4179000000.0,
+            'net_income': 161000000.0,
+            'eps_basic': 0.41,
+            'eps_diluted': 0.41,
+            'dividend': 0.17,
+            'assets': 58810000000.0,
+            'equity': 30714000000.0,
+            'cash': 318000000.0
+        })
+
     def test_axp_20100930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/4962/000095012310100214/axp-20100930.xml')
         self.assert_item(item, {

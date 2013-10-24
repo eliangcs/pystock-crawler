@@ -294,7 +294,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:SalesRevenueServicesNet',
             '//*[contains(local-name(), "TotalRevenues") and contains(local-name(), "After")]',
             '//*[contains(local-name(), "TotalRevenues")]',
-            '//us-gaap:ElectricUtilityRevenue'
+            '//*[contains(local-name(), "Revenue")]'
         ])
         self.add_xpath('revenues', '//us-gaap:FinancialServicesRevenue')
 
@@ -310,10 +310,10 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
             '//*[contains(local-name(), "EarningsPerShare") and contains(local-name(), "Basic")]',
-            '//*[local-name()="BasicEarningsAttributableToStockholdersPerCommonShare"]',
             '//*[local-name()="IncomePerShareFromContinuingOperationsAvailableToCompanyStockholdersBasicAndDiluted"]',
-            '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
-            '//*[contains(local-name(), "NetLossPerShare")]'
+            '//*[contains(local-name(), "NetLossPerShare")]',
+            '//*[local-name()="BasicEarningsAttributableToStockholdersPerCommonShare"]',
+            '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic'
         ])
 
         self.add_xpaths('eps_diluted', [
@@ -321,10 +321,10 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:IncomeLossFromContinuingOperationsPerDilutedShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
             '//*[contains(local-name(), "EarningsPerShare") and contains(local-name(), "Diluted")]',
-            '//*[local-name()="DilutedEarningsAttributableToStockholdersPerCommonShare"]',
             '//*[local-name()="IncomePerShareFromContinuingOperationsAvailableToCompanyStockholdersBasicAndDiluted"]',
-            '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted',
-            '//*[contains(local-name(), "NetLossPerShare")]'
+            '//*[contains(local-name(), "NetLossPerShare")]',
+            '//*[local-name()="DilutedEarningsAttributableToStockholdersPerCommonShare"]',
+            '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted'
         ])
 
         self.add_xpaths('dividend', [
