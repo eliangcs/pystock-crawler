@@ -168,6 +168,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 1148925000.0
         })
 
+    def test_agn_20101231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/850693/000119312511050632/agn-20101231.xml')
+        self.assert_item(item, {
+            'symbol': 'AGN',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2010-12-31',
+            'revenues': 4919400000.0,
+            'net_income': 600000.0,
+            'eps_basic': 0.0,
+            'eps_diluted': 0.0,
+            'dividend': 0.2,
+            'assets': 8308100000.0,
+            'equity': 4781100000.0,
+            'cash': 1991200000.0
+        })
+
     def test_axp_20100930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/4962/000095012310100214/axp-20100930.xml')
         self.assert_item(item, {
