@@ -186,6 +186,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 1991200000.0
         })
 
+    def test_aig_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/5272/000104746913008075/aig-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'AIG',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 17315000000.0,
+            'net_income': 2731000000.0,
+            'eps_basic': 1.85,
+            'eps_diluted': 1.84,
+            'dividend': 0.0,
+            'assets': 537438000000.0,
+            'equity': 98155000000.0,
+            'cash': 1762000000.0
+        })
+
     def test_all_20130331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/899051/000110465913035969/all-20130331.xml')
         self.assert_item(item, {
