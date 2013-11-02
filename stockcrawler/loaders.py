@@ -17,7 +17,8 @@ class IntermediateValue(object):
     of output processors. "Intermediate" is shorten as "imd" in later naming.
 
     '''
-    def __init__(self, value, context):
+    def __init__(self, local_name, value, context):
+        self.local_name = local_name
         self.value = value
         self.context = context
 
@@ -29,7 +30,7 @@ class IntermediateValue(object):
         return 0
 
     def __repr__(self):
-        return '(%s, %s)' % (self.value, self.context.select('@id')[0].extract())
+        return '(%s, %s, %s)' % (self.local_name, self.value, self.context.select('@id')[0].extract())
 
     def is_member(self):
         return is_member(self.context)
@@ -51,7 +52,7 @@ class MatchEndDate(object):
 
     def __call__(self, value, loader_context):
         if not hasattr(value, 'select'):
-            return IntermediateValue(0.0, None)
+            return IntermediateValue('', 0.0, None)
 
         doc_end_date_str = loader_context['end_date']
         doc_type = loader_context['doc_type']
@@ -91,7 +92,8 @@ class MatchEndDate(object):
                 except (IndexError, ValueError):
                     pass
                 else:
-                    return IntermediateValue(val, context)
+                    local_name = value.select('local-name()')[0].extract()
+                    return IntermediateValue(local_name, val, context)
 
         return None
 
@@ -119,7 +121,7 @@ class ImdSumMembersOr(object):
                 non_members.append(imd_value)
 
         if members and len(members) == len(imd_values):
-            return sum([m.value for m in members])
+            return imd_sum(members)
 
         if imd_values:
             return self.second_func(non_members)
@@ -144,6 +146,20 @@ def imd_min(imd_values):
         imd_value = min(imd_values)
         return imd_value.value
     return None
+
+
+def imd_sum(imd_values):
+    return sum([v.value for v in imd_values])
+
+
+def imd_get_revenues(imd_values):
+    interest_elems = filter(lambda v: 'interest' in v.local_name.lower(), imd_values)
+    if len(interest_elems) == len(imd_values):
+        # HACK: An exceptional case for BBT
+        # Revenues = InterestIncome + NoninterestIncome
+        return imd_sum(imd_values)
+
+    return imd_max(imd_values)
 
 
 def is_member(context):
@@ -230,7 +246,7 @@ class ReportItemLoader(XmlXPathItemLoader):
     period_focus_out = TakeFirst()
 
     revenues_in = MapCompose(MatchEndDate(float))
-    revenues_out = ImdSumMembersOr(imd_max)
+    revenues_out = ImdSumMembersOr(imd_get_revenues)
 
     net_income_in = MapCompose(MatchEndDate(float, context_filter=is_not_member))
     net_income_out = Compose(imd_min)
@@ -294,6 +310,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:SalesRevenueServicesNet',
             '//*[contains(local-name(), "TotalRevenues") and contains(local-name(), "After")]',
             '//*[contains(local-name(), "TotalRevenues")]',
+            '//*[local-name()="InterestAndDividendIncomeOperating" or local-name()="NoninterestIncome"]',
             '//*[contains(local-name(), "Revenue")]'
         ])
         self.add_xpath('revenues', '//us-gaap:FinancialServicesRevenue')

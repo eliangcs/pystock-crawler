@@ -366,6 +366,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 8335000000.0
         })
 
+    def test_bbt_20110930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/92230/000119312511304459/bbt-20110930.xml')
+        self.assert_item(item, {
+            'symbol': 'BBT',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2011-09-30',
+            'revenues': 2440000000.0,
+            'net_income': 366000000.0,
+            'eps_basic': 0.52,
+            'eps_diluted': 0.52,
+            'dividend': 0.16,
+            'assets': 167677000000.0,
+            'equity': 17541000000.0,
+            'cash': 1312000000.0
+        })
+
     def test_cbs_20100331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/813828/000104746910004823/cbs-20100331.xml')
         self.assert_item(item, {
