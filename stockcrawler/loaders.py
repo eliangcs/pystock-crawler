@@ -277,7 +277,7 @@ class ReportItemLoader(XmlXPathItemLoader):
         doc_type = self._get_doc_type()
 
         # ignore document that is not 10-Q or 10-K
-        if doc_type not in ('10-Q', '10-K'):
+        if doc_type.split('/')[0] not in ('10-Q', '10-K'):
             return
 
         # some documents set their amendment flag in DocumentType, e.g., '10-Q/A',
