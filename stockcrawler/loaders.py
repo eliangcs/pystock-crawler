@@ -17,9 +17,10 @@ class IntermediateValue(object):
     of output processors. "Intermediate" is shorten as "imd" in later naming.
 
     '''
-    def __init__(self, local_name, value, context):
+    def __init__(self, local_name, value, text, context):
         self.local_name = local_name
         self.value = value
+        self.text = text
         self.context = context
 
     def __cmp__(self, other):
@@ -46,13 +47,12 @@ class ExtractText(object):
 
 class MatchEndDate(object):
 
-    def __init__(self, data_type=str, context_filter=None):
+    def __init__(self, data_type=str):
         self.data_type = data_type
-        self.context_filter = context_filter
 
     def __call__(self, value, loader_context):
         if not hasattr(value, 'select'):
-            return IntermediateValue('', 0.0, None)
+            return IntermediateValue('', 0.0, '0', None)
 
         doc_end_date_str = loader_context['end_date']
         doc_type = loader_context['doc_type']
@@ -60,9 +60,6 @@ class MatchEndDate(object):
 
         context_id = value.select('@contextRef')[0].extract()
         context = selector.select('//*[@id="%s"]' % context_id)[0]
-
-        if self.context_filter and not self.context_filter(context):
-            return None
 
         date = None
         try:
@@ -88,21 +85,14 @@ class MatchEndDate(object):
             delta_days = (doc_end_date - date).days
             if abs(delta_days) < 30:
                 try:
-                    val = self.data_type(value.select('./text()')[0].extract())
+                    text = value.select('./text()')[0].extract()
+                    val = self.data_type(text)
                 except (IndexError, ValueError):
                     pass
                 else:
                     local_name = value.select('local-name()')[0].extract()
-                    return IntermediateValue(local_name, val, context)
+                    return IntermediateValue(local_name, val, text, context)
 
-        return None
-
-
-class ImdTakeFirst(object):
-
-    def __call__(self, imd_values):
-        if imd_values:
-            return imd_values[0].value
         return None
 
 
@@ -162,6 +152,18 @@ def imd_get_revenues(imd_values):
     return imd_max(imd_values)
 
 
+def imd_get_net_income(imd_values):
+    values = filter(lambda v: '.' not in v.text, imd_values)
+    return imd_min(values)
+
+
+def imd_filter_member(imd_values):
+    non_members = filter(lambda v: not v.is_member(), imd_values)
+    if non_members:
+        return non_members
+    return imd_values
+
+
 def is_member(context):
     if context:
         texts = context.select('.//*[local-name()="explicitMember"]/text()').extract()
@@ -171,10 +173,6 @@ def is_member(context):
         if 'member' not in text or 'successormember' in text:
             return False
     return True
-
-
-def is_not_member(context):
-    return not is_member(context)
 
 
 def str_to_bool(value):
@@ -248,8 +246,8 @@ class ReportItemLoader(XmlXPathItemLoader):
     revenues_in = MapCompose(MatchEndDate(float))
     revenues_out = ImdSumMembersOr(imd_get_revenues)
 
-    net_income_in = MapCompose(MatchEndDate(float, context_filter=is_not_member))
-    net_income_out = Compose(imd_min)
+    net_income_in = MapCompose(MatchEndDate(float))
+    net_income_out = Compose(imd_filter_member, imd_get_net_income)
 
     eps_basic_in = MapCompose(MatchEndDate(float))
     eps_basic_out = Compose(ImdSumMembersOr(imd_first), lambda x: x if x < 1000.0 else None)
@@ -258,16 +256,16 @@ class ReportItemLoader(XmlXPathItemLoader):
     eps_diluted_out = Compose(ImdSumMembersOr(imd_first), lambda x: x if x < 1000.0 else None)
 
     dividend_in = MapCompose(MatchEndDate(float))
-    dividend_out = ImdTakeFirst()
+    dividend_out = Compose(imd_first)
 
-    assets_in = MapCompose(MatchEndDate(float, context_filter=is_not_member))
-    assets_out = Compose(imd_max)
+    assets_in = MapCompose(MatchEndDate(float))
+    assets_out = Compose(imd_filter_member, imd_max)
 
-    equity_in = MapCompose(MatchEndDate(float, context_filter=is_not_member))
-    equity_out = ImdTakeFirst()
+    equity_in = MapCompose(MatchEndDate(float))
+    equity_out = Compose(imd_filter_member, imd_first)
 
-    cash_in = MapCompose(MatchEndDate(float, context_filter=is_not_member))
-    cash_out = Compose(imd_max)
+    cash_in = MapCompose(MatchEndDate(float))
+    cash_out = Compose(imd_filter_member, imd_max)
 
     def __init__(self, *args, **kwargs):
         super(ReportItemLoader, self).__init__(*args, **kwargs)
@@ -320,8 +318,7 @@ class ReportItemLoader(XmlXPathItemLoader):
         self.add_xpath('revenues', '//us-gaap:FinancialServicesRevenue')
 
         self.add_xpaths('net_income', [
-            '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
-            '//us-gaap:NetIncomeLoss',
+            '//*[local-name()="NetIncomeLossAvailableToCommonStockholdersBasic" or local-name()="NetIncomeLoss"]',
             '//us-gaap:ProfitLoss',
             '//us-gaap:IncomeLossFromContinuingOperations'
         ])
