@@ -276,6 +276,10 @@ class ReportItemLoader(XmlXPathItemLoader):
         end_date = self._get_doc_end_date()
         doc_type = self._get_doc_type()
 
+        # ignore document that is not 10-Q or 10-K
+        if doc_type not in ('10-Q', '10-K'):
+            return
+
         # some documents set their amendment flag in DocumentType, e.g., '10-Q/A',
         # instead of setting it in AmendmentFlag
         amend = None
