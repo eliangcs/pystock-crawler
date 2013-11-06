@@ -1,3 +1,5 @@
+import os
+
 from datetime import datetime
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
@@ -49,15 +51,20 @@ class EdgarSpider(CrawlSpider):
     def __init__(self, **kwargs):
         super(EdgarSpider, self).__init__(**kwargs)
 
-        symbol_file_path = kwargs.get('symbols')
+        symbols_arg = kwargs.get('symbols')
         start_date = kwargs.get('startdate', '')
         end_date = kwargs.get('enddate', '')
 
         check_date_arg(start_date, 'startdate')
         check_date_arg(end_date, 'enddate')
 
-        if symbol_file_path:
-            symbols = load_symbols(symbol_file_path)
+        if symbols_arg:
+            if os.path.exists(symbols_arg):
+                # get symbols from a text file
+                symbols = load_symbols(symbols_arg)
+            else:
+                # inline symbols in command
+                symbols = symbols_arg.split(',')
             self.start_urls = URLGenerator(symbols, start_date, end_date)
         else:
             self.start_urls = []

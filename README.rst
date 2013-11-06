@@ -43,23 +43,27 @@ Usage
 
 Crawl data from `SEC EDGAR`_ database::
 
-    scrapy crawl edgar -a symbols=SYMBOL_LIST_FILE
+    scrapy crawl edgar -a symbols=SYMBOLS
                        -a startdate=YYYYMMDD
                        -a enddate=YYYYMMDD
                        -o OUTPUT_FILE
                        -t OUTPUT_FORMAT
 
-* ``-a symbols``: A text file that lists the trading symbols you want to
-  crawl.
+* ``-a symbols``: Trading symbols you want to crawl. Can be a text file or a
+  comma-separated string.
 * ``-a startdate`` and ``-a enddate``: Optional. If specified, the crawler
   only collects the documents that were filed within
   this period.
 * ``-o``: Output file path.
 * ``-t``: Output file format, e.g., ``csv`` and ``json``.
 
-Usage example::
+Example 1::
 
-    scrapy crawl edgar -a symbols=./symbols.txt -a startdate=20130101 -a enddate=20130930 -o output.json -t json
+    scrapy crawl edgar -a symbols=./symbols/nasdaq100.txt -a startdate=20130101 -a enddate=20130930 -o output.csv -t csv
+
+Example 2::
+
+    scrapy crawl edgar -a symbols=GOOG,AAPL,FB -o tech.csv -t csv
 
 
 Running Tests
