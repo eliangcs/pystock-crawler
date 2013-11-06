@@ -780,6 +780,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 16164000000.0
         })
 
+    def test_hon_20120331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/773840/000093041312002323/hon-20120331.xml')
+        self.assert_item(item, {
+            'symbol': 'HON',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-03-31',
+            'revenues': 9307000000.0,
+            'net_income': 823000000.0,
+            'eps_basic': 1.06,
+            'eps_diluted': 1.04,
+            'dividend': 0.3725,
+            'assets': 40370000000.0,
+            'equity': 11842000000.0,
+            'cash': 3988000000.0
+        })
+
     def test_intc_20111231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/50863/000119312512075534/intc-20111231.xml')
         self.assert_item(item, {

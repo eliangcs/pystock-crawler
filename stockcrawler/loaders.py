@@ -353,7 +353,10 @@ class ReportItemLoader(XmlXPathItemLoader):
         # if dividend isn't found in doc, assume it's 0
         self.add_value('dividend', 0.0)
 
-        self.add_xpath('assets', '//us-gaap:Assets')
+        self.add_xpaths('assets', [
+            '//us-gaap:Assets',
+            '//us-gaap:AssetsNet'
+        ])
 
         self.add_xpaths('equity', [
             '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest',
