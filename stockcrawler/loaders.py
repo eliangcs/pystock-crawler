@@ -370,6 +370,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:CashAndDueFromBanks',
             '//us-gaap:CashAndCashEquivalentsAtCarryingValue',
             '//us-gaap:Cash',
+            '//*[contains(local-name(), "CarryingValueOfCashAndCashEquivalents")]',
             '//*[contains(local-name(), "CashCashEquivalents")]'
         ])
 
