@@ -690,6 +690,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 2384000000.0
         })
 
+    def test_gis_20121125(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/40704/000119312512508388/gis-20121125.xml')
+        self.assert_item(item, {
+            'symbol': 'GIS',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2012-11-25',
+            'revenues': 4881800000.0,
+            'net_income': 541600000.0,
+            'eps_basic': 0.84,
+            'eps_diluted': 0.82,
+            'dividend': 0.33,
+            'assets': 22952900000.0,
+            'equity': 7440000000.0,
+            'cash': 734900000.0
+        })
+
     def test_gmcr_20110625(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/909954/000119312511214253/gmcr-20110630.xml')
         self.assert_item(item, {

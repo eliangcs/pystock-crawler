@@ -369,7 +369,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:CashCashEquivalentsAndFederalFundsSold',
             '//us-gaap:CashAndDueFromBanks',
             '//us-gaap:CashAndCashEquivalentsAtCarryingValue',
-            '//us-gaap:Cash'
+            '//us-gaap:Cash',
+            '//*[contains(local-name(), "CashCashEquivalents")]'
         ])
 
     def _get_symbol(self):
