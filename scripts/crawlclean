@@ -1,0 +1,2 @@
+scrapy crawl edgar -a symbols=$1 -o $2 -t csv
+./scripts/cleanup.py $2

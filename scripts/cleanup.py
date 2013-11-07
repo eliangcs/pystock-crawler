@@ -6,9 +6,9 @@ import csv
 def parse_args():
     parser = argparse.ArgumentParser(description='Clean up the crawled CSV file.')
     parser.add_argument('input_file', metavar='INPUT_FILE', type=unicode,
-                        help='Input CSV file')
-    parser.add_argument('output_file', metavar='OUTPUT_FILE', type=unicode,
-                        help='Output CSV file')
+                        help='input CSV file')
+    parser.add_argument('-o', metavar='OUTPUT_FILE', type=unicode,
+                        help='output CSV file, overwrite INPUT_FILE if not specified')
     return parser.parse_args()
 
 
@@ -61,7 +61,7 @@ def main():
     args = parse_args()
     items = parse_csv(args.input_file)
     items = sort_items(items)
-    write_csv(items, args.output_file)
+    write_csv(items, args.o or args.input_file)
 
 
 if __name__ == '__main__':
