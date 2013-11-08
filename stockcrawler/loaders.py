@@ -363,7 +363,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest',
             '//us-gaap:StockholdersEquity',
             '//us-gaap:RetainedEarningsAccumulatedDeficit',
-            '//*[contains(local-name(), "MembersEquityIncludingPortionAttributableToNoncontrollingInterest")]'
+            '//*[contains(local-name(), "MembersEquityIncludingPortionAttributableToNoncontrollingInterest")]',
+            '//*[local-name()="TotalCapitalization"]'
         ])
 
         self.add_xpaths('cash', [
