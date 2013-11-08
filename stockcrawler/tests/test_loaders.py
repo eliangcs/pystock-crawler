@@ -1827,6 +1827,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 24700000.0
         })
 
+    def test_wec_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/783325/000010781513000112/wec-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'WEC',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-06-30',
+            'revenues': 1012300000.0,
+            'net_income': 119000000.0,
+            'eps_basic': 0.52,
+            'eps_diluted': 0.52,
+            'dividend': 0.34,
+            'assets': 14317000000.0,
+            'equity': 8609000000.0,
+            'cash': 21000000.0
+        })
+
     def test_wfm_20120115(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/865436/000144530512000434/wfm-20120115.xml')
         self.assert_item(item, {
