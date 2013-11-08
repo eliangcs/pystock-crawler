@@ -275,7 +275,7 @@ class ReportItemLoader(XmlXPathItemLoader):
         doc_type = self._get_doc_type()
 
         # ignore document that is not 10-Q or 10-K
-        if doc_type.split('/')[0] not in ('10-Q', '10-K'):
+        if not (doc_type and doc_type.split('/')[0] in ('10-Q', '10-K')):
             return
 
         # some documents set their amendment flag in DocumentType, e.g., '10-Q/A',
@@ -404,7 +404,10 @@ class ReportItemLoader(XmlXPathItemLoader):
         return date.strftime(DATE_FORMAT)
 
     def _get_doc_type(self):
-        return self.selector.select('//dei:DocumentType/text()')[0].extract().upper()
+        try:
+            return self.selector.select('//dei:DocumentType/text()')[0].extract().upper()
+        except IndexError:
+            return None
 
     def _get_period_focus(self, doc_end_date):
         try:
