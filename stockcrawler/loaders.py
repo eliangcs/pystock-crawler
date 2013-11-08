@@ -320,7 +320,8 @@ class ReportItemLoader(XmlXPathItemLoader):
         self.add_xpaths('net_income', [
             '//*[local-name()="NetIncomeLossAvailableToCommonStockholdersBasic" or local-name()="NetIncomeLoss"]',
             '//us-gaap:ProfitLoss',
-            '//us-gaap:IncomeLossFromContinuingOperations'
+            '//us-gaap:IncomeLossFromContinuingOperations',
+            '//*[contains(local-name(), "IncomeLossFromContinuingOperations")]'
         ])
 
         self.add_xpaths('eps_basic', [
