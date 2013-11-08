@@ -1682,6 +1682,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 3749000000.0
         })
 
+    def test_tgt_20130803(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/27419/000110465913066569/tgt-20130803.xml')
+        self.assert_item(item, {
+            'symbol': 'TGT',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-08-03',
+            'revenues': 17117000000.0,
+            'net_income': 611000000.0,
+            'eps_basic': 0.96,
+            'eps_diluted': 0.95,
+            'dividend': 0.43,
+            'assets': 44162000000.0,
+            'equity': 16020000000.0,
+            'cash': 1018000000.0
+        })
+
     def test_tsla_20110630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312511221497/tsla-20110630.xml')
         self.assert_item(item, {
