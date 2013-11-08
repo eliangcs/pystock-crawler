@@ -331,6 +331,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//*[local-name()="IncomePerShareFromContinuingOperationsAvailableToCompanyStockholdersBasicAndDiluted"]',
             '//*[contains(local-name(), "NetLossPerShare")]',
             '//*[local-name()="BasicEarningsAttributableToStockholdersPerCommonShare"]',
+            '//*[local-name()="Earningspersharebasicanddiluted"]',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic'
         ])
 

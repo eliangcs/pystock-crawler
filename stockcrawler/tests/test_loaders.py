@@ -690,6 +690,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 2384000000.0
         })
 
+    def test_ftr_20110930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/20520/000002052011000066/ftr-20110930.xml')
+        self.assert_item(item, {
+            'symbol': 'FTR',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2011-09-30',
+            'revenues': 1290939000.0,
+            'net_income': 19481000.0,
+            'eps_basic': 0.02,
+            'eps_diluted': 0.02,
+            'dividend': 0.0,
+            'assets': 17493767000.0,
+            'equity': 4776588000.0,
+            'cash': 205817000.0
+        })
+
     def test_ge_20121231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/40545/000004054513000036/ge-20121231.xml')
         self.assert_item(item, {
