@@ -528,6 +528,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 2000000
         })
 
+    def test_csc_20120928(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/23082/000002308212000073/csc-20120928.xml')
+        self.assert_item(item, {
+            'symbol': 'CSC',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2012-09-28',
+            'revenues': 3854000000.0,
+            'net_income': 130000000.0,
+            'eps_basic': 0.84,
+            'eps_diluted': 0.83,
+            'dividend': 0.2,
+            'assets': 11649000000.0,
+            'equity': 2885000000.0,
+            'cash': 1850000000.0
+        })
+
     def test_disca_20090630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1437107/000095012309029613/disca-20090630.xml')
         self.assert_item(item, {

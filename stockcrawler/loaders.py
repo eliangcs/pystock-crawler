@@ -358,7 +358,8 @@ class ReportItemLoader(XmlXPathItemLoader):
 
         self.add_xpaths('assets', [
             '//us-gaap:Assets',
-            '//us-gaap:AssetsNet'
+            '//us-gaap:AssetsNet',
+            '//us-gaap:LiabilitiesAndStockholdersEquity'
         ])
 
         self.add_xpaths('equity', [
