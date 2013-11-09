@@ -310,6 +310,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:SalesRevenueNet',
             '//us-gaap:SalesRevenueGoodsNet',
             '//us-gaap:SalesRevenueServicesNet',
+            '//*[local-name()="NetRevenuesIncludingNetInterestIncome"]',
             '//*[contains(local-name(), "TotalRevenues") and contains(local-name(), "After")]',
             '//*[contains(local-name(), "TotalRevenues")]',
             '//*[local-name()="InterestAndDividendIncomeOperating" or local-name()="NoninterestIncome"]',
@@ -374,6 +375,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:CashAndDueFromBanks',
             '//us-gaap:CashAndCashEquivalentsAtCarryingValue',
             '//us-gaap:Cash',
+            '//*[local-name()="CashAndCashEquivalents"]',
             '//*[contains(local-name(), "CarryingValueOfCashAndCashEquivalents")]',
             '//*[contains(local-name(), "CashCashEquivalents")]'
         ])
