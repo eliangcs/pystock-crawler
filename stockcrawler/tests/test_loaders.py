@@ -906,6 +906,42 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 3988000000.0
         })
 
+    def test_hrb_20091031(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12659/000095012309069608/hrb-20091031.xml')
+        self.assert_item(item, {
+            'symbol': 'HRB',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2009-10-31',
+            'revenues': 326081000.0,
+            'net_income': -128587000.0,
+            'eps_basic': -0.38,
+            'eps_diluted': -0.38,
+            'dividend': 0.15,
+            'assets': 4967359000.0,
+            'equity': 1071097000.0,
+            'cash': 1432243000.0
+        })
+
+    def test_hrb_20130731(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12659/000157484213000013/hrb-20130731.xml')
+        self.assert_item(item, {
+            'symbol': 'HRB',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2013-07-31',
+            'revenues': 127195000.0,
+            'net_income': -115187000.0,
+            'eps_basic': -0.42,
+            'eps_diluted': -0.42,
+            'dividend': 0.20,
+            'assets': 3762888000.0,
+            'equity': 1105315000.0,
+            'cash': 1163876000.0
+        })
+
     def test_intc_20111231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/50863/000119312512075534/intc-20111231.xml')
         self.assert_item(item, {

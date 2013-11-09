@@ -335,7 +335,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//*[local-name()="BasicEarningsAttributableToStockholdersPerCommonShare"]',
             '//*[local-name()="Earningspersharebasicanddiluted"]',
             '//*[local-name()="NetIncomeLossAttributableToCommonStockholdersBasicAndDiluted"]',
-            '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic'
+            '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
+            '//*[local-name()="NetIncomeLossEPS"]'
         ])
 
         self.add_xpaths('eps_diluted', [
@@ -347,7 +348,9 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//*[contains(local-name(), "NetLossPerShare")]',
             '//*[local-name()="DilutedEarningsAttributableToStockholdersPerCommonShare"]',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted',
-            '//*[local-name()="NetIncomeLossAttributableToCommonStockholdersBasicAndDiluted"]'
+            '//*[local-name()="NetIncomeLossAttributableToCommonStockholdersBasicAndDiluted"]',
+            '//us-gaap:EarningsPerShareBasic',
+            '//*[local-name()="NetIncomeLossEPS"]'
         ])
 
         self.add_xpaths('dividend', [
