@@ -1935,6 +1935,42 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 529954000.0
         })
 
+    def test_xel_20100331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/72903/000110465910024080/xel-20100331.xml')
+        self.assert_item(item, {
+            'symbol': 'XEL',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-03-31',
+            'revenues': 2807462000.0,
+            'net_income': 166058000.0,
+            'eps_basic': 0.36,
+            'eps_diluted': 0.36,
+            'dividend': 0.25,
+            'assets': 25334501000.0,
+            'equity': 7355871000.0,
+            'cash': 79504000.0
+        })
+
+    def test_xel_20101231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/72903/000114036111012444/xel-20101231.xml')
+        self.assert_item(item, {
+            'symbol': 'XEL',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2010-12-31',
+            'revenues': 10310947000.0,
+            'net_income': 751593000.0,
+            'eps_basic': 1.63,
+            'eps_diluted': 1.62,
+            'dividend': 1.0,
+            'assets': 27387690000.0,
+            'equity': 8083519000.0,
+            'cash': 108437000.0
+        })
+
     def test_xom_20110331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/34088/000119312511127973/xom-20110331.xml')
         self.assert_item(item, {

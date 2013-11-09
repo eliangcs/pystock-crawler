@@ -170,7 +170,7 @@ def is_member(context):
         text = str(texts).lower()
 
         # 'SuccessorMember' is a rare case that shouldn't be treated as member
-        if 'member' not in text or 'successormember' in text:
+        if 'member' not in text or 'successor' in text:
             return False
     return True
 
@@ -367,6 +367,7 @@ class ReportItemLoader(XmlXPathItemLoader):
         self.add_xpaths('equity', [
             '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest',
             '//us-gaap:StockholdersEquity',
+            '//*[local-name()="CommonShareholdersEquity"]',
             '//us-gaap:RetainedEarningsAccumulatedDeficit',
             '//*[contains(local-name(), "MembersEquityIncludingPortionAttributableToNoncontrollingInterest")]',
             '//us-gaap:CapitalizationLongtermDebtAndEquity',
