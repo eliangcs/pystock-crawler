@@ -336,7 +336,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//*[local-name()="Earningspersharebasicanddiluted"]',
             '//*[local-name()="NetIncomeLossAttributableToCommonStockholdersBasicAndDiluted"]',
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersBasic',
-            '//*[local-name()="NetIncomeLossEPS"]'
+            '//*[local-name()="NetIncomeLossEPS"]',
+            '//*[local-name()="NetLoss"]'
         ])
 
         self.add_xpaths('eps_diluted', [
@@ -350,7 +351,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted',
             '//*[local-name()="NetIncomeLossAttributableToCommonStockholdersBasicAndDiluted"]',
             '//us-gaap:EarningsPerShareBasic',
-            '//*[local-name()="NetIncomeLossEPS"]'
+            '//*[local-name()="NetIncomeLossEPS"]',
+            '//*[local-name()="NetLoss"]'
         ])
 
         self.add_xpaths('dividend', [
@@ -435,11 +437,11 @@ class ReportItemLoader(XmlXPathItemLoader):
 
         if delta_days > -45 and delta_days < 45:
             return 'FY'
-        elif delta_days > -135 and delta_days < 135:
-            return 'Q3'
-        elif delta_days > -225 and delta_days < 225:
-            return 'Q2'
-        elif delta_days > -315 and delta_days < 315:
+        elif (delta_days <= -45 and delta_days > -135) or delta_days > 225:
             return 'Q1'
+        elif (delta_days <= -135 and delta_days > -225) or (delta_days > 135 and delta_days <= 225):
+            return 'Q2'
+        elif delta_days <= -225 or (delta_days > 45 and delta_days <= 135):
+            return 'Q3'
 
         return 'FY'

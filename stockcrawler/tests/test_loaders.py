@@ -906,6 +906,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 3988000000.0
         })
 
+    def test_hrb_20090731(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12659/000095012309041361/hrb-20090731.xml')
+        self.assert_item(item, {
+            'symbol': 'HRB',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2009-07-31',
+            'revenues': 275505000.0,
+            'net_income': -133634000.0,
+            'eps_basic': -0.4,
+            'eps_diluted': -0.4,
+            'dividend': 0.15,
+            'assets': 4545762000.0,
+            'equity': 1190714000.0,
+            'cash': 1006303000.0
+        })
+
     def test_hrb_20091031(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/12659/000095012309069608/hrb-20091031.xml')
         self.assert_item(item, {
@@ -1483,12 +1501,13 @@ class ReportItemLoaderTest(TestCaseBase):
         })
 
     def test_nws_20090930(self):
+        # symbol is changed to FOX
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1308161/000119312509224062/nws-20090930.xml')
         self.assert_item(item, {
             'symbol': 'NWS',
             'amend': False,
             'doc_type': '10-Q',
-            'period_focus': 'Q3',
+            'period_focus': 'Q1',
             'end_date': '2009-09-30',
             'revenues': 7199000000.0,
             'net_income': 571000000.0,
