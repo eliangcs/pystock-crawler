@@ -204,6 +204,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 1762000000.0
         })
 
+    def test_aiv_20110630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/922864/000095012311070591/aiv-20110630.xml')
+        self.assert_item(item, {
+            'symbol': 'AIV',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2011-06-30',
+            'revenues': 281035000.0,
+            'net_income': -33177000.0,
+            'eps_basic': -0.28,
+            'eps_diluted': -0.28,
+            'dividend': 0.12,
+            'assets': 7164972000.0,
+            'equity': 1241336000.0,
+            'cash': 85324000.0
+        })
+
     def test_all_20130331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/899051/000110465913035969/all-20130331.xml')
         self.assert_item(item, {
