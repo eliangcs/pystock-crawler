@@ -301,7 +301,9 @@ class ReportItemLoader(XmlXPathItemLoader):
         self.add_value('end_date', end_date)
         self.add_value('doc_type', doc_type)
 
-        if not self.add_xpath('period_focus', '//dei:DocumentFiscalPeriodFocus'):
+        if doc_type == '10-K':
+            self.add_value('period_focus', 'FY')
+        elif not self.add_xpath('period_focus', '//dei:DocumentFiscalPeriodFocus'):
             period_focus = self._get_period_focus(end_date)
             self.add_value('period_focus', period_focus)
 
@@ -310,6 +312,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:SalesRevenueNet',
             '//us-gaap:SalesRevenueGoodsNet',
             '//us-gaap:SalesRevenueServicesNet',
+            '//us-gaap:RealEstateRevenueNet',
             '//*[local-name()="NetRevenuesIncludingNetInterestIncome"]',
             '//*[contains(local-name(), "TotalRevenues") and contains(local-name(), "After")]',
             '//*[contains(local-name(), "TotalRevenues")]',

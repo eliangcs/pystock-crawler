@@ -1900,6 +1900,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 774000000.0
         })
 
+    def test_vno_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/899689/000089968912000004/vno-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'VNO',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-12-31',
+            'revenues': 2915665000.0,
+            'net_income': 601771000.0,
+            'eps_basic': 3.26,
+            'eps_diluted': 3.23,
+            'dividend': 0.0,
+            'assets': 20446487000.0,
+            'equity': 7508447000.0,
+            'cash': 606553000.0
+        })
+
     def test_vrsk_20120930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1442145/000119312512441544/vrsk-20120930.xml')
         self.assert_item(item, {
