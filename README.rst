@@ -32,7 +32,8 @@ Then you can create an isolated Python environment with::
 
     mkvirtualenv stockcrawler
 
-`Download`_ or clone this repository::
+`Download<https://github.com/eliangcs/stockcrawler/archive/master.zip>`_ or
+clone this repository::
 
     git clone git@github.com:eliangcs/stockcrawler.git
 
@@ -89,7 +90,6 @@ This downloads the test data from the internet on the fly, so it will take
 some time and disk space.
 
 
-.. _Donwload: https://github.com/eliangcs/stockcrawler/archive/master.zip
 .. _virtualenv: http://www.virtualenv.org/
 .. _virtualenvwrapper: http://virtualenvwrapper.readthedocs.org/
 .. _Scrapy: http://scrapy.org/
