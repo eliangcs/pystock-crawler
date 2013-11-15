@@ -1809,6 +1809,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 1018000000.0
         })
 
+    def test_trv_20100331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/86312/000110465910021504/trv-20100331.xml')
+        self.assert_item(item, {
+            'symbol': 'TRV',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-03-31',
+            'revenues': 6119000000.0,
+            'net_income': 647000000.0,
+            'eps_basic': 1.26,
+            'eps_diluted': 1.25,
+            'dividend': 0.0,
+            'assets': 108696000000.0,
+            'equity': 26671000000.0,
+            'cash': 251000000.0
+        })
+
     def test_tsla_20110630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1318605/000119312511221497/tsla-20110630.xml')
         self.assert_item(item, {
