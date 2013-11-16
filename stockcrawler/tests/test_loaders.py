@@ -510,6 +510,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 282000000.0
         })
 
+    def test_cci_20091231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1051470/000119312510031419/cci-20091231.xml')
+        self.assert_item(item, {
+            'symbol': 'CCI',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2009-12-31',
+            'revenues': 1685407000.0,
+            'net_income': -135138000.0,
+            'eps_basic': -0.47,
+            'eps_diluted': -0.47,
+            'dividend': 0.0,
+            'assets': 10956606000.0,
+            'equity': 2936085000.0,
+            'cash': 766146000.0
+        })
+
     def test_ccmm_20110630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1091667/000109166711000103/ccmm-20110630.xml')
         self.assert_item(item, {
