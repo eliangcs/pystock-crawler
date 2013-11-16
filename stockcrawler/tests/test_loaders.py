@@ -1609,6 +1609,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 1854700000.0
         })
 
+    def test_pcg_20091231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1004980/000100498010000015/pcg-20091231.xml')
+        self.assert_item(item, {
+            'symbol': 'PCG',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2009-12-31',
+            'revenues': 13399000000.0,
+            'net_income': 1220000000.0,
+            'eps_basic': 3.25,
+            'eps_diluted': 3.2,
+            'dividend': 1.68,
+            'assets': 42945000000.0,
+            'equity': 10585000000.0,
+            'cash': 527000000.0
+        })
+
     def test_qep_20110630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1108827/000119312511202252/qep-20110630.xml')
         self.assert_item(item, {

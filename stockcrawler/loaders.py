@@ -359,8 +359,8 @@ class ReportItemLoader(XmlXPathItemLoader):
         ])
 
         self.add_xpaths('dividend', [
-            '//us-gaap:CommonStockDividendsPerShareCashPaid',
-            '//us-gaap:CommonStockDividendsPerShareDeclared'
+            '//us-gaap:CommonStockDividendsPerShareDeclared',
+            '//us-gaap:CommonStockDividendsPerShareCashPaid'
         ])
 
         # if dividend isn't found in doc, assume it's 0
