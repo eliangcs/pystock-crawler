@@ -11,13 +11,13 @@ StockCrawler
 daily prices and fundamental figures such as revenues and EPS.
 
 
-Project Status
---------------
+Development Status
+------------------
 
 ``StockCrawler`` is still **UNDER DEVELOPMENT**, so expect bugs and design
 changes. The plan is to be able to crawl both price data and financial
-reports. I'm working on financial reports and will proceed to work on pirce
-data after that.
+reports. I'm working on financial reports (10-Q and 10-K forms) and will
+proceed to work on pirce data after that.
 
 
 Installation (For Developers)
@@ -32,10 +32,13 @@ Then you can create an isolated Python environment with::
 
     mkvirtualenv stockcrawler
 
-`Download<https://github.com/eliangcs/stockcrawler/archive/master.zip>`_ or
-clone this repository::
+Clone this repository::
 
     git clone git@github.com:eliangcs/stockcrawler.git
+
+Or you can just download the `ZIP file
+<https://github.com/eliangcs/stockcrawler/archive/master.zip>`_ and extract
+it.
 
 ``StockCrawler`` is based on an awesome web crawling framework `Scrapy`_,
 which is listed in ``requirements.txt``. Install it and other dependencies
@@ -86,8 +89,8 @@ Then running the tests is a simple command::
 
     py.test
 
-This downloads the test data from the internet on the fly, so it will take
-some time and disk space.
+This downloads the test data from from `SEC EDGAR`_ on the fly, so it will
+take some time and disk space.
 
 
 .. _virtualenv: http://www.virtualenv.org/
