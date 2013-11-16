@@ -1609,6 +1609,42 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 1854700000.0
         })
 
+    def test_qep_20110630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1108827/000119312511202252/qep-20110630.xml')
+        self.assert_item(item, {
+            'symbol': 'QEP',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2011-06-30',
+            'revenues': 784100000.0,
+            'net_income': 92800000.0,
+            'eps_basic': 0.52,
+            'eps_diluted': 0.52,
+            'dividend': 0.02,
+            'assets': 7075000000.0,
+            'equity': 3184400000.0,
+            'cash': None
+        })
+
+    def test_qep_20120930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1108827/000110882712000006/qep-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'QEP',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': 542400000.0,
+            'net_income': -3100000.0,
+            'eps_basic': -0.02,
+            'eps_diluted': -0.02,
+            'dividend': 0.02,
+            'assets': 8996100000.0,
+            'equity': 3377000000.0,
+            'cash': 0.0
+        })
+
     def test_regn_20100630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/872589/000120677410001689/regn-20100630.xml')
         self.assert_item(item, {
