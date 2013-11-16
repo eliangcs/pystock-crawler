@@ -325,7 +325,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//*[local-name()="NetIncomeLossAvailableToCommonStockholdersBasic" or local-name()="NetIncomeLoss"]',
             '//us-gaap:ProfitLoss',
             '//us-gaap:IncomeLossFromContinuingOperations',
-            '//*[contains(local-name(), "IncomeLossFromContinuingOperations")]'
+            '//*[contains(local-name(), "IncomeLossFromContinuingOperations")]',
+            '//*[contains(local-name(), "NetIncomeLoss")]'
         ])
 
         self.add_xpaths('eps_basic', [
@@ -375,6 +376,7 @@ class ReportItemLoader(XmlXPathItemLoader):
         self.add_xpaths('equity', [
             '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest',
             '//us-gaap:StockholdersEquity',
+            '//*[local-name()="TotalCommonShareholdersEquity"]',
             '//*[local-name()="CommonShareholdersEquity"]',
             '//us-gaap:RetainedEarningsAccumulatedDeficit',
             '//*[contains(local-name(), "MembersEquityIncludingPortionAttributableToNoncontrollingInterest")]',

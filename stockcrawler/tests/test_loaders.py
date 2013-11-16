@@ -726,6 +726,25 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 2384000000.0
         })
 
+    def test_fpl_20100331(self):
+        # FPL was later changed to NEE
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/37634/000075330810000051/fpl-20100331.xml')
+        self.assert_item(item, {
+            'symbol': 'FPL',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-03-31',
+            'revenues': 3622000000.0,
+            'net_income': 556000000.0,
+            'eps_basic': 1.36,
+            'eps_diluted': 1.36,
+            'dividend': 0.5,
+            'assets': 50942000000.0,
+            'equity': 13336000000.0,
+            'cash': 1215000000.0
+        })
+
     def test_ftr_20110930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/20520/000002052011000066/ftr-20110930.xml')
         self.assert_item(item, {
