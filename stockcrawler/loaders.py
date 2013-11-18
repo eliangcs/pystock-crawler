@@ -380,6 +380,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:StockholdersEquity',
             '//*[local-name()="TotalCommonShareholdersEquity"]',
             '//*[local-name()="CommonShareholdersEquity"]',
+            '//*[local-name()="CommonStockEquity"]',
             '//us-gaap:RetainedEarningsAccumulatedDeficit',
             '//*[contains(local-name(), "MembersEquityIncludingPortionAttributableToNoncontrollingInterest")]',
             '//us-gaap:CapitalizationLongtermDebtAndEquity',
