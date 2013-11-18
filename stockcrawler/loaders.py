@@ -308,8 +308,8 @@ class ReportItemLoader(XmlXPathItemLoader):
             self.add_value('period_focus', period_focus)
 
         self.add_xpaths('revenues', [
-            '//us-gaap:Revenues',
             '//us-gaap:SalesRevenueNet',
+            '//us-gaap:Revenues',
             '//us-gaap:SalesRevenueGoodsNet',
             '//us-gaap:SalesRevenueServicesNet',
             '//us-gaap:RealEstateRevenueNet',
