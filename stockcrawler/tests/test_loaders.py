@@ -1339,6 +1339,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 163414000.0
         })
 
+    def test_lly_20100930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/59478/000095012310097867/lly-20100930.xml')
+        self.assert_item(item, {
+            'symbol': 'LLY',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2010-09-30',
+            'revenues': 5654800000.0,
+            'net_income': 1302900000.0,
+            'eps_basic': 1.18,
+            'eps_diluted': 1.18,
+            'dividend': 0.49,
+            'assets': 29904300000.0,
+            'equity': 12405500000.0,
+            'cash': 5908800000.0
+        })
+
     def test_lmca_20120331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793412000012/lmca-20120331.xml')
         self.assert_item(item, {
