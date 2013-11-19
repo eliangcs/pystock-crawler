@@ -198,9 +198,9 @@ def imd_mult(imd_values):
             # HACK: some of LUV's reports have unreasonablely small numbers such as
             # 4136 in revenues which should be 4136 millions, this hack uses id attribute
             # to determine if it should be scaled up
-            if 'inmillions' in node_id and v.value < 100000.0:
+            if 'inmillions' in node_id and abs(v.value) < 100000.0:
                 v.value *= 1000000.0
-            elif 'inthousands' in node_id and v.value < 100000000.0:
+            elif 'inthousands' in node_id and abs(v.value) < 100000000.0:
                 v.value *= 1000.0
     return imd_values
 
