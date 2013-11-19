@@ -188,6 +188,23 @@ def imd_filter_member(imd_values):
     return imd_values
 
 
+def imd_mult(imd_values):
+    for v in imd_values:
+        try:
+            node_id = v.node.select('@id')[0].extract().lower()
+        except (AttributeError, IndexError):
+            pass
+        else:
+            # HACK: some of LUV's reports have unreasonablely small numbers such as
+            # 4136 in revenues which should be 4136 millions, this hack uses id attribute
+            # to determine if it should be scaled up
+            if 'inmillions' in node_id and v.value < 100000.0:
+                v.value *= 1000000.0
+            elif 'inthousands' in node_id and v.value < 100000000.0:
+                v.value *= 1000.0
+    return imd_values
+
+
 def is_member(context):
     if context:
         texts = context.select('.//*[local-name()="explicitMember"]/text()').extract()
@@ -268,10 +285,10 @@ class ReportItemLoader(XmlXPathItemLoader):
     period_focus_out = TakeFirst()
 
     revenues_in = MapCompose(MatchEndDate(float))
-    revenues_out = ImdSumMembersOr(imd_get_revenues)
+    revenues_out = Compose(imd_mult, ImdSumMembersOr(imd_get_revenues))
 
     net_income_in = MapCompose(MatchEndDate(float))
-    net_income_out = Compose(imd_filter_member, imd_get_net_income)
+    net_income_out = Compose(imd_filter_member, imd_mult, imd_get_net_income)
 
     eps_basic_in = MapCompose(MatchEndDate(float))
     eps_basic_out = Compose(ImdSumMembersOr(imd_get_per_share_value), lambda x: x if x < MAX_PER_SHARE_VALUE else None)
@@ -283,13 +300,13 @@ class ReportItemLoader(XmlXPathItemLoader):
     dividend_out = Compose(imd_get_per_share_value, lambda x: x if x < MAX_PER_SHARE_VALUE and x > 0.0 else 0.0)
 
     assets_in = MapCompose(MatchEndDate(float))
-    assets_out = Compose(imd_filter_member, imd_max)
+    assets_out = Compose(imd_filter_member, imd_mult, imd_max)
 
     equity_in = MapCompose(MatchEndDate(float))
-    equity_out = Compose(imd_filter_member, imd_first)
+    equity_out = Compose(imd_filter_member, imd_mult, imd_first)
 
     cash_in = MapCompose(MatchEndDate(float))
-    cash_out = Compose(imd_filter_member, imd_max)
+    cash_out = Compose(imd_filter_member, imd_mult, imd_max)
 
     def __init__(self, *args, **kwargs):
         super(ReportItemLoader, self).__init__(*args, **kwargs)

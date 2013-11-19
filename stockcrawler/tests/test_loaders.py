@@ -1411,6 +1411,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 551000000.0
         })
 
+    def test_luv_20110630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/92380/000009238011000070/luv-20110630.xml')
+        self.assert_item(item, {
+            'symbol': 'LUV',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2011-06-30',
+            'revenues': 4136000000.0,
+            'net_income': 161000000.0,
+            'eps_basic': 0.21,
+            'eps_diluted': 0.21,
+            'dividend': 0.0045,
+            'assets': 18945000000.0,
+            'equity': 7202000000.0,
+            'cash': 1595000000.0
+        })
+
     def test_mchp_20120630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/827054/000082705412000230/mchp-20120630.xml')
         self.assert_item(item, {
