@@ -175,7 +175,7 @@ def imd_get_per_share_value(imd_values):
         except (AttributeError, IndexError):
             return None
         else:
-            # HACK: some of LTD's reports have unreasonable large per share value, such as
+            # HACK: some of LTD's reports have unreasonablely large per share value, such as
             # 320000 EPS (and it should be 0.32), so use decimals attribute to scale it down,
             # note that this is NOT a correct way to interpret decimals attribute
             value *= pow(10, decimals - 2)
