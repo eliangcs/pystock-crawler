@@ -2332,3 +2332,21 @@ class ReportItemLoaderTest(TestCaseBase):
             'equity': 1906958000.0,
             'cash': 450348000.0
         })
+
+    def test_xrx_20091231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/108772/000119312510043079/xrx-20091231.xml')
+        self.assert_item(item, {
+            'symbol': 'XRX',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2009-12-31',
+            'revenues': 15179000000.0,
+            'net_income': 485000000.0,
+            'eps_basic': 0.56,
+            'eps_diluted': 0.55,
+            'dividend': 0.0,
+            'assets': 24032000000.0,
+            'equity': 7191000000.0,
+            'cash': 3799000000.0
+        })

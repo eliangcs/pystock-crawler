@@ -169,7 +169,7 @@ def imd_get_per_share_value(imd_values):
 
     v = imd_values[0]
     value = v.value
-    if value > MAX_PER_SHARE_VALUE:
+    if abs(value) > MAX_PER_SHARE_VALUE:
         try:
             decimals = int(v.node.select('@decimals')[0].extract())
         except (AttributeError, IndexError):
@@ -179,7 +179,7 @@ def imd_get_per_share_value(imd_values):
             # 320000 EPS (and it should be 0.32), so use decimals attribute to scale it down,
             # note that this is NOT a correct way to interpret decimals attribute
             value *= pow(10, decimals - 2)
-    return value if value <= MAX_PER_SHARE_VALUE else None
+    return value if abs(value) <= MAX_PER_SHARE_VALUE else None
 
 
 def imd_filter_member(imd_values):
@@ -281,7 +281,7 @@ class ReportItemLoader(XmlXPathItemLoader):
     eps_diluted_out = Compose(ImdSumMembersOr(imd_get_per_share_value), lambda x: x if x < MAX_PER_SHARE_VALUE else None)
 
     dividend_in = MapCompose(MatchEndDate(float))
-    dividend_out = Compose(imd_get_per_share_value, lambda x: x if x < MAX_PER_SHARE_VALUE else None)
+    dividend_out = Compose(imd_get_per_share_value, lambda x: x if x < MAX_PER_SHARE_VALUE and x > 0.0 else 0.0)
 
     assets_in = MapCompose(MatchEndDate(float))
     assets_out = Compose(imd_filter_member, imd_max)
@@ -347,6 +347,7 @@ class ReportItemLoader(XmlXPathItemLoader):
         self.add_xpath('revenues', '//us-gaap:FinancialServicesRevenue')
 
         self.add_xpaths('net_income', [
+            '//*[contains(local-name(), "NetLossIncome") and contains(local-name(), "Corporation")]',
             '//*[local-name()="NetIncomeLossAvailableToCommonStockholdersBasic" or local-name()="NetIncomeLoss"]',
             '//us-gaap:ProfitLoss',
             '//us-gaap:IncomeLossFromContinuingOperations',
