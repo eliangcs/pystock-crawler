@@ -1393,6 +1393,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 498000000.0
         })
 
+    def test_ltd_20130803(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/701985/000070198513000032/ltd-20130803.xml')
+        self.assert_item(item, {
+            'symbol': 'LTD',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2013-08-03',
+            'revenues': 2516000000.0,
+            'net_income': 178000000.0,
+            'eps_basic': 0.62,
+            'eps_diluted': 0.61,
+            'dividend': 0.3,
+            'assets': 6072000000.0,
+            'equity': -861000000.0,
+            'cash': 551000000.0
+        })
+
     def test_mchp_20120630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/827054/000082705412000230/mchp-20120630.xml')
         self.assert_item(item, {

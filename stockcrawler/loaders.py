@@ -10,6 +10,8 @@ from stockcrawler.items import ReportItem
 
 DATE_FORMAT = '%Y-%m-%d'
 
+MAX_PER_SHARE_VALUE = 1000.0
+
 
 class IntermediateValue(object):
     '''
@@ -17,11 +19,12 @@ class IntermediateValue(object):
     of output processors. "Intermediate" is shorten as "imd" in later naming.
 
     '''
-    def __init__(self, local_name, value, text, context):
+    def __init__(self, local_name, value, text, context, node=None):
         self.local_name = local_name
         self.value = value
         self.text = text
         self.context = context
+        self.node = node
 
     def __cmp__(self, other):
         if self.value < other.value:
@@ -31,7 +34,10 @@ class IntermediateValue(object):
         return 0
 
     def __repr__(self):
-        return '(%s, %s, %s)' % (self.local_name, self.value, self.context.select('@id')[0].extract())
+        context_id = None
+        if self.context:
+            context_id = self.context.select('@id')[0].extract()
+        return '(%s, %s, %s)' % (self.local_name, self.value, context_id)
 
     def is_member(self):
         return is_member(self.context)
@@ -91,7 +97,7 @@ class MatchEndDate(object):
                     pass
                 else:
                     local_name = value.select('local-name()')[0].extract()
-                    return IntermediateValue(local_name, val, text, context)
+                    return IntermediateValue(local_name, val, text, context, value)
 
         return None
 
@@ -155,6 +161,22 @@ def imd_get_revenues(imd_values):
 def imd_get_net_income(imd_values):
     values = filter(lambda v: '.' not in v.text, imd_values)
     return imd_min(values)
+
+
+def imd_get_per_share_value(imd_values):
+    if not imd_values:
+        return None
+
+    v = imd_values[0]
+    value = v.value
+    if value > MAX_PER_SHARE_VALUE:
+        try:
+            decimals = int(v.node.select('@decimals')[0].extract())
+        except (AttributeError, IndexError):
+            return None
+        else:
+            value *= pow(10, decimals - 2)
+    return value if value <= MAX_PER_SHARE_VALUE else None
 
 
 def imd_filter_member(imd_values):
@@ -250,13 +272,13 @@ class ReportItemLoader(XmlXPathItemLoader):
     net_income_out = Compose(imd_filter_member, imd_get_net_income)
 
     eps_basic_in = MapCompose(MatchEndDate(float))
-    eps_basic_out = Compose(ImdSumMembersOr(imd_first), lambda x: x if x < 1000.0 else None)
+    eps_basic_out = Compose(ImdSumMembersOr(imd_get_per_share_value), lambda x: x if x < MAX_PER_SHARE_VALUE else None)
 
     eps_diluted_in = MapCompose(MatchEndDate(float))
-    eps_diluted_out = Compose(ImdSumMembersOr(imd_first), lambda x: x if x < 1000.0 else None)
+    eps_diluted_out = Compose(ImdSumMembersOr(imd_get_per_share_value), lambda x: x if x < MAX_PER_SHARE_VALUE else None)
 
     dividend_in = MapCompose(MatchEndDate(float))
-    dividend_out = Compose(imd_first)
+    dividend_out = Compose(imd_get_per_share_value, lambda x: x if x < MAX_PER_SHARE_VALUE else None)
 
     assets_in = MapCompose(MatchEndDate(float))
     assets_out = Compose(imd_filter_member, imd_max)
