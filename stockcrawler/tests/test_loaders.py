@@ -2350,3 +2350,21 @@ class ReportItemLoaderTest(TestCaseBase):
             'equity': 7191000000.0,
             'cash': 3799000000.0
         })
+
+    def test_zmh_20090630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1136869/000095012309035693/zmh-20090630.xml')
+        self.assert_item(item, {
+            'symbol': 'ZMH',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2009-06-30',
+            'revenues': 1019900000.0,
+            'net_income': 210099999.99999988,
+            'eps_basic': 0.98,
+            'eps_diluted': 0.98,
+            'dividend': 0.0,
+            'assets': 7462100000.000001,
+            'equity': 5805600000.0,
+            'cash': 277500000.0
+        })

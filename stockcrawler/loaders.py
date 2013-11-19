@@ -159,8 +159,7 @@ def imd_get_revenues(imd_values):
 
 
 def imd_get_net_income(imd_values):
-    values = filter(lambda v: '.' not in v.text, imd_values)
-    return imd_min(values)
+    return imd_min(imd_values)
 
 
 def imd_get_per_share_value(imd_values):
@@ -351,7 +350,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//*[local-name()="NetIncomeLossAvailableToCommonStockholdersBasic" or local-name()="NetIncomeLoss"]',
             '//us-gaap:ProfitLoss',
             '//us-gaap:IncomeLossFromContinuingOperations',
-            '//*[contains(local-name(), "IncomeLossFromContinuingOperations")]',
+            '//*[contains(local-name(), "IncomeLossFromContinuingOperations") and not(contains(local-name(), "Per"))]',
             '//*[contains(local-name(), "NetIncomeLoss")]'
         ])
 
