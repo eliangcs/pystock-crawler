@@ -182,6 +182,21 @@ def imd_get_per_share_value(imd_values):
 
 
 def imd_filter_member(imd_values):
+    if imd_values:
+        with_memberness = [(v, memberness(v.context)) for v in imd_values]
+        with_memberness = sorted(with_memberness, cmp=lambda a, b: a[1] - b[1])
+
+        m0 = with_memberness[0][1]
+        non_members = []
+
+        for v in with_memberness:
+            if v[1] == m0:
+                non_members.append(v[0])
+
+        return non_members
+
+    return imd_values
+
     non_members = filter(lambda v: not v.is_member(), imd_values)
     if non_members:
         return non_members
@@ -205,13 +220,29 @@ def imd_mult(imd_values):
     return imd_values
 
 
+def memberness(context):
+    '''The likelihood that the context is a "member".'''
+    if context:
+        texts = context.select('.//*[local-name()="explicitMember"]/text()').extract()
+        text = str(texts).lower()
+
+        if 'member' not in text:
+            return 0
+        elif 'successor' in text:
+            # 'SuccessorMember' is a rare case that shouldn't be treated as member
+            return 1
+        elif 'parent' in text:
+            return 2
+    return 3
+
+
 def is_member(context):
     if context:
         texts = context.select('.//*[local-name()="explicitMember"]/text()').extract()
         text = str(texts).lower()
 
         # 'SuccessorMember' is a rare case that shouldn't be treated as member
-        if 'member' not in text or 'successor' in text:
+        if 'member' not in text or 'successor' in text or 'parent' in text:
             return False
     return True
 
@@ -285,7 +316,7 @@ class ReportItemLoader(XmlXPathItemLoader):
     period_focus_out = TakeFirst()
 
     revenues_in = MapCompose(MatchEndDate(float))
-    revenues_out = Compose(imd_mult, ImdSumMembersOr(imd_get_revenues))
+    revenues_out = Compose(imd_filter_member, imd_mult, ImdSumMembersOr(imd_get_revenues))
 
     net_income_in = MapCompose(MatchEndDate(float))
     net_income_out = Compose(imd_filter_member, imd_mult, imd_get_net_income)
