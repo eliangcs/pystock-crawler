@@ -780,6 +780,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 74000000.0
         })
 
+    def test_eqt_20101231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/33213/000110465911009751/eqt-20101231.xml')
+        self.assert_item(item, {
+            'symbol': 'EQT',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2010-12-31',
+            'revenues': 1322708000.0,
+            'net_income': 227700000.0,
+            'eps_basic': 1.58,
+            'eps_diluted': 1.57,
+            'dividend': 0.88,
+            'assets': 7098438000.0,
+            'equity': 3078696000.0,
+            'cash': 0.0
+        })
+
     def test_fast_20090630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/815556/000119312509154691/fast-20090630.xml')
         self.assert_item(item, {
