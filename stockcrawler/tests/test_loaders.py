@@ -510,6 +510,42 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 282000000.0
         })
 
+    def test_cce_20101001(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1491675/000119312510239952/cce-20101001.xml')
+        self.assert_item(item, {
+            'symbol': 'CCE',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2010-10-01',
+            'revenues': 1681000000.0,
+            'net_income': 208000000.0,
+            'eps_basic': 0.61,
+            'eps_diluted': 0.61,
+            'dividend': 0.0,
+            'assets': 8457000000.0,
+            'equity': 3277000000.0,
+            'cash': 476000000.0
+        })
+
+    def test_cce_20101231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1491675/000119312511033197/cce-20101231.xml')
+        self.assert_item(item, {
+            'symbol': 'CCE',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2010-12-31',
+            'revenues': 6714000000.0,
+            'net_income': 624000000.0,
+            'eps_basic': 1.84,
+            'eps_diluted': 1.83,
+            'dividend': 0.12,
+            'assets': 8596000000.0,
+            'equity': 3143000000.0,
+            'cash': 321000000.0
+        })
+
     def test_cci_20091231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1051470/000119312510031419/cci-20091231.xml')
         self.assert_item(item, {
