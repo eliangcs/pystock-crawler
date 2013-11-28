@@ -744,6 +744,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 6530000000.0
         })
 
+    def test_ecl_20120930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/31462/000110465912072308/ecl-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'ECL',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': 3023300000.0,
+            'net_income': 238000000.0,
+            'eps_basic': 0.81,
+            'eps_diluted': 0.8,
+            'dividend': 0.2,
+            'assets': 16722800000.0,
+            'equity': 6026200000.0,
+            'cash': 324000000.0
+        })
+
     def test_ed_20130930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/23632/000119312513425393/ed-20130930.xml')
         self.assert_item(item, {
