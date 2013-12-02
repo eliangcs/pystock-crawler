@@ -1393,6 +1393,42 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 244000000.0
         })
 
+    def test_l_20100331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/60086/000119312510105707/l-20100331.xml')
+        self.assert_item(item, {
+            'symbol': 'L',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2010-03-31',
+            'revenues': 3713000000.0,
+            'net_income': 420000000.0,
+            'eps_basic': 0.99,
+            'eps_diluted': 0.99,
+            'dividend': 0.0625,
+            'assets': 75855000000.0,
+            'equity': 21993000000.0,
+            'cash': 135000000.0
+        })
+
+    def test_l_20100930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/60086/000119312510245478/l-20100930.xml')
+        self.assert_item(item, {
+            'symbol': 'L',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2010-09-30',
+            'revenues': 3701000000.0,
+            'net_income': 36000000.0,
+            'eps_basic': 0.09,
+            'eps_diluted': 0.09,
+            'dividend': 0.0625,
+            'assets': 76821000000.0,
+            'equity': 23499000000.0,
+            'cash': 132000000.0
+        })
+
     def test_lbtya_20100331(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1316631/000119312510111069/lbtya-20100331.xml')
         self.assert_item(item, {
