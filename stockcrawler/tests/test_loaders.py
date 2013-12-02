@@ -1483,6 +1483,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 794000000.0
         })
 
+    def test_lll_20100625(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1039101/000095012310071159/lll-20100625.xml')
+        self.assert_item(item, {
+            'symbol': 'LLL',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2010-06-25',
+            'revenues': -3966000000.0,  # a doc's error, should be 3966M
+            'net_income': -228000000.0,  # a doc's error, should be 227M
+            'eps_basic': 1.97,
+            'eps_diluted': 1.95,
+            'dividend': 0.4,
+            'assets': 15689000000.0,
+            'equity': 6926000000.0,
+            'cash': 1023000000.0
+        })
+
     def test_lltc_20110102(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/791907/000079190711000016/lltc-20110102.xml')
         self.assert_item(item, {
