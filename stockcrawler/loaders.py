@@ -124,6 +124,12 @@ class ImdSumMembersOr(object):
         return None
 
 
+def get_amend(values):
+    if values:
+        return values[0]
+    return False
+
+
 def imd_first(imd_values):
     if imd_values:
         return imd_values[0].value
@@ -310,7 +316,7 @@ class ReportItemLoader(XmlXPathItemLoader):
     symbol_out = TakeFirst()
 
     amend_in = MapCompose(ExtractText(), str_to_bool)
-    amend_out = TakeFirst()
+    amend_out = Compose(get_amend)
 
     period_focus_in = MapCompose(ExtractText(), unicode.upper)
     period_focus_out = TakeFirst()
