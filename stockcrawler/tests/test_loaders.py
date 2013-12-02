@@ -906,6 +906,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 1514943000.0
         })
 
+    def test_fmc_20090630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/37785/000119312509165435/fmc-20090630.xml')
+        self.assert_item(item, {
+            'symbol': 'FMC',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2009-06-30',
+            'revenues': 700300000.0,
+            'net_income': 69300000.0,
+            'eps_basic': 0.95,
+            'eps_diluted': 0.94,
+            'dividend': 0.0,
+            'assets': 3028500000.0,
+            'equity': 1101200000.0,
+            'cash': 67000000.0
+        })
+
     def test_fpl_20100331(self):
         # FPL was later changed to NEE
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/37634/000075330810000051/fpl-20100331.xml')
