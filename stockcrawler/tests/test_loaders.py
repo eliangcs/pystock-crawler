@@ -1573,6 +1573,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 1915000000.0
         })
 
+    def test_lnc_20120930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/59558/000005955812000143/lnc-20120930.xml')
+        self.assert_item(item, {
+            'symbol': 'LNC',
+            'amend': False,  # mistake in doc, should be True
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2012-09-30',
+            'revenues': None,  # missing in doc, should be 2954000000
+            'net_income': 402000000.0,
+            'eps_basic': 1.45,
+            'eps_diluted': 1.41,
+            'dividend': 0.0,
+            'assets': 215458000000.0,
+            'equity': 15237000000.0,
+            'cash': 4373000000.0
+        })
+
     def test_ltd_20111029(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/701985/000144530511003514/ltd-20111029.xml')
         self.assert_item(item, {

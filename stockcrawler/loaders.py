@@ -130,12 +130,6 @@ def get_amend(values):
     return False
 
 
-def imd_first(imd_values):
-    if imd_values:
-        return imd_values[0].value
-    return None
-
-
 def imd_max(imd_values):
     if imd_values:
         imd_value = max(imd_values)
@@ -185,6 +179,21 @@ def imd_get_per_share_value(imd_values):
             # note that this is NOT a correct way to interpret decimals attribute
             value *= pow(10, decimals - 2)
     return value if abs(value) <= MAX_PER_SHARE_VALUE else None
+
+
+def imd_get_equity(imd_values):
+    if not imd_values:
+        return None
+
+    values = filter(lambda v: v.local_name == 'StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest', imd_values)
+    if values:
+        return values[0].value
+
+    values = filter(lambda v: v.local_name == 'StockholdersEquity', imd_values)
+    if values:
+        return values[0].value
+
+    return imd_values[0].value
 
 
 def imd_filter_member(imd_values):
@@ -340,7 +349,7 @@ class ReportItemLoader(XmlXPathItemLoader):
     assets_out = Compose(imd_filter_member, imd_mult, imd_max)
 
     equity_in = MapCompose(MatchEndDate(float))
-    equity_out = Compose(imd_filter_member, imd_mult, imd_first)
+    equity_out = Compose(imd_filter_member, imd_mult, imd_get_equity)
 
     cash_in = MapCompose(MatchEndDate(float))
     cash_out = Compose(imd_filter_member, imd_mult, imd_max)
@@ -458,8 +467,7 @@ class ReportItemLoader(XmlXPathItemLoader):
         ])
 
         self.add_xpaths('equity', [
-            '//us-gaap:StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest',
-            '//us-gaap:StockholdersEquity',
+            '//*[local-name()="StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest" or local-name()="StockholdersEquity"]',
             '//*[local-name()="TotalCommonShareholdersEquity"]',
             '//*[local-name()="CommonShareholdersEquity"]',
             '//*[local-name()="CommonStockEquity"]',
