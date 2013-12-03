@@ -2314,6 +2314,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 249000000.0
         })
 
+    def test_via_20091231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1339947/000119312510028165/via-20091231.xml')
+        self.assert_item(item, {
+            'symbol': 'VIA',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2009-12-31',
+            'revenues': 13619000000.0,
+            'net_income': 1611000000.0,
+            'eps_basic': 2.65,
+            'eps_diluted': 2.65,
+            'dividend': 0.0,
+            'assets': 21900000000.0,
+            'equity': 8677000000.0,
+            'cash': 298000000.0
+        })
+
     def test_via_20120630(self):
         # 'via-20120401.xml' is misnamed
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1339947/000119312512333732/via-20120401.xml')
