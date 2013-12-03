@@ -2296,6 +2296,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 746057000.0
         })
 
+    def test_vel_pe_20130930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/103682/000119312513427104/d-20130930.xml')
+        self.assert_item(item, {
+            'symbol': 'VEL - PE',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2013-09-30',
+            'revenues': 3432000000.0,
+            'net_income': 569000000.0,
+            'eps_basic': 0.98,
+            'eps_diluted': 0.98,
+            'dividend': 0.5625,
+            'assets': 48488000000.0,
+            'equity': 11242000000.0,
+            'cash': 287000000.0
+        })
+
     def test_via_20090930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1339947/000119312509221448/via-20090930.xml')
         self.assert_item(item, {
