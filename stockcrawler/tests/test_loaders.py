@@ -579,7 +579,7 @@ class ReportItemLoaderTest(TestCaseBase):
             'dividend': 0.0,
             'assets': None,
             'equity': None,
-            'cash': None
+            'cash': 194000000
         })
 
     def test_chtr_20111231(self):
