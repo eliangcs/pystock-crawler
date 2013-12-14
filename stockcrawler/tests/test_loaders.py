@@ -1663,6 +1663,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 779848000.0
         })
 
+    def test_mdlz_20130930(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1103982/000119312513431957/mdlz-20130930.xml')
+        self.assert_item(item, {
+            'symbol': 'MDLZ',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q3',
+            'end_date': '2013-09-30',
+            'revenues': 8472000000.0,
+            'net_income': 1024000000.0,
+            'eps_basic': 0.58,
+            'eps_diluted': 0.57,
+            'dividend': 0.14,
+            'assets': 74859000000.0,
+            'equity': 32492000000.0,
+            'cash': 3692000000.0
+        })
+
     def test_mmm_20091231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/66740/000110465910007295/mmm-20091231.xml')
         self.assert_item(item, {
