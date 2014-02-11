@@ -1,7 +1,6 @@
 from datetime import datetime
-from scrapy.contrib.loader import XPathItemLoader
+from scrapy.contrib.loader import ItemLoader
 from scrapy.contrib.loader.processor import Compose, MapCompose, TakeFirst
-from scrapy.selector import XmlXPathSelector
 from scrapy.utils.misc import arg_to_iter
 from scrapy.utils.python import flatten
 
@@ -36,7 +35,7 @@ class IntermediateValue(object):
     def __repr__(self):
         context_id = None
         if self.context:
-            context_id = self.context.select('@id')[0].extract()
+            context_id = self.context.xpath('@id')[0].extract()
         return '(%s, %s, %s)' % (self.local_name, self.value, context_id)
 
     def is_member(self):
@@ -47,7 +46,7 @@ class ExtractText(object):
 
     def __call__(self, value):
         if hasattr(value, 'select'):
-            return value.select('./text()')[0].extract()
+            return value.xpath('./text()')[0].extract()
         return unicode(value)
 
 
@@ -64,16 +63,16 @@ class MatchEndDate(object):
         doc_type = loader_context['doc_type']
         selector = loader_context['selector']
 
-        context_id = value.select('@contextRef')[0].extract()
-        context = selector.select('//*[@id="%s"]' % context_id)[0]
+        context_id = value.xpath('@contextRef')[0].extract()
+        context = selector.xpath('//*[@id="%s"]' % context_id)[0]
 
         date = None
         try:
-            date = context.select('.//*[local-name()="instant"]/text()')[0].extract()
+            date = context.xpath('.//*[local-name()="instant"]/text()')[0].extract()
         except (IndexError, ValueError):
             try:
-                start_date_str = context.select('.//*[local-name()="startDate"]/text()')[0].extract()
-                end_date_str = context.select('.//*[local-name()="endDate"]/text()')[0].extract()
+                start_date_str = context.xpath('.//*[local-name()="startDate"]/text()')[0].extract()
+                end_date_str = context.xpath('.//*[local-name()="endDate"]/text()')[0].extract()
                 start_date = datetime.strptime(start_date_str, DATE_FORMAT)
                 end_date = datetime.strptime(end_date_str, DATE_FORMAT)
                 delta_days = (end_date - start_date).days
@@ -91,12 +90,12 @@ class MatchEndDate(object):
             delta_days = (doc_end_date - date).days
             if abs(delta_days) < 30:
                 try:
-                    text = value.select('./text()')[0].extract()
+                    text = value.xpath('./text()')[0].extract()
                     val = self.data_type(text)
                 except (IndexError, ValueError):
                     pass
                 else:
-                    local_name = value.select('local-name()')[0].extract()
+                    local_name = value.xpath('local-name()')[0].extract()
                     return IntermediateValue(local_name, val, text, context, value)
 
         return None
@@ -170,7 +169,7 @@ def imd_get_per_share_value(imd_values):
     value = v.value
     if abs(value) > MAX_PER_SHARE_VALUE:
         try:
-            decimals = int(v.node.select('@decimals')[0].extract())
+            decimals = int(v.node.xpath('@decimals')[0].extract())
         except (AttributeError, IndexError):
             return None
         else:
@@ -221,7 +220,7 @@ def imd_filter_member(imd_values):
 def imd_mult(imd_values):
     for v in imd_values:
         try:
-            node_id = v.node.select('@id')[0].extract().lower()
+            node_id = v.node.xpath('@id')[0].extract().lower()
         except (AttributeError, IndexError):
             pass
         else:
@@ -238,7 +237,7 @@ def imd_mult(imd_values):
 def memberness(context):
     '''The likelihood that the context is a "member".'''
     if context:
-        texts = context.select('.//*[local-name()="explicitMember"]/text()').extract()
+        texts = context.xpath('.//*[local-name()="explicitMember"]/text()').extract()
         text = str(texts).lower()
 
         if 'member' not in text:
@@ -253,7 +252,7 @@ def memberness(context):
 
 def is_member(context):
     if context:
-        texts = context.select('.//*[local-name()="explicitMember"]/text()').extract()
+        texts = context.xpath('.//*[local-name()="explicitMember"]/text()').extract()
         text = str(texts).lower()
 
         # 'SuccessorMember' is a rare case that shouldn't be treated as member
@@ -290,9 +289,7 @@ def register_namespaces(xxs):
             pass
 
 
-class XmlXPathItemLoader(XPathItemLoader):
-
-    default_selector_class = XmlXPathSelector
+class XmlXPathItemLoader(ItemLoader):
 
     def __init__(self, *args, **kwargs):
         super(XmlXPathItemLoader, self).__init__(*args, **kwargs)
@@ -313,7 +310,7 @@ class XmlXPathItemLoader(XPathItemLoader):
 
     def _get_values(self, xpaths, **kw):
         xpaths = arg_to_iter(xpaths)
-        return flatten([self.selector.select(xpath) for xpath in xpaths])
+        return flatten([self.selector.xpath(xpath) for xpath in xpaths])
 
 
 class ReportItemLoader(XmlXPathItemLoader):
@@ -504,12 +501,12 @@ class ReportItemLoader(XmlXPathItemLoader):
         url_date_str = url_date.strftime(DATE_FORMAT)
 
         try:
-            doc_date_str = self.selector.select('//dei:DocumentPeriodEndDate/text()')[0].extract()
+            doc_date_str = self.selector.xpath('//dei:DocumentPeriodEndDate/text()')[0].extract()
             doc_date = datetime.strptime(doc_date_str, DATE_FORMAT)
         except (IndexError, ValueError):
             return url_date.strftime(DATE_FORMAT)
 
-        context_date_strs = set(self.selector.select('//*[local-name()="context"]//*[local-name()="endDate"]/text()').extract())
+        context_date_strs = set(self.selector.xpath('//*[local-name()="context"]//*[local-name()="endDate"]/text()').extract())
 
         date = url_date
         if doc_date_str in context_date_strs:
@@ -519,14 +516,14 @@ class ReportItemLoader(XmlXPathItemLoader):
 
     def _get_doc_type(self):
         try:
-            return self.selector.select('//dei:DocumentType/text()')[0].extract().upper()
+            return self.selector.xpath('//dei:DocumentType/text()')[0].extract().upper()
         except IndexError:
             return None
 
     def _get_period_focus(self, doc_end_date):
         try:
             doc_yr = doc_end_date.split('-')[0]
-            yr_end_date = self.selector.select('//dei:CurrentFiscalYearEndDate/text()')[0].extract()
+            yr_end_date = self.selector.xpath('//dei:CurrentFiscalYearEndDate/text()')[0].extract()
             yr_end_date = yr_end_date.replace('--', doc_yr + '-')
         except IndexError:
             return None
