@@ -32,3 +32,18 @@ class ReportItem(Item):
     assets = Field()
     equity = Field()
     cash = Field()
+
+
+class PriceItem(Item):
+    # Trading symbol
+    symbol = Field()
+
+    # YYYY-MM-DD
+    date = Field()
+
+    open = Field()
+    close = Field()
+    high = Field()
+    low = Field()
+    adj_close = Field()
+    volume = Field()

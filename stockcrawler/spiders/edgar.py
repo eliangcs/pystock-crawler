@@ -1,28 +1,10 @@
 import os
 
-from datetime import datetime
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 
+from stockcrawler import utils
 from stockcrawler.loaders import ReportItemLoader
-
-
-def load_symbols(file_path):
-    symbols = []
-    with open(file_path) as f:
-        for line in f:
-            line = line.strip()
-            if line and not line.startswith('#'):
-                symbols.append(line)
-    return symbols
-
-
-def check_date_arg(value, arg_name):
-    if value:
-        try:
-            datetime.strptime(value, '%Y%m%d')
-        except ValueError:
-            raise ValueError("Option '%s' must be in YYYYMMDD format, input is '%s'" % (arg_name, value))
 
 
 class URLGenerator(object):
@@ -55,13 +37,13 @@ class EdgarSpider(CrawlSpider):
         start_date = kwargs.get('startdate', '')
         end_date = kwargs.get('enddate', '')
 
-        check_date_arg(start_date, 'startdate')
-        check_date_arg(end_date, 'enddate')
+        utils.check_date_arg(start_date, 'startdate')
+        utils.check_date_arg(end_date, 'enddate')
 
         if symbols_arg:
             if os.path.exists(symbols_arg):
                 # get symbols from a text file
-                symbols = load_symbols(symbols_arg)
+                symbols = utils.load_symbols(symbols_arg)
             else:
                 # inline symbols in command
                 symbols = symbols_arg.split(',')
