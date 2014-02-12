@@ -5,7 +5,7 @@ import urlparse
 from scrapy.http.response.xml import XmlResponse
 
 from stockcrawler.loaders import ReportItemLoader
-from stockcrawler.tests.base import TestCaseBase
+from stockcrawler.tests.base import SAMPLE_DATA_DIR, TestCaseBase
 
 
 def create_response(file_path):
@@ -33,7 +33,7 @@ def download(url, local_path):
 
 def parse_xml(url):
     url_path = urlparse.urlparse(url).path
-    local_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'sample_data', url_path[1:])
+    local_path = os.path.join(SAMPLE_DATA_DIR, url_path[1:])
     download(url, local_path)
     response = create_response(local_path)
     loader = ReportItemLoader(response=response)

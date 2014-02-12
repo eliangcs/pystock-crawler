@@ -1,4 +1,9 @@
+import os
 import unittest
+
+
+# Stores temporary test data
+SAMPLE_DATA_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'sample_data')
 
 
 class TestCaseBase(unittest.TestCase):
@@ -26,3 +31,15 @@ class TestCaseBase(unittest.TestCase):
         self.assert_none_or_almost_equal(item.get('assets'), expected.get('assets'))
         self.assert_none_or_almost_equal(item.get('equity'), expected.get('equity'))
         self.assert_none_or_almost_equal(item.get('cash'), expected.get('cash'))
+
+
+def _create_sample_data_dir():
+    if not os.path.exists(SAMPLE_DATA_DIR):
+        try:
+            os.makedirs(SAMPLE_DATA_DIR)
+        except OSError:
+            pass
+
+    assert os.path.exists(SAMPLE_DATA_DIR)
+
+_create_sample_data_dir()
