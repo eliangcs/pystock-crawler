@@ -6,6 +6,8 @@ from datetime import datetime
 def check_date_arg(value, arg_name=None):
     if value:
         try:
+            if len(value) != 8:
+                raise ValueError
             datetime.strptime(value, '%Y%m%d')
         except ValueError:
             raise ValueError("Option '%s' must be in YYYYMMDD format, input is '%s'" % (arg_name, value))
