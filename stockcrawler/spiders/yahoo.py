@@ -1,5 +1,6 @@
-import cStringIO as StringIO
+import cStringIO
 import os
+import re
 
 from datetime import datetime
 from scrapy.spider import Spider
@@ -62,17 +63,21 @@ class YahooSpider(Spider):
             self.start_urls = []
 
     def parse(self, response):
+        symbol = self._get_symbol_from_url(response.url)
         try:
-            file_like = StringIO.StringIO(response.body)
-            rows = utils.parse_csv(response.body)
-
-            print '--------------------------'
-            print list(rows)
-            print '--------------------------'
+            file_like = cStringIO.StringIO(response.body)
+            rows = utils.parse_csv(file_like)
             for row in rows:
-                item = PriceItem()
-                for k, v in row.items():
-                    item[k.lower()] = v
+                item = PriceItem(symbol=symbol)
+                for k, v in row.iteritems():
+                    item[k.replace(' ', '_').lower()] = v
+                print item
                 yield item
         finally:
             file_like.close()
+
+    def _get_symbol_from_url(self, url):
+        match = re.search(r'[\?&]s=([^&]*)', url)
+        if match:
+            return match.group(1)
+        return ''

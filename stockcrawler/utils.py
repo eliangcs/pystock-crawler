@@ -26,8 +26,6 @@ def load_symbols(file_path):
 def parse_csv(file_like):
     reader = csv.reader(file_like)
     headers = reader.next()
-
-    print 'headers: %s' % headers
     for row in reader:
         item = {}
         for i, value in enumerate(row):
