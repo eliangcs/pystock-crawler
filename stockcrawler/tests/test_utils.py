@@ -1,3 +1,4 @@
+import cStringIO
 import os
 
 from stockcrawler import utils
@@ -40,3 +41,12 @@ class UtilsTest(TestCaseBase):
                 os.remove(filename)
             except OSError:
                 pass
+
+    def test_parse_csv(self):
+        f = cStringIO.StringIO('name,age\nAvon,30\nOmar,29\nJoe,45\n')
+        items = list(utils.parse_csv(f))
+        self.assertEqual(items, [
+            { 'name': 'Avon', 'age': '30' },
+            { 'name': 'Omar', 'age': '29' },
+            { 'name': 'Joe', 'age': '45' }
+        ])
