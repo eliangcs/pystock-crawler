@@ -37,10 +37,7 @@ class UtilsTest(TestCaseBase):
             symbols = list(utils.load_symbols(filename))
             self.assertEqual(symbols, ['AAPL', 'GOOG', 'FB', 'TWTR', 'AMZN', 'SPY', 'YHOO'])
         finally:
-            try:
-                os.remove(filename)
-            except OSError:
-                pass
+            os.remove(filename)
 
     def test_parse_csv(self):
         f = cStringIO.StringIO('name,age\nAvon,30\nOmar,29\nJoe,45\n')
