@@ -5,6 +5,9 @@ import csv
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Clean up the crawled CSV file.')
+    parser.add_argument('data_type', metavar='DATA_TYPE', type=unicode,
+                        choices=('reports', 'prices'),
+                        help="what's in the input file, 'reports' or 'prices'?")
     parser.add_argument('input_file', metavar='INPUT_FILE', type=unicode,
                         help='input CSV file')
     parser.add_argument('-o', metavar='OUTPUT_FILE', type=unicode,
@@ -25,15 +28,18 @@ def parse_csv(file_path):
             yield item
 
 
-def item_cmp(a, b):
+def item_cmp_report(a, b):
     cmp_sym = cmp(a['symbol'], b['symbol'])
     if cmp_sym == 0:
         return cmp(a['end_date'], b['end_date'])
     return cmp_sym
 
 
-def sort_items(items):
-    return sorted(items, cmp=item_cmp)
+def item_cmp_price(a, b):
+    cmp_sym = cmp(a['symbol'], b['symbol'])
+    if cmp_sym == 0:
+        return cmp(a['date'], b['date'])
+    return cmp_sym
 
 
 def dict_to_list(a, keys):
@@ -43,11 +49,7 @@ def dict_to_list(a, keys):
     return result
 
 
-def write_csv(items, file_path):
-    headers = ['symbol', 'doc_type', 'amend', 'end_date', 'period_focus',
-               'revenues', 'net_income', 'eps_basic', 'eps_diluted', 'dividend',
-               'assets', 'cash', 'equity']
-
+def write_csv(items, file_path, headers):
     with open(file_path, 'wb') as f:
         writer = csv.writer(f)
         writer.writerow(headers)
@@ -57,11 +59,29 @@ def write_csv(items, file_path):
             writer.writerow(row)
 
 
+CMPS = {
+    'reports': item_cmp_report,
+    'prices': item_cmp_price
+}
+
+HEADERS = {
+    'reports': (
+        'symbol', 'doc_type', 'amend', 'end_date', 'period_focus',
+        'revenues', 'net_income', 'eps_basic', 'eps_diluted', 'dividend',
+        'assets', 'cash', 'equity'
+    ),
+    'prices': (
+        'symbol', 'date', 'open', 'high', 'low', 'close', 'volume', 'adj_close'
+    )
+}
+
+
 def main():
     args = parse_args()
+    headers = HEADERS[args.data_type]
     items = parse_csv(args.input_file)
-    items = sort_items(items)
-    write_csv(items, args.o or args.input_file)
+    items = sorted(items, cmp=CMPS[args.data_type])
+    write_csv(items, args.o or args.input_file, headers)
 
 
 if __name__ == '__main__':
