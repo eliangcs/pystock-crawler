@@ -19,7 +19,8 @@ def load_symbols(file_path):
         for line in f:
             line = line.strip()
             if line and not line.startswith('#'):
-                symbols.append(line)
+                symbol = line.split()[0]
+                symbols.append(symbol)
     return symbols
 
 
