@@ -4,8 +4,8 @@ import urlparse
 
 from scrapy.http.response.xml import XmlResponse
 
-from stockcrawler.loaders import ReportItemLoader
-from stockcrawler.tests.base import SAMPLE_DATA_DIR, TestCaseBase
+from pystock_crawler.loaders import ReportItemLoader
+from pystock_crawler.tests.base import SAMPLE_DATA_DIR, TestCaseBase
 
 
 def create_response(file_path):

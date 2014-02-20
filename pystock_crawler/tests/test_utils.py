@@ -1,8 +1,8 @@
 import cStringIO
 import os
 
-from stockcrawler import utils
-from stockcrawler.tests.base import SAMPLE_DATA_DIR, TestCaseBase
+from pystock_crawler import utils
+from pystock_crawler.tests.base import SAMPLE_DATA_DIR, TestCaseBase
 
 
 class UtilsTest(TestCaseBase):

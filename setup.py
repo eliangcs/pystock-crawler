@@ -5,13 +5,13 @@ except ImportError:
 
 
 setup(
-    name='stockcrawler',
+    name='pystock-crawler',
     version='0.0.1',
-    url = 'http://github.com/eliangcs/stockcrawler/',
+    url='https://github.com/eliangcs/pystock-crawler',
     description='Crawl stock historical data.',
     long_description=open('README.rst').read(),
     author='Chang-Hung Liang',
     author_email='eliang.cs@gmail.com',
     license='MIT',
-    packages=['stockcrawler'],
+    packages=['pystock_crawler'],
 )

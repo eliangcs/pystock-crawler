@@ -1,5 +1,5 @@
-from stockcrawler.spiders.yahoo import YahooSpider
-from stockcrawler.tests.base import TestCaseBase
+from pystock_crawler.spiders.yahoo import YahooSpider
+from pystock_crawler.tests.base import TestCaseBase
 
 
 class YahooSpiderTest(TestCaseBase):

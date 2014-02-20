@@ -2,7 +2,7 @@
 *.log
 *.csv
 .coverage
-stockcrawler.egg-info/
-stockcrawler/tests/sample_data/
+pystock_crawler.egg-info/
+pystock_crawler/tests/sample_data/
 .scrapy/
 .~*

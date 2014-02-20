@@ -5,8 +5,8 @@ import re
 from datetime import datetime
 from scrapy.spider import Spider
 
-from stockcrawler import utils
-from stockcrawler.items import PriceItem
+from pystock_crawler import utils
+from pystock_crawler.items import PriceItem
 
 
 class URLGenerator(object):

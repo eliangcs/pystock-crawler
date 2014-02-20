@@ -3,8 +3,8 @@ import tempfile
 
 from scrapy.http import HtmlResponse, XmlResponse
 
-from stockcrawler.spiders.edgar import EdgarSpider, URLGenerator
-from stockcrawler.tests.base import TestCaseBase
+from pystock_crawler.spiders.edgar import EdgarSpider, URLGenerator
+from pystock_crawler.tests.base import TestCaseBase
 
 
 def make_url(symbol, start_date='', end_date=''):
