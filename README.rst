@@ -1,20 +1,20 @@
-StockCrawler
-============
+pystock-crawler
+===============
 
-.. image:: https://travis-ci.org/eliangcs/stockcrawler.png?branch=master
-    :target: https://travis-ci.org/eliangcs/stockcrawler
+.. image:: https://travis-ci.org/eliangcs/pystock-crawler.png?branch=master
+    :target: https://travis-ci.org/eliangcs/pystock-crawler
 
-.. image:: https://coveralls.io/repos/eliangcs/stockcrawler/badge.png?branch=master
-    :target: https://coveralls.io/r/eliangcs/stockcrawler
+.. image:: https://coveralls.io/repos/eliangcs/pystock-crawler/badge.png?branch=master
+    :target: https://coveralls.io/r/eliangcs/pystock-crawler
 
-``StockCrawler`` is a utility for scraping stock historical data including
+``pystock-crawler`` is a utility for scraping stock historical data including
 daily prices and fundamental figures such as revenues and EPS.
 
 
 Development Status
 ------------------
 
-``StockCrawler`` is still **UNDER DEVELOPMENT**, so expect bugs and design
+``pystock-crawler`` is still **UNDER DEVELOPMENT**, so expect bugs and design
 changes. The plan is to be able to crawl both price data and financial
 reports. I'm working on financial reports (10-Q and 10-K forms) and will
 proceed to work on pirce data after that.
@@ -30,19 +30,18 @@ recommend you to use `virtualenvwrapper`_. This is how you install them::
 
 Then you can create an isolated Python environment with::
 
-    mkvirtualenv stockcrawler
+    mkvirtualenv pystock-crawler
 
 Clone this repository::
 
-    git clone git@github.com:eliangcs/stockcrawler.git
+    git clone git@github.com:eliangcs/pystock-crawler.git
 
 Or you can just download the `ZIP file
-<https://github.com/eliangcs/stockcrawler/archive/master.zip>`_ and extract
+<https://github.com/eliangcs/pystock-crawler/archive/master.zip>`_ and extract
 it.
 
-``StockCrawler`` is based on an awesome web crawling framework `Scrapy`_,
-which is listed in ``requirements.txt``. Install it and other dependencies
-like this::
+``pystock-crawler`` is based on web crawling framework `Scrapy`_, which is
+listed in ``requirements.txt``. Install it and other dependencies like this::
 
     pip install -r requirements.txt
 
@@ -99,6 +98,6 @@ take some time and disk space.
 .. _SEC EDGAR: http://www.sec.gov/edgar/searchedgar/companysearch.html
 
 
-.. image:: https://d2weczhvl823v0.cloudfront.net/eliangcs/stockcrawler/trend.png
+.. image:: https://d2weczhvl823v0.cloudfront.net/eliangcs/pystock-crawler/trend.png
     :target: https://bitdeli.com/free
     :alt: Bitdeli Badge
