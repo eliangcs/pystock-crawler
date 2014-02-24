@@ -9,31 +9,35 @@ from pystock_crawler import utils
 from pystock_crawler.items import PriceItem
 
 
-class URLGenerator(object):
+def parse_date(date_str):
+    if date_str:
+        date = datetime.strptime(date_str, '%Y%m%d')
+        return date.year, date.month - 1, date.day
+    return '', '', ''
 
-    def __init__(self, symbols, start_date='', end_date=''):
-        self.symbols = symbols
-        self.start_date = self._parse_date(start_date)
-        self.end_date = self._parse_date(end_date)
 
-    def __iter__(self):
-        url = 'http://ichart.finance.yahoo.com/table.csv?s=%(symbol)s&d=%(end_month)s1&e=%(end_day)s&f=%(end_year)s&g=d&a=%(start_month)s&b=%(start_day)s&c=%(start_year)s&ignore=.csv'
-        for symbol in self.symbols:
-            yield (url % {
-                'symbol': symbol,
-                'start_year': self.start_date[0],
-                'start_month': self.start_date[1],
-                'start_day': self.start_date[2],
-                'end_year': self.end_date[0],
-                'end_month': self.end_date[1],
-                'end_day': self.end_date[2]
-            })
+def make_url(symbol, start_date=None, end_date=None):
+    url = ('http://ichart.finance.yahoo.com/table.csv?'
+           's=%(symbol)s&d=%(end_month)s&e=%(end_day)s&f=%(end_year)s&g=d&'
+           'a=%(start_month)s&b=%(start_day)s&c=%(start_year)s&ignore=.csv')
 
-    def _parse_date(self, date_str):
-        if date_str:
-            date = datetime.strptime(date_str, '%Y%m%d')
-            return date.year, date.month - 1, date.day - 1
-        return '', '', ''
+    start_date = parse_date(start_date)
+    end_date = parse_date(end_date)
+
+    return url % {
+        'symbol': symbol,
+        'start_year': start_date[0],
+        'start_month': start_date[1],
+        'start_day': start_date[2],
+        'end_year': end_date[0],
+        'end_month': end_date[1],
+        'end_day': end_date[2]
+    }
+
+
+def generate_urls(symbols, start_date=None, end_date=None):
+    for symbol in symbols:
+        yield make_url
 
 
 class YahooSpider(Spider):
@@ -58,7 +62,7 @@ class YahooSpider(Spider):
             else:
                 # inline symbols in command
                 symbols = symbols_arg.split(',')
-            self.start_urls = URLGenerator(symbols, start_date, end_date)
+            self.start_urls = generate_urls(symbols, start_date, end_date)
         else:
             self.start_urls = []
 
