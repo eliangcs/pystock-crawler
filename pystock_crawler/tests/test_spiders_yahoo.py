@@ -1,6 +1,8 @@
 import os
 import tempfile
 
+from scrapy.http import TextResponse
+
 from pystock_crawler.spiders.yahoo import make_url, YahooSpider
 from pystock_crawler.tests.base import TestCaseBase
 
@@ -67,5 +69,44 @@ class YahooSpiderTest(TestCaseBase):
         with self.assertRaises(ValueError):
             YahooSpider(enddate='12345678')
 
+    def test_parse(self):
+        spider = YahooSpider()
 
-    # TODO: more tests
+        body = ('Date,Open,High,Low,Close,Volume,Adj Close\n'
+                '2013-11-22,121.58,122.75,117.93,121.38,11096700,121.38\n'
+                '2013-09-06,168.57,169.70,165.15,166.97,8619700,166.97\n'
+                '2013-06-26,103.80,105.87,102.66,105.72,6602600,105.72\n')
+        response = TextResponse(make_url('YHOO'), body=body)
+        items = list(spider.parse(response))
+
+        self.assertEqual(len(items), 3)
+        self.assert_item(items[0], {
+            'symbol': 'YHOO',
+            'date': '2013-11-22',
+            'open': 121.58,
+            'high': 122.75,
+            'low': 117.93,
+            'close': 121.38,
+            'volume': 11096700,
+            'adj_close': 121.38
+        })
+        self.assert_item(items[1], {
+            'symbol': 'YHOO',
+            'date': '2013-09-06',
+            'open': 168.57,
+            'high': 169.70,
+            'low': 165.15,
+            'close': 166.97,
+            'volume': 8619700,
+            'adj_close': 166.97
+        })
+        self.assert_item(items[2], {
+            'symbol': 'YHOO',
+            'date': '2013-06-26',
+            'open': 103.80,
+            'high': 105.87,
+            'low': 102.66,
+            'close': 105.72,
+            'volume': 6602600,
+            'adj_close': 105.72
+        })
