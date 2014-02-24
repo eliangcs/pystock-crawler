@@ -38,6 +38,12 @@ class YahooSpiderTest(TestCaseBase):
         spider = YahooSpider()
         self.assertEqual(spider.start_urls, [])
 
+    def test_inline_symbols(self):
+        spider = YahooSpider(symbols='KO,DIS,ATVI')
+        self.assertEqual(list(spider.start_urls), [
+            make_url(symbol) for symbol in ('KO', 'DIS', 'ATVI')
+        ])
+
     def test_symbol_file(self):
         try:
             # Create a mock file of a list of symbols
