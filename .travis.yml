@@ -5,10 +5,10 @@ branches:
   only:
     - master
 install:
-  - pip install -r requirements.txt --use-mirrors
-  - pip install pytest pytest-cov requests --use-mirrors
+  - pip install -r requirements.txt
+  - pip install pytest pytest-cov requests
 script:
   - py.test
 after_success:
-  - pip install python-coveralls --use-mirrors
+  - pip install python-coveralls
   - coveralls
