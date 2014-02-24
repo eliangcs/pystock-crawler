@@ -1,3 +1,6 @@
+import os
+import tempfile
+
 from pystock_crawler.spiders.yahoo import make_url, YahooSpider
 from pystock_crawler.tests.base import TestCaseBase
 
@@ -34,5 +37,19 @@ class YahooSpiderTest(TestCaseBase):
     def test_empty_creation(self):
         spider = YahooSpider()
         self.assertEqual(spider.start_urls, [])
+
+    def test_symbol_file(self):
+        try:
+            # Create a mock file of a list of symbols
+            with tempfile.NamedTemporaryFile('w', delete=False) as f:
+                f.write('# Comment\nGOOG\tGoogle Inc.\nAAPL\nFB  Facebook.com\n#comment\nAMZN\n')
+
+            spider = YahooSpider(symbols=f.name)
+            self.assertEqual(list(spider.start_urls), [
+                make_url(symbol) for symbol in ('GOOG', 'AAPL', 'FB', 'AMZN')
+            ])
+        finally:
+            os.remove(f.name)
+
 
     # TODO: more tests

@@ -37,7 +37,7 @@ def make_url(symbol, start_date=None, end_date=None):
 
 def generate_urls(symbols, start_date=None, end_date=None):
     for symbol in symbols:
-        yield make_url
+        yield make_url(symbol, start_date, end_date)
 
 
 class YahooSpider(Spider):
