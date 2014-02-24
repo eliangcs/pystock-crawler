@@ -71,7 +71,6 @@ class YahooSpider(Spider):
                 item = PriceItem(symbol=symbol)
                 for k, v in row.iteritems():
                     item[k.replace(' ', '_').lower()] = v
-                print item
                 yield item
         finally:
             file_like.close()
