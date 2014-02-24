@@ -36,9 +36,12 @@ class YahooSpiderTest(TestCaseBase):
 
     def test_empty_creation(self):
         spider = YahooSpider()
-        self.assertEqual(spider.start_urls, [])
+        self.assertEqual(list(spider.start_urls), [])
 
     def test_inline_symbols(self):
+        spider = YahooSpider(symbols='C')
+        self.assertEqual(list(spider.start_urls), [make_url('C')])
+
         spider = YahooSpider(symbols='KO,DIS,ATVI')
         self.assertEqual(list(spider.start_urls), [
             make_url(symbol) for symbol in ('KO', 'DIS', 'ATVI')
@@ -56,6 +59,13 @@ class YahooSpiderTest(TestCaseBase):
             ])
         finally:
             os.remove(f.name)
+
+    def test_illegal_dates(self):
+        with self.assertRaises(ValueError):
+            YahooSpider(startdate='12345678')
+
+        with self.assertRaises(ValueError):
+            YahooSpider(enddate='12345678')
 
 
     # TODO: more tests
