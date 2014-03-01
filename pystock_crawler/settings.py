@@ -14,6 +14,8 @@ NEWSPIDER_MODULE = 'pystock_crawler.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'stockcrawler (+http://www.yourdomain.com)'
 
-LOG_LEVEL = 'DEBUG'
+LOG_LEVEL = 'INFO'
 
 HTTPCACHE_ENABLED = True
+
+HTTPCACHE_POLICY = 'scrapy.contrib.httpcache.RFC2616Policy'
