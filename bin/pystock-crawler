@@ -1,3 +1,52 @@
 #!/usr/bin/env python
+'''
+Usage:
+  pystock-crawler crawl prices [-w DIR] [-s FILE] [-d YYYYMMDD]
+  pystock-crawler crawl reports [-w DIR] [-s FILE] [-d YYYYMMDD]
+  pystock-crawler merge [-w DIR]
+  pystock-crawler (-h | --help)
+  pystock-crawler (-v | --version)
 
-print 'Not implemented yet'
+Options:
+  -d YYYYMMDD   Start date [default: ]
+  -h --help     Show this screen
+  -s FILE       Symbol list file [default: ./symbols.txt]
+  -v --version  Show version
+  -w DIR        Working directory [default: .]
+
+'''
+from docopt import docopt
+
+
+def crawl_prices(args):
+    print 'crawl_prices'
+
+
+def crawl_reports(args):
+    print 'crawl_reports'
+
+
+def merge(args):
+    print 'merge'
+
+
+def display_version():
+    print '1.0.0'
+
+
+def main():
+    args = docopt(__doc__)
+
+    if args['crawl']:
+        if args['prices']:
+            crawl_prices(args)
+        elif args['reports']:
+            crawl_reports(args)
+    elif args['merge']:
+        merge(args)
+    elif args['--version']:
+        display_version()
+
+
+if __name__ == '__main__':
+    main()
