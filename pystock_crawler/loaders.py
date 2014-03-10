@@ -83,7 +83,10 @@ class MatchEndDate(object):
             except (IndexError, ValueError):
                 pass
         else:
-            date = datetime.strptime(date, DATE_FORMAT)
+            try:
+                date = datetime.strptime(date, DATE_FORMAT)
+            except ValueError:
+                pass
 
         if date:
             doc_end_date = datetime.strptime(doc_end_date_str, DATE_FORMAT)
