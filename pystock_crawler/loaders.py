@@ -518,7 +518,7 @@ class ReportItemLoader(XmlXPathItemLoader):
     def _get_doc_type(self):
         try:
             return self.selector.xpath('//dei:DocumentType/text()')[0].extract().upper()
-        except IndexError:
+        except (IndexError, ValueError):
             return None
 
     def _get_period_focus(self, doc_end_date):

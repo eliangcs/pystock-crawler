@@ -150,6 +150,12 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 3392000000.0
         })
 
+    def test_adbe_20060914(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/796343/000110465906066129/adbe-20060914.xml')
+
+        # Old document is not supported
+        self.assertFalse(item)
+
     def test_adbe_20090227(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/796343/000079634309000021/adbe-20090227.xml')
         self.assert_item(item, {
