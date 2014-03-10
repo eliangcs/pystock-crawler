@@ -68,11 +68,11 @@ class MatchEndDate(object):
 
         date = None
         try:
-            date = context.xpath('.//*[local-name()="instant"]/text()')[0].extract()
+            date = context.xpath('.//*[local-name()="instant"]/text()')[0].extract().strip()
         except (IndexError, ValueError):
             try:
-                start_date_str = context.xpath('.//*[local-name()="startDate"]/text()')[0].extract()
-                end_date_str = context.xpath('.//*[local-name()="endDate"]/text()')[0].extract()
+                start_date_str = context.xpath('.//*[local-name()="startDate"]/text()')[0].extract().strip()
+                end_date_str = context.xpath('.//*[local-name()="endDate"]/text()')[0].extract().strip()
                 start_date = datetime.strptime(start_date_str, DATE_FORMAT)
                 end_date = datetime.strptime(end_date_str, DATE_FORMAT)
                 delta_days = (end_date - start_date).days
@@ -419,6 +419,7 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:EarningsPerShareBasic',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicShare',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicAndDilutedShare',
+            '//*[contains(local-name(), "NetIncomeLoss") and contains(local-name(), "Per") and contains(local-name(), "Common")]',
             '//*[contains(local-name(), "Earnings") and contains(local-name(), "Per") and contains(local-name(), "Basic")]',
             '//*[local-name()="IncomePerShareFromContinuingOperationsAvailableToCompanyStockholdersBasicAndDiluted"]',
             '//*[contains(local-name(), "NetLossPerShare")]',

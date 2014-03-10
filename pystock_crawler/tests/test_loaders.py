@@ -888,6 +888,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 2384000000.0
         })
 
+    def test_fll_20121231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/891482/000118811213000562/fll-20121231.xml')
+        self.assert_item(item, {
+            'symbol': 'FLL',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-12-31',
+            'revenues': 128760000.0,
+            'net_income': 27834000.0,
+            'eps_basic': 1.49,
+            'eps_diluted': None,
+            'dividend': 0.0,
+            'assets': 162725000.0,
+            'equity': 81133000.0,
+            'cash': 20603000.0
+        })
+
     def test_flr_20080930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1124198/000110465908068715/flr-20080930.xml')
         self.assert_item(item, {
