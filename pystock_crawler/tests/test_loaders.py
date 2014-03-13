@@ -1220,6 +1220,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 1163876000.0
         })
 
+    def test_ihc_20120331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/701869/000070186912000029/ihc-20120331.xml')
+        self.assert_item(item, {
+            'symbol': 'IHC',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2012-03-31',
+            'revenues': 102156000.0,
+            'net_income': 3922000.0,
+            'eps_basic': 0.22,
+            'eps_diluted': 0.22,
+            'dividend': 0.0,
+            'assets': 1364411000.0,
+            'equity': 280250000.0,
+            'cash': 9286000.0
+        })
+
     def test_intc_20111231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/50863/000119312512075534/intc-20111231.xml')
         self.assert_item(item, {
@@ -2011,6 +2029,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'assets': 5789541000.0,
             'equity': 2072525000.0,
             'cash': 205410000.0
+        })
+
+    def test_pay_20110430(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1312073/000119312511161119/pay-20110430.xml')
+        self.assert_item(item, {
+            'symbol': 'PAY',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'end_date': '2011-04-30',
+            'revenues': 292446000.0,
+            'net_income': 25200000.0,
+            'eps_basic': 0.29,
+            'eps_diluted': 0.27,
+            'dividend': 0.0,
+            'assets': 1252289000.0,
+            'equity': 332172000.0,
+            'cash': 531542000.0
         })
 
     def test_pcar_20100331(self):
