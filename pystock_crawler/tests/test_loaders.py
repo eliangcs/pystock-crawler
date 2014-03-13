@@ -804,6 +804,25 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 0.0
         })
 
+    def test_etr_20121231(self):
+        # Large file test (121 MB)
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/7323/000006598413000050/etr-20121231.xml')
+        self.assert_item(item, {
+            'symbol': 'ETR',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2012-12-31',
+            'revenues': 10302079000.0,
+            'net_income': 846673000.0,
+            'eps_basic': 4.77,
+            'eps_diluted': 4.76,
+            'dividend': 3.32,
+            'assets': 43202502000.0,
+            'equity': 9291089000.0,
+            'cash': 532569000.0
+        })
+
     def test_exc_20100930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/22606/000119312510234590/exc-20100930.xml')
         self.assert_item(item, {

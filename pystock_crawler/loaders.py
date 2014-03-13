@@ -1,3 +1,5 @@
+import re
+
 from datetime import datetime
 from scrapy.contrib.loader import ItemLoader
 from scrapy.contrib.loader.processor import Compose, MapCompose, TakeFirst
@@ -10,6 +12,12 @@ from pystock_crawler.items import ReportItem
 DATE_FORMAT = '%Y-%m-%d'
 
 MAX_PER_SHARE_VALUE = 1000.0
+
+# If number of characters of response body exceeds this value,
+# remove some useless text defined by RE_XML_GARBAGE to reduce memory usage
+THRESHOLD_TO_CLEAN = 50000000
+
+RE_XML_GARBAGE = re.compile(r'>([^<]{100,})<')
 
 
 class IntermediateValue(object):
@@ -199,6 +207,8 @@ def imd_get_equity(imd_values):
 
 
 def imd_filter_member(imd_values):
+    print imd_values
+
     if imd_values:
         with_memberness = [(v, memberness(v.context)) for v in imd_values]
         with_memberness = sorted(with_memberness, cmp=lambda a, b: a[1] - b[1])
@@ -355,6 +365,13 @@ class ReportItemLoader(XmlXPathItemLoader):
     cash_out = Compose(imd_filter_member, imd_mult, imd_max)
 
     def __init__(self, *args, **kwargs):
+        response = kwargs.get('response')
+        if len(response.body) > THRESHOLD_TO_CLEAN:
+            # Remove some useless text to reduce memory usage
+            body, __ = RE_XML_GARBAGE.subn(lambda m: '><', response.body)
+            response = response.replace(body=body)
+            kwargs['response'] = response
+
         super(ReportItemLoader, self).__init__(*args, **kwargs)
 
         symbol = self._get_symbol()
