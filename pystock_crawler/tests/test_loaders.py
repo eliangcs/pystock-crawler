@@ -2193,6 +2193,24 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash': 746576000.0
         })
 
+    def test_spex_20130331(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/12239/000141588913001019/spex-20130331.xml')
+        self.assert_item(item, {
+            'symbol': 'SPEX',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'end_date': '2013-03-31',
+            'revenues': 5761.0,
+            'net_income': -3696570.0,
+            'eps_basic': -5.35,
+            'eps_diluted': None,
+            'dividend': 0.0,
+            'assets': 3572989.0,
+            'equity': 2857993.0,
+            'cash': 3448526.0
+        })
+
     def test_strza_20121231(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793413000015/strza-20121231.xml')
         self.assert_item(item, {

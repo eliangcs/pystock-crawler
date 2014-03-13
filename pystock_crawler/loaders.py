@@ -181,7 +181,7 @@ def imd_get_per_share_value(imd_values):
     if abs(value) > MAX_PER_SHARE_VALUE:
         try:
             decimals = int(v.node.xpath('@decimals')[0].extract())
-        except (AttributeError, IndexError):
+        except (AttributeError, IndexError, ValueError):
             return None
         else:
             # HACK: some of LTD's reports have unreasonablely large per share value, such as
@@ -207,8 +207,6 @@ def imd_get_equity(imd_values):
 
 
 def imd_filter_member(imd_values):
-    print imd_values
-
     if imd_values:
         with_memberness = [(v, memberness(v.context)) for v in imd_values]
         with_memberness = sorted(with_memberness, cmp=lambda a, b: a[1] - b[1])
