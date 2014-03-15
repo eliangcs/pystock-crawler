@@ -8,14 +8,28 @@
 
 BOT_NAME = 'pystock-crawler'
 
-SPIDER_MODULES = ['pystock_crawler.spiders']
-NEWSPIDER_MODULE = 'pystock_crawler.spiders'
+EXPORT_FIELDS = (
+    # Price columns
+    'symbol', 'date', 'open', 'high', 'low', 'close', 'volume', 'adj_close',
 
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'stockcrawler (+http://www.yourdomain.com)'
+    # Report columns
+    'end_date', 'amend', 'period_focus', 'doc_type', 'revenues', 'net_income',
+    'eps_basic', 'eps_diluted', 'dividend', 'assets', 'cash', 'equity',
+)
 
-LOG_LEVEL = 'INFO'
+FEED_EXPORTERS = {
+    'csv': 'pystock_crawler.exporters.CsvItemExporter2'
+}
 
 HTTPCACHE_ENABLED = True
 
 HTTPCACHE_POLICY = 'scrapy.contrib.httpcache.RFC2616Policy'
+
+LOG_LEVEL = 'INFO'
+
+NEWSPIDER_MODULE = 'pystock_crawler.spiders'
+
+SPIDER_MODULES = ['pystock_crawler.spiders']
+
+# Crawl responsibly by identifying yourself (and your website) on the user-agent
+#USER_AGENT = 'pystock-crawler (+http://www.yourdomain.com)'
