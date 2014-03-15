@@ -78,7 +78,6 @@ def print_version():
 
 
 def main():
-    log.start()
     args = docopt(__doc__)
 
     symbols = args.get('<symbols>')
@@ -96,6 +95,7 @@ def main():
         spider = None
 
     if spider:
+        log.start()
         crawl(spider, symbols, start_date, end_date, output, log_file)
         if sorting and output:
             sort_csv(output)
