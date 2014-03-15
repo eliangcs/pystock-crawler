@@ -1,51 +1,106 @@
 #!/usr/bin/env python
 '''
 Usage:
-  pystock-crawler crawl prices [-w DIR] [-s FILE] [-d YYYYMMDD]
-  pystock-crawler crawl reports [-w DIR] [-s FILE] [-d YYYYMMDD]
-  pystock-crawler merge [-w DIR]
+  pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD] [-l LOGFILE] [--sort]
+  pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]  [-l LOGFILE] [--sort]
   pystock-crawler (-h | --help)
   pystock-crawler (-v | --version)
 
 Options:
-  -d YYYYMMDD   Start date [default: ]
   -h --help     Show this screen
-  -s FILE       Symbol list file [default: ./symbols.txt]
-  -v --version  Show version
-  -w DIR        Working directory [default: .]
+  -o OUTPUT     Output file
+  -s YYYYMMDD   Start date [default: ]
+  -e YYYYMMDD   End date [default: ]
+  -l LOGFILE    Log output [default: ]
+  --sort        Sort the result
 
 '''
+import codecs
+import os
+import sys
+
 from docopt import docopt
+from scrapy import log
+
+try:
+    import pystock_crawler
+except ImportError:
+    # For development environment
+    sys.path.append('.')
+    import pystock_crawler
 
 
-def crawl_prices(args):
-    print 'crawl_prices'
+def crawl(spider, symbols, start_date, end_date, output, log_file):
+    command = 'scrapy crawl %s -a symbols="%s" -t csv' % (spider, symbols)
+
+    if start_date:
+        command += ' -a startdate=%s' % start_date
+    if end_date:
+        command += ' -a enddate=%s' % end_date
+    if output:
+        command += ' -o "%s"' % output
+    if log_file:
+        command += ' -s LOG_FILE="%s"' % log_file
+
+    print command
+    os.system(command)
 
 
-def crawl_reports(args):
-    print 'crawl_reports'
+def sort_csv(filename):
+    log.msg(u'Sorting: %s' % filename, log.INFO)
+
+    with codecs.open(filename, 'r', 'utf-8') as f:
+        headers = f.next()
+        lines = [line for line in f]
+
+    def line_cmp(line1, line2):
+        a = line1.split(',')
+        b = line2.split(',')
+        length = min(len(a), len(b))
+        i = 0
+        while 1:
+            result = cmp(a[i], b[i])
+            if result or i >= length:
+                return result
+            i += 1
+
+    lines = sorted(lines, cmp=line_cmp)
+
+    with codecs.open(filename, 'w', 'utf-8') as f:
+        f.write(headers)
+        f.writelines(lines)
+
+    log.msg(u'Sorted: %s' % filename, log.INFO)
 
 
-def merge(args):
-    print 'merge'
-
-
-def display_version():
-    print '1.0.0'
+def print_version():
+    print 'pystock-crawler %s' % pystock_crawler.__version__
 
 
 def main():
+    log.start()
     args = docopt(__doc__)
 
-    if args['crawl']:
-        if args['prices']:
-            crawl_prices(args)
-        elif args['reports']:
-            crawl_reports(args)
-    elif args['merge']:
-        merge(args)
-    elif args['--version']:
-        display_version()
+    symbols = args.get('<symbols>')
+    start_date = args.get('-s')
+    end_date = args.get('-e')
+    output = args.get('-o')
+    log_file = args.get('-l')
+    sorting = args.get('--sort')
+
+    if args['prices']:
+        spider = 'yahoo'
+    elif args['reports']:
+        spider = 'edgar'
+    else:
+        spider = None
+
+    if spider:
+        crawl(spider, symbols, start_date, end_date, output, log_file)
+        if sorting and output:
+            sort_csv(output)
+    elif args['-v'] or args['--version']:
+        print_version()
 
 
 if __name__ == '__main__':
