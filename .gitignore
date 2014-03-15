@@ -1,8 +1,9 @@
-*.pyc
-*.log
 *.csv
+*.log
+*.pyc
 .coverage
-pystock_crawler.egg-info/
-pystock_crawler/tests/sample_data/
 .scrapy/
 .~*
+dist/
+pystock_crawler.egg-info/
+pystock_crawler/tests/sample_data/
