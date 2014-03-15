@@ -1,6 +1,7 @@
 import re
 
 from datetime import datetime
+from scrapy import log
 from scrapy.contrib.loader import ItemLoader
 from scrapy.contrib.loader.processor import Compose, MapCompose, TakeFirst
 from scrapy.utils.misc import arg_to_iter
@@ -17,6 +18,7 @@ MAX_PER_SHARE_VALUE = 1000.0
 # remove some useless text defined by RE_XML_GARBAGE to reduce memory usage
 THRESHOLD_TO_CLEAN = 50000000
 
+# Used to get rid of "<tag>LONG STRING...</tag>"
 RE_XML_GARBAGE = re.compile(r'>([^<]{100,})<')
 
 
@@ -72,7 +74,15 @@ class MatchEndDate(object):
         selector = loader_context['selector']
 
         context_id = value.xpath('@contextRef')[0].extract()
-        context = selector.xpath('//*[@id="%s"]' % context_id)[0]
+        try:
+            context = selector.xpath('//*[@id="%s"]' % context_id)[0]
+        except IndexError:
+            try:
+                url = loader_context['response'].url
+            except KeyError:
+                url = None
+            log.msg(u'Cannot find context: %s in %s' % (context_id, url), log.WARNING)
+            return None
 
         date = None
         try:
