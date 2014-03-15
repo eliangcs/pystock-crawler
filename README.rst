@@ -7,91 +7,117 @@ pystock-crawler
 .. image:: https://coveralls.io/repos/eliangcs/pystock-crawler/badge.png?branch=master
     :target: https://coveralls.io/r/eliangcs/pystock-crawler
 
-``pystock-crawler`` is a utility for scraping stock historical data including
-daily prices and fundamental figures such as revenues and EPS.
+``pystock-crawler`` is a utility for scraping stock historical data including:
+
+* Daily prices from `Yahoo Finance`_
+* Fundamentals from 10-Q and 10-K filings on `SEC EDGAR`_
 
 
-Development Status
-------------------
+Installation
+------------
 
-``pystock-crawler`` is still **UNDER DEVELOPMENT**, so expect bugs and design
-changes. The plan is to be able to crawl both price data and financial
-reports. I'm working on financial reports (10-Q and 10-K forms) and will
-proceed to work on pirce data after that.
+Prerequisites:
+
+* Linux or Mac OS
+* Python 2.7
+
+Install it in `virtualenv`_ (recommended)::
+
+    pip install pystock-crawler
+
+Or do system-wide installation::
+
+    sudo pip install pystock-crawler
 
 
-Installation (For Developers)
------------------------------
+Quickstart
+----------
 
-A good Python developer always uses `virtualenv`_, so you should, too. I also
-recommend you to use `virtualenvwrapper`_. This is how you install them::
+**Example 1.** Google's and Yahoo's daily prices and sort::
 
-    pip install virtualenv virtualenvwrapper
+    pystock-crawler prices GOOG,YHOO -o out.csv --sort
 
-Then you can create an isolated Python environment with::
+**Example 2.** Daily prices of all companies listed in ``./symbols.txt``::
 
-    mkvirtualenv pystock-crawler
+    pystock-crawler prices ./symbols.txt -o out.csv
 
-Clone this repository::
+**Example 3.** Facebook's fundamentals during 2013::
 
-    git clone git@github.com:eliangcs/pystock-crawler.git
+    pystock-crawler reports FB -o out.csv -s 20130101 -e 20131231
 
-Or you can just download the `ZIP file
-<https://github.com/eliangcs/pystock-crawler/archive/master.zip>`_ and extract
-it.
+**Example 4.** Fundamentals all companies in ``./nyse.txt`` and direct the
+logs to ``./crawling.log``::
 
-``pystock-crawler`` is based on web crawling framework `Scrapy`_, which is
-listed in ``requirements.txt``. Install it and other dependencies like this::
-
-    pip install -r requirements.txt
-
-Notice on Windows, it isn't that easy to install `Scrapy`_. Please refer to
-`Scrapy`_ documentation for detail.
+    pystock-crawler reports ./nyse.txt -o out.csv -l ./crawling.log
 
 
 Usage
 -----
 
-Crawl data from `SEC EDGAR`_ database::
+Type ``pystock-crawler -h`` to see command help::
 
-    scrapy crawl edgar -a symbols=SYMBOLS
-                       -a startdate=YYYYMMDD
-                       -a enddate=YYYYMMDD
-                       -o OUTPUT_FILE
-                       -t OUTPUT_FORMAT
+    Usage:
+      pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD] [-l LOGFILE] [--sort]
+      pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]  [-l LOGFILE] [--sort]
+      pystock-crawler (-h | --help)
+      pystock-crawler (-v | --version)
 
-* ``-a symbols``: Trading symbols you want to crawl. Can be a text file or a
-  comma-separated string.
-* ``-a startdate`` and ``-a enddate``: Optional. If specified, the crawler
-  only collects the documents that were filed within
-  this period.
-* ``-o``: Output file path.
-* ``-t``: Output file format, e.g., ``csv`` and ``json``.
+    Options:
+      -h --help     Show this screen
+      -o OUTPUT     Output file
+      -s YYYYMMDD   Start date [default: ]
+      -e YYYYMMDD   End date [default: ]
+      -l LOGFILE    Log output [default: ]
+      --sort        Sort the result
 
-Example 1::
+Use ``prices`` to crawl price data and ``reports`` to crawl fundamentals.
 
-    scrapy crawl edgar -a symbols=./symbols/nasdaq100.txt -a startdate=20130101 -a enddate=20130930 -o output.csv -t csv
+``<symbols>`` can be an inline string separated with commas or a text file
+that lists symbols line by line. For example, the inline string can be
+something like ``AAPL,GOOG,FB``. And the text file may look like this::
 
-Example 2::
+    # Comment to be ignored
+    AAPL    Put anything you want here
+    GOOG    Since the text here is ignored
+    FB
 
-    scrapy crawl edgar -a symbols=GOOG,AAPL,FB -o tech.csv -t csv
+Use ``-o`` to specify the output file. CSV is the only supported output format
+for now.
+
+``-l`` is where the crawling logs go to. If not specified, the logs go to
+stdout.
+
+The rows in the output CSV file are in an arbitrary order by default. Use
+``--sort`` to sort them by symbols and dates. But if you have a large output
+file, don't use ``--sort`` because it will be slow and eat a lot of memory.
 
 
-Running Tests
--------------
+Developer Guide
+---------------
+
+Installing Dependencies
+~~~~~~~~~~~~~~~~~~~~~~~
+
+    pip install -r requirements.txt
+
+
+Running Test
+~~~~~~~~~~~~
 
 Install ``pytest``, ``pytest-cov``, and ``requests`` if you don't have them::
 
     pip install pytest pytest-cov requests
 
-Then running the tests is a simple command::
+Then run the test::
 
     py.test
 
 This downloads the test data from from `SEC EDGAR`_ on the fly, so it will
-take some time and disk space.
+take some time and disk space. If you want to delete test data, just delete
+``pystock_crawler/tests/sample_data`` directory.
 
 
+.. _Yahoo Finance: http://finance.yahoo.com/
 .. _virtualenv: http://www.virtualenv.org/
 .. _virtualenvwrapper: http://virtualenvwrapper.readthedocs.org/
 .. _Scrapy: http://scrapy.org/
