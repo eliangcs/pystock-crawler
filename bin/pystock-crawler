@@ -42,6 +42,8 @@ def crawl(spider, symbols, start_date, end_date, output, log_file):
     if log_file:
         command += ' -s LOG_FILE="%s"' % log_file
 
+    command += ' -s SCRAPY_SETTINGS_MODULE=pystock_crawler.settings'
+
     print command
     os.system(command)
 
