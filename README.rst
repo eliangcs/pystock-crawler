@@ -96,8 +96,3 @@ take some time and disk space.
 .. _virtualenvwrapper: http://virtualenvwrapper.readthedocs.org/
 .. _Scrapy: http://scrapy.org/
 .. _SEC EDGAR: http://www.sec.gov/edgar/searchedgar/companysearch.html
-
-
-.. image:: https://d2weczhvl823v0.cloudfront.net/eliangcs/pystock-crawler/trend.png
-    :target: https://bitdeli.com/free
-    :alt: Bitdeli Badge
