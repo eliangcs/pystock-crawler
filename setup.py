@@ -48,7 +48,7 @@ setup(
     author='Chang-Hung Liang',
     author_email='eliang.cs@gmail.com',
     license='MIT',
-    packages=['pystock_crawler'],
+    packages=['pystock_crawler', 'pystock_crawler.spiders'],
     scripts=['bin/pystock-crawler'],
-    install_requires=parse_requirements('requirements.txt'),
+    install_requires=parse_requirements('requirements.txt')
 )
