@@ -133,7 +133,7 @@ def main():
         spider = None
 
     if spider:
-        log.start()
+        log.start(logfile=log_file)
         crawl(spider, symbols, start_date, end_date, output, log_file)
         if sorting and output:
             sort_csv(output)
