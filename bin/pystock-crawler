@@ -18,7 +18,9 @@ Options:
 import codecs
 import os
 import sys
+import uuid
 
+from contextlib import contextmanager
 from docopt import docopt
 from scrapy import log
 
@@ -28,6 +30,40 @@ except ImportError:
     # For development environment
     sys.path.append('.')
     import pystock_crawler
+
+
+def random_string(length=5):
+    return uuid.uuid4().get_hex()[0:5]
+
+
+@contextmanager
+def tmp_scrapy_cfg():
+    content = '''# pystock_crawler scrapy.cfg
+[settings]
+default = pystock_crawler.settings
+
+[deploy]
+#url = http://localhost:6800/
+project = pystock_crawler
+'''
+    filename = os.path.abspath('./scrapy.cfg')
+    filename_bak = os.path.abspath('./scrapy-%s.cfg' % random_string())
+    if os.path.exists(filename):
+        log.msg(u'Renaming %s -> %s' % (filename, filename_bak))
+        os.rename(filename, filename_bak)
+    assert not os.path.exists(filename)
+    log.msg(u'Creating temporary config: %s' % filename)
+    with open(filename, 'w') as f:
+        f.write(content)
+
+    yield
+
+    if os.path.exists(filename):
+        log.msg(u'Deleting %s' % filename)
+        os.remove(filename)
+    if os.path.exists(filename_bak):
+        log.msg(u'Renaming %s -> %s' % (filename_bak, filename))
+        os.rename(filename_bak, filename)
 
 
 def crawl(spider, symbols, start_date, end_date, output, log_file):
@@ -42,14 +78,14 @@ def crawl(spider, symbols, start_date, end_date, output, log_file):
     if log_file:
         command += ' -s LOG_FILE="%s"' % log_file
 
-    command += ' -s SCRAPY_SETTINGS_MODULE=pystock_crawler.settings'
+    log.msg('Command: %s' % command)
 
-    print command
-    os.system(command)
+    with tmp_scrapy_cfg():
+        os.system(command)
 
 
 def sort_csv(filename):
-    log.msg(u'Sorting: %s' % filename, log.INFO)
+    log.msg(u'Sorting: %s' % filename)
 
     with codecs.open(filename, 'r', 'utf-8') as f:
         headers = f.next()
@@ -72,7 +108,7 @@ def sort_csv(filename):
         f.write(headers)
         f.writelines(lines)
 
-    log.msg(u'Sorted: %s' % filename, log.INFO)
+    log.msg(u'Sorted: %s' % filename)
 
 
 def print_version():
