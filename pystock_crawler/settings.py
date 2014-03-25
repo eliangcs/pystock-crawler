@@ -25,6 +25,8 @@ HTTPCACHE_ENABLED = True
 
 HTTPCACHE_POLICY = 'scrapy.contrib.httpcache.RFC2616Policy'
 
+HTTPCACHE_STORAGE = 'scrapy.contrib.httpcache.DbmCacheStorage'
+
 LOG_LEVEL = 'INFO'
 
 NEWSPIDER_MODULE = 'pystock_crawler.spiders'
