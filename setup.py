@@ -50,5 +50,16 @@ setup(
     license='MIT',
     packages=['pystock_crawler', 'pystock_crawler.spiders'],
     scripts=['bin/pystock-crawler'],
-    install_requires=parse_requirements('requirements.txt')
+    install_requires=parse_requirements('requirements.txt'),
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Environment :: Console',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: Software Development :: Libraries :: Python Modules'
+    ]
 )
