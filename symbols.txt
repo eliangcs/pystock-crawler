@@ -1,6 +1,0 @@
-#AAPL
-#FB
-#GOOG
-#MSFT
-#YHOO
-TSLA
