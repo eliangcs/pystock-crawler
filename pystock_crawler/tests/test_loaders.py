@@ -146,14 +146,20 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-09-29',
-            'revenues': 156508000000.0,
-            'net_income': 41733000000.0,
+            'revenues': 156508000000,
+            'op_income': 55241000000,
+            'net_income': 41733000000,
             'eps_basic': 44.64,
             'eps_diluted': 44.15,
             'dividend': 2.65,
-            'assets': 176064000000.0,
-            'equity': 118210000000.0,
-            'cash': 10746000000.0
+            'assets': 176064000000,
+            'cur_assets': 57653000000,
+            'cur_liab': 38542000000,
+            'equity': 118210000000,
+            'cash': 10746000000,
+            'cash_flow_op': 50856000000,
+            'cash_flow_inv': -48227000000,
+            'cash_flow_fin': -1698000000
         })
 
     def test_aes_20100331(self):

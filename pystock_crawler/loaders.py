@@ -237,11 +237,6 @@ def imd_filter_member(imd_values):
 
     return imd_values
 
-    non_members = filter(lambda v: not v.is_member(), imd_values)
-    if non_members:
-        return non_members
-    return imd_values
-
 
 def imd_mult(imd_values):
     for v in imd_values:
@@ -266,7 +261,9 @@ def memberness(context):
         texts = context.xpath('.//*[local-name()="explicitMember"]/text()').extract()
         text = str(texts).lower()
 
-        if 'member' not in text:
+        if 'country' in text:
+            return 2
+        elif 'member' not in text:
             return 0
         elif 'successor' in text:
             # 'SuccessorMember' is a rare case that shouldn't be treated as member
