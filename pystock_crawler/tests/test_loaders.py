@@ -170,14 +170,20 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
-            'revenues': 4112000000.0,
-            'net_income': 187000000.0,
+            'revenues': 4112000000,
+            'op_income': None,  # Missing value
+            'net_income': 187000000,
             'eps_basic': 0.27,
             'eps_diluted': 0.27,
             'dividend': 0.0,
-            'assets': 41882000000.0,
-            'equity': 10536000000.0,
-            'cash': 3392000000.0
+            'assets': 41882000000,
+            'cur_assets': 10460000000,
+            'cur_liab': 6894000000,
+            'equity': 10536000000,
+            'cash': 3392000000,
+            'cash_flow_op': 684000000,
+            'cash_flow_inv': -595000000,
+            'cash_flow_fin': 1515000000
         })
 
     def test_adbe_20060914(self):
