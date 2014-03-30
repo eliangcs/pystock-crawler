@@ -122,14 +122,20 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2011-03-26',
-            'revenues': 24667000000.0,
-            'net_income': 5987000000.0,
+            'revenues': 24667000000,
+            'net_income': 5987000000,
+            'op_income': 7874000000,
             'eps_basic': 6.49,
             'eps_diluted': 6.40,
             'dividend': 0.0,
-            'assets': 94904000000.0,
-            'equity': 61477000000.0,
-            'cash': 15978000000.0
+            'assets': 94904000000,
+            'cur_assets': 46997000000,
+            'cur_liab': 24327000000,
+            'equity': 61477000000,
+            'cash': 15978000000,
+            'cash_flow_op': 15992000000,
+            'cash_flow_inv': -12251000000,
+            'cash_flow_fin': 976000000
         })
 
     def test_aapl_20120929(self):
