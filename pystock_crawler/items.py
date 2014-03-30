@@ -22,6 +22,7 @@ class ReportItem(Item):
     end_date = Field()
 
     revenues = Field()
+    op_income = Field()
     net_income = Field()
 
     eps_basic = Field()
@@ -29,9 +30,17 @@ class ReportItem(Item):
 
     dividend = Field()
 
+    # Balance sheet stuffs
     assets = Field()
+    cur_assets = Field()
+    cur_liab = Field()
     equity = Field()
     cash = Field()
+
+    # Cash flow from operating, investing, and financing
+    cash_flow_op = Field()
+    cash_flow_inv = Field()
+    cash_flow_fin = Field()
 
 
 class PriceItem(Item):

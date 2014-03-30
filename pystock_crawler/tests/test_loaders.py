@@ -51,13 +51,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2011-01-31',
             'revenues': 1519000000.0,
+            'op_income': 211000000.0,
             'net_income': 193000000.0,
             'eps_basic': 0.56,
             'eps_diluted': 0.54,
             'dividend': 0.0,
             'assets': 8044000000.0,
+            'cur_assets': 4598000000.0,
+            'cur_liab': 1406000000.0,
             'equity': 3339000000.0,
-            'cash': 2638000000.0
+            'cash': 2638000000.0,
+            'cash_flow_op': 120000000.0,
+            'cash_flow_inv': 1500000000.0,
+            'cash_flow_fin': -1634000000.0
         })
 
     def test_aa_20120630(self):

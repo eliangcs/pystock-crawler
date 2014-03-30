@@ -354,6 +354,9 @@ class ReportItemLoader(XmlXPathItemLoader):
     net_income_in = MapCompose(MatchEndDate(float))
     net_income_out = Compose(imd_filter_member, imd_mult, imd_get_net_income)
 
+    op_income_in = MapCompose(MatchEndDate(float))
+    op_income_out = Compose(imd_filter_member, imd_mult, imd_get_net_income)
+
     eps_basic_in = MapCompose(MatchEndDate(float))
     eps_basic_out = Compose(ImdSumMembersOr(imd_get_per_share_value), lambda x: x if x < MAX_PER_SHARE_VALUE else None)
 
@@ -366,11 +369,26 @@ class ReportItemLoader(XmlXPathItemLoader):
     assets_in = MapCompose(MatchEndDate(float))
     assets_out = Compose(imd_filter_member, imd_mult, imd_max)
 
+    cur_assets_in = MapCompose(MatchEndDate(float))
+    cur_assets_out = Compose(imd_filter_member, imd_mult, imd_max)
+
+    cur_liab_in = MapCompose(MatchEndDate(float))
+    cur_liab_out = Compose(imd_filter_member, imd_mult, imd_max)
+
     equity_in = MapCompose(MatchEndDate(float))
     equity_out = Compose(imd_filter_member, imd_mult, imd_get_equity)
 
     cash_in = MapCompose(MatchEndDate(float))
     cash_out = Compose(imd_filter_member, imd_mult, imd_max)
+
+    cash_flow_op_in = MapCompose(MatchEndDate(float))
+    cash_flow_op_out = Compose(imd_filter_member, imd_mult, imd_max)
+
+    cash_flow_inv_in = MapCompose(MatchEndDate(float))
+    cash_flow_inv_out = Compose(imd_filter_member, imd_mult, imd_max)
+
+    cash_flow_fin_in = MapCompose(MatchEndDate(float))
+    cash_flow_fin_out = Compose(imd_filter_member, imd_mult, imd_max)
 
     def __init__(self, *args, **kwargs):
         response = kwargs.get('response')
@@ -443,6 +461,10 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//*[starts-with(local-name(), "NetIncomeAttributableTo")]'
         ])
 
+        self.add_xpaths('op_income', [
+            '//us-gaap:OperatingIncomeLoss'
+        ])
+
         self.add_xpaths('eps_basic', [
             '//us-gaap:EarningsPerShareBasic',
             '//us-gaap:IncomeLossFromContinuingOperationsPerBasicShare',
@@ -492,6 +514,14 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//us-gaap:LiabilitiesAndStockholdersEquity'
         ])
 
+        self.add_xpaths('cur_assets', [
+            '//us-gaap:AssetsCurrent'
+        ])
+
+        self.add_xpaths('cur_liab', [
+            '//us-gaap:LiabilitiesCurrent'
+        ])
+
         self.add_xpaths('equity', [
             '//*[local-name()="StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest" or local-name()="StockholdersEquity"]',
             '//*[local-name()="TotalCommonShareholdersEquity"]',
@@ -513,6 +543,18 @@ class ReportItemLoader(XmlXPathItemLoader):
             '//*[contains(local-name(), "CarryingValueOfCashAndCashEquivalents")]',
             '//*[contains(local-name(), "CashCashEquivalents")]',
             '//*[contains(local-name(), "CashAndCashEquivalents")]'
+        ])
+
+        self.add_xpaths('cash_flow_op', [
+            '//us-gaap:NetCashProvidedByUsedInOperatingActivities'
+        ])
+
+        self.add_xpaths('cash_flow_inv', [
+            '//us-gaap:NetCashProvidedByUsedInInvestingActivities'
+        ])
+
+        self.add_xpaths('cash_flow_fin', [
+            '//us-gaap:NetCashProvidedByUsedInFinancingActivities'
         ])
 
     def _get_symbol(self):
