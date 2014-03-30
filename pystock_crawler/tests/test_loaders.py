@@ -74,14 +74,20 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2012-06-30',
-            'revenues': 5963000000.0,
-            'net_income': -2000000.0,
+            'revenues': 5963000000,
+            'op_income': None,  # Missing value
+            'net_income': -2000000,
             'eps_basic': None,  # EPS is 0 actually, but got no data in XML
             'eps_diluted': None,
             'dividend': 0.03,
-            'assets': 39498000000.0,
-            'equity': 16914000000.0,
-            'cash': 1712000000.0
+            'assets': 39498000000,
+            'cur_assets': 7767000000,
+            'cur_liab': 6151000000,
+            'equity': 16914000000,
+            'cash': 1712000000,
+            'cash_flow_op': 301000000,
+            'cash_flow_inv': -704000000,
+            'cash_flow_fin': 196000000
         })
 
     def test_aapl_20100626(self):

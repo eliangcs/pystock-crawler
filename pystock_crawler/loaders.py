@@ -62,8 +62,9 @@ class ExtractText(object):
 
 class MatchEndDate(object):
 
-    def __init__(self, data_type=str):
+    def __init__(self, data_type=str, ignore_date_range=False):
         self.data_type = data_type
+        self.ignore_date_range = ignore_date_range
 
     def __call__(self, value, loader_context):
         if not hasattr(value, 'select'):
@@ -89,15 +90,19 @@ class MatchEndDate(object):
             date = context.xpath('.//*[local-name()="instant"]/text()')[0].extract().strip()
         except (IndexError, ValueError):
             try:
-                start_date_str = context.xpath('.//*[local-name()="startDate"]/text()')[0].extract().strip()
                 end_date_str = context.xpath('.//*[local-name()="endDate"]/text()')[0].extract().strip()
-                start_date = datetime.strptime(start_date_str, DATE_FORMAT)
                 end_date = datetime.strptime(end_date_str, DATE_FORMAT)
-                delta_days = (end_date - start_date).days
-                if doc_type == '10-Q' and delta_days < 120 and delta_days > 60:
+
+                if self.ignore_date_range:
                     date = end_date
-                elif doc_type == '10-K' and delta_days < 380 and delta_days > 350:
-                    date = end_date
+                else:
+                    start_date_str = context.xpath('.//*[local-name()="startDate"]/text()')[0].extract().strip()
+                    start_date = datetime.strptime(start_date_str, DATE_FORMAT)
+                    delta_days = (end_date - start_date).days
+                    if doc_type == '10-Q' and delta_days < 120 and delta_days > 60:
+                        date = end_date
+                    elif doc_type == '10-K' and delta_days < 380 and delta_days > 350:
+                        date = end_date
             except (IndexError, ValueError):
                 pass
         else:
@@ -381,13 +386,13 @@ class ReportItemLoader(XmlXPathItemLoader):
     cash_in = MapCompose(MatchEndDate(float))
     cash_out = Compose(imd_filter_member, imd_mult, imd_max)
 
-    cash_flow_op_in = MapCompose(MatchEndDate(float))
+    cash_flow_op_in = MapCompose(MatchEndDate(float, True))
     cash_flow_op_out = Compose(imd_filter_member, imd_mult, imd_max)
 
-    cash_flow_inv_in = MapCompose(MatchEndDate(float))
+    cash_flow_inv_in = MapCompose(MatchEndDate(float, True))
     cash_flow_inv_out = Compose(imd_filter_member, imd_mult, imd_max)
 
-    cash_flow_fin_in = MapCompose(MatchEndDate(float))
+    cash_flow_fin_in = MapCompose(MatchEndDate(float, True))
     cash_flow_fin_out = Compose(imd_filter_member, imd_mult, imd_max)
 
     def __init__(self, *args, **kwargs):
