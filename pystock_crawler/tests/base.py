@@ -32,12 +32,14 @@ class TestCaseBase(unittest.TestCase):
         self.assert_none_or_almost_equal(item.get('equity'), expected.get('equity'))
         self.assert_none_or_almost_equal(item.get('cash'), expected.get('cash'))
 
-        # self.assert_none_or_almost_equal(item.get('op_income'), expected.get('op_income'))
-        # self.assert_none_or_almost_equal(item.get('cur_assets'), expected.get('cur_assets'))
-        # self.assert_none_or_almost_equal(item.get('cur_liab'), expected.get('cur_liab'))
-        # self.assert_none_or_almost_equal(item.get('cash_flow_op'), expected.get('cash_flow_op'))
-        # self.assert_none_or_almost_equal(item.get('cash_flow_inv'), expected.get('cash_flow_inv'))
-        # self.assert_none_or_almost_equal(item.get('cash_flow_fin'), expected.get('cash_flow_fin'))
+        # DEBUG: This 'if' statement should be removed after all test cases have new fields
+        if 'op_income' in expected:
+            self.assert_none_or_almost_equal(item.get('op_income'), expected.get('op_income'))
+            self.assert_none_or_almost_equal(item.get('cur_assets'), expected.get('cur_assets'))
+            self.assert_none_or_almost_equal(item.get('cur_liab'), expected.get('cur_liab'))
+            self.assert_none_or_almost_equal(item.get('cash_flow_op'), expected.get('cash_flow_op'))
+            self.assert_none_or_almost_equal(item.get('cash_flow_inv'), expected.get('cash_flow_inv'))
+            self.assert_none_or_almost_equal(item.get('cash_flow_fin'), expected.get('cash_flow_fin'))
 
 
 def _create_sample_data_dir():
