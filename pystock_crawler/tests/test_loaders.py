@@ -296,14 +296,20 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-03-31',
-            'revenues': 8463000000.0,
-            'net_income': 709000000.0,
+            'revenues': 8463000000,
+            'op_income': None,
+            'net_income': 709000000,
             'eps_basic': 1.49,
             'eps_diluted': 1.47,
             'dividend': 0.25,
-            'assets': 126612000000.0,
-            'equity': 20619000000.0,
-            'cash': 820000000.0
+            'assets': 126612000000,
+            'cur_assets': None,
+            'cur_liab': None,
+            'equity': 20619000000,
+            'cash': 820000000,
+            'cash_flow_op': 740000000,
+            'cash_flow_inv': 136000000,
+            'cash_flow_fin': -862000000
         })
 
     def test_apa_20120930(self):
