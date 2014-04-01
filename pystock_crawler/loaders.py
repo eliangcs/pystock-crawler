@@ -187,6 +187,11 @@ def imd_get_net_income(imd_values):
     return imd_min(imd_values)
 
 
+def imd_get_op_income(imd_values):
+    imd_values = filter(lambda v: memberness(v.context) < 2, imd_values)
+    return imd_min(imd_values)
+
+
 def imd_get_per_share_value(imd_values):
     if not imd_values:
         return None
@@ -357,7 +362,7 @@ class ReportItemLoader(XmlXPathItemLoader):
     net_income_out = Compose(imd_filter_member, imd_mult, imd_get_net_income)
 
     op_income_in = MapCompose(MatchEndDate(float))
-    op_income_out = Compose(imd_filter_member, imd_mult, imd_get_net_income)
+    op_income_out = Compose(imd_filter_member, imd_mult, imd_get_op_income)
 
     eps_basic_in = MapCompose(MatchEndDate(float))
     eps_basic_out = Compose(ImdSumMembersOr(imd_get_per_share_value), lambda x: x if x < MAX_PER_SHARE_VALUE else None)
