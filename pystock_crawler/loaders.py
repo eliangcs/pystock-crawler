@@ -553,15 +553,18 @@ class ReportItemLoader(XmlXPathItemLoader):
         ])
 
         self.add_xpaths('cash_flow_op', [
-            '//us-gaap:NetCashProvidedByUsedInOperatingActivities'
+            '//us-gaap:NetCashProvidedByUsedInOperatingActivities',
+            '//us-gaap:NetCashProvidedByUsedInOperatingActivitiesContinuingOperations'
         ])
 
         self.add_xpaths('cash_flow_inv', [
-            '//us-gaap:NetCashProvidedByUsedInInvestingActivities'
+            '//us-gaap:NetCashProvidedByUsedInInvestingActivities',
+            '//us-gaap:NetCashProvidedByUsedInInvestingActivitiesContinuingOperations'
         ])
 
         self.add_xpaths('cash_flow_fin', [
-            '//us-gaap:NetCashProvidedByUsedInFinancingActivities'
+            '//us-gaap:NetCashProvidedByUsedInFinancingActivities',
+            '//us-gaap:NetCashProvidedByUsedInFinancingActivitiesContinuingOperations'
         ])
 
     def _get_symbol(self):
