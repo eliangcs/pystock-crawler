@@ -368,14 +368,20 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2012-06-30',
-            'revenues': 7504000000.0,
-            'net_income': 1339000000.0,
+            'revenues': 7504000000,
+            'op_income': None,
+            'net_income': 1339000000,
             'eps_basic': 1.16,
             'eps_diluted': 1.15,
             'dividend': 0.2,
-            'assets': 148128000000.0,
-            'equity': 19267000000.0,
-            'cash': 22072000000.0
+            'assets': 148128000000,
+            'cur_assets': None,
+            'cur_liab': None,
+            'equity': 19267000000,
+            'cash': 22072000000,
+            'cash_flow_op': 6742000000,
+            'cash_flow_inv': -1771000000,
+            'cash_flow_fin': -7786000000
         })
 
     def test_axp_20121231(self):
