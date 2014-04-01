@@ -633,13 +633,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2011-12-31',
             'revenues': 14245000000,
+            'op_income': 2529000000,
             'net_income': 1305000000,
             'eps_basic': 1.97,
             'eps_diluted': 1.92,
             'dividend': 0.35,
             'assets': 26197000000,
+            'cur_assets': 5543000000,
+            'cur_liab': 3933000000,
             'equity': 9908000000,
-            'cash': 660000000
+            'cash': 660000000,
+            'cash_flow_op': 1749000000,
+            'cash_flow_inv': -389000000,
+            'cash_flow_fin': -1180000000
         })
 
     def test_cbs_20130630(self):
