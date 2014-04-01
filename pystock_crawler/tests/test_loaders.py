@@ -440,14 +440,20 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2009-12-31',
-            'revenues': 68281000000.0,
-            'net_income': 1312000000.0,
+            'revenues': 68281000000,
+            'op_income': 2096000000,
+            'net_income': 1312000000,
             'eps_basic': 1.86,
             'eps_diluted': 1.84,
             'dividend': 1.68,
-            'assets': 62053000000.0,
-            'equity': 2225000000.0,
-            'cash': 9215000000.0
+            'assets': 62053000000,
+            'cur_assets': 35275000000,
+            'cur_liab': 32883000000,
+            'equity': 2225000000,
+            'cash': 9215000000,
+            'cash_flow_op': 5603000000,
+            'cash_flow_inv': -3794000000,
+            'cash_flow_fin': 4094000000
         })
 
     def test_ba_20110930(self):
@@ -458,14 +464,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2011-09-30',
-            'revenues': 17727000000.0,
-            'net_income': 1098000000.0,
+            'revenues': 17727000000,
+            'net_income': 1098000000,
             'eps_basic': 1.47,
             'eps_diluted': 1.46,
             'dividend': 0.42,
-            'assets': 74163000000.0,
-            'equity': 6061000000.0,
-            'cash': 5954000000.0
+            'assets': 74163000000,
+            'equity': 6061000000,
+            'cash': 5954000000
         })
 
     def test_ba_20130331(self):
@@ -476,14 +482,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-03-31',
-            'revenues': 18893000000.0,
-            'net_income': 1106000000.0,
+            'revenues': 18893000000,
+            'net_income': 1106000000,
             'eps_basic': 1.45,
             'eps_diluted': 1.44,
             'dividend': 0.49,
-            'assets': 90447000000.0,
-            'equity': 7560000000.0,
-            'cash': 8335000000.0
+            'assets': 90447000000,
+            'equity': 7560000000,
+            'cash': 8335000000
         })
 
     def test_bbt_20110930(self):
@@ -494,14 +500,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2011-09-30',
-            'revenues': 2440000000.0,
-            'net_income': 366000000.0,
+            'revenues': 2440000000,
+            'net_income': 366000000,
             'eps_basic': 0.52,
             'eps_diluted': 0.52,
             'dividend': 0.16,
-            'assets': 167677000000.0,
-            'equity': 17541000000.0,
-            'cash': 1312000000.0
+            'assets': 167677000000,
+            'equity': 17541000000,
+            'cash': 1312000000
         })
 
     def test_bk_20100331(self):
@@ -512,14 +518,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
-            'revenues': 883000000.0,
-            'net_income': 559000000.0,
+            'revenues': 883000000,
+            'net_income': 559000000,
             'eps_basic': 0.46,
             'eps_diluted': 0.46,
             'dividend': 0.09,
-            'assets': 220551000000.0,
-            'equity': 30455000000.0,
-            'cash': 3307000000.0
+            'assets': 220551000000,
+            'equity': 30455000000,
+            'cash': 3307000000
         })
 
     def test_blk_20130630(self):
@@ -530,14 +536,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
-            'revenues': 2482000000.0,
-            'net_income': 729000000.0,
+            'revenues': 2482000000,
+            'net_income': 729000000,
             'eps_basic': 4.27,
             'eps_diluted': 4.19,
             'dividend': 1.68,
-            'assets': 193745000000.0,
-            'equity': 25755000000.0,
-            'cash': 3668000000.0
+            'assets': 193745000000,
+            'equity': 25755000000,
+            'cash': 3668000000
         })
 
     def test_c_20090630(self):
@@ -548,14 +554,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
-            'revenues': 29969000000.0,
-            'net_income': 4279000000.0,
+            'revenues': 29969000000,
+            'net_income': 4279000000,
             'eps_basic': 0.49,
             'eps_diluted': 0.49,
             'dividend': 0.0,
-            'assets': 1848533000000.0,
-            'equity': 154168000000.0,
-            'cash': 26915000000.0
+            'assets': 1848533000000,
+            'equity': 154168000000,
+            'cash': 26915000000
         })
 
     def test_cbs_20100331(self):
@@ -566,14 +572,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
-            'revenues': 3530900000.0,
-            'net_income': -26200000.0,
+            'revenues': 3530900000,
+            'net_income': -26200000,
             'eps_basic': -0.04,
             'eps_diluted': -0.04,
             'dividend': 0.05,
-            'assets': 26756100000.0,
-            'equity': 9046100000.0,
-            'cash': 872700000.0
+            'assets': 26756100000,
+            'equity': 9046100000,
+            'cash': 872700000
         })
 
     def test_cbs_20111231(self):
@@ -584,14 +590,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-12-31',
-            'revenues': 14245000000.0,
-            'net_income': 1305000000.0,
+            'revenues': 14245000000,
+            'net_income': 1305000000,
             'eps_basic': 1.97,
             'eps_diluted': 1.92,
             'dividend': 0.35,
-            'assets': 26197000000.0,
-            'equity': 9908000000.0,
-            'cash': 660000000.0
+            'assets': 26197000000,
+            'equity': 9908000000,
+            'cash': 660000000
         })
 
     def test_cbs_20130630(self):
@@ -602,14 +608,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
-            'revenues': 3699000000.0,
-            'net_income': 472000000.0,
+            'revenues': 3699000000,
+            'net_income': 472000000,
             'eps_basic': 0.78,
             'eps_diluted': 0.76,
             'dividend': 0.12,
-            'assets': 25693000000.0,
-            'equity': 9601000000.0,
-            'cash': 282000000.0
+            'assets': 25693000000,
+            'equity': 9601000000,
+            'cash': 282000000
         })
 
     def test_cce_20101001(self):
@@ -620,14 +626,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2010-10-01',
-            'revenues': 1681000000.0,
-            'net_income': 208000000.0,
+            'revenues': 1681000000,
+            'net_income': 208000000,
             'eps_basic': 0.61,
             'eps_diluted': 0.61,
             'dividend': 0.0,
-            'assets': 8457000000.0,
-            'equity': 3277000000.0,
-            'cash': 476000000.0
+            'assets': 8457000000,
+            'equity': 3277000000,
+            'cash': 476000000
         })
 
     def test_cce_20101231(self):
@@ -638,14 +644,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2010-12-31',
-            'revenues': 6714000000.0,
-            'net_income': 624000000.0,
+            'revenues': 6714000000,
+            'net_income': 624000000,
             'eps_basic': 1.84,
             'eps_diluted': 1.83,
             'dividend': 0.12,
-            'assets': 8596000000.0,
-            'equity': 3143000000.0,
-            'cash': 321000000.0
+            'assets': 8596000000,
+            'equity': 3143000000,
+            'cash': 321000000
         })
 
     def test_cci_20091231(self):
@@ -656,14 +662,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2009-12-31',
-            'revenues': 1685407000.0,
-            'net_income': -135138000.0,
+            'revenues': 1685407000,
+            'net_income': -135138000,
             'eps_basic': -0.47,
             'eps_diluted': -0.47,
             'dividend': 0.0,
-            'assets': 10956606000.0,
-            'equity': 2936085000.0,
-            'cash': 766146000.0
+            'assets': 10956606000,
+            'equity': 2936085000,
+            'cash': 766146000
         })
 
     def test_ccmm_20110630(self):
@@ -674,8 +680,8 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2011-06-30',
-            'revenues': 1791000000.0,
-            'net_income': -107000000.0,
+            'revenues': 1791000000,
+            'net_income': -107000000,
             'eps_basic': -0.98,
             'eps_diluted': -0.98,
             'dividend': 0.0,
@@ -692,8 +698,8 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-12-31',
-            'revenues': 7204000000.0,
-            'net_income': -369000000.0,
+            'revenues': 7204000000,
+            'net_income': -369000000,
             'eps_basic': -3.39,
             'eps_diluted': -3.39,
             'dividend': 0.0,
@@ -710,14 +716,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-03-31',
-            'revenues': 8183000000.0,
-            'net_income': 57000000.0,
+            'revenues': 8183000000,
+            'net_income': 57000000,
             'eps_basic': 0.2,
             'eps_diluted': 0.2,
             'dividend': 0.04,
-            'assets': 54939000000.0,
-            'equity': 9660000000.0,
-            'cash': 3306000000.0
+            'assets': 54939000000,
+            'equity': 9660000000,
+            'cash': 3306000000
         })
 
     def test_csc_20120928(self):
@@ -728,14 +734,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2012-09-28',
-            'revenues': 3854000000.0,
-            'net_income': 130000000.0,
+            'revenues': 3854000000,
+            'net_income': 130000000,
             'eps_basic': 0.84,
             'eps_diluted': 0.83,
             'dividend': 0.2,
-            'assets': 11649000000.0,
-            'equity': 2885000000.0,
-            'cash': 1850000000.0
+            'assets': 11649000000,
+            'equity': 2885000000,
+            'cash': 1850000000
         })
 
     def test_disca_20090630(self):
@@ -746,14 +752,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
-            'revenues': 881000000.0,
-            'net_income': 183000000.0,
+            'revenues': 881000000,
+            'net_income': 183000000,
             'eps_basic': 0.43,
             'eps_diluted': 0.43,
             'dividend': 0.0,
-            'assets': 10696000000.0,
-            'equity': 5918000000.0,
-            'cash': 339000000.0
+            'assets': 10696000000,
+            'equity': 5918000000,
+            'cash': 339000000
         })
 
     def test_disca_20090930(self):
@@ -764,14 +770,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2009-09-30',
-            'revenues': 854000000.0,
-            'net_income': 95000000.0,
+            'revenues': 854000000,
+            'net_income': 95000000,
             'eps_basic': 0.22,
             'eps_diluted': 0.22,
             'dividend': 0.0,
-            'assets': 10741000000.0,
-            'equity': 6042000000.0,
-            'cash': 401000000.0
+            'assets': 10741000000,
+            'equity': 6042000000,
+            'cash': 401000000
         })
 
     def test_dltr_20130504(self):
@@ -782,14 +788,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-05-04',
-            'revenues': 1865800000.0,
-            'net_income': 133500000.0,
+            'revenues': 1865800000,
+            'net_income': 133500000,
             'eps_basic': 0.6,
             'eps_diluted': 0.59,
             'dividend': 0.0,
-            'assets': 2811800000.0,
-            'equity': 1739700000.0,
-            'cash': 383300000.0
+            'assets': 2811800000,
+            'equity': 1739700000,
+            'cash': 383300000
         })
 
     def test_dtv_20110331(self):
@@ -800,14 +806,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2011-03-31',
-            'revenues': 6319000000.0,
-            'net_income': 674000000.0,
+            'revenues': 6319000000,
+            'net_income': 674000000,
             'eps_basic': 0.85,
             'eps_diluted': 0.85,
             'dividend': 0.0,
-            'assets': 20593000000.0,
-            'equity': -902000000.0,
-            'cash': 4295000000.0
+            'assets': 20593000000,
+            'equity': -902000000,
+            'cash': 4295000000
         })
 
     def test_ebay_20100630(self):
@@ -818,14 +824,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2010-06-30',
-            'revenues': 2215379000.0,
-            'net_income': 412192000.0,
+            'revenues': 2215379000,
+            'net_income': 412192000,
             'eps_basic': 0.31,
             'eps_diluted': 0.31,
             'dividend': 0.0,
-            'assets': 18747584000.0,
-            'equity': 14169291000.0,
-            'cash': 4037442000.0
+            'assets': 18747584000,
+            'equity': 14169291000,
+            'cash': 4037442000
         })
 
     def test_ebay_20130331(self):
@@ -836,14 +842,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-03-31',
-            'revenues': 3748000000.0,
-            'net_income': 677000000.0,
+            'revenues': 3748000000,
+            'net_income': 677000000,
             'eps_basic': 0.52,
             'eps_diluted': 0.51,
             'dividend': 0.0,
-            'assets': 38000000000.0,
-            'equity': 21112000000.0,
-            'cash': 6530000000.0
+            'assets': 38000000000,
+            'equity': 21112000000,
+            'cash': 6530000000
         })
 
     def test_ecl_20120930(self):
@@ -854,14 +860,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
-            'revenues': 3023300000.0,
-            'net_income': 238000000.0,
+            'revenues': 3023300000,
+            'net_income': 238000000,
             'eps_basic': 0.81,
             'eps_diluted': 0.8,
             'dividend': 0.2,
-            'assets': 16722800000.0,
-            'equity': 6026200000.0,
-            'cash': 324000000.0
+            'assets': 16722800000,
+            'equity': 6026200000,
+            'cash': 324000000
         })
 
     def test_ed_20130930(self):
@@ -872,14 +878,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2013-09-30',
-            'revenues': 3484000000.0,
-            'net_income': 464000000.0,
+            'revenues': 3484000000,
+            'net_income': 464000000,
             'eps_basic': 1.58,
             'eps_diluted': 1.58,
             'dividend': 0.615,
-            'assets': 41964000000.0,
-            'equity': 12166000000.0,
-            'cash': 74000000.0
+            'assets': 41964000000,
+            'equity': 12166000000,
+            'cash': 74000000
         })
 
     def test_eqt_20101231(self):
@@ -890,13 +896,13 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2010-12-31',
-            'revenues': 1322708000.0,
-            'net_income': 227700000.0,
+            'revenues': 1322708000,
+            'net_income': 227700000,
             'eps_basic': 1.58,
             'eps_diluted': 1.57,
             'dividend': 0.88,
-            'assets': 7098438000.0,
-            'equity': 3078696000.0,
+            'assets': 7098438000,
+            'equity': 3078696000,
             'cash': 0.0
         })
 
@@ -909,14 +915,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-12-31',
-            'revenues': 10302079000.0,
-            'net_income': 846673000.0,
+            'revenues': 10302079000,
+            'net_income': 846673000,
             'eps_basic': 4.77,
             'eps_diluted': 4.76,
             'dividend': 3.32,
-            'assets': 43202502000.0,
-            'equity': 9291089000.0,
-            'cash': 532569000.0
+            'assets': 43202502000,
+            'equity': 9291089000,
+            'cash': 532569000
         })
 
     def test_exc_20100930(self):
@@ -927,14 +933,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2010-09-30',
-            'revenues': 5291000000.0,
-            'net_income': 845000000.0,
+            'revenues': 5291000000,
+            'net_income': 845000000,
             'eps_basic': 1.28,
             'eps_diluted': 1.27,
             'dividend': 0.53,
-            'assets': 50948000000.0,
-            'equity': 13955000000.0,
-            'cash': 2735000000.0
+            'assets': 50948000000,
+            'equity': 13955000000,
+            'cash': 2735000000
         })
 
     def test_fast_20090630(self):
@@ -945,14 +951,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
-            'revenues': 474894000.0,
-            'net_income': 43538000.0,
+            'revenues': 474894000,
+            'net_income': 43538000,
             'eps_basic': 0.29,
             'eps_diluted': 0.29,
             'dividend': 0.0,
-            'assets': 1328684000.0,
-            'equity': 1186845000.0,
-            'cash': 173667000.0
+            'assets': 1328684000,
+            'equity': 1186845000,
+            'cash': 173667000
         })
 
     def test_fast_20090930(self):
@@ -963,14 +969,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2009-09-30',
-            'revenues': 489339000.0,
-            'net_income': 47589000.0,
+            'revenues': 489339000,
+            'net_income': 47589000,
             'eps_basic': 0.32,
             'eps_diluted': 0.32,
             'dividend': 0.0,
-            'assets': 1337764000.0,
-            'equity': 1185140000.0,
-            'cash': 193744000.0
+            'assets': 1337764000,
+            'equity': 1185140000,
+            'cash': 193744000
         })
 
     def test_fb_20120630(self):
@@ -981,14 +987,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2012-06-30',
-            'revenues': 1184000000.0,
-            'net_income': -157000000.0,
+            'revenues': 1184000000,
+            'net_income': -157000000,
             'eps_basic': -0.08,
             'eps_diluted': -0.08,
             'dividend': 0.0,
-            'assets': 14928000000.0,
-            'equity': 13309000000.0,
-            'cash': 2098000000.0
+            'assets': 14928000000,
+            'equity': 13309000000,
+            'cash': 2098000000
         })
 
     def test_fb_20121231(self):
@@ -999,14 +1005,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-12-31',
-            'revenues': 5089000000.0,
-            'net_income': 32000000.0,
+            'revenues': 5089000000,
+            'net_income': 32000000,
             'eps_basic': 0.02,
             'eps_diluted': 0.01,
             'dividend': 0.0,
-            'assets': 15103000000.0,
-            'equity': 11755000000.0,
-            'cash': 2384000000.0
+            'assets': 15103000000,
+            'equity': 11755000000,
+            'cash': 2384000000
         })
 
     def test_fll_20121231(self):
@@ -1017,14 +1023,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-12-31',
-            'revenues': 128760000.0,
-            'net_income': 27834000.0,
+            'revenues': 128760000,
+            'net_income': 27834000,
             'eps_basic': 1.49,
             'eps_diluted': None,
             'dividend': 0.0,
-            'assets': 162725000.0,
-            'equity': 81133000.0,
-            'cash': 20603000.0
+            'assets': 162725000,
+            'equity': 81133000,
+            'cash': 20603000
         })
 
     def test_flr_20080930(self):
@@ -1035,14 +1041,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2008-09-30',
-            'revenues': 5673818000.0,
-            'net_income': 183099000.0,
+            'revenues': 5673818000,
+            'net_income': 183099000,
             'eps_basic': 1.03,
             'eps_diluted': 1.01,
             'dividend': 0.125,
-            'assets': 6605120000.0,
-            'equity': 2741002000.0,
-            'cash': 1514943000.0
+            'assets': 6605120000,
+            'equity': 2741002000,
+            'cash': 1514943000
         })
 
     def test_fmc_20090630(self):
@@ -1053,14 +1059,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
-            'revenues': 700300000.0,
-            'net_income': 69300000.0,
+            'revenues': 700300000,
+            'net_income': 69300000,
             'eps_basic': 0.95,
             'eps_diluted': 0.94,
             'dividend': 0.0,
-            'assets': 3028500000.0,
-            'equity': 1101200000.0,
-            'cash': 67000000.0
+            'assets': 3028500000,
+            'equity': 1101200000,
+            'cash': 67000000
         })
 
     def test_fpl_20100331(self):
@@ -1072,14 +1078,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
-            'revenues': 3622000000.0,
-            'net_income': 556000000.0,
+            'revenues': 3622000000,
+            'net_income': 556000000,
             'eps_basic': 1.36,
             'eps_diluted': 1.36,
             'dividend': 0.5,
-            'assets': 50942000000.0,
-            'equity': 13336000000.0,
-            'cash': 1215000000.0
+            'assets': 50942000000,
+            'equity': 13336000000,
+            'cash': 1215000000
         })
 
     def test_ftr_20110930(self):
@@ -1090,14 +1096,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2011-09-30',
-            'revenues': 1290939000.0,
-            'net_income': 19481000.0,
+            'revenues': 1290939000,
+            'net_income': 19481000,
             'eps_basic': 0.02,
             'eps_diluted': 0.02,
             'dividend': 0.0,
-            'assets': 17493767000.0,
-            'equity': 4776588000.0,
-            'cash': 205817000.0
+            'assets': 17493767000,
+            'equity': 4776588000,
+            'cash': 205817000
         })
 
     def test_ge_20121231(self):
@@ -1108,14 +1114,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-12-31',
-            'revenues': 147359000000.0,
-            'net_income': 13641000000.0,
+            'revenues': 147359000000,
+            'net_income': 13641000000,
             'eps_basic': 1.29,
             'eps_diluted': 1.29,
             'dividend': 0.7,
-            'assets': 685328000000.0,
-            'equity': 128470000000.0,
-            'cash': 77356000000.0
+            'assets': 685328000000,
+            'equity': 128470000000,
+            'cash': 77356000000
         })
 
     def test_gis_20121125(self):
@@ -1126,14 +1132,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2012-11-25',
-            'revenues': 4881800000.0,
-            'net_income': 541600000.0,
+            'revenues': 4881800000,
+            'net_income': 541600000,
             'eps_basic': 0.84,
             'eps_diluted': 0.82,
             'dividend': 0.33,
-            'assets': 22952900000.0,
-            'equity': 7440000000.0,
-            'cash': 734900000.0
+            'assets': 22952900000,
+            'equity': 7440000000,
+            'cash': 734900000
         })
 
     def test_gmcr_20110625(self):
@@ -1144,14 +1150,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2011-06-25',
-            'revenues': 717210000.0,
-            'net_income': 56348000.0,
+            'revenues': 717210000,
+            'net_income': 56348000,
             'eps_basic': 0.38,
             'eps_diluted': 0.37,
             'dividend': 0.0,
-            'assets': 2874422000.0,
-            'equity': 1816646000.0,
-            'cash': 76138000.0
+            'assets': 2874422000,
+            'equity': 1816646000,
+            'cash': 76138000
         })
 
     def test_goog_20090930(self):
@@ -1162,14 +1168,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2009-09-30',
-            'revenues': 5944851000.0,
-            'net_income': 1638975000.0,
+            'revenues': 5944851000,
+            'net_income': 1638975000,
             'eps_basic': 5.18,
             'eps_diluted': 5.13,
             'dividend': 0.0,
-            'assets': 37702845000.0,
-            'equity': 33721753000.0,
-            'cash': 12087115000.0
+            'assets': 37702845000,
+            'equity': 33721753000,
+            'cash': 12087115000
         })
 
     def test_goog_20120930(self):
@@ -1180,14 +1186,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
-            'revenues': 14101000000.0,
-            'net_income': 2176000000.0,
+            'revenues': 14101000000,
+            'net_income': 2176000000,
             'eps_basic': 6.64,
             'eps_diluted': 6.53,
             'dividend': 0.0,
-            'assets': 89730000000.0,
-            'equity': 68028000000.0,
-            'cash': 16260000000.0
+            'assets': 89730000000,
+            'equity': 68028000000,
+            'cash': 16260000000
         })
 
     def test_goog_20121231(self):
@@ -1198,14 +1204,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-12-31',
-            'revenues': 50175000000.0,
-            'net_income': 10737000000.0,
+            'revenues': 50175000000,
+            'net_income': 10737000000,
             'eps_basic': 32.81,
             'eps_diluted': 32.31,
             'dividend': 0.0,
-            'assets': 93798000000.0,
-            'equity': 71715000000.0,
-            'cash': 14778000000.0
+            'assets': 93798000000,
+            'equity': 71715000000,
+            'cash': 14778000000
         })
 
     def test_goog_20130630(self):
@@ -1216,14 +1222,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
-            'revenues': 14105000000.0,
-            'net_income': 3228000000.0,
+            'revenues': 14105000000,
+            'net_income': 3228000000,
             'eps_basic': 9.71,
             'eps_diluted': 9.54,
             'dividend': 0.0,
-            'assets': 101182000000.0,
-            'equity': 78852000000.0,
-            'cash': 16164000000.0
+            'assets': 101182000000,
+            'equity': 78852000000,
+            'cash': 16164000000
         })
 
     def test_gs_20090626(self):
@@ -1234,14 +1240,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2009-06-26',
-            'revenues': 13761000000.0,
-            'net_income': 2718000000.0,
+            'revenues': 13761000000,
+            'net_income': 2718000000,
             'eps_basic': 5.27,
             'eps_diluted': 4.93,
             'dividend': 0.35,
-            'assets': 889544000000.0,
-            'equity': 62813000000.0,
-            'cash': 22177000000.0
+            'assets': 889544000000,
+            'equity': 62813000000,
+            'cash': 22177000000
         })
 
     def test_hon_20120331(self):
@@ -1252,14 +1258,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2012-03-31',
-            'revenues': 9307000000.0,
-            'net_income': 823000000.0,
+            'revenues': 9307000000,
+            'net_income': 823000000,
             'eps_basic': 1.06,
             'eps_diluted': 1.04,
             'dividend': 0.3725,
-            'assets': 40370000000.0,
-            'equity': 11842000000.0,
-            'cash': 3988000000.0
+            'assets': 40370000000,
+            'equity': 11842000000,
+            'cash': 3988000000
         })
 
     def test_hrb_20090731(self):
@@ -1270,14 +1276,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2009-07-31',
-            'revenues': 275505000.0,
-            'net_income': -133634000.0,
+            'revenues': 275505000,
+            'net_income': -133634000,
             'eps_basic': -0.4,
             'eps_diluted': -0.4,
             'dividend': 0.15,
-            'assets': 4545762000.0,
-            'equity': 1190714000.0,
-            'cash': 1006303000.0
+            'assets': 4545762000,
+            'equity': 1190714000,
+            'cash': 1006303000
         })
 
     def test_hrb_20091031(self):
@@ -1288,14 +1294,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2009-10-31',
-            'revenues': 326081000.0,
-            'net_income': -128587000.0,
+            'revenues': 326081000,
+            'net_income': -128587000,
             'eps_basic': -0.38,
             'eps_diluted': -0.38,
             'dividend': 0.15,
-            'assets': 4967359000.0,
-            'equity': 1071097000.0,
-            'cash': 1432243000.0
+            'assets': 4967359000,
+            'equity': 1071097000,
+            'cash': 1432243000
         })
 
     def test_hrb_20130731(self):
@@ -1306,14 +1312,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-07-31',
-            'revenues': 127195000.0,
-            'net_income': -115187000.0,
+            'revenues': 127195000,
+            'net_income': -115187000,
             'eps_basic': -0.42,
             'eps_diluted': -0.42,
             'dividend': 0.20,
-            'assets': 3762888000.0,
-            'equity': 1105315000.0,
-            'cash': 1163876000.0
+            'assets': 3762888000,
+            'equity': 1105315000,
+            'cash': 1163876000
         })
 
     def test_ihc_20120331(self):
@@ -1324,14 +1330,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2012-03-31',
-            'revenues': 102156000.0,
-            'net_income': 3922000.0,
+            'revenues': 102156000,
+            'net_income': 3922000,
             'eps_basic': 0.22,
             'eps_diluted': 0.22,
             'dividend': 0.0,
-            'assets': 1364411000.0,
-            'equity': 280250000.0,
-            'cash': 9286000.0
+            'assets': 1364411000,
+            'equity': 280250000,
+            'cash': 9286000
         })
 
     def test_intc_20111231(self):
@@ -1342,14 +1348,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-12-31',
-            'revenues': 53999000000.0,
-            'net_income': 12942000000.0,
+            'revenues': 53999000000,
+            'net_income': 12942000000,
             'eps_basic': 2.46,
             'eps_diluted': 2.39,
             'dividend': 0.7824,
-            'assets': 71119000000.0,
-            'equity': 45911000000.0,
-            'cash': 5065000000.0
+            'assets': 71119000000,
+            'equity': 45911000000,
+            'cash': 5065000000
         })
 
     def test_intu_20101031(self):
@@ -1360,14 +1366,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-10-31',
-            'revenues': 532000000.0,
-            'net_income': -70000000.0,
+            'revenues': 532000000,
+            'net_income': -70000000,
             'eps_basic': -0.22,
             'eps_diluted': -0.22,
             'dividend': 0.0,
-            'assets': 4943000000.0,
-            'equity': 2615000000.0,
-            'cash': 112000000.0
+            'assets': 4943000000,
+            'equity': 2615000000,
+            'cash': 112000000
         })
 
     def test_jnj_20120101(self):
@@ -1378,14 +1384,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-01-01',
-            'revenues': 65030000000.0,
-            'net_income': 9672000000.0,
+            'revenues': 65030000000,
+            'net_income': 9672000000,
             'eps_basic': 3.54,
             'eps_diluted': 3.49,
             'dividend': 2.25,
-            'assets': 113644000000.0,
-            'equity': 57080000000.0,
-            'cash': 24542000000.0
+            'assets': 113644000000,
+            'equity': 57080000000,
+            'cash': 24542000000
         })
 
     def test_jnj_20120930(self):
@@ -1396,14 +1402,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
-            'revenues': 17052000000.0,
-            'net_income': 2968000000.0,
+            'revenues': 17052000000,
+            'net_income': 2968000000,
             'eps_basic': 1.08,
             'eps_diluted': 1.05,
             'dividend': 0.61,
-            'assets': 118951000000.0,
-            'equity': 63761000000.0,
-            'cash': 15486000000.0
+            'assets': 118951000000,
+            'equity': 63761000000,
+            'cash': 15486000000
         })
 
     def test_jnj_20130630(self):
@@ -1414,14 +1420,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
-            'revenues': 17877000000.0,
-            'net_income': 3833000000.0,
+            'revenues': 17877000000,
+            'net_income': 3833000000,
             'eps_basic': 1.36,
             'eps_diluted': 1.33,
             'dividend': 0.66,
-            'assets': 124325000000.0,
-            'equity': 69665000000.0,
-            'cash': 17307000000.0
+            'assets': 124325000000,
+            'equity': 69665000000,
+            'cash': 17307000000
         })
 
     def test_jpm_20090630(self):
@@ -1432,14 +1438,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
-            'revenues': 25623000000.0,
-            'net_income': 1072000000.0,
+            'revenues': 25623000000,
+            'net_income': 1072000000,
             'eps_basic': 0.28,
             'eps_diluted': 0.28,
             'dividend': 0.05,
-            'assets': 2026642000000.0,
-            'equity': 154766000000.0,
-            'cash': 25133000000.0
+            'assets': 2026642000000,
+            'equity': 154766000000,
+            'cash': 25133000000
         })
 
     def test_jpm_20111231(self):
@@ -1450,14 +1456,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-12-31',
-            'revenues': 97234000000.0,
-            'net_income': 17568000000.0,
+            'revenues': 97234000000,
+            'net_income': 17568000000,
             'eps_basic': 4.50,
             'eps_diluted': 4.48,
             'dividend': 1.0,
-            'assets': 2265792000000.0,
-            'equity': 183573000000.0,
-            'cash': 59602000000.0
+            'assets': 2265792000000,
+            'equity': 183573000000,
+            'cash': 59602000000
         })
 
     def test_jpm_20130331(self):
@@ -1468,14 +1474,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-03-31',
-            'revenues': 25122000000.0,
-            'net_income': 6131000000.0,
+            'revenues': 25122000000,
+            'net_income': 6131000000,
             'eps_basic': 1.61,
             'eps_diluted': 1.59,
             'dividend': 0.30,
-            'assets': 2389349000000.0,
-            'equity': 207086000000.0,
-            'cash': 45524000000.0
+            'assets': 2389349000000,
+            'equity': 207086000000,
+            'cash': 45524000000
         })
 
     def test_ko_20100402(self):
@@ -1486,14 +1492,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-04-02',
-            'revenues': 7525000000.0,
-            'net_income': 1614000000.0,
+            'revenues': 7525000000,
+            'net_income': 1614000000,
             'eps_basic': 0.70,
             'eps_diluted': 0.69,
             'dividend': 0.44,
-            'assets': 47403000000.0,
-            'equity': 25157000000.0,
-            'cash': 5684000000.0
+            'assets': 47403000000,
+            'equity': 25157000000,
+            'cash': 5684000000
         })
 
     def test_ko_20101231(self):
@@ -1504,14 +1510,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2010-12-31',
-            'revenues': 35119000000.0,
-            'net_income': 11809000000.0,
+            'revenues': 35119000000,
+            'net_income': 11809000000,
             'eps_basic': 5.12,
             'eps_diluted': 5.06,
             'dividend': 1.76,
-            'assets': 72921000000.0,
-            'equity': 31317000000.0,
-            'cash': 8517000000.0
+            'assets': 72921000000,
+            'equity': 31317000000,
+            'cash': 8517000000
         })
 
     def test_ko_20120928(self):
@@ -1522,14 +1528,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-28',
-            'revenues': 12340000000.0,
-            'net_income': 2311000000.0,
+            'revenues': 12340000000,
+            'net_income': 2311000000,
             'eps_basic': 0.51,
             'eps_diluted': 0.50,
             'dividend': 0.255,
-            'assets': 86654000000.0,
-            'equity': 33590000000.0,
-            'cash': 9615000000.0
+            'assets': 86654000000,
+            'equity': 33590000000,
+            'cash': 9615000000
         })
 
     def test_krft_20120930(self):
@@ -1540,14 +1546,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
-            'revenues': 4606000000.0,
-            'net_income': 470000000.0,
+            'revenues': 4606000000,
+            'net_income': 470000000,
             'eps_basic': 0.79,
             'eps_diluted': 0.79,
             'dividend': 0.0,
-            'assets': 22284000000.0,
-            'equity': 7458000000.0,
-            'cash': 244000000.0
+            'assets': 22284000000,
+            'equity': 7458000000,
+            'cash': 244000000
         })
 
     def test_l_20100331(self):
@@ -1558,14 +1564,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
-            'revenues': 3713000000.0,
-            'net_income': 420000000.0,
+            'revenues': 3713000000,
+            'net_income': 420000000,
             'eps_basic': 0.99,
             'eps_diluted': 0.99,
             'dividend': 0.0625,
-            'assets': 75855000000.0,
-            'equity': 21993000000.0,
-            'cash': 135000000.0
+            'assets': 75855000000,
+            'equity': 21993000000,
+            'cash': 135000000
         })
 
     def test_l_20100930(self):
@@ -1576,14 +1582,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2010-09-30',
-            'revenues': 3701000000.0,
-            'net_income': 36000000.0,
+            'revenues': 3701000000,
+            'net_income': 36000000,
             'eps_basic': 0.09,
             'eps_diluted': 0.09,
             'dividend': 0.0625,
-            'assets': 76821000000.0,
-            'equity': 23499000000.0,
-            'cash': 132000000.0
+            'assets': 76821000000,
+            'equity': 23499000000,
+            'cash': 132000000
         })
 
     def test_lbtya_20100331(self):
@@ -1594,14 +1600,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
-            'revenues': 2178900000.0,
-            'net_income': 736600000.0,
+            'revenues': 2178900000,
+            'net_income': 736600000,
             'eps_basic': 2.75,
             'eps_diluted': 2.75,
             'dividend': 0.0,
-            'assets': 33083500000.0,
-            'equity': 4066000000.0,
-            'cash': 4184200000.0
+            'assets': 33083500000,
+            'equity': 4066000000,
+            'cash': 4184200000
         })
 
     def test_lcapa_20110930(self):
@@ -1612,14 +1618,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2011-09-30',
-            'revenues': 540000000.0,
-            'net_income': -42000000.0,
+            'revenues': 540000000,
+            'net_income': -42000000,
             'eps_basic': -0.07,
             'eps_diluted': -0.12,
             'dividend': 0.0,
-            'assets': 8915000000.0,
-            'equity': 5078000000.0,
-            'cash': 1937000000.0
+            'assets': 8915000000,
+            'equity': 5078000000,
+            'cash': 1937000000
         })
 
     def test_linta_20120331(self):
@@ -1630,14 +1636,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2012-03-31',
-            'revenues': 2314000000.0,
-            'net_income': 91000000.0,
+            'revenues': 2314000000,
+            'net_income': 91000000,
             'eps_basic': 0.16,
             'eps_diluted': 0.16,
             'dividend': 0.0,
-            'assets': 17144000000.0,
-            'equity': 6505000000.0,
-            'cash': 794000000.0
+            'assets': 17144000000,
+            'equity': 6505000000,
+            'cash': 794000000
         })
 
     def test_lll_20100625(self):
@@ -1648,14 +1654,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2010-06-25',
-            'revenues': -3966000000.0,  # a doc's error, should be 3966M
-            'net_income': -228000000.0,  # a doc's error, should be 227M
+            'revenues': -3966000000,  # a doc's error, should be 3966M
+            'net_income': -228000000,  # a doc's error, should be 227M
             'eps_basic': 1.97,
             'eps_diluted': 1.95,
             'dividend': 0.4,
-            'assets': 15689000000.0,
-            'equity': 6926000000.0,
-            'cash': 1023000000.0
+            'assets': 15689000000,
+            'equity': 6926000000,
+            'cash': 1023000000
         })
 
     def test_lltc_20110102(self):
@@ -1666,14 +1672,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2011-01-02',
-            'revenues': 383621000.0,
-            'net_income': 143743000.0,
+            'revenues': 383621000,
+            'net_income': 143743000,
             'eps_basic': 0.62,
             'eps_diluted': 0.62,
             'dividend': 0.23,
-            'assets': 1446186000.0,
-            'equity': 278793000.0,
-            'cash': 203308000.0
+            'assets': 1446186000,
+            'equity': 278793000,
+            'cash': 203308000
         })
 
     def test_lltc_20111002(self):
@@ -1684,14 +1690,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2011-10-02',
-            'revenues': 329920000.0,
-            'net_income': 108401000.0,
+            'revenues': 329920000,
+            'net_income': 108401000,
             'eps_basic': 0.47,
             'eps_diluted': 0.47,
             'dividend': 0.24,
-            'assets': 1659341000.0,
-            'equity': 543199000.0,
-            'cash': 163414000.0
+            'assets': 1659341000,
+            'equity': 543199000,
+            'cash': 163414000
         })
 
     def test_lly_20100930(self):
@@ -1702,14 +1708,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2010-09-30',
-            'revenues': 5654800000.0,
-            'net_income': 1302900000.0,
+            'revenues': 5654800000,
+            'net_income': 1302900000,
             'eps_basic': 1.18,
             'eps_diluted': 1.18,
             'dividend': 0.49,
-            'assets': 29904300000.0,
-            'equity': 12405500000.0,
-            'cash': 5908800000.0
+            'assets': 29904300000,
+            'equity': 12405500000,
+            'cash': 5908800000
         })
 
     def test_lmca_20120331(self):
@@ -1720,14 +1726,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2012-03-31',
-            'revenues': 440000000.0,
-            'net_income': 137000000.0,
+            'revenues': 440000000,
+            'net_income': 137000000,
             'eps_basic': 1.13,
             'eps_diluted': 1.10,
             'dividend': 0.0,
-            'assets': 7122000000.0,
-            'equity': 5321000000.0,
-            'cash': 1915000000.0
+            'assets': 7122000000,
+            'equity': 5321000000,
+            'cash': 1915000000
         })
 
     def test_lnc_20120930(self):
@@ -1739,13 +1745,13 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
             'revenues': None,  # missing in doc, should be 2954000000
-            'net_income': 402000000.0,
+            'net_income': 402000000,
             'eps_basic': 1.45,
             'eps_diluted': 1.41,
             'dividend': 0.0,
-            'assets': 215458000000.0,
-            'equity': 15237000000.0,
-            'cash': 4373000000.0
+            'assets': 215458000000,
+            'equity': 15237000000,
+            'cash': 4373000000
         })
 
     def test_ltd_20111029(self):
@@ -1756,14 +1762,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2011-10-29',
-            'revenues': 2174000000.0,
-            'net_income': 94000000.0,
+            'revenues': 2174000000,
+            'net_income': 94000000,
             'eps_basic': 0.32,
             'eps_diluted': 0.31,
             'dividend': 0.2,
-            'assets': 6517000000.0,
-            'equity': 521000000.0,
-            'cash': 498000000.0
+            'assets': 6517000000,
+            'equity': 521000000,
+            'cash': 498000000
         })
 
     def test_ltd_20130803(self):
@@ -1774,14 +1780,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-08-03',
-            'revenues': 2516000000.0,
-            'net_income': 178000000.0,
+            'revenues': 2516000000,
+            'net_income': 178000000,
             'eps_basic': 0.62,
             'eps_diluted': 0.61,
             'dividend': 0.3,
-            'assets': 6072000000.0,
-            'equity': -861000000.0,
-            'cash': 551000000.0
+            'assets': 6072000000,
+            'equity': -861000000,
+            'cash': 551000000
         })
 
     def test_luv_20110630(self):
@@ -1792,14 +1798,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2011-06-30',
-            'revenues': 4136000000.0,
-            'net_income': 161000000.0,
+            'revenues': 4136000000,
+            'net_income': 161000000,
             'eps_basic': 0.21,
             'eps_diluted': 0.21,
             'dividend': 0.0045,
-            'assets': 18945000000.0,
-            'equity': 7202000000.0,
-            'cash': 1595000000.0
+            'assets': 18945000000,
+            'equity': 7202000000,
+            'cash': 1595000000
         })
 
     def test_mchp_20120630(self):
@@ -1810,14 +1816,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2012-06-30',
-            'revenues': 352134000.0,
-            'net_income': 78710000.0,
+            'revenues': 352134000,
+            'net_income': 78710000,
             'eps_basic': 0.41,
             'eps_diluted': 0.39,
             'dividend': 0.35,
-            'assets': 3144840000.0,
-            'equity': 2017990000.0,
-            'cash': 779848000.0
+            'assets': 3144840000,
+            'equity': 2017990000,
+            'cash': 779848000
         })
 
     def test_mdlz_20130930(self):
@@ -1828,14 +1834,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2013-09-30',
-            'revenues': 8472000000.0,
-            'net_income': 1024000000.0,
+            'revenues': 8472000000,
+            'net_income': 1024000000,
             'eps_basic': 0.58,
             'eps_diluted': 0.57,
             'dividend': 0.14,
-            'assets': 74859000000.0,
-            'equity': 32492000000.0,
-            'cash': 3692000000.0
+            'assets': 74859000000,
+            'equity': 32492000000,
+            'cash': 3692000000
         })
 
     def test_mmm_20091231(self):
@@ -1846,14 +1852,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2009-12-31',
-            'revenues': 23123000000.0,
-            'net_income': 3193000000.0,
+            'revenues': 23123000000,
+            'net_income': 3193000000,
             'eps_basic': 4.56,
             'eps_diluted': 4.52,
             'dividend': 2.04,
-            'assets': 27250000000.0,
-            'equity': 13302000000.0,
-            'cash': 3040000000.0
+            'assets': 27250000000,
+            'equity': 13302000000,
+            'cash': 3040000000
         })
 
     def test_mmm_20120331(self):
@@ -1864,14 +1870,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2012-03-31',
-            'revenues': 7486000000.0,
-            'net_income': 1125000000.0,
+            'revenues': 7486000000,
+            'net_income': 1125000000,
             'eps_basic': 1.61,
             'eps_diluted': 1.59,
             'dividend': 0.59,
-            'assets': 32015000000.0,
-            'equity': 16619000000.0,
-            'cash': 2332000000.0
+            'assets': 32015000000,
+            'equity': 16619000000,
+            'cash': 2332000000
         })
 
     def test_mmm_20130630(self):
@@ -1882,14 +1888,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
-            'revenues': 7752000000.0,
-            'net_income': 1197000000.0,
+            'revenues': 7752000000,
+            'net_income': 1197000000,
             'eps_basic': 1.74,
             'eps_diluted': 1.71,
             'dividend': 0.635,
-            'assets': 34130000000.0,
-            'equity': 18319000000.0,
-            'cash': 2942000000.0
+            'assets': 34130000000,
+            'equity': 18319000000,
+            'cash': 2942000000
         })
 
     def test_mnst_20130630(self):
@@ -1900,14 +1906,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
-            'revenues': 630934000.0,
-            'net_income': 106873000.0,
+            'revenues': 630934000,
+            'net_income': 106873000,
             'eps_basic': 0.64,
             'eps_diluted': 0.62,
             'dividend': 0.0,
-            'assets': 1317842000.0,
-            'equity': 856021000.0,
-            'cash': 283839000.0
+            'assets': 1317842000,
+            'equity': 856021000,
+            'cash': 283839000
         })
 
     def test_msft_20110630(self):
@@ -1918,14 +1924,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-06-30',
-            'revenues': 69943000000.0,
-            'net_income': 23150000000.0,
+            'revenues': 69943000000,
+            'net_income': 23150000000,
             'eps_basic': 2.73,
             'eps_diluted': 2.69,
             'dividend': 0.64,
-            'assets': 108704000000.0,
-            'equity': 57083000000.0,
-            'cash': 9610000000.0
+            'assets': 108704000000,
+            'equity': 57083000000,
+            'cash': 9610000000
         })
 
     def test_msft_20111231(self):
@@ -1936,14 +1942,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2011-12-31',
-            'revenues': 20885000000.0,
-            'net_income': 6624000000.0,
+            'revenues': 20885000000,
+            'net_income': 6624000000,
             'eps_basic': 0.79,
             'eps_diluted': 0.78,
             'dividend': 0.20,
-            'assets': 112243000000.0,
-            'equity': 64121000000.0,
-            'cash': 10610000000.0
+            'assets': 112243000000,
+            'equity': 64121000000,
+            'cash': 10610000000
         })
 
     def test_msft_20130331(self):
@@ -1954,14 +1960,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2013-03-31',
-            'revenues': 20489000000.0,
-            'net_income': 6055000000.0,
+            'revenues': 20489000000,
+            'net_income': 6055000000,
             'eps_basic': 0.72,
             'eps_diluted': 0.72,
             'dividend': 0.23,
-            'assets': 134105000000.0,
-            'equity': 76688000000.0,
-            'cash': 5240000000.0
+            'assets': 134105000000,
+            'equity': 76688000000,
+            'cash': 5240000000
         })
 
     def test_mu_20121129(self):
@@ -1972,14 +1978,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2012-11-29',
-            'revenues': 1834000000.0,
-            'net_income': -275000000.0,
+            'revenues': 1834000000,
+            'net_income': -275000000,
             'eps_basic': -0.27,
             'eps_diluted': -0.27,
             'dividend': 0.0,
-            'assets': 14067000000.0,
-            'equity': 8186000000.0,
-            'cash': 2102000000.0
+            'assets': 14067000000,
+            'equity': 8186000000,
+            'cash': 2102000000
         })
 
     def test_mxim_20110326(self):
@@ -1990,14 +1996,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2011-03-26',
-            'revenues': 606775000.0,
-            'net_income': 136276000.0,
+            'revenues': 606775000,
+            'net_income': 136276000,
             'eps_basic': 0.46,
             'eps_diluted': 0.45,
             'dividend': 0.21,
-            'assets': 3452417000.0,
-            'equity': 2465040000.0,
-            'cash': 868923000.0
+            'assets': 3452417000,
+            'equity': 2465040000,
+            'cash': 868923000
         })
 
     def test_nflx_20120930(self):
@@ -2008,14 +2014,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
-            'revenues': 905089000.0,
-            'net_income': 7675000.0,
+            'revenues': 905089000,
+            'net_income': 7675000,
             'eps_basic': 0.14,
             'eps_diluted': 0.13,
             'dividend': 0.0,
-            'assets': 3808833000.0,
-            'equity': 716840000.0,
-            'cash': 370298000.0
+            'assets': 3808833000,
+            'equity': 716840000,
+            'cash': 370298000
         })
 
     def test_nvda_20130127(self):
@@ -2026,14 +2032,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2013-01-27',
-            'revenues': 4280159000.0,
-            'net_income': 562536000.0,
+            'revenues': 4280159000,
+            'net_income': 562536000,
             'eps_basic': 0.91,
             'eps_diluted': 0.9,
             'dividend': 0.075,
-            'assets': 6412245000.0,
-            'equity': 4827703000.0,
-            'cash': 732786000.0
+            'assets': 6412245000,
+            'equity': 4827703000,
+            'cash': 732786000
         })
 
     def test_nws_20090930(self):
@@ -2045,14 +2051,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2009-09-30',
-            'revenues': 7199000000.0,
-            'net_income': 571000000.0,
+            'revenues': 7199000000,
+            'net_income': 571000000,
             'eps_basic': 0.22,
             'eps_diluted': 0.22,
             'dividend': 0.06,
-            'assets': 55316000000.0,
-            'equity': 24479000000.0,
-            'cash': 7832000000.0
+            'assets': 55316000000,
+            'equity': 24479000000,
+            'cash': 7832000000
         })
 
     def test_omx_20110924(self):
@@ -2063,14 +2069,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2011-09-24',
-            'revenues': 1774767000.0,
-            'net_income': 21518000.0,
+            'revenues': 1774767000,
+            'net_income': 21518000,
             'eps_basic': 0.25,
             'eps_diluted': 0.25,
             'dividend': 0.0,
-            'assets': 4002981000.0,
-            'equity': 657636000.0,
-            'cash': 485426000.0
+            'assets': 4002981000,
+            'equity': 657636000,
+            'cash': 485426000
         })
 
     def test_omx_20111231(self):
@@ -2081,14 +2087,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-12-31',
-            'revenues': 7121167000.0,
-            'net_income': 32771000.0,
+            'revenues': 7121167000,
+            'net_income': 32771000,
             'eps_basic': 0.38,
             'eps_diluted': 0.38,
             'dividend': 0.0,
-            'assets': 4069275000.0,
-            'equity': 568993000.0,
-            'cash': 427111000.0
+            'assets': 4069275000,
+            'equity': 568993000,
+            'cash': 427111000
         })
 
     def test_omx_20121229(self):
@@ -2099,14 +2105,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-12-29',
-            'revenues': 6920384000.0,
-            'net_income': 414694000.0,
+            'revenues': 6920384000,
+            'net_income': 414694000,
             'eps_basic': 4.79,
             'eps_diluted': 4.74,
             'dividend': 0.0,
-            'assets': 3784315000.0,
-            'equity': 1034373000.0,
-            'cash': 495056000.0
+            'assets': 3784315000,
+            'equity': 1034373000,
+            'cash': 495056000
         })
 
     def test_orly_20130331(self):
@@ -2117,14 +2123,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-03-31',
-            'revenues': 1585009000.0,
-            'net_income': 154329000.0,
+            'revenues': 1585009000,
+            'net_income': 154329000,
             'eps_basic': 1.38,
             'eps_diluted': 1.36,
             'dividend': 0.0,
-            'assets': 5789541000.0,
-            'equity': 2072525000.0,
-            'cash': 205410000.0
+            'assets': 5789541000,
+            'equity': 2072525000,
+            'cash': 205410000
         })
 
     def test_pay_20110430(self):
@@ -2135,14 +2141,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2011-04-30',
-            'revenues': 292446000.0,
-            'net_income': 25200000.0,
+            'revenues': 292446000,
+            'net_income': 25200000,
             'eps_basic': 0.29,
             'eps_diluted': 0.27,
             'dividend': 0.0,
-            'assets': 1252289000.0,
-            'equity': 332172000.0,
-            'cash': 531542000.0
+            'assets': 1252289000,
+            'equity': 332172000,
+            'cash': 531542000
         })
 
     def test_pcar_20100331(self):
@@ -2153,14 +2159,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
-            'revenues': 2230700000.0,
-            'net_income': 68300000.0,
+            'revenues': 2230700000,
+            'net_income': 68300000,
             'eps_basic': 0.19,
             'eps_diluted': 0.19,
             'dividend': 0.09,
-            'assets': 13990000000.0,
-            'equity': 5092600000.0,
-            'cash': 1854700000.0
+            'assets': 13990000000,
+            'equity': 5092600000,
+            'cash': 1854700000
         })
 
     def test_pcg_20091231(self):
@@ -2171,14 +2177,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2009-12-31',
-            'revenues': 13399000000.0,
-            'net_income': 1220000000.0,
+            'revenues': 13399000000,
+            'net_income': 1220000000,
             'eps_basic': 3.25,
             'eps_diluted': 3.2,
             'dividend': 1.68,
-            'assets': 42945000000.0,
-            'equity': 10585000000.0,
-            'cash': 527000000.0
+            'assets': 42945000000,
+            'equity': 10585000000,
+            'cash': 527000000
         })
 
     def test_qep_20110630(self):
@@ -2189,13 +2195,13 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2011-06-30',
-            'revenues': 784100000.0,
-            'net_income': 92800000.0,
+            'revenues': 784100000,
+            'net_income': 92800000,
             'eps_basic': 0.52,
             'eps_diluted': 0.52,
             'dividend': 0.02,
-            'assets': 7075000000.0,
-            'equity': 3184400000.0,
+            'assets': 7075000000,
+            'equity': 3184400000,
             'cash': None
         })
 
@@ -2207,13 +2213,13 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
-            'revenues': 542400000.0,
-            'net_income': -3100000.0,
+            'revenues': 542400000,
+            'net_income': -3100000,
             'eps_basic': -0.02,
             'eps_diluted': -0.02,
             'dividend': 0.02,
-            'assets': 8996100000.0,
-            'equity': 3377000000.0,
+            'assets': 8996100000,
+            'equity': 3377000000,
             'cash': 0.0
         })
 
@@ -2225,14 +2231,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2010-06-30',
-            'revenues': 115886000.0,
-            'net_income': -25474000.0,
+            'revenues': 115886000,
+            'net_income': -25474000,
             'eps_basic': -0.31,
             'eps_diluted': -0.31,
             'dividend': 0.0,
-            'assets': 790641000.0,
-            'equity': 371216000.0,
-            'cash': 112000000.0
+            'assets': 790641000,
+            'equity': 371216000,
+            'cash': 112000000
         })
 
     def test_sbac_20110331(self):
@@ -2243,14 +2249,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2011-03-31',
-            'revenues': 167749000.0,
-            'net_income': -34251000.0,
+            'revenues': 167749000,
+            'net_income': -34251000,
             'eps_basic': -0.3,
             'eps_diluted': -0.3,
             'dividend': 0.0,
-            'assets': 3466258000.0,
-            'equity': 213078000.0,
-            'cash': 95104000.0
+            'assets': 3466258000,
+            'equity': 213078000,
+            'cash': 95104000
         })
 
     def test_shld_20101030(self):
@@ -2261,14 +2267,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2010-10-30',
-            'revenues': 9678000000.0,
-            'net_income': -218000000.0,
+            'revenues': 9678000000,
+            'net_income': -218000000,
             'eps_basic': -1.98,
             'eps_diluted': -1.98,
             'dividend': 0.0,
-            'assets': 26045000000.0,
-            'equity': 8378000000.0,
-            'cash': 790000000.0
+            'assets': 26045000000,
+            'equity': 8378000000,
+            'cash': 790000000
         })
 
     def test_sial_20101231(self):
@@ -2279,14 +2285,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2010-12-31',
-            'revenues': 2271000000.0,
-            'net_income': 384000000.0,
+            'revenues': 2271000000,
+            'net_income': 384000000,
             'eps_basic': 3.17,
             'eps_diluted': 3.12,
             'dividend': 0.0,
-            'assets': 3014000000.0,
-            'equity': 1976000000.0,
-            'cash': 569000000.0
+            'assets': 3014000000,
+            'equity': 1976000000,
+            'cash': 569000000
         })
 
     def test_siri_20100630(self):
@@ -2297,14 +2303,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2010-06-30',
-            'revenues': 699761000.0,
-            'net_income': 15272000.0,
+            'revenues': 699761000,
+            'net_income': 15272000,
             'eps_basic': 0.0,
             'eps_diluted': 0.0,
             'dividend': 0.0,
-            'assets': 7200932000.0,
-            'equity': 180428000.0,
-            'cash': 258854000.0
+            'assets': 7200932000,
+            'equity': 180428000,
+            'cash': 258854000
         })
 
     def test_siri_20120331(self):
@@ -2315,14 +2321,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2012-03-31',
-            'revenues': 804722000.0,
-            'net_income': 107774000.0,
+            'revenues': 804722000,
+            'net_income': 107774000,
             'eps_basic': 0.03,
             'eps_diluted': 0.02,
             'dividend': 0.0,
-            'assets': 7501724000.0,
-            'equity': 849579000.0,
-            'cash': 746576000.0
+            'assets': 7501724000,
+            'equity': 849579000,
+            'cash': 746576000
         })
 
     def test_spex_20130331(self):
@@ -2351,14 +2357,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2012-12-31',
-            'revenues': 1630696000.0,
-            'net_income': 254484000.0,
+            'revenues': 1630696000,
+            'net_income': 254484000,
             'eps_basic': None,
             'eps_diluted': None,
             'dividend': 0.0,
-            'assets': 2176050000.0,
-            'equity': 1302144000.0,
-            'cash': 749774000.0
+            'assets': 2176050000,
+            'equity': 1302144000,
+            'cash': 749774000
         })
 
     def test_stx_20120928(self):
@@ -2369,14 +2375,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2012-09-28',
-            'revenues': 3732000000.0,
-            'net_income': 582000000.0,
+            'revenues': 3732000000,
+            'net_income': 582000000,
             'eps_basic': 1.48,
             'eps_diluted': 1.42,
             'dividend': 0.32,
-            'assets': 9522000000.0,
-            'equity': 3535000000.0,
-            'cash': 1894000000.0
+            'assets': 9522000000,
+            'equity': 3535000000,
+            'cash': 1894000000
         })
 
     def test_stx_20121228(self):
@@ -2388,14 +2394,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2012-12-28',
-            'revenues': 3668000000.0,
-            'net_income': 492000000.0,
+            'revenues': 3668000000,
+            'net_income': 492000000,
             'eps_basic': 1.33,
             'eps_diluted': 1.3,
             'dividend': 0.7,
             'assets': 8742000000,
-            'equity': 2925000000.0,
-            'cash': 1383000000.0
+            'equity': 2925000000,
+            'cash': 1383000000
         })
 
     def test_symc_20130628(self):
@@ -2407,14 +2413,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-06-28',
-            'revenues': 1709000000.0,
-            'net_income': 157000000.0,
+            'revenues': 1709000000,
+            'net_income': 157000000,
             'eps_basic': 0.23,
             'eps_diluted': 0.22,
             'dividend': 0.15,
-            'assets': 13151000000.0,
-            'equity': 5497000000.0,
-            'cash': 3749000000.0
+            'assets': 13151000000,
+            'equity': 5497000000,
+            'cash': 3749000000
         })
 
     def test_tgt_20130803(self):
@@ -2425,14 +2431,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-08-03',
-            'revenues': 17117000000.0,
-            'net_income': 611000000.0,
+            'revenues': 17117000000,
+            'net_income': 611000000,
             'eps_basic': 0.96,
             'eps_diluted': 0.95,
             'dividend': 0.43,
-            'assets': 44162000000.0,
-            'equity': 16020000000.0,
-            'cash': 1018000000.0
+            'assets': 44162000000,
+            'equity': 16020000000,
+            'cash': 1018000000
         })
 
     def test_trv_20100331(self):
@@ -2443,14 +2449,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
-            'revenues': 6119000000.0,
-            'net_income': 647000000.0,
+            'revenues': 6119000000,
+            'net_income': 647000000,
             'eps_basic': 1.26,
             'eps_diluted': 1.25,
             'dividend': 0.0,
-            'assets': 108696000000.0,
-            'equity': 26671000000.0,
-            'cash': 251000000.0
+            'assets': 108696000000,
+            'equity': 26671000000,
+            'cash': 251000000
         })
 
     def test_tsla_20110630(self):
@@ -2461,14 +2467,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2011-06-30',
-            'revenues': 58171000.0,
-            'net_income': -58903000.0,
+            'revenues': 58171000,
+            'net_income': -58903000,
             'eps_basic': -0.60,
             'eps_diluted': -0.60,
             'dividend': 0.0,
-            'assets': 646155000.0,
-            'equity': 348452000.0,
-            'cash': 319380000.0
+            'assets': 646155000,
+            'equity': 348452000,
+            'cash': 319380000
         })
 
     def test_tsla_20111231(self):
@@ -2479,14 +2485,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-12-31',
-            'revenues': 204242000.0,
-            'net_income': -254411000.0,
+            'revenues': 204242000,
+            'net_income': -254411000,
             'eps_basic': -2.53,
             'eps_diluted': -2.53,
             'dividend': 0.0,
-            'assets': 713448000.0,
-            'equity': 224045000.0,
-            'cash': 255266000.0
+            'assets': 713448000,
+            'equity': 224045000,
+            'cash': 255266000
         })
 
     def test_tsla_20130630(self):
@@ -2497,14 +2503,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
-            'revenues': 405139000.0,
-            'net_income': -30502000.0,
+            'revenues': 405139000,
+            'net_income': -30502000,
             'eps_basic': -0.26,
             'eps_diluted': -0.26,
             'dividend': 0.0,
-            'assets': 1887844000.0,
-            'equity': 629426000.0,
-            'cash': 746057000.0
+            'assets': 1887844000,
+            'equity': 629426000,
+            'cash': 746057000
         })
 
     def test_vel_pe_20130930(self):
@@ -2515,14 +2521,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2013-09-30',
-            'revenues': 3432000000.0,
-            'net_income': 569000000.0,
+            'revenues': 3432000000,
+            'net_income': 569000000,
             'eps_basic': 0.98,
             'eps_diluted': 0.98,
             'dividend': 0.5625,
-            'assets': 48488000000.0,
-            'equity': 11242000000.0,
-            'cash': 287000000.0
+            'assets': 48488000000,
+            'equity': 11242000000,
+            'cash': 287000000
         })
 
     def test_via_20090930(self):
@@ -2533,14 +2539,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2009-09-30',
-            'revenues': 3317000000.0,
-            'net_income': 463000000.0,
+            'revenues': 3317000000,
+            'net_income': 463000000,
             'eps_basic': 0.76,
             'eps_diluted': 0.76,
             'dividend': 0.0,
-            'assets': 21307000000.0,
-            'equity': 8044000000.0,
-            'cash': 249000000.0
+            'assets': 21307000000,
+            'equity': 8044000000,
+            'cash': 249000000
         })
 
     def test_via_20091231(self):
@@ -2551,14 +2557,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2009-12-31',
-            'revenues': 13619000000.0,
-            'net_income': 1611000000.0,
+            'revenues': 13619000000,
+            'net_income': 1611000000,
             'eps_basic': 2.65,
             'eps_diluted': 2.65,
             'dividend': 0.0,
-            'assets': 21900000000.0,
-            'equity': 8677000000.0,
-            'cash': 298000000.0
+            'assets': 21900000000,
+            'equity': 8677000000,
+            'cash': 298000000
         })
 
     def test_via_20120630(self):
@@ -2570,14 +2576,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-06-30',
-            'revenues': 3241000000.0,
-            'net_income': 534000000.0,
+            'revenues': 3241000000,
+            'net_income': 534000000,
             'eps_basic': 1.02,
             'eps_diluted': 1.01,
             'dividend': 0.275,
-            'assets': 21958000000.0,
-            'equity': 7473000000.0,
-            'cash': 774000000.0
+            'assets': 21958000000,
+            'equity': 7473000000,
+            'cash': 774000000
         })
 
     def test_vno_20090630(self):
@@ -2588,14 +2594,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'FY',  # mismarked in doc, actually should be Q2
             'end_date': '2009-06-30',
-            'revenues': 678385000.0,
-            'net_income': -51904000.0,
+            'revenues': 678385000,
+            'net_income': -51904000,
             'eps_basic': -0.3,
             'eps_diluted': -0.3,
             'dividend': 0.95,
-            'assets': 21831857000.0,
-            'equity': 7122175000.0,
-            'cash': 2068498000.0
+            'assets': 21831857000,
+            'equity': 7122175000,
+            'cash': 2068498000
         })
 
     def test_vno_20111231(self):
@@ -2606,14 +2612,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-12-31',
-            'revenues': 2915665000.0,
-            'net_income': 601771000.0,
+            'revenues': 2915665000,
+            'net_income': 601771000,
             'eps_basic': 3.26,
             'eps_diluted': 3.23,
             'dividend': 0.0,
-            'assets': 20446487000.0,
-            'equity': 7508447000.0,
-            'cash': 606553000.0
+            'assets': 20446487000,
+            'equity': 7508447000,
+            'cash': 606553000
         })
 
     def test_vrsk_20120930(self):
@@ -2624,14 +2630,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
-            'revenues': 398863000.0,
-            'net_income': 82911000.0,
+            'revenues': 398863000,
+            'net_income': 82911000,
             'eps_basic': 0.5,
             'eps_diluted': 0.48,
             'dividend': 0.0,
-            'assets': 2303433000.0,
-            'equity': 142048000.0,
-            'cash': 97770000.0
+            'assets': 2303433000,
+            'equity': 142048000,
+            'cash': 97770000
         })
 
     def test_wat_20120929(self):
@@ -2642,14 +2648,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q3',
             'end_date': '2012-09-29',
-            'revenues': 449952000.0,
-            'net_income': 99109000.0,
+            'revenues': 449952000,
+            'net_income': 99109000,
             'eps_basic': 1.13,
             'eps_diluted': 1.12,
             'dividend': 0.0,
-            'assets': 2997140000.0,
-            'equity': 1329879000.0,
-            'cash': 356293000.0
+            'assets': 2997140000,
+            'equity': 1329879000,
+            'cash': 356293000
         })
 
     def test_wec_20130331(self):
@@ -2660,14 +2666,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-03-31',
-            'revenues': 1275200000.0,
-            'net_income': 176600000.0,
+            'revenues': 1275200000,
+            'net_income': 176600000,
             'eps_basic': 0.77,
             'eps_diluted': 0.76,
             'dividend': 0.34,
-            'assets': 14295300000.0,
-            'equity': 8675000000.0,
-            'cash': 24700000.0
+            'assets': 14295300000,
+            'equity': 8675000000,
+            'cash': 24700000
         })
 
     def test_wec_20130630(self):
@@ -2678,14 +2684,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
-            'revenues': 1012300000.0,
-            'net_income': 119000000.0,
+            'revenues': 1012300000,
+            'net_income': 119000000,
             'eps_basic': 0.52,
             'eps_diluted': 0.52,
             'dividend': 0.34,
-            'assets': 14317000000.0,
-            'equity': 8609000000.0,
-            'cash': 21000000.0
+            'assets': 14317000000,
+            'equity': 8609000000,
+            'cash': 21000000
         })
 
     def test_wfm_20120115(self):
@@ -2696,14 +2702,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2012-01-15',
-            'revenues': 3390940000.0,
-            'net_income': 118327000.0,
+            'revenues': 3390940000,
+            'net_income': 118327000,
             'eps_basic': 0.66,
             'eps_diluted': 0.65,
             'dividend': 0.14,
-            'assets': 4528241000.0,
-            'equity': 3182747000.0,
-            'cash': 529954000.0
+            'assets': 4528241000,
+            'equity': 3182747000,
+            'cash': 529954000
         })
 
     def test_xel_20100331(self):
@@ -2714,14 +2720,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
-            'revenues': 2807462000.0,
-            'net_income': 166058000.0,
+            'revenues': 2807462000,
+            'net_income': 166058000,
             'eps_basic': 0.36,
             'eps_diluted': 0.36,
             'dividend': 0.25,
-            'assets': 25334501000.0,
-            'equity': 7355871000.0,
-            'cash': 79504000.0
+            'assets': 25334501000,
+            'equity': 7355871000,
+            'cash': 79504000
         })
 
     def test_xel_20101231(self):
@@ -2732,14 +2738,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2010-12-31',
-            'revenues': 10310947000.0,
-            'net_income': 751593000.0,
+            'revenues': 10310947000,
+            'net_income': 751593000,
             'eps_basic': 1.63,
             'eps_diluted': 1.62,
             'dividend': 1.0,
-            'assets': 27387690000.0,
-            'equity': 8083519000.0,
-            'cash': 108437000.0
+            'assets': 27387690000,
+            'equity': 8083519000,
+            'cash': 108437000
         })
 
     def test_xom_20110331(self):
@@ -2750,14 +2756,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2011-03-31',
-            'revenues': 114004000000.0,
-            'net_income': 10650000000.0,
+            'revenues': 114004000000,
+            'net_income': 10650000000,
             'eps_basic': 2.14,
             'eps_diluted': 2.14,
             'dividend': 0.44,
-            'assets': 319533000000.0,
-            'equity': 157531000000.0,
-            'cash': 12833000000.0
+            'assets': 319533000000,
+            'equity': 157531000000,
+            'cash': 12833000000
         })
 
     def test_xom_20111231(self):
@@ -2768,14 +2774,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2011-12-31',
-            'revenues': 467029000000.0,
-            'net_income': 41060000000.0,
+            'revenues': 467029000000,
+            'net_income': 41060000000,
             'eps_basic': 8.43,
             'eps_diluted': 8.42,
             'dividend': 1.85,
-            'assets': 331052000000.0,
-            'equity': 160744000000.0,
-            'cash': 12664000000.0
+            'assets': 331052000000,
+            'equity': 160744000000,
+            'cash': 12664000000
         })
 
     def test_xom_20130630(self):
@@ -2786,14 +2792,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
-            'revenues': 106469000000.0,
-            'net_income': 6860000000.0,
+            'revenues': 106469000000,
+            'net_income': 6860000000,
             'eps_basic': 1.55,
             'eps_diluted': 1.55,
             'dividend': 0.63,
-            'assets': 341615000000.0,
-            'equity': 171588000000.0,
-            'cash': 4609000000.0
+            'assets': 341615000000,
+            'equity': 171588000000,
+            'cash': 4609000000
         })
 
     def test_xray_20091231(self):
@@ -2804,14 +2810,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2009-12-31',
-            'revenues': 2159916000.0,
-            'net_income': 274258000.0,
+            'revenues': 2159916000,
+            'net_income': 274258000,
             'eps_basic': 1.85,
             'eps_diluted': 1.83,
             'dividend': 0.2,
-            'assets': 3087932000.0,
-            'equity': 1906958000.0,
-            'cash': 450348000.0
+            'assets': 3087932000,
+            'equity': 1906958000,
+            'cash': 450348000
         })
 
     def test_xrx_20091231(self):
@@ -2822,14 +2828,14 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-K',
             'period_focus': 'FY',
             'end_date': '2009-12-31',
-            'revenues': 15179000000.0,
-            'net_income': 485000000.0,
+            'revenues': 15179000000,
+            'net_income': 485000000,
             'eps_basic': 0.56,
             'eps_diluted': 0.55,
             'dividend': 0.0,
-            'assets': 24032000000.0,
-            'equity': 7191000000.0,
-            'cash': 3799000000.0
+            'assets': 24032000000,
+            'equity': 7191000000,
+            'cash': 3799000000
         })
 
     def test_zmh_20090630(self):
@@ -2840,12 +2846,12 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
-            'revenues': 1019900000.0,
-            'net_income': 210099999.99999988,
+            'revenues': 1019900000,
+            'net_income': 210099999.99999988,  # Wired number, but it's actually in the filing
             'eps_basic': 0.98,
             'eps_diluted': 0.98,
             'dividend': 0.0,
             'assets': 7462100000.000001,
-            'equity': 5805600000.0,
-            'cash': 277500000.0
+            'equity': 5805600000,
+            'cash': 277500000
         })
