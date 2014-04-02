@@ -705,13 +705,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2010-12-31',
             'revenues': 6714000000,
+            'op_income': 810000000,
             'net_income': 624000000,
             'eps_basic': 1.84,
             'eps_diluted': 1.83,
             'dividend': 0.12,
             'assets': 8596000000,
+            'cur_assets': 2230000000,
+            'cur_liab': 1942000000,
             'equity': 3143000000,
-            'cash': 321000000
+            'cash': 321000000,
+            'cash_flow_op': 825000000,
+            'cash_flow_inv': -739000000,
+            'cash_flow_fin': -144000000
         })
 
     def test_cci_20091231(self):
