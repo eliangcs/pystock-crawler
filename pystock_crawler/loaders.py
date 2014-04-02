@@ -266,7 +266,9 @@ def memberness(context):
         texts = context.xpath('.//*[local-name()="explicitMember"]/text()').extract()
         text = str(texts).lower()
 
-        if 'country' in text:
+        if len(texts) > 1:
+            return 2
+        elif 'country' in text:
             return 2
         elif 'member' not in text:
             return 0

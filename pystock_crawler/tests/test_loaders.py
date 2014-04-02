@@ -777,13 +777,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2011-12-31',
             'revenues': 7204000000,
+            'op_income': 1041000000,
             'net_income': -369000000,
             'eps_basic': -3.39,
             'eps_diluted': -3.39,
             'dividend': 0.0,
             'assets': 15605000000,
+            'cur_assets': 370000000,
+            'cur_liab': 1153000000,
             'equity': 409000000,
-            'cash': 2000000
+            'cash': 2000000,
+            'cash_flow_op': 1737000000,
+            'cash_flow_inv': -1367000000,
+            'cash_flow_fin': -373000000
         })
 
     def test_ci_20130331(self):
