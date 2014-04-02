@@ -753,13 +753,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2011-06-30',
             'revenues': 1791000000,
+            'op_income': 270000000,
             'net_income': -107000000,
             'eps_basic': -0.98,
             'eps_diluted': -0.98,
             'dividend': 0.0,
             'assets': None,
+            'cur_assets': None,  # Seems the source filing got the wrong context date on balance sheet
+            'cur_liab': None,
             'equity': None,
-            'cash': 194000000
+            'cash': 194000000,
+            'cash_flow_op': 907000000,
+            'cash_flow_inv': -694000000,
+            'cash_flow_fin': -51000000
         })
 
     def test_chtr_20111231(self):
