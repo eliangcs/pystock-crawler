@@ -729,13 +729,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2009-12-31',
             'revenues': 1685407000,
+            'op_income': 433991000,
             'net_income': -135138000,
             'eps_basic': -0.47,
             'eps_diluted': -0.47,
             'dividend': 0.0,
             'assets': 10956606000,
+            'cur_assets': 1196033000,
+            'cur_liab': 754105000,
             'equity': 2936085000,
-            'cash': 766146000
+            'cash': 766146000,
+            'cash_flow_op': 571256000,
+            'cash_flow_inv': -172145000,
+            'cash_flow_fin': 214396000
         })
 
     def test_ccmm_20110630(self):
