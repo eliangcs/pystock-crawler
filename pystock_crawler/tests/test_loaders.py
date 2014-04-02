@@ -801,13 +801,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2013-03-31',
             'revenues': 8183000000,
+            'op_income': None,
             'net_income': 57000000,
             'eps_basic': 0.2,
             'eps_diluted': 0.2,
             'dividend': 0.04,
             'assets': 54939000000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 9660000000,
-            'cash': 3306000000
+            'cash': 3306000000,
+            'cash_flow_op': -805000000,
+            'cash_flow_inv': 962000000,
+            'cash_flow_fin': 185000000
         })
 
     def test_csc_20120928(self):
