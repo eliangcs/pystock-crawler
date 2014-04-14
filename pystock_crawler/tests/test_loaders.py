@@ -897,13 +897,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2013-05-04',
             'revenues': 1865800000,
+            'op_income': 216600000,
             'net_income': 133500000,
             'eps_basic': 0.6,
             'eps_diluted': 0.59,
             'dividend': 0.0,
             'assets': 2811800000,
+            'cur_assets': 1489800000,
+            'cur_liab': 663000000,
             'equity': 1739700000,
-            'cash': 383300000
+            'cash': 383300000,
+            'cash_flow_op': 129300000,
+            'cash_flow_inv': -88200000,
+            'cash_flow_fin': -57400000
         })
 
     def test_dtv_20110331(self):
