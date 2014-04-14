@@ -945,13 +945,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2010-06-30',
             'revenues': 2215379000,
+            'op_income': 484565000,
             'net_income': 412192000,
             'eps_basic': 0.31,
             'eps_diluted': 0.31,
             'dividend': 0.0,
             'assets': 18747584000,
+            'cur_assets': 8675313000,
+            'cur_liab': 3564261000,
             'equity': 14169291000,
-            'cash': 4037442000
+            'cash': 4037442000,
+            'cash_flow_op': 1144641000,
+            'cash_flow_inv': -835635000,
+            'cash_flow_fin': 50363000
         })
 
     def test_ebay_20130331(self):
