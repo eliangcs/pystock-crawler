@@ -849,13 +849,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
             'revenues': 881000000,
+            'op_income': 486000000,
             'net_income': 183000000,
             'eps_basic': 0.43,
             'eps_diluted': 0.43,
             'dividend': 0.0,
             'assets': 10696000000,
+            'cur_assets': 1331000000,
+            'cur_liab': 1227000000,
             'equity': 5918000000,
-            'cash': 339000000
+            'cash': 339000000,
+            'cash_flow_op': 320000000,
+            'cash_flow_inv': 288000000,
+            'cash_flow_fin': -371000000
         })
 
     def test_disca_20090930(self):
