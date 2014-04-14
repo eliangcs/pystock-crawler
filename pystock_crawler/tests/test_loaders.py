@@ -1090,13 +1090,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2010-09-30',
             'revenues': 5291000000,
+            'op_income': 1366000000,
             'net_income': 845000000,
             'eps_basic': 1.28,
             'eps_diluted': 1.27,
             'dividend': 0.53,
             'assets': 50948000000,
+            'cur_assets': 6760000000,
+            'cur_liab': 3967000000,
             'equity': 13955000000,
-            'cash': 2735000000
+            'cash': 2735000000,
+            'cash_flow_op': 4112000000,
+            'cash_flow_inv': -2037000000,
+            'cash_flow_fin': -1350000000
         })
 
     def test_fast_20090630(self):
