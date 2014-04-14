@@ -873,13 +873,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2009-09-30',
             'revenues': 854000000,
+            'op_income': 215000000,
             'net_income': 95000000,
             'eps_basic': 0.22,
             'eps_diluted': 0.22,
             'dividend': 0.0,
             'assets': 10741000000,
+            'cur_assets': 1417000000,
+            'cur_liab': 762000000,
             'equity': 6042000000,
-            'cash': 401000000
+            'cash': 401000000,
+            'cash_flow_op': 358000000,
+            'cash_flow_inv': 279000000,
+            'cash_flow_fin': -343000000
         })
 
     def test_dltr_20130504(self):
