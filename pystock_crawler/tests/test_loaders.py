@@ -1234,13 +1234,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2008-09-30',
             'revenues': 5673818000,
+            'op_income': None,
             'net_income': 183099000,
             'eps_basic': 1.03,
             'eps_diluted': 1.01,
             'dividend': 0.125,
             'assets': 6605120000,
+            'cur_assets': 4808393000,
+            'cur_liab': 3228638000,
             'equity': 2741002000,
-            'cash': 1514943000
+            'cash': 1514943000,
+            'cash_flow_op': 855198000,
+            'cash_flow_inv': -295445000,
+            'cash_flow_fin': -202011000
         })
 
     def test_fmc_20090630(self):
