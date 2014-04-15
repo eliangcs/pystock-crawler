@@ -1138,13 +1138,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2009-09-30',
             'revenues': 489339000,
+            'op_income': 76410000,
             'net_income': 47589000,
             'eps_basic': 0.32,
             'eps_diluted': 0.32,
             'dividend': 0.0,
             'assets': 1337764000,
+            'cur_assets': 998090000,
+            'cur_liab': 138744000,
             'equity': 1185140000,
-            'cash': 193744000
+            'cash': 193744000,
+            'cash_flow_op': 253184000,
+            'cash_flow_inv': -41031000,
+            'cash_flow_fin': -106943000
         })
 
     def test_fb_20120630(self):
