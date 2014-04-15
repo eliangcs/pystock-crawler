@@ -1258,13 +1258,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
             'revenues': 700300000,
+            'op_income': 97200000,
             'net_income': 69300000,
             'eps_basic': 0.95,
             'eps_diluted': 0.94,
             'dividend': 0.0,
             'assets': 3028500000,
+            'cur_assets': 1423700000,
+            'cur_liab': 717200000,
             'equity': 1101200000,
-            'cash': 67000000
+            'cash': 67000000,
+            'cash_flow_op': 173900000,
+            'cash_flow_inv': -106500000,
+            'cash_flow_fin': -33100000
         })
 
     def test_fpl_20100331(self):
