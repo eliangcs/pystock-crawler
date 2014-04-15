@@ -1186,13 +1186,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2012-12-31',
             'revenues': 5089000000,
+            'op_income': -743000000,
             'net_income': 32000000,
             'eps_basic': 0.02,
             'eps_diluted': 0.01,
             'dividend': 0.0,
             'assets': 15103000000,
+            'cur_assets': 11967000000,
+            'cur_liab': 1034000000,
             'equity': 11755000000,
-            'cash': 2384000000
+            'cash': 2384000000,
+            'cash_flow_op': 683000000,
+            'cash_flow_inv': -7170000000,
+            'cash_flow_fin': 7090000000
         })
 
     def test_fll_20121231(self):
@@ -1204,13 +1210,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2012-12-31',
             'revenues': 128760000,
+            'op_income': 49638000,
             'net_income': 27834000,
             'eps_basic': 1.49,
             'eps_diluted': None,
             'dividend': 0.0,
             'assets': 162725000,
+            'cur_assets': 32339000,
+            'cur_liab': 15332000,
             'equity': 81133000,
-            'cash': 20603000
+            'cash': 20603000,
+            'cash_flow_op': -4301000,
+            'cash_flow_inv': 45271000,
+            'cash_flow_fin': -35074000
         })
 
     def test_flr_20080930(self):
