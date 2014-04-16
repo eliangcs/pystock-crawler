@@ -1331,13 +1331,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2012-12-31',
             'revenues': 147359000000,
+            'op_income': 22887000000,
             'net_income': 13641000000,
             'eps_basic': 1.29,
             'eps_diluted': 1.29,
             'dividend': 0.7,
             'assets': 685328000000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 128470000000,
-            'cash': 77356000000
+            'cash': 77356000000,
+            'cash_flow_op': 31331000000,
+            'cash_flow_inv': 11302000000,
+            'cash_flow_fin': -51074000000
         })
 
     def test_gis_20121125(self):
