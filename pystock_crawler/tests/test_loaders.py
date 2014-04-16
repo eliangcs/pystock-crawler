@@ -1403,13 +1403,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2009-09-30',
             'revenues': 5944851000,
+            'op_income': 2073718000,
             'net_income': 1638975000,
             'eps_basic': 5.18,
             'eps_diluted': 5.13,
             'dividend': 0.0,
             'assets': 37702845000,
+            'cur_assets': 26353544000,
+            'cur_liab': 2321774000,
             'equity': 33721753000,
-            'cash': 12087115000
+            'cash': 12087115000,
+            'cash_flow_op': 6584667000,
+            'cash_flow_inv': -3245963000,
+            'cash_flow_fin': 74851000
         })
 
     def test_goog_20120930(self):
