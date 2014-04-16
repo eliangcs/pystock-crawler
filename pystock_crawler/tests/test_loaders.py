@@ -1379,13 +1379,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2011-06-25',
             'revenues': 717210000,
+            'op_income': 119310000,
             'net_income': 56348000,
             'eps_basic': 0.38,
             'eps_diluted': 0.37,
             'dividend': 0.0,
             'assets': 2874422000,
+            'cur_assets': 844998000,
+            'cur_liab': 395706000,
             'equity': 1816646000,
-            'cash': 76138000
+            'cash': 76138000,
+            'cash_flow_op': 174708000,
+            'cash_flow_inv': -1082070000,
+            'cash_flow_fin': 986183000
         })
 
     def test_goog_20090930(self):
