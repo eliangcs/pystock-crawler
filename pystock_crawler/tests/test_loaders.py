@@ -1355,13 +1355,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2012-11-25',
             'revenues': 4881800000,
+            'op_income': 829000000,
             'net_income': 541600000,
             'eps_basic': 0.84,
             'eps_diluted': 0.82,
             'dividend': 0.33,
             'assets': 22952900000,
+            'cur_assets': 4565500000,
+            'cur_liab': 5736400000,
             'equity': 7440000000,
-            'cash': 734900000
+            'cash': 734900000,
+            'cash_flow_op': 1317100000,
+            'cash_flow_inv': -1103200000,
+            'cash_flow_fin': 33700000
         })
 
     def test_gmcr_20110625(self):
