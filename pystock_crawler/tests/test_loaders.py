@@ -1571,13 +1571,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2009-10-31',
             'revenues': 326081000,
+            'op_income': -214553000,
             'net_income': -128587000,
             'eps_basic': -0.38,
             'eps_diluted': -0.38,
             'dividend': 0.15,
             'assets': 4967359000,
+            'cur_assets': 2300986000,
+            'cur_liab': 2382867000,
             'equity': 1071097000,
-            'cash': 1432243000
+            'cash': 1432243000,
+            'cash_flow_op': -786152000,
+            'cash_flow_inv': 43280000,
+            'cash_flow_fin': 511231000
         })
 
     def test_hrb_20130731(self):
