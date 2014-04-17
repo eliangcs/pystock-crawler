@@ -1595,13 +1595,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2013-07-31',
             'revenues': 127195000,
+            'op_income': -179555000,
             'net_income': -115187000,
             'eps_basic': -0.42,
             'eps_diluted': -0.42,
             'dividend': 0.20,
             'assets': 3762888000,
+            'cur_assets': 1704932000,
+            'cur_liab': 1450484000,
             'equity': 1105315000,
-            'cash': 1163876000
+            'cash': 1163876000,
+            'cash_flow_op': -318742000,
+            'cash_flow_inv': -29090000,
+            'cash_flow_fin': -229255000
         })
 
     def test_ihc_20120331(self):
