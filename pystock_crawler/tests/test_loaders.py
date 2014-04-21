@@ -2124,13 +2124,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2010-09-30',
             'revenues': 5654800000,
+            'op_income': None,
             'net_income': 1302900000,
             'eps_basic': 1.18,
             'eps_diluted': 1.18,
             'dividend': 0.49,
             'assets': 29904300000,
+            'cur_assets': 14184300000,
+            'cur_liab': 6097400000,
             'equity': 12405500000,
-            'cash': 5908800000
+            'cash': 5908800000,
+            'cash_flow_op': 4628700000,
+            'cash_flow_inv': -1595300000,
+            'cash_flow_fin': -1472300000
         })
 
     def test_lmca_20120331(self):
