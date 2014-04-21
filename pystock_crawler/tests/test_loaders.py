@@ -2173,13 +2173,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
             'revenues': None,  # missing in doc, should be 2954000000
+            'op_income': None,
             'net_income': 402000000,
             'eps_basic': 1.45,
             'eps_diluted': 1.41,
             'dividend': 0.0,
             'assets': 215458000000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 15237000000,
-            'cash': 4373000000
+            'cash': 4373000000,
+            'cash_flow_op': 666000000,
+            'cash_flow_inv': -2067000000,
+            'cash_flow_fin': 1264000000
         })
 
     def test_ltd_20111029(self):
