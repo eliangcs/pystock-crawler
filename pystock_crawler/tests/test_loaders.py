@@ -1979,13 +1979,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
             'revenues': 2178900000,
+            'op_income': 303600000,
             'net_income': 736600000,
             'eps_basic': 2.75,
             'eps_diluted': 2.75,
             'dividend': 0.0,
             'assets': 33083500000,
+            'cur_assets': 5524900000,
+            'cur_liab': 4107000000,
             'equity': 4066000000,
-            'cash': 4184200000
+            'cash': 4184200000,
+            'cash_flow_op': 803300000,
+            'cash_flow_inv': 45400000,
+            'cash_flow_fin': 170700000
         })
 
     def test_lcapa_20110930(self):
