@@ -2140,6 +2140,7 @@ class ReportItemLoaderTest(TestCaseBase):
         })
 
     def test_lmca_20120331(self):
+        # This symbol was changed to STRZA
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793412000012/lmca-20120331.xml')
         self.assert_item(item, {
             'symbol': 'LMCA',
@@ -2148,13 +2149,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2012-03-31',
             'revenues': 440000000,
+            'op_income': 89000000,
             'net_income': 137000000,
             'eps_basic': 1.13,
             'eps_diluted': 1.10,
             'dividend': 0.0,
             'assets': 7122000000,
+            'cur_assets': 3380000000,
+            'cur_liab': 547000000,
             'equity': 5321000000,
-            'cash': 1915000000
+            'cash': 1915000000,
+            'cash_flow_op': 94000000,
+            'cash_flow_inv': 581000000,
+            'cash_flow_fin': -830000000
         })
 
     def test_lnc_20120930(self):
