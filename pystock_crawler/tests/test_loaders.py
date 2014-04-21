@@ -1955,13 +1955,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2010-09-30',
             'revenues': 3701000000,
+            'op_income': None,
             'net_income': 36000000,
             'eps_basic': 0.09,
             'eps_diluted': 0.09,
             'dividend': 0.0625,
             'assets': 76821000000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 23499000000,
-            'cash': 132000000
+            'cash': 132000000,
+            'cash_flow_op': 895000000,
+            'cash_flow_inv': -426000000,
+            'cash_flow_fin': -527000000
         })
 
     def test_lbtya_20100331(self):
