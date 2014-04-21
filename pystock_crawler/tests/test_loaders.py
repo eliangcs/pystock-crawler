@@ -1883,13 +1883,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2012-09-28',
             'revenues': 12340000000,
+            'op_income': 2793000000,
             'net_income': 2311000000,
             'eps_basic': 0.51,
             'eps_diluted': 0.50,
             'dividend': 0.255,
             'assets': 86654000000,
+            'cur_assets': 29712000000,
+            'cur_liab': 27008000000,
             'equity': 33590000000,
-            'cash': 9615000000
+            'cash': 9615000000,
+            'cash_flow_op': 7840000000,
+            'cash_flow_inv': -10399000000,
+            'cash_flow_fin': -399000000
         })
 
     def test_krft_20120930(self):
