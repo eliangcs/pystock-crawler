@@ -2052,13 +2052,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2010-06-25',
             'revenues': -3966000000,  # a doc's error, should be 3966M
+            'op_income': -442000000,  # a doc's error, should be 442M
             'net_income': -228000000,  # a doc's error, should be 227M
             'eps_basic': 1.97,
             'eps_diluted': 1.95,
             'dividend': 0.4,
             'assets': 15689000000,
+            'cur_assets': 5494000000,
+            'cur_liab': 3730000000,
             'equity': 6926000000,
-            'cash': 1023000000
+            'cash': 1023000000,
+            'cash_flow_op': 589000000,
+            'cash_flow_inv': -688000000,
+            'cash_flow_fin': 132000000
         })
 
     def test_lltc_20110102(self):
