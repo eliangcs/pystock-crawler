@@ -1739,13 +1739,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
             'revenues': 17877000000,
+            'op_income': 5020000000,
             'net_income': 3833000000,
             'eps_basic': 1.36,
             'eps_diluted': 1.33,
             'dividend': 0.66,
             'assets': 124325000000,
+            'cur_assets': 51273000000,
+            'cur_liab': 23767000000,
             'equity': 69665000000,
-            'cash': 17307000000
+            'cash': 17307000000,
+            'cash_flow_op': 7328000000,
+            'cash_flow_inv': -1972000000,
+            'cash_flow_fin': -2754000000
         })
 
     def test_jpm_20090630(self):
