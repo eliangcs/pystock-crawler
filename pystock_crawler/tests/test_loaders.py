@@ -1995,6 +1995,7 @@ class ReportItemLoaderTest(TestCaseBase):
         })
 
     def test_lcapa_20110930(self):
+        # This symbol was changed to STRZA
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1507934/000150793411000006/lcapa-20110930.xml')
         self.assert_item(item, {
             'symbol': 'LCAPA',
@@ -2003,13 +2004,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2011-09-30',
             'revenues': 540000000,
+            'op_income': 111000000,
             'net_income': -42000000,
             'eps_basic': -0.07,
             'eps_diluted': -0.12,
             'dividend': 0.0,
             'assets': 8915000000,
+            'cur_assets': 3767000000,
+            'cur_liab': 3012000000,
             'equity': 5078000000,
-            'cash': 1937000000
+            'cash': 1937000000,
+            'cash_flow_op': 316000000,
+            'cash_flow_inv': -205000000,
+            'cash_flow_fin': -264000000
         })
 
     def test_linta_20120331(self):
