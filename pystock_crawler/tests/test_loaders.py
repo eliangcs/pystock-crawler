@@ -1691,13 +1691,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2012-01-01',
             'revenues': 65030000000,
+            'op_income': 13765000000,
             'net_income': 9672000000,
             'eps_basic': 3.54,
             'eps_diluted': 3.49,
             'dividend': 2.25,
             'assets': 113644000000,
+            'cur_assets': 54316000000,
+            'cur_liab': 22811000000,
             'equity': 57080000000,
-            'cash': 24542000000
+            'cash': 24542000000,
+            'cash_flow_op': 14298000000,
+            'cash_flow_inv': -4612000000,
+            'cash_flow_fin': -4452000000
         })
 
     def test_jnj_20120930(self):
