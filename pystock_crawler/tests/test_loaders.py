@@ -2189,6 +2189,7 @@ class ReportItemLoaderTest(TestCaseBase):
         })
 
     def test_ltd_20111029(self):
+        # This symbol was changed to LB
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/701985/000144530511003514/ltd-20111029.xml')
         self.assert_item(item, {
             'symbol': 'LTD',
@@ -2197,13 +2198,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2011-10-29',
             'revenues': 2174000000,
+            'op_income': 186000000,
             'net_income': 94000000,
             'eps_basic': 0.32,
             'eps_diluted': 0.31,
             'dividend': 0.2,
             'assets': 6517000000,
+            'cur_assets': 2616000000,
+            'cur_liab': 1504000000,
             'equity': 521000000,
-            'cash': 498000000
+            'cash': 498000000,
+            'cash_flow_op': 94000000,
+            'cash_flow_inv': -239000000,
+            'cash_flow_fin': -489000000
         })
 
     def test_ltd_20130803(self):
@@ -2215,13 +2222,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2013-08-03',
             'revenues': 2516000000,
+            'op_income': 358000000,
             'net_income': 178000000,
             'eps_basic': 0.62,
             'eps_diluted': 0.61,
             'dividend': 0.3,
             'assets': 6072000000,
+            'cur_assets': 2098000000,
+            'cur_liab': 1485000000,
             'equity': -861000000,
-            'cash': 551000000
+            'cash': 551000000,
+            'cash_flow_op': 354000000,
+            'cash_flow_inv': -381000000,
+            'cash_flow_fin': -194000000
         })
 
     def test_luv_20110630(self):
