@@ -2246,13 +2246,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2011-06-30',
             'revenues': 4136000000,
+            'op_income': 207000000,
             'net_income': 161000000,
             'eps_basic': 0.21,
             'eps_diluted': 0.21,
             'dividend': 0.0045,
             'assets': 18945000000,
+            'cur_assets': 5421000000,
+            'cur_liab': 5318000000,
             'equity': 7202000000,
-            'cash': 1595000000
+            'cash': 1595000000,
+            'cash_flow_op': 237000000,
+            'cash_flow_inv': -589000000,
+            'cash_flow_fin': -92000000
         })
 
     def test_mchp_20120630(self):
