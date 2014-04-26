@@ -2703,13 +2703,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2011-04-30',
             'revenues': 292446000,
+            'op_income': 37338000,
             'net_income': 25200000,
             'eps_basic': 0.29,
             'eps_diluted': 0.27,
             'dividend': 0.0,
             'assets': 1252289000,
+            'cur_assets': 935395000,
+            'cur_liab': 303590000,
             'equity': 332172000,
-            'cash': 531542000
+            'cash': 531542000,
+            'cash_flow_op': 68831000,
+            'cash_flow_inv': -20049000,
+            'cash_flow_fin': 34676000
         })
 
     def test_pcar_20100331(self):
