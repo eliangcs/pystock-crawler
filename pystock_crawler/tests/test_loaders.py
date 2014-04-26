@@ -2414,13 +2414,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2011-06-30',
             'revenues': 69943000000,
+            'op_income': 27161000000,
             'net_income': 23150000000,
             'eps_basic': 2.73,
             'eps_diluted': 2.69,
             'dividend': 0.64,
             'assets': 108704000000,
+            'cur_assets': 74918000000,
+            'cur_liab': 28774000000,
             'equity': 57083000000,
-            'cash': 9610000000
+            'cash': 9610000000,
+            'cash_flow_op': 26994000000,
+            'cash_flow_inv': -14616000000,
+            'cash_flow_fin': -8376000000
         })
 
     def test_msft_20111231(self):
