@@ -2270,13 +2270,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2012-06-30',
             'revenues': 352134000,
+            'op_income': 96333000,
             'net_income': 78710000,
             'eps_basic': 0.41,
             'eps_diluted': 0.39,
             'dividend': 0.35,
             'assets': 3144840000,
+            'cur_assets': 2229298000,
+            'cur_liab': 249989000,
             'equity': 2017990000,
-            'cash': 779848000
+            'cash': 779848000,
+            'cash_flow_op': 128971000,
+            'cash_flow_inv': 77890000,
+            'cash_flow_fin': -62768000
         })
 
     def test_mdlz_20130930(self):
