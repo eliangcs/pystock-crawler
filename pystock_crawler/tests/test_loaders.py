@@ -2390,13 +2390,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
             'revenues': 630934000,
+            'op_income': 179427000,
             'net_income': 106873000,
             'eps_basic': 0.64,
             'eps_diluted': 0.62,
             'dividend': 0.0,
             'assets': 1317842000,
+            'cur_assets': 1093822000,
+            'cur_liab': 346174000,
             'equity': 856021000,
-            'cash': 283839000
+            'cash': 283839000,
+            'cash_flow_op': 99720000,
+            'cash_flow_inv': -70580000,
+            'cash_flow_fin': 30981000
         })
 
     def test_msft_20110630(self):
