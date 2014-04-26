@@ -2558,13 +2558,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2013-01-27',
             'revenues': 4280159000,
+            'op_income': 648239000,
             'net_income': 562536000,
             'eps_basic': 0.91,
             'eps_diluted': 0.9,
             'dividend': 0.075,
             'assets': 6412245000,
+            'cur_assets': 4775258000,
+            'cur_liab': 976223000,
             'equity': 4827703000,
-            'cash': 732786000
+            'cash': 732786000,
+            'cash_flow_op': 824172000,
+            'cash_flow_inv': -743992000,
+            'cash_flow_fin': -15270000
         })
 
     def test_nws_20090930(self):
