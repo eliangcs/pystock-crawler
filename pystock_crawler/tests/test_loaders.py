@@ -2631,13 +2631,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2011-12-31',
             'revenues': 7121167000,
+            'op_income': 86486000,
             'net_income': 32771000,
             'eps_basic': 0.38,
             'eps_diluted': 0.38,
             'dividend': 0.0,
             'assets': 4069275000,
+            'cur_assets': 1938974000,
+            'cur_liab': 1013301000,
             'equity': 568993000,
-            'cash': 427111000
+            'cash': 427111000,
+            'cash_flow_op': 53679000,
+            'cash_flow_inv': -69373000,
+            'cash_flow_fin': -17952000
         })
 
     def test_omx_20121229(self):
