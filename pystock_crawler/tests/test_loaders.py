@@ -2655,13 +2655,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2012-12-29',
             'revenues': 6920384000,
+            'op_income': 24278000,
             'net_income': 414694000,
             'eps_basic': 4.79,
             'eps_diluted': 4.74,
             'dividend': 0.0,
             'assets': 3784315000,
+            'cur_assets': 1983884000,
+            'cur_liab': 1056641000,
             'equity': 1034373000,
-            'cash': 495056000
+            'cash': 495056000,
+            'cash_flow_op': 185201000,
+            'cash_flow_inv': -85244000,
+            'cash_flow_fin': -34836000
         })
 
     def test_orly_20130331(self):
