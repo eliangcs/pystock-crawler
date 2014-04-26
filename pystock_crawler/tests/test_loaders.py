@@ -2462,13 +2462,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2013-03-31',
             'revenues': 20489000000,
+            'op_income': 7612000000,
             'net_income': 6055000000,
             'eps_basic': 0.72,
             'eps_diluted': 0.72,
             'dividend': 0.23,
             'assets': 134105000000,
+            'cur_assets': 93524000000,
+            'cur_liab': 31929000000,
             'equity': 76688000000,
-            'cash': 5240000000
+            'cash': 5240000000,
+            'cash_flow_op': 9666000000,
+            'cash_flow_inv': -7660000000,
+            'cash_flow_fin': -2744000000
         })
 
     def test_mu_20121129(self):
