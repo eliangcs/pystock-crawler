@@ -1186,19 +1186,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2012-12-31',
             'revenues': 5089000000,
-            'op_income': -743000000,
+            'op_income': 538000000,
             'net_income': 32000000,
             'eps_basic': 0.02,
             'eps_diluted': 0.01,
             'dividend': 0.0,
             'assets': 15103000000,
-            'cur_assets': 11967000000,
-            'cur_liab': 1034000000,
+            'cur_assets': 11267000000,
+            'cur_liab': 1052000000,
             'equity': 11755000000,
             'cash': 2384000000,
-            'cash_flow_op': 683000000,
-            'cash_flow_inv': -7170000000,
-            'cash_flow_fin': 7090000000
+            'cash_flow_op': 1612000000,
+            'cash_flow_inv': -7024000000,
+            'cash_flow_fin': 6283000000
         })
 
     def test_fll_20121231(self):
