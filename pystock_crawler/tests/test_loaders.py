@@ -1000,7 +1000,7 @@ class ReportItemLoaderTest(TestCaseBase):
             'dividend': 0.2,
             'assets': 16722800000,
             'cur_assets': 4072900000,
-            'cur_liab': 10696600000,
+            'cur_liab': 2818700000,
             'equity': 6026200000,
             'cash': 324000000,
             'cash_flow_op': 720800000,
