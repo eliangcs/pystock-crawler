@@ -28,12 +28,16 @@ class IntermediateValue(object):
     of output processors. "Intermediate" is shorten as "imd" in later naming.
 
     '''
-    def __init__(self, local_name, value, text, context, node=None):
+    def __init__(self, local_name, value, text, context, node=None, start_date=None,
+                 end_date=None, instant=None):
         self.local_name = local_name
         self.value = value
         self.text = text
         self.context = context
         self.node = node
+        self.start_date = start_date
+        self.end_date = end_date
+        self.instant = instant
 
     def __cmp__(self, other):
         if self.value < other.value:
@@ -85,31 +89,28 @@ class MatchEndDate(object):
             log.msg(u'Cannot find context: %s in %s' % (context_id, url), log.WARNING)
             return None
 
-        date = None
+        date = instant = start_date = end_date = None
         try:
-            date = context.xpath('.//*[local-name()="instant"]/text()')[0].extract().strip()
+            instant = context.xpath('.//*[local-name()="instant"]/text()')[0].extract().strip()
         except (IndexError, ValueError):
             try:
                 end_date_str = context.xpath('.//*[local-name()="endDate"]/text()')[0].extract().strip()
                 end_date = datetime.strptime(end_date_str, DATE_FORMAT)
 
-                if self.ignore_date_range:
+                start_date_str = context.xpath('.//*[local-name()="startDate"]/text()')[0].extract().strip()
+                start_date = datetime.strptime(start_date_str, DATE_FORMAT)
+
+                if self.ignore_date_range or date_range_matches_doc_type(doc_type, start_date, end_date):
                     date = end_date
-                else:
-                    start_date_str = context.xpath('.//*[local-name()="startDate"]/text()')[0].extract().strip()
-                    start_date = datetime.strptime(start_date_str, DATE_FORMAT)
-                    delta_days = (end_date - start_date).days
-                    if doc_type == '10-Q' and delta_days < 120 and delta_days > 60:
-                        date = end_date
-                    elif doc_type == '10-K' and delta_days < 380 and delta_days > 350:
-                        date = end_date
             except (IndexError, ValueError):
                 pass
         else:
             try:
-                date = datetime.strptime(date, DATE_FORMAT)
+                instant = datetime.strptime(instant, DATE_FORMAT)
             except ValueError:
                 pass
+            else:
+                date = instant
 
         if date:
             doc_end_date = datetime.strptime(doc_end_date_str, DATE_FORMAT)
@@ -122,7 +123,8 @@ class MatchEndDate(object):
                     pass
                 else:
                     local_name = value.xpath('local-name()')[0].extract()
-                    return IntermediateValue(local_name, val, text, context, value)
+                    return IntermediateValue(local_name, val, text, context, value,
+                        start_date=start_date, end_date=end_date, instant=instant)
 
         return None
 
@@ -147,6 +149,12 @@ class ImdSumMembersOr(object):
         if imd_values:
             return self.second_func(non_members)
         return None
+
+
+def date_range_matches_doc_type(doc_type, start_date, end_date):
+    delta_days = (end_date - start_date).days
+    return ((doc_type == '10-Q' and delta_days < 120 and delta_days > 60) or
+            (doc_type == '10-K' and delta_days < 380 and delta_days > 350))
 
 
 def get_amend(values):
@@ -190,6 +198,24 @@ def imd_get_net_income(imd_values):
 def imd_get_op_income(imd_values):
     imd_values = filter(lambda v: memberness(v.context) < 2, imd_values)
     return imd_min(imd_values)
+
+
+def imd_get_cash_flow(imd_values, loader_context):
+    if len(imd_values) == 1:
+        return imd_values[0].value
+
+    doc_type = loader_context['doc_type']
+
+    within_date_range = []
+    for imd_value in imd_values:
+        if imd_value.start_date and imd_value.end_date:
+            if date_range_matches_doc_type(doc_type, imd_value.start_date, imd_value.end_date):
+                within_date_range.append(imd_value)
+
+    if within_date_range:
+        return imd_max(within_date_range)
+
+    return imd_max(imd_values)
 
 
 def imd_get_per_share_value(imd_values):
@@ -391,13 +417,13 @@ class ReportItemLoader(XmlXPathItemLoader):
     cash_out = Compose(imd_filter_member, imd_mult, imd_max)
 
     cash_flow_op_in = MapCompose(MatchEndDate(float, True))
-    cash_flow_op_out = Compose(imd_filter_member, imd_mult, imd_max)
+    cash_flow_op_out = Compose(imd_filter_member, imd_mult, imd_get_cash_flow)
 
     cash_flow_inv_in = MapCompose(MatchEndDate(float, True))
-    cash_flow_inv_out = Compose(imd_filter_member, imd_mult, imd_max)
+    cash_flow_inv_out = Compose(imd_filter_member, imd_mult, imd_get_cash_flow)
 
     cash_flow_fin_in = MapCompose(MatchEndDate(float, True))
-    cash_flow_fin_out = Compose(imd_filter_member, imd_mult, imd_max)
+    cash_flow_fin_out = Compose(imd_filter_member, imd_mult, imd_get_cash_flow)
 
     def __init__(self, *args, **kwargs):
         response = kwargs.get('response')
