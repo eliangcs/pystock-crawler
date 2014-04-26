@@ -2534,13 +2534,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2012-09-30',
             'revenues': 905089000,
+            'op_income': 16135000,
             'net_income': 7675000,
             'eps_basic': 0.14,
             'eps_diluted': 0.13,
             'dividend': 0.0,
             'assets': 3808833000,
+            'cur_assets': 2225018000,
+            'cur_liab': 1598223000,
             'equity': 716840000,
-            'cash': 370298000
+            'cash': 370298000,
+            'cash_flow_op': 150000,
+            'cash_flow_inv': -33524000,
+            'cash_flow_fin': -158000
         })
 
     def test_nvda_20130127(self):
