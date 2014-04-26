@@ -2486,13 +2486,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2012-11-29',
             'revenues': 1834000000,
+            'op_income': -157000000,
             'net_income': -275000000,
             'eps_basic': -0.27,
             'eps_diluted': -0.27,
             'dividend': 0.0,
             'assets': 14067000000,
+            'cur_assets': 5315000000,
+            'cur_liab': 2138000000,
             'equity': 8186000000,
-            'cash': 2102000000
+            'cash': 2102000000,
+            'cash_flow_op': 236000000,
+            'cash_flow_inv': -639000000,
+            'cash_flow_fin': 46000000
         })
 
     def test_mxim_20110326(self):
