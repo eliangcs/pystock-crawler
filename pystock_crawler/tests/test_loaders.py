@@ -2318,13 +2318,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2009-12-31',
             'revenues': 23123000000,
+            'op_income': 4814000000,
             'net_income': 3193000000,
             'eps_basic': 4.56,
             'eps_diluted': 4.52,
             'dividend': 2.04,
             'assets': 27250000000,
+            'cur_assets': 10795000000,
+            'cur_liab': 4897000000,
             'equity': 13302000000,
-            'cash': 3040000000
+            'cash': 3040000000,
+            'cash_flow_op': 4941000000,
+            'cash_flow_inv': -1732000000,
+            'cash_flow_fin': -2014000000
         })
 
     def test_mmm_20120331(self):
