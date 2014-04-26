@@ -2574,7 +2574,7 @@ class ReportItemLoaderTest(TestCaseBase):
         })
 
     def test_nws_20090930(self):
-        # symbol is changed to FOX
+        # This symbol was changed to FOX
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1308161/000119312509224062/nws-20090930.xml')
         self.assert_item(item, {
             'symbol': 'NWS',
@@ -2583,13 +2583,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2009-09-30',
             'revenues': 7199000000,
+            'op_income': 1042000000,
             'net_income': 571000000,
             'eps_basic': 0.22,
             'eps_diluted': 0.22,
             'dividend': 0.06,
             'assets': 55316000000,
+            'cur_assets': 17425000000,
+            'cur_liab': 10990000000,
             'equity': 24479000000,
-            'cash': 7832000000
+            'cash': 7832000000,
+            'cash_flow_op': 680000000,
+            'cash_flow_inv': -362000000,
+            'cash_flow_fin': 942000000
         })
 
     def test_omx_20110924(self):
