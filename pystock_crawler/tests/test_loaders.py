@@ -2366,13 +2366,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
             'revenues': 7752000000,
+            'op_income': 1702000000,
             'net_income': 1197000000,
             'eps_basic': 1.74,
             'eps_diluted': 1.71,
             'dividend': 0.635,
             'assets': 34130000000,
+            'cur_assets': 13983000000,
+            'cur_liab': 6335000000,
             'equity': 18319000000,
-            'cash': 2942000000
+            'cash': 2942000000,
+            'cash_flow_op': 2673000000,
+            'cash_flow_inv': -740000000,
+            'cash_flow_fin': -1727000000
         })
 
     def test_mnst_20130630(self):
