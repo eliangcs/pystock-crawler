@@ -2510,13 +2510,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2011-03-26',
             'revenues': 606775000,
+            'op_income': 163995000,
             'net_income': 136276000,
             'eps_basic': 0.46,
             'eps_diluted': 0.45,
             'dividend': 0.21,
             'assets': 3452417000,
+            'cur_assets': 1676593000,
+            'cur_liab': 391153000,
             'equity': 2465040000,
-            'cash': 868923000
+            'cash': 868923000,
+            'cash_flow_op': 615180000,
+            'cash_flow_inv': -224755000,
+            'cash_flow_fin': -348014000
         })
 
     def test_nflx_20120930(self):
