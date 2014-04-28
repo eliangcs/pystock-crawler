@@ -2895,13 +2895,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2010-12-31',
             'revenues': 2271000000,
+            'op_income': 551000000,
             'net_income': 384000000,
             'eps_basic': 3.17,
             'eps_diluted': 3.12,
             'dividend': 0.0,
             'assets': 3014000000,
+            'cur_assets': 1602000000,
+            'cur_liab': 530000000,
             'equity': 1976000000,
-            'cash': 569000000
+            'cash': 569000000,
+            'cash_flow_op': 523000000,
+            'cash_flow_inv': -182000000,
+            'cash_flow_fin': -161000000
         })
 
     def test_siri_20100630(self):
