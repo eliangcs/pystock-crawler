@@ -3040,13 +3040,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2012-12-28',
             'revenues': 3668000000,
+            'op_income': 555000000,
             'net_income': 492000000,
             'eps_basic': 1.33,
             'eps_diluted': 1.3,
             'dividend': 0.7,
             'assets': 8742000000,
+            'cur_assets': 5017000000,
+            'cur_liab': 2643000000,
             'equity': 2925000000,
-            'cash': 1383000000
+            'cash': 1383000000,
+            'cash_flow_op': 1976000000,
+            'cash_flow_inv': -453000000,
+            'cash_flow_fin': -1849000000
         })
 
     def test_symc_20130628(self):
