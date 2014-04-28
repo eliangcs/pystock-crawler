@@ -2823,13 +2823,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2010-06-30',
             'revenues': 115886000,
+            'op_income': -23724000,
             'net_income': -25474000,
             'eps_basic': -0.31,
             'eps_diluted': -0.31,
             'dividend': 0.0,
             'assets': 790641000,
+            'cur_assets': 417750000,
+            'cur_liab': 119571000,
             'equity': 371216000,
-            'cash': 112000000
+            'cash': 112000000,
+            'cash_flow_op': -22626000,
+            'cash_flow_inv': -131383000,
+            'cash_flow_fin': 58934000
         })
 
     def test_sbac_20110331(self):
