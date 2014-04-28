@@ -3065,13 +3065,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2013-06-28',
             'revenues': 1709000000,
+            'op_income': 224000000,
             'net_income': 157000000,
             'eps_basic': 0.23,
             'eps_diluted': 0.22,
             'dividend': 0.15,
             'assets': 13151000000,
+            'cur_assets': 5179000000,
+            'cur_liab': 4205000000,
             'equity': 5497000000,
-            'cash': 3749000000
+            'cash': 3749000000,
+            'cash_flow_op': 312000000,
+            'cash_flow_inv': -29000000,
+            'cash_flow_fin': -1192000000
         })
 
     def test_tgt_20130803(self):
