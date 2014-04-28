@@ -2943,13 +2943,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2012-03-31',
             'revenues': 804722000,
+            'op_income': 199238000,
             'net_income': 107774000,
             'eps_basic': 0.03,
             'eps_diluted': 0.02,
             'dividend': 0.0,
             'assets': 7501724000,
+            'cur_assets': 1337094000,
+            'cur_liab': 2236580000,
             'equity': 849579000,
-            'cash': 746576000
+            'cash': 746576000,
+            'cash_flow_op': 39948000,
+            'cash_flow_inv': -25187000,
+            'cash_flow_fin': -42175000
         })
 
     def test_spex_20130331(self):
