@@ -2966,14 +2966,20 @@ class ReportItemLoaderTest(TestCaseBase):
             'doc_type': '10-Q',
             'period_focus': 'Q1',
             'end_date': '2013-03-31',
-            'revenues': 5761.0,
-            'net_income': -3696570.0,
+            'revenues': 5761,
+            'op_income': -910547,
+            'net_income': -3696570,
             'eps_basic': -5.35,
             'eps_diluted': None,
             'dividend': 0.0,
-            'assets': 3572989.0,
-            'equity': 2857993.0,
-            'cash': 3448526.0
+            'assets': 3572989,
+            'cur_assets': 3535555,
+            'cur_liab': 453858,
+            'equity': 2857993,
+            'cash': 3448526,
+            'cash_flow_op': -1049711,
+            'cash_flow_inv': None,
+            'cash_flow_fin': None
         })
 
     def test_strza_20121231(self):
