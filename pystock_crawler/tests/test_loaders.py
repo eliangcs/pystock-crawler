@@ -2871,13 +2871,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2010-10-30',
             'revenues': 9678000000,
+            'op_income': -292000000,
             'net_income': -218000000,
             'eps_basic': -1.98,
             'eps_diluted': -1.98,
             'dividend': 0.0,
             'assets': 26045000000,
+            'cur_assets': 13123000000,
+            'cur_liab': 10682000000,
             'equity': 8378000000,
-            'cash': 790000000
+            'cash': 790000000,
+            'cash_flow_op': -1172000000,
+            'cash_flow_inv': -296000000,
+            'cash_flow_fin': 532000000
         })
 
     def test_sial_20101231(self):
