@@ -2991,13 +2991,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2012-12-31',
             'revenues': 1630696000,
+            'op_income': 405404000,
             'net_income': 254484000,
             'eps_basic': None,
             'eps_diluted': None,
             'dividend': 0.0,
             'assets': 2176050000,
+            'cur_assets': 1376911000,
+            'cur_liab': 330451000,
             'equity': 1302144000,
-            'cash': 749774000
+            'cash': 749774000,
+            'cash_flow_op': 292077000,
+            'cash_flow_inv': -16214000,
+            'cash_flow_fin': -626101000
         })
 
     def test_stx_20120928(self):
