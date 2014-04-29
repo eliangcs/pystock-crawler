@@ -3498,19 +3498,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2010-12-31',
             'revenues': 10310947000,
-            'op_income': None,
+            'op_income': 1619969000,
             'net_income': 751593000,
             'eps_basic': 1.63,
             'eps_diluted': 1.62,
             'dividend': 1.0,
             'assets': 27387690000,
-            'cur_assets': None,
-            'cur_liab': None,
+            'cur_assets': 2732643000,
+            'cur_liab': 2536533000,
             'equity': 8083519000,
             'cash': 108437000,
-            'cash_flow_op': None,
-            'cash_flow_inv': None,
-            'cash_flow_fin': None
+            'cash_flow_op': 1893942000,
+            'cash_flow_inv': -2806724000,
+            'cash_flow_fin': 905571000
         })
 
     def test_xom_20110331(self):
