@@ -3624,13 +3624,13 @@ class ReportItemLoaderTest(TestCaseBase):
             'eps_diluted': 0.55,
             'dividend': 0.0,
             'assets': 24032000000,
-            'cur_assets': None,
-            'cur_liab': None,
+            'cur_assets': 9731000000,
+            'cur_liab': 4461000000,
             'equity': 7191000000,
             'cash': 3799000000,
-            'cash_flow_op': None,
-            'cash_flow_inv': None,
-            'cash_flow_fin': None
+            'cash_flow_op': 2208000000,
+            'cash_flow_inv': -343000000,
+            'cash_flow_fin': 692000000
         })
 
     def test_zmh_20090630(self):
