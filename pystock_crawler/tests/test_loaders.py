@@ -3474,19 +3474,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
             'revenues': 2807462000,
-            'op_income': None,
+            'op_income': 403665000,
             'net_income': 166058000,
             'eps_basic': 0.36,
             'eps_diluted': 0.36,
             'dividend': 0.25,
             'assets': 25334501000,
-            'cur_assets': None,
-            'cur_liab': None,
+            'cur_assets': 2344294000,
+            'cur_liab': 2759838000,
             'equity': 7355871000,
             'cash': 79504000,
-            'cash_flow_op': None,
-            'cash_flow_inv': None,
-            'cash_flow_fin': None
+            'cash_flow_op': 555539000,
+            'cash_flow_inv': -460112000,
+            'cash_flow_fin': -121731000
         })
 
     def test_xel_20101231(self):
