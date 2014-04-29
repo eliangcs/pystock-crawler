@@ -3137,13 +3137,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2011-06-30',
             'revenues': 58171000,
+            'op_income': -58739000,
             'net_income': -58903000,
             'eps_basic': -0.60,
             'eps_diluted': -0.60,
             'dividend': 0.0,
             'assets': 646155000,
+            'cur_assets': 417758000,
+            'cur_liab': 138736000,
             'equity': 348452000,
-            'cash': 319380000
+            'cash': 319380000,
+            'cash_flow_op': -65785000,
+            'cash_flow_inv': -13011000,
+            'cash_flow_fin': 298618000
         })
 
     def test_tsla_20111231(self):
