@@ -3450,13 +3450,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2012-01-15',
             'revenues': 3390940000,
+            'op_income': 190338000,
             'net_income': 118327000,
             'eps_basic': 0.66,
             'eps_diluted': 0.65,
             'dividend': 0.14,
             'assets': 4528241000,
+            'cur_assets': 1677087000,
+            'cur_liab': 896972000,
             'equity': 3182747000,
-            'cash': 529954000
+            'cash': 529954000,
+            'cash_flow_op': 260896000,
+            'cash_flow_inv': -6963000,
+            'cash_flow_fin': 63562000
         })
 
     def test_xel_20100331(self):
@@ -3468,13 +3474,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2010-03-31',
             'revenues': 2807462000,
+            'op_income': None,
             'net_income': 166058000,
             'eps_basic': 0.36,
             'eps_diluted': 0.36,
             'dividend': 0.25,
             'assets': 25334501000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 7355871000,
-            'cash': 79504000
+            'cash': 79504000,
+            'cash_flow_op': None,
+            'cash_flow_inv': None,
+            'cash_flow_fin': None
         })
 
     def test_xel_20101231(self):
@@ -3486,13 +3498,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2010-12-31',
             'revenues': 10310947000,
+            'op_income': None,
             'net_income': 751593000,
             'eps_basic': 1.63,
             'eps_diluted': 1.62,
             'dividend': 1.0,
             'assets': 27387690000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 8083519000,
-            'cash': 108437000
+            'cash': 108437000,
+            'cash_flow_op': None,
+            'cash_flow_inv': None,
+            'cash_flow_fin': None
         })
 
     def test_xom_20110331(self):
@@ -3504,13 +3522,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q1',
             'end_date': '2011-03-31',
             'revenues': 114004000000,
+            'op_income': None,
             'net_income': 10650000000,
             'eps_basic': 2.14,
             'eps_diluted': 2.14,
             'dividend': 0.44,
             'assets': 319533000000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 157531000000,
-            'cash': 12833000000
+            'cash': 12833000000,
+            'cash_flow_op': None,
+            'cash_flow_inv': None,
+            'cash_flow_fin': None
         })
 
     def test_xom_20111231(self):
@@ -3522,13 +3546,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2011-12-31',
             'revenues': 467029000000,
+            'op_income': None,
             'net_income': 41060000000,
             'eps_basic': 8.43,
             'eps_diluted': 8.42,
             'dividend': 1.85,
             'assets': 331052000000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 160744000000,
-            'cash': 12664000000
+            'cash': 12664000000,
+            'cash_flow_op': None,
+            'cash_flow_inv': None,
+            'cash_flow_fin': None
         })
 
     def test_xom_20130630(self):
@@ -3540,13 +3570,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
             'revenues': 106469000000,
+            'op_income': None,
             'net_income': 6860000000,
             'eps_basic': 1.55,
             'eps_diluted': 1.55,
             'dividend': 0.63,
             'assets': 341615000000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 171588000000,
-            'cash': 4609000000
+            'cash': 4609000000,
+            'cash_flow_op': None,
+            'cash_flow_inv': None,
+            'cash_flow_fin': None
         })
 
     def test_xray_20091231(self):
@@ -3558,13 +3594,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2009-12-31',
             'revenues': 2159916000,
+            'op_income': None,
             'net_income': 274258000,
             'eps_basic': 1.85,
             'eps_diluted': 1.83,
             'dividend': 0.2,
             'assets': 3087932000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 1906958000,
-            'cash': 450348000
+            'cash': 450348000,
+            'cash_flow_op': None,
+            'cash_flow_inv': None,
+            'cash_flow_fin': None
         })
 
     def test_xrx_20091231(self):
@@ -3576,13 +3618,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2009-12-31',
             'revenues': 15179000000,
+            'op_income': None,
             'net_income': 485000000,
             'eps_basic': 0.56,
             'eps_diluted': 0.55,
             'dividend': 0.0,
             'assets': 24032000000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 7191000000,
-            'cash': 3799000000
+            'cash': 3799000000,
+            'cash_flow_op': None,
+            'cash_flow_inv': None,
+            'cash_flow_fin': None
         })
 
     def test_zmh_20090630(self):
@@ -3594,11 +3642,17 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
             'revenues': 1019900000,
+            'op_income': None,
             'net_income': 210099999.99999988,  # Wired number, but it's actually in the filing
             'eps_basic': 0.98,
             'eps_diluted': 0.98,
             'dividend': 0.0,
             'assets': 7462100000.000001,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 5805600000,
-            'cash': 277500000
+            'cash': 277500000,
+            'cash_flow_op': None,
+            'cash_flow_inv': None,
+            'cash_flow_fin': None
         })
