@@ -3282,13 +3282,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q3',
             'end_date': '2012-06-30',
             'revenues': 3241000000,
+            'op_income': 903000000,
             'net_income': 534000000,
             'eps_basic': 1.02,
             'eps_diluted': 1.01,
             'dividend': 0.275,
             'assets': 21958000000,
+            'cur_assets': 4511000000,
+            'cur_liab': 3716000000,
             'equity': 7473000000,
-            'cash': 774000000
+            'cash': 774000000,
+            'cash_flow_op': 1736000000,
+            'cash_flow_inv': -212000000,
+            'cash_flow_fin': -1750000000
         })
 
     def test_vno_20090630(self):
