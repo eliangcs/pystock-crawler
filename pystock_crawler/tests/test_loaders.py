@@ -3642,17 +3642,17 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2009-06-30',
             'revenues': 1019900000,
-            'op_income': None,
+            'op_income': 296499999.99999988,
             'net_income': 210099999.99999988,  # Wired number, but it's actually in the filing
             'eps_basic': 0.98,
             'eps_diluted': 0.98,
             'dividend': 0.0,
             'assets': 7462100000.000001,
-            'cur_assets': None,
-            'cur_liab': None,
+            'cur_assets': 2328700000.0000005,
+            'cur_liab': 669200000,
             'equity': 5805600000,
             'cash': 277500000,
-            'cash_flow_op': None,
-            'cash_flow_inv': None,
-            'cash_flow_fin': None
+            'cash_flow_op': 379700000.00000018,
+            'cash_flow_inv': -174300000.00000003,
+            'cash_flow_fin': -142000000.00000003
         })
