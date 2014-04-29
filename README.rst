@@ -10,24 +10,30 @@ pystock-crawler
 .. image:: https://coveralls.io/repos/eliangcs/pystock-crawler/badge.png?branch=master
     :target: https://coveralls.io/r/eliangcs/pystock-crawler
 
-``pystock-crawler`` is a utility for scraping stock historical data including:
+``pystock-crawler`` is a utility for crawling stock historical data including:
 
 * Daily prices from `Yahoo Finance`_
 * Fundamentals from 10-Q and 10-K filings on `SEC EDGAR`_
 
-Example output::
+
+Example Output
+--------------
+
+Apple's daily prices::
 
     symbol,date,open,high,low,close,volume,adj_close
-    AAPL,2014-03-14,528.79,530.89,523.00,524.69,8453600,524.69
-    AAPL,2014-03-13,537.44,539.66,529.16,530.65,9191200,530.65
-    AAPL,2014-03-12,534.51,537.35,532.00,536.61,7118800,536.61
-    AAPL,2014-03-11,535.45,538.74,532.59,536.09,9972300,536.09
+    AAPL,2014-04-28,572.80,595.75,572.55,594.09,23890900,594.09
+    AAPL,2014-04-25,564.53,571.99,563.96,571.94,13922800,571.94
+    AAPL,2014-04-24,568.21,570.00,560.73,567.77,27092600,567.77
+    ...
 
-    symbol,end_date,amend,period_focus,doc_type,revenues,net_income,eps_basic,eps_diluted,dividend,assets,cash,equity
-    GOOG,2013-03-31,False,Q1,10-Q,13969000000.0,3346000000.0,10.13,9.94,0.0,96692000000.0,15375000000.0,75473000000.0
-    GOOG,2013-06-30,False,Q2,10-Q,14105000000.0,3228000000.0,9.71,9.54,0.0,101182000000.0,16164000000.0,78852000000.0
-    GOOG,2013-09-30,False,Q3,10-Q,14893000000.0,2970000000.0,8.9,8.75,0.0,105068000000.0,15242000000.0,82989000000.0
-    GOOG,2013-12-31,False,FY,10-K,59825000000.0,12920000000.0,38.82,38.13,0.0,110920000000.0,18898000000.0,87309000000.0
+Google's fundamentals::
+
+    symbol,end_date,amend,period_focus,doc_type,revenues,op_income,net_income,eps_basic,eps_diluted,dividend,assets,cur_assets,cur_liab,cash,equity,cash_flow_op,cash_flow_inv,cash_flow_fin
+    GOOG,2009-06-30,False,Q2,10-Q,5522897000.0,1873894000.0,1484545000.0,4.7,4.66,0.0,35158760000.0,23834853000.0,2000962000.0,11911351000.0,31594856000.0,3858684000.0,-635974000.0,46354000.0
+    GOOG,2009-09-30,False,Q3,10-Q,5944851000.0,2073718000.0,1638975000.0,5.18,5.13,0.0,37702845000.0,26353544000.0,2321774000.0,12087115000.0,33721753000.0,6584667000.0,-3245963000.0,74851000.0
+    GOOG,2009-12-31,False,FY,10-K,23650563000.0,8312186000.0,6520448000.0,20.62,20.41,0.0,40496778000.0,29166958000.0,2747467000.0,10197588000.0,36004224000.0,9316198000.0,-8019205000.0,233412000.0
+    ...
 
 
 Installation
@@ -95,7 +101,7 @@ Use ``prices`` to crawl price data and ``reports`` to crawl fundamentals.
 that lists symbols line by line. For example, the inline string can be
 something like ``AAPL,GOOG,FB``. And the text file may look like this::
 
-    # Comment to be ignored
+    # This line is comment
     AAPL    Put anything you want here
     GOOG    Since the text here is ignored
     FB
@@ -109,6 +115,12 @@ stdout.
 The rows in the output CSV file are in an arbitrary order by default. Use
 ``--sort`` to sort them by symbols and dates. But if you have a large output
 file, don't use ``--sort`` because it will be slow and eat a lot of memory.
+
+**NOTE**: The crawler stores HTTP cache in a directory named ``.scrapy`` under
+your current working directory. The cache helps speed up the crawling process
+next time your fetch same web pages again. The cache can be quite huge. If you
+don't need it, just delete the ``.scrapy`` directory after you've done
+crawling.
 
 
 Developer Guide
