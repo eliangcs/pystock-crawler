@@ -3185,13 +3185,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
             'revenues': 405139000,
+            'op_income': -11792000,
             'net_income': -30502000,
             'eps_basic': -0.26,
             'eps_diluted': -0.26,
             'dividend': 0.0,
             'assets': 1887844000,
+            'cur_assets': 1129542000,
+            'cur_liab': 486545000,
             'equity': 629426000,
-            'cash': 746057000
+            'cash': 746057000,
+            'cash_flow_op': 25886000,
+            'cash_flow_inv': -82410000,
+            'cash_flow_fin': 600691000
         })
 
     def test_vel_pe_20130930(self):
