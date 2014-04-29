@@ -3330,13 +3330,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',
             'end_date': '2011-12-31',
             'revenues': 2915665000,
+            'op_income': 856153000,
             'net_income': 601771000,
             'eps_basic': 3.26,
             'eps_diluted': 3.23,
             'dividend': 0.0,
             'assets': 20446487000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 7508447000,
-            'cash': 606553000
+            'cash': 606553000,
+            'cash_flow_op': 702499000,
+            'cash_flow_inv': -164761000,
+            'cash_flow_fin': -621974000
         })
 
     def test_vrsk_20120930(self):
