@@ -3426,13 +3426,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'Q2',
             'end_date': '2013-06-30',
             'revenues': 1012300000,
+            'op_income': 229500000,
             'net_income': 119000000,
             'eps_basic': 0.52,
             'eps_diluted': 0.52,
             'dividend': 0.34,
             'assets': 14317000000,
+            'cur_assets': 1271100000,
+            'cur_liab': 1280700000,
             'equity': 8609000000,
-            'cash': 21000000
+            'cash': 21000000,
+            'cash_flow_op': 681500000,
+            'cash_flow_inv': -336600000,
+            'cash_flow_fin': -359500000
         })
 
     def test_wfm_20120115(self):
