@@ -3306,13 +3306,19 @@ class ReportItemLoaderTest(TestCaseBase):
             'period_focus': 'FY',  # mismarked in doc, actually should be Q2
             'end_date': '2009-06-30',
             'revenues': 678385000,
+            'op_income': 221139000,
             'net_income': -51904000,
             'eps_basic': -0.3,
             'eps_diluted': -0.3,
             'dividend': 0.95,
             'assets': 21831857000,
+            'cur_assets': None,
+            'cur_liab': None,
             'equity': 7122175000,
-            'cash': 2068498000
+            'cash': 2068498000,
+            'cash_flow_op': 379439000,
+            'cash_flow_inv': -219310000,
+            'cash_flow_fin': 381516000
         })
 
     def test_vno_20111231(self):
