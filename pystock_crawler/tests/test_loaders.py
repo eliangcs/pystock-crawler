@@ -3528,13 +3528,13 @@ class ReportItemLoaderTest(TestCaseBase):
             'eps_diluted': 2.14,
             'dividend': 0.44,
             'assets': 319533000000,
-            'cur_assets': None,
-            'cur_liab': None,
+            'cur_assets': 72022000000,
+            'cur_liab': 73576000000,
             'equity': 157531000000,
             'cash': 12833000000,
-            'cash_flow_op': None,
-            'cash_flow_inv': None,
-            'cash_flow_fin': None
+            'cash_flow_op': 16856000000,
+            'cash_flow_inv': -5353000000,
+            'cash_flow_fin': -6749000000
         })
 
     def test_xom_20111231(self):
