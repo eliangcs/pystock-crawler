@@ -13,8 +13,9 @@ EXPORT_FIELDS = (
     'symbol', 'date', 'open', 'high', 'low', 'close', 'volume', 'adj_close',
 
     # Report columns
-    'end_date', 'amend', 'period_focus', 'doc_type', 'revenues', 'net_income',
-    'eps_basic', 'eps_diluted', 'dividend', 'assets', 'cash', 'equity',
+    'end_date', 'amend', 'period_focus', 'doc_type', 'revenues', 'op_income', 'net_income',
+    'eps_basic', 'eps_diluted', 'dividend', 'assets', 'cur_assets', 'cur_liab', 'cash', 'equity',
+    'cash_flow_op', 'cash_flow_inv', 'cash_flow_fin',
 )
 
 FEED_EXPORTERS = {
