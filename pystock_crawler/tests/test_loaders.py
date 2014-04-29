@@ -3576,13 +3576,13 @@ class ReportItemLoaderTest(TestCaseBase):
             'eps_diluted': 1.55,
             'dividend': 0.63,
             'assets': 341615000000,
-            'cur_assets': None,
-            'cur_liab': None,
+            'cur_assets': 62844000000,
+            'cur_liab': 72688000000,
             'equity': 171588000000,
             'cash': 4609000000,
-            'cash_flow_op': None,
-            'cash_flow_inv': None,
-            'cash_flow_fin': None
+            'cash_flow_op': 21275000000,
+            'cash_flow_inv': -18547000000,
+            'cash_flow_fin': -7409000000
         })
 
     def test_xray_20091231(self):
