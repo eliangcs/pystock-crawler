@@ -56,3 +56,8 @@ class PriceItem(Item):
     low = Field()
     adj_close = Field()
     volume = Field()
+
+
+class SymbolItem(Item):
+    symbol = Field()
+    name = Field()

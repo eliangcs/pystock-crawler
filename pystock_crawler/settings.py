@@ -19,7 +19,8 @@ EXPORT_FIELDS = (
 )
 
 FEED_EXPORTERS = {
-    'csv': 'pystock_crawler.exporters.CsvItemExporter2'
+    'csv': 'pystock_crawler.exporters.CsvItemExporter2',
+    'symbollist': 'pystock_crawler.exporters.SymbolListExporter'
 }
 
 HTTPCACHE_ENABLED = True

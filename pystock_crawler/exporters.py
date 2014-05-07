@@ -1,5 +1,5 @@
 from scrapy.conf import settings
-from scrapy.contrib.exporter import CsvItemExporter
+from scrapy.contrib.exporter import BaseItemExporter, CsvItemExporter
 
 
 class CsvItemExporter2(CsvItemExporter):
@@ -27,3 +27,13 @@ class CsvItemExporter2(CsvItemExporter):
             else:
                 self.fields_to_export = item_fields
             self.csv_writer.writerow(self.fields_to_export)
+
+
+class SymbolListExporter(BaseItemExporter):
+
+    def __init__(self, file, **kwargs):
+        self._configure(kwargs, dont_fail=True)
+        self.file = file
+
+    def export_item(self, item):
+        self.file.write('%s\t%s\n' % (item['symbol'], item['name']))
