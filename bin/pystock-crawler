@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 '''
 Usage:
+  pystock-crawler symbols <exchanges> (-o OUTPUT) [-l LOGFILE] [--sort]
   pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD] [-l LOGFILE] [--sort]
   pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]  [-l LOGFILE] [--sort]
   pystock-crawler (-h | --help)
@@ -66,6 +67,23 @@ project = pystock_crawler
         os.rename(filename_bak, filename)
 
 
+def run_scrapy_command(cmd):
+    log.msg('Command: %s' % cmd)
+    with tmp_scrapy_cfg():
+        os.system(cmd)
+
+
+def crawl_symbols(exchanges, output, log_file):
+    command = 'scrapy crawl nasdaq -a exchanges="%s" -t symbollist' % exchanges
+
+    if output:
+        command += ' -o "%s"' % output
+    if log_file:
+        command += ' -s LOG_FILE="%s"' % log_file
+
+    run_scrapy_command(command)
+
+
 def crawl(spider, symbols, start_date, end_date, output, log_file):
     command = 'scrapy crawl %s -a symbols="%s" -t csv' % (spider, symbols)
 
@@ -78,10 +96,21 @@ def crawl(spider, symbols, start_date, end_date, output, log_file):
     if log_file:
         command += ' -s LOG_FILE="%s"' % log_file
 
-    log.msg('Command: %s' % command)
+    run_scrapy_command(command)
 
-    with tmp_scrapy_cfg():
-        os.system(command)
+
+def sort_symbols(filename):
+    log.msg(u'Sorting: %s' % filename)
+
+    with codecs.open(filename, 'r', 'utf-8') as f:
+        lines = [line for line in f]
+
+    lines = sorted(lines)
+
+    with codecs.open(filename, 'w', 'utf-8') as f:
+        f.writelines(lines)
+
+    log.msg(u'Sorted: %s' % filename)
 
 
 def sort_csv(filename):
@@ -137,6 +166,12 @@ def main():
         crawl(spider, symbols, start_date, end_date, output, log_file)
         if sorting and output:
             sort_csv(output)
+    elif args['symbols']:
+        log.start(logfile=log_file)
+        exchanges = args.get('<exchanges>')
+        crawl_symbols(exchanges, output, log_file)
+        if sorting and output:
+            sort_symbols(output)
     elif args['-v'] or args['--version']:
         print_version()
 
