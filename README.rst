@@ -96,6 +96,7 @@ Usage
 Type ``pystock-crawler -h`` to see command help::
 
     Usage:
+      pystock-crawler symbols <exchanges> (-o OUTPUT) [-l LOGFILE] [--sort]
       pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD] [-l LOGFILE] [--sort]
       pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]  [-l LOGFILE] [--sort]
       pystock-crawler (-h | --help)
@@ -109,7 +110,14 @@ Type ``pystock-crawler -h`` to see command help::
       -l LOGFILE    Log output [default: ]
       --sort        Sort the result
 
-Use ``prices`` to crawl price data and ``reports`` to crawl fundamentals.
+There are three commands available:
+
+* ``pystock-crawler symbols`` grabs ticker symbol lists
+* ``pystock-crawler prices`` grabs daily prices
+* ``pystock-crawler reports`` grabs fundamentals
+
+``<exchanges>`` is a comma-separated string that specify the stock exchanges
+you want to include. Only NYSE and NASDAQ are supported.
 
 ``<symbols>`` can be an inline string separated with commas or a text file
 that lists symbols line by line. For example, the inline string can be
