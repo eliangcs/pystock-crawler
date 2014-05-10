@@ -19,6 +19,7 @@ class TestCaseBase(unittest.TestCase):
 
     def assert_item(self, item, expected):
         self.assertEqual(item.get('symbol'), expected.get('symbol'))
+        self.assertEqual(item.get('name'), expected.get('name'))
         self.assertEqual(item.get('amend'), expected.get('amend'))
         self.assertEqual(item.get('doc_type'), expected.get('doc_type'))
         self.assertEqual(item.get('period_focus'), expected.get('period_focus'))
