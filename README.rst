@@ -10,14 +10,23 @@ pystock-crawler
 .. image:: https://coveralls.io/repos/eliangcs/pystock-crawler/badge.png?branch=master
     :target: https://coveralls.io/r/eliangcs/pystock-crawler
 
-``pystock-crawler`` is a utility for crawling stock historical data including:
+``pystock-crawler`` is a utility for crawling historical data of US stocks,
+including:
 
+* Ticker symbols listed in NYSE and NASDAQ from `NASDAQ`_
 * Daily prices from `Yahoo Finance`_
 * Fundamentals from 10-Q and 10-K filings on `SEC EDGAR`_
 
 
 Example Output
 --------------
+
+NYSE ticker symbols::
+
+    DDD   3D Systems Corporation
+    MMM   3M Company
+    WBAI  500.com Limited
+    ...
 
 Apple's daily prices::
 
@@ -44,7 +53,8 @@ Prerequisites:
 * Python 2.7
 
 ``pystock-crawler`` is based on Scrapy_, so you will also need to install
-prerequisites such as lxml_ and libffi_ for Scrapy and its dependencies.
+prerequisites such as lxml_ and libffi_ for Scrapy and its dependencies. See
+`Scrapy's installation guide`_ for more details.
 
 Install with `virtualenv`_ (recommended)::
 
@@ -74,6 +84,10 @@ Quickstart
 logs to ``./crawling.log``::
 
     pystock-crawler reports ./nyse.txt -o out.csv -l ./crawling.log
+
+**Example 5.** All ticker symbols in NYSE and NASDAQ::
+
+    pystock-crawler symbols NYSE,NASDAQ -o out.txt
 
 
 Usage
@@ -151,7 +165,9 @@ take some time and disk space. If you want to delete test data, just delete
 
 .. _libffi: https://sourceware.org/libffi/
 .. _lxml: http://lxml.de/
+.. _NASDAQ: http://www.nasdaq.com/
 .. _Scrapy: http://scrapy.org/
+.. _Scrapy's installation guide: http://doc.scrapy.org/en/latest/intro/install.html
 .. _SEC EDGAR: http://www.sec.gov/edgar/searchedgar/companysearch.html
 .. _virtualenv: http://www.virtualenv.org/
 .. _virtualenvwrapper: http://virtualenvwrapper.readthedocs.org/
