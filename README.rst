@@ -116,7 +116,7 @@ There are three commands available:
 * ``pystock-crawler prices`` grabs daily prices
 * ``pystock-crawler reports`` grabs fundamentals
 
-``<exchanges>`` is a comma-separated string that specify the stock exchanges
+``<exchanges>`` is a comma-separated string that specifies the stock exchanges
 you want to include. Only NYSE and NASDAQ are supported.
 
 ``<symbols>`` can be an inline string separated with commas or a text file
