@@ -1,8 +1,12 @@
 import cStringIO
+import re
 
 from scrapy.spider import Spider
 
 from pystock_crawler.items import SymbolItem
+
+
+RE_SYMBOL = re.compile(r'^[A-Z]+$')
 
 
 def generate_urls(exchanges):
@@ -31,7 +35,8 @@ class NasdaqSpider(Spider):
             for line in file_like:
                 tokens = line.split(',')
                 symbol = tokens[0].strip('"')
-                name = tokens[1].strip('"')
-                yield SymbolItem(symbol=symbol, name=name)
+                if RE_SYMBOL.match(symbol):
+                    name = tokens[1].strip('"')
+                    yield SymbolItem(symbol=symbol, name=name)
         finally:
             file_like.close()
