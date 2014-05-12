@@ -117,7 +117,11 @@ def sort_csv(filename):
     log.msg(u'Sorting: %s' % filename)
 
     with codecs.open(filename, 'r', 'utf-8') as f:
-        headers = f.next()
+        try:
+            headers = f.next()
+        except StopIteration:
+            log.msg(u'No need to sort empty file: %s' % filename)
+            return
         lines = [line for line in f]
 
     def line_cmp(line1, line2):
