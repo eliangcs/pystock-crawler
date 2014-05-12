@@ -119,6 +119,10 @@ There are three commands available:
 ``<exchanges>`` is a comma-separated string that specifies the stock exchanges
 you want to include. Only NYSE and NASDAQ are supported.
 
+The output file of ``pystock-crawler symbols`` can be used for ``<symbols>``
+argument in ``pystock-crawler prices`` and ``pystock-crawler reports``
+commands.
+
 ``<symbols>`` can be an inline string separated with commas or a text file
 that lists symbols line by line. For example, the inline string can be
 something like ``AAPL,GOOG,FB``. And the text file may look like this::
@@ -128,8 +132,10 @@ something like ``AAPL,GOOG,FB``. And the text file may look like this::
     GOOG    Since the text here is ignored
     FB
 
-Use ``-o`` to specify the output file. CSV is the only supported output format
-for now.
+Use ``-o`` to specify the output file. For ``pystock-crawler symbols``
+command, the output format is a simple text file. For
+``pystock-crawler prices`` and ``pystock-crawler reports`` the output format
+is CSV.
 
 ``-l`` is where the crawling logs go to. If not specified, the logs go to
 stdout.
