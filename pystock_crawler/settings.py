@@ -39,3 +39,5 @@ SPIDER_MODULES = ['pystock_crawler.spiders']
 #USER_AGENT = 'pystock-crawler (+http://www.yourdomain.com)'
 
 COOKIES_ENABLED = False
+
+AUTOTHROTTLE_ENABLED = True
