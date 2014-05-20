@@ -38,6 +38,10 @@ SPIDER_MODULES = ['pystock_crawler.spiders']
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'pystock-crawler (+http://www.yourdomain.com)'
 
+CONCURRENT_REQUESTS_PER_DOMAIN = 16
+
 COOKIES_ENABLED = False
 
 AUTOTHROTTLE_ENABLED = True
+
+RETRY_TIMES = 4
