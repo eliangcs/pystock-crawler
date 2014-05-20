@@ -45,3 +45,10 @@ COOKIES_ENABLED = False
 #AUTOTHROTTLE_ENABLED = True
 
 RETRY_TIMES = 4
+
+EXTENSIONS = {
+    'pystock_crawler.throttle.PassiveThrottle': 0
+}
+
+PASSIVETHROTTLE_ENABLED = True
+#PASSIVETHROTTLE_DEBUG = True
