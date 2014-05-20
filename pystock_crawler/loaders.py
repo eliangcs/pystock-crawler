@@ -16,7 +16,7 @@ MAX_PER_SHARE_VALUE = 1000.0
 
 # If number of characters of response body exceeds this value,
 # remove some useless text defined by RE_XML_GARBAGE to reduce memory usage
-THRESHOLD_TO_CLEAN = 50000000
+THRESHOLD_TO_CLEAN = 20000000
 
 # Used to get rid of "<tag>LONG STRING...</tag>"
 RE_XML_GARBAGE = re.compile(r'>([^<]{100,})<')
