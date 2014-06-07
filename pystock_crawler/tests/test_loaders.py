@@ -3200,6 +3200,30 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash_flow_fin': 600691000
         })
 
+    def test_utmd_20111231(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/706698/000109690612002585/utmd-20111231.xml')
+        self.assert_item(item, {
+            'symbol': 'UTMD',
+            'amend': False,
+            'doc_type': '10-K',
+            'period_focus': 'FY',
+            'end_date': '2011-12-31',
+            'revenues': 37860000,
+            'op_income': 11842000,
+            'net_income': 7414000,
+            'eps_basic': 2.04,
+            'eps_diluted': 2.03,
+            'dividend': 0.0,
+            'assets': 76389000,
+            'cur_assets': 17016000,
+            'cur_liab': 9631000,
+            'equity': 40757000,
+            'cash': 6534000,
+            'cash_flow_op': 11365000,
+            'cash_flow_inv': -26685000,
+            'cash_flow_fin': 18078000
+        })
+
     def test_vel_pe_20130930(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/103682/000119312513427104/d-20130930.xml')
         self.assert_item(item, {
