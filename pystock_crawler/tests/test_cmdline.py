@@ -52,6 +52,8 @@ class CrawlSymbolsTest(unittest.TestCase):
     def get_output_content(self):
         output_path = self.args['output']
 
+        os.system('touch %s' % os.path.join(TEST_DIR, 'hello'))
+
         with open(self.args['log_file']) as f:
             print f.read()
         print os.getcwd()
