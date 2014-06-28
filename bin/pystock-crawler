@@ -167,6 +167,8 @@ def main():
     else:
         spider = None
 
+    if symbols and os.path.exists(symbols):
+        symbols = os.path.abspath(symbols)
     if output:
         output = os.path.abspath(output)
     if log_file:

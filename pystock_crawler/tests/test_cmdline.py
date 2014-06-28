@@ -102,3 +102,64 @@ class CrawlSymbolsTest(unittest.TestCase):
         self.assert_nyse_and_nasdaq_output()
         self.assert_log()
         self.assert_cache()
+
+
+class CrawlPricesTest(unittest.TestCase):
+
+    def setUp(self):
+        if os.path.isdir(TEST_DIR):
+            shutil.rmtree(TEST_DIR)
+        os.mkdir(TEST_DIR)
+
+        self.args = {
+            'output': os.path.join(TEST_DIR, 'prices.txt'),
+            'log_file': os.path.join(TEST_DIR, 'prices.log'),
+            'working_dir': TEST_DIR
+        }
+
+    def tearDown(self):
+        shutil.rmtree(TEST_DIR)
+
+    def assert_cache(self):
+        # Check if cache is there
+        cache_dir = os.path.join(TEST_DIR, '.scrapy', 'httpcache', 'yahoo.leveldb')
+        self.assertTrue(os.path.isdir(cache_dir))
+
+    def assert_log(self):
+        # Check if log file is there
+        log_path = self.args['log_file']
+        self.assertTrue(os.path.isfile(log_path))
+
+    def get_output_content(self):
+        output_path = self.args['output']
+        self.assertTrue(os.path.isfile(output_path))
+
+        with open(output_path) as f:
+            content = f.read()
+        return content
+
+    def test_crawl_inline_symbols(self):
+        r = run('./bin/pystock-crawler prices GOOG,IBM -o %(output)s -l %(log_file)s -w %(working_dir)s' % self.args)
+        self.assertEqual(r.status_code, 0)
+
+        content = self.get_output_content()
+        self.assertIn('GOOG', content)
+        self.assertIn('IBM', content)
+        self.assert_log()
+        self.assert_cache()
+
+    def test_crawl_symbol_file(self):
+        # Create a sample symbol file
+        symbol_file = os.path.join(TEST_DIR, 'symbols.txt')
+        with open(symbol_file, 'w') as f:
+            f.write('WMT\nJPM')
+        self.args['symbol_file'] = symbol_file
+
+        r = run('./bin/pystock-crawler prices %(symbol_file)s -o %(output)s -l %(log_file)s -w %(working_dir)s' % self.args)
+        self.assertEqual(r.status_code, 0)
+
+        content = self.get_output_content()
+        self.assertIn('WMT', content)
+        self.assertIn('JPM', content)
+        self.assert_log()
+        self.assert_cache()
