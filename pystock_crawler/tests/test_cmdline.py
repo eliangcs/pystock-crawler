@@ -51,6 +51,10 @@ class CrawlSymbolsTest(unittest.TestCase):
 
     def get_output_content(self):
         output_path = self.args['output']
+
+        print output_path
+        print os.listdir(TEST_DIR)
+
         self.assertTrue(os.path.isfile(output_path))
 
         with open(output_path) as f:
