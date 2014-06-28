@@ -43,7 +43,7 @@ setup(
     name='pystock-crawler',
     version=find_version('pystock_crawler', '__init__.py'),
     url='https://github.com/eliangcs/pystock-crawler',
-    description='Crawl stock historical data.',
+    description='Crawl and parse stock historical data',
     long_description=read_description('README.rst'),
     author='Chang-Hung Liang',
     author_email='eliang.cs@gmail.com',
