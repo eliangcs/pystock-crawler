@@ -92,13 +92,13 @@ class CrawlSymbolsTest(unittest.TestCase):
     def test_crawl_nyse(self):
         r = run('./bin/pystock-crawler symbols NYSE -o %(output)s -l %(log_file)s -w %(working_dir)s' % self.args)
         self.assertEqual(r.status_code, 0)
-        self.assert_cache()
         self.assert_nyse_output()
         self.assert_log()
+        self.assert_cache()
 
     def test_crawl_nyse_and_nasdaq(self):
         r = run('./bin/pystock-crawler symbols NYSE,NASDAQ -o %(output)s -l %(log_file)s -w %(working_dir)s' % self.args)
         self.assertEqual(r.status_code, 0)
-        self.assert_cache()
         self.assert_nyse_and_nasdaq_output()
         self.assert_log()
+        self.assert_cache()
