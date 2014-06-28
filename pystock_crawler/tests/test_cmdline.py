@@ -44,6 +44,9 @@ class CrawlSymbolsTest(unittest.TestCase):
             'working_dir': TEST_DIR
         }
 
+    def tearDown(self):
+        shutil.rmtree(TEST_DIR)
+
     def assert_cache(self):
         # Check if cache is there
         cache_dir = os.path.join(TEST_DIR, '.scrapy', 'httpcache', 'nasdaq.leveldb')
@@ -85,9 +88,6 @@ class CrawlSymbolsTest(unittest.TestCase):
         # Check if log file is there
         log_path = self.args['log_file']
         self.assertTrue(os.path.isfile(log_path))
-
-    def tearDown(self):
-        shutil.rmtree(TEST_DIR)
 
     def test_crawl_nyse(self):
         r = run('./bin/pystock-crawler symbols NYSE -o %(output)s -l %(log_file)s -w %(working_dir)s' % self.args)
