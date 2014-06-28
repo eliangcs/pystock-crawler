@@ -53,6 +53,10 @@ class CrawlSymbolsTest(unittest.TestCase):
         output_path = self.args['output']
 
         os.system('touch %s' % os.path.join(TEST_DIR, 'hello'))
+        os.system('scrapy crawl --help > ./scrapy_help.txt')
+
+        with open('./scrapy_help.txt') as f:
+            print f.read()
 
         with open(self.args['log_file']) as f:
             print f.read()
