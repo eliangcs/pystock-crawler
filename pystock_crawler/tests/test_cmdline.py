@@ -1,10 +1,11 @@
 import os
 import shutil
+import subprocess
 import unittest
 
 import pystock_crawler
 
-from envoy import run
+from envoy import run, expand_args
 
 
 TEST_DIR = './test_data'
@@ -53,13 +54,31 @@ class CrawlSymbolsTest(unittest.TestCase):
         output_path = self.args['output']
 
         os.system('touch %s' % os.path.join(TEST_DIR, 'hello'))
-        os.system('scrapy crawl nasdaq -a exchanges="NYSE" -t symbollist -o "/home/travis/build/eliangcs/pystock-crawler/test_data/ss.txt" -s LOG_FILE="/home/travis/build/eliangcs/pystock-crawler/test_data/ss.log"')
+        cmd = 'scrapy crawl nasdaq -a exchanges="NYSE" -t symbollist -o "/home/travis/build/eliangcs/pystock-crawler/test_data/envoy.txt" -s LOG_FILE="/home/travis/build/eliangcs/pystock-crawler/test_data/envoy.log"'
+        run(cmd)
+        process = subprocess.Popen([
+            'scrapy', 'crawl', 'nasdaq',
+            '-a', 'exchanges="NYSE"',
+            '-t', 'symbollist',
+            '-o', '/home/travis/build/eliangcs/pystock-crawler/test_data/popen.txt',
+            '-s', 'LOG_FILE="/home/travis/build/eliangcs/pystock-crawler/test_data/popen.log"'
+        ], shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=0)
+        process.communicate()
 
-        with open('./test_data/ss.txt') as f:
+        print '### Envoy'
+        with open('./test_data/envoy.txt') as f:
             print f.read()[0:200]
+
+        print '### Popen'
+        with open('./test_data/popen.txt') as f:
+            print f.read()[0:200]
+
+        print '### expand_args'
+        print expand_args(cmd)
 
         with open(self.args['log_file']) as f:
             print f.read()
+
         print os.getcwd()
         print os.listdir(os.getcwd())
         print output_path
