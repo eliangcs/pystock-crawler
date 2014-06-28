@@ -30,7 +30,7 @@ try:
     import pystock_crawler
 except ImportError:
     # For development environment
-    sys.path.append('.')
+    sys.path.append(os.getcwd())
     import pystock_crawler
 
 
