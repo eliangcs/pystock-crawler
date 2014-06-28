@@ -96,19 +96,20 @@ Usage
 Type ``pystock-crawler -h`` to see command help::
 
     Usage:
-      pystock-crawler symbols <exchanges> (-o OUTPUT) [-l LOGFILE] [--sort]
-      pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD] [-l LOGFILE] [--sort]
-      pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]  [-l LOGFILE] [--sort]
+      pystock-crawler symbols <exchanges> (-o OUTPUT) [-l LOGFILE] [-w WORKING_DIR] [--sort]
+      pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD] [-l LOGFILE] [-w WORKING_DIR] [--sort]
+      pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]  [-l LOGFILE] [-w WORKING_DIR] [--sort]
       pystock-crawler (-h | --help)
       pystock-crawler (-v | --version)
 
     Options:
-      -h --help     Show this screen
-      -o OUTPUT     Output file
-      -s YYYYMMDD   Start date [default: ]
-      -e YYYYMMDD   End date [default: ]
-      -l LOGFILE    Log output [default: ]
-      --sort        Sort the result
+      -h --help       Show this screen
+      -o OUTPUT       Output file
+      -s YYYYMMDD     Start date [default: ]
+      -e YYYYMMDD     End date [default: ]
+      -l LOGFILE      Log output [default: ]
+      -w WORKING_DIR  Working directory [default: .]
+      --sort          Sort the result
 
 There are three commands available:
 
@@ -140,15 +141,16 @@ is CSV.
 ``-l`` is where the crawling logs go to. If not specified, the logs go to
 stdout.
 
-The rows in the output CSV file are in an arbitrary order by default. Use
-``--sort`` to sort them by symbols and dates. But if you have a large output
-file, don't use ``--sort`` because it will be slow and eat a lot of memory.
+By default, the crawler uses the current directory as the working directory.
+If you don't want to use the current directoy, you can specify it with ``-w``
+option. The crawler keeps HTTP cache in a directory named ``.scrapy`` under
+the working directory. The cache can save your time by avoid downloading the
+same web pages. However, the cache can be quite huge. If you don't need it,
+just delete the ``.scrapy`` directory after you've done crawling.
 
-**NOTE**: The crawler stores HTTP cache in a directory named ``.scrapy`` under
-your current working directory. The cache helps speed up the crawling process
-next time your fetch same web pages again. The cache can be quite huge. If you
-don't need it, just delete the ``.scrapy`` directory after you've done
-crawling.
+The rows in the output file are in an arbitrary order by default. Use
+``--sort`` option to sort them by symbols and dates. But if you have a large
+output file, don't use --sort because it will be slow and eat a lot of memory.
 
 
 Developer Guide
