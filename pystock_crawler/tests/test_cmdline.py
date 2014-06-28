@@ -52,6 +52,8 @@ class CrawlSymbolsTest(unittest.TestCase):
     def get_output_content(self):
         output_path = self.args['output']
 
+        print os.getcwd()
+        print os.listdir(os.getcwd())
         print output_path
         print os.listdir(TEST_DIR)
 
