@@ -1,3 +1,4 @@
 docopt==0.6.1
+leveldb==0.193
 Scrapy==0.24.1
 service-identity==1.0.0
