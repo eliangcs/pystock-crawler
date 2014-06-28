@@ -167,8 +167,10 @@ def main():
     else:
         spider = None
 
-    output = os.path.abspath(output)
-    log_file = os.path.abspath(log_file)
+    if output:
+        output = os.path.abspath(output)
+    if log_file:
+        log_file = os.path.abspath(log_file)
 
     try:
         os.chdir(working_dir)
