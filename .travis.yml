@@ -8,7 +8,7 @@ install:
   - pip install -r requirements.txt
   - pip install -r requirements-test.txt
 script:
-  - py.test
+  - py.test -k cmdline
 after_success:
   - pip install python-coveralls
   - coveralls
