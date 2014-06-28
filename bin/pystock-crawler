@@ -1,19 +1,20 @@
 #!/usr/bin/env python
 '''
 Usage:
-  pystock-crawler symbols <exchanges> (-o OUTPUT) [-l LOGFILE] [--sort]
-  pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD] [-l LOGFILE] [--sort]
-  pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]  [-l LOGFILE] [--sort]
+  pystock-crawler symbols <exchanges> (-o OUTPUT) [-l LOGFILE] [-w WORKING_DIR] [--sort]
+  pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD] [-l LOGFILE] [-w WORKING_DIR] [--sort]
+  pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]  [-l LOGFILE] [-w WORKING_DIR] [--sort]
   pystock-crawler (-h | --help)
   pystock-crawler (-v | --version)
 
 Options:
-  -h --help     Show this screen
-  -o OUTPUT     Output file
-  -s YYYYMMDD   Start date [default: ]
-  -e YYYYMMDD   End date [default: ]
-  -l LOGFILE    Log output [default: ]
-  --sort        Sort the result
+  -h --help       Show this screen
+  -o OUTPUT       Output file
+  -s YYYYMMDD     Start date [default: ]
+  -e YYYYMMDD     End date [default: ]
+  -l LOGFILE      Log output [default: ]
+  -w WORKING_DIR  Working directory [default: .]
+  --sort          Sort the result
 
 '''
 import codecs
@@ -157,6 +158,7 @@ def main():
     output = args.get('-o')
     log_file = args.get('-l')
     sorting = args.get('--sort')
+    working_dir = args.get('-w')
 
     if args['prices']:
         spider = 'yahoo'
@@ -164,6 +166,15 @@ def main():
         spider = 'edgar'
     else:
         spider = None
+
+    output = os.path.abspath(output)
+    log_file = os.path.abspath(log_file)
+
+    try:
+        os.chdir(working_dir)
+    except OSError as err:
+        sys.stderr.write('%s\n' % err)
+        return
 
     if spider:
         log.start(logfile=log_file)
