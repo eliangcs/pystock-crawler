@@ -53,10 +53,10 @@ class CrawlSymbolsTest(unittest.TestCase):
         output_path = self.args['output']
 
         os.system('touch %s' % os.path.join(TEST_DIR, 'hello'))
-        os.system('scrapy crawl --help > ./scrapy_help.txt')
+        os.system('scrapy crawl nasdaq -a exchanges="NYSE" -t symbollist -o "/home/travis/build/eliangcs/pystock-crawler/test_data/ss.txt" -s LOG_FILE="/home/travis/build/eliangcs/pystock-crawler/test_data/ss.log"')
 
-        with open('./scrapy_help.txt') as f:
-            print f.read()
+        with open('./test_data/ss.txt') as f:
+            print f.read()[0:200]
 
         with open(self.args['log_file']) as f:
             print f.read()
