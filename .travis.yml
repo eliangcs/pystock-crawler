@@ -6,7 +6,8 @@ branches:
     - master
 install:
   - pip install -r requirements.txt
-  - pip install pytest pytest-cov requests
+  - pip install -r requirements-test.txt
+  - export PYTHONPATH=$PYTHONPATH:`pwd`
 script:
   - py.test
 after_success:

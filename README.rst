@@ -164,17 +164,19 @@ Installing Dependencies
 Running Test
 ~~~~~~~~~~~~
 
-Install ``pytest``, ``pytest-cov``, and ``requests`` if you don't have them::
+Install test requirements::
 
-    pip install pytest pytest-cov requests
+    pip install -r requirements-test.txt
 
 Then run the test::
 
     py.test
 
-This downloads the test data from from `SEC EDGAR`_ on the fly, so it will
-take some time and disk space. If you want to delete test data, just delete
-``pystock_crawler/tests/sample_data`` directory.
+This will download the test data (a lot of XML files) from from `SEC EDGAR`_
+on the fly, so it will take some time and disk space. The test data is saved
+to ``pystock_crawler/tests/sample_data`` directory. It can be reused on the
+next time you run the test. If you don't need them, just delete the
+``sample_data`` directory.
 
 
 .. _libffi: https://sourceware.org/libffi/

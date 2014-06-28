@@ -1,0 +1,4 @@
+envoy
+pytest
+pytest-cov
+requests
