@@ -7,7 +7,6 @@ branches:
 install:
   - pip install -r requirements.txt
   - pip install -r requirements-test.txt
-  - export PYTHONPATH=$PYTHONPATH:`pwd`
 script:
   - py.test
 after_success:
