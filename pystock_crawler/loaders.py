@@ -123,7 +123,8 @@ class MatchEndDate(object):
                     pass
                 else:
                     local_name = value.xpath('local-name()')[0].extract()
-                    return IntermediateValue(local_name, val, text, context, value,
+                    return IntermediateValue(
+                        local_name, val, text, context, value,
                         start_date=start_date, end_date=end_date, instant=instant)
 
         return None
