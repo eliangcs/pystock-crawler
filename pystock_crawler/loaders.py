@@ -438,6 +438,7 @@ class ReportItemLoader(XmlXPathItemLoader):
 
         symbol = self._get_symbol()
         end_date = self._get_doc_end_date()
+        fiscal_year = self._get_doc_fiscal_year()
         doc_type = self._get_doc_type()
 
         # ignore document that is not 10-Q or 10-K
@@ -464,14 +465,18 @@ class ReportItemLoader(XmlXPathItemLoader):
         else:
             self.add_xpath('amend', '//dei:AmendmentFlag')
 
+        if doc_type == '10-K':
+            period_focus = 'FY'
+        else:
+            period_focus = self._get_period_focus(end_date)
+
+        if not fiscal_year and period_focus:
+            fiscal_year = self._guess_fiscal_year(end_date, period_focus)
+
+        self.add_value('period_focus', period_focus)
+        self.add_value('fiscal_year', fiscal_year)
         self.add_value('end_date', end_date)
         self.add_value('doc_type', doc_type)
-
-        if doc_type == '10-K':
-            self.add_value('period_focus', 'FY')
-        elif not self.add_xpath('period_focus', '//dei:DocumentFiscalPeriodFocus'):
-            period_focus = self._get_period_focus(end_date)
-            self.add_value('period_focus', period_focus)
 
         self.add_xpaths('revenues', [
             '//us-gaap:SalesRevenueNet',
@@ -603,6 +608,31 @@ class ReportItemLoader(XmlXPathItemLoader):
         except IndexError:
             return None
 
+    def _get_doc_fiscal_year(self):
+        try:
+            fiscal_year = self.selector.xpath('//dei:DocumentFiscalYearFocus/text()')[0].extract()
+            return int(fiscal_year)
+        except (IndexError, ValueError):
+            return None
+
+    def _guess_fiscal_year(self, end_date, period_focus):
+        # Guess fiscal_year based on document end_date and period_focus
+        date = datetime.strptime(end_date, DATE_FORMAT)
+        month_ranges = {
+            'Q1': (2, 3, 4),
+            'Q2': (5, 6, 7),
+            'Q3': (8, 9, 10),
+            'FY': (11, 12, 1)
+        }
+        month_range = month_ranges.get(period_focus)
+
+        if date.month in month_range:
+            if period_focus == 'FY' and date.month == 1:
+                return date.year - 1
+            return date.year
+
+        return None
+
     def _get_doc_end_date(self):
         # the document end date could come from URL or document content
         # we need to guess which one is correct
@@ -631,6 +661,11 @@ class ReportItemLoader(XmlXPathItemLoader):
             return None
 
     def _get_period_focus(self, doc_end_date):
+        try:
+            return self.selector.xpath('//dei:DocumentFiscalPeriodFocus/text()')[0].extract().upper()
+        except IndexError:
+            pass
+
         try:
             doc_yr = doc_end_date.split('-')[0]
             yr_end_date = self.selector.xpath('//dei:CurrentFiscalYearEndDate/text()')[0].extract()

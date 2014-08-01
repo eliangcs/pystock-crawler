@@ -23,6 +23,7 @@ class TestCaseBase(unittest.TestCase):
         self.assertEqual(item.get('amend'), expected.get('amend'))
         self.assertEqual(item.get('doc_type'), expected.get('doc_type'))
         self.assertEqual(item.get('period_focus'), expected.get('period_focus'))
+        self.assertEqual(item.get('fiscal_year'), expected.get('fiscal_year'))
         self.assertEqual(item.get('end_date'), expected.get('end_date'))
         self.assert_none_or_almost_equal(item.get('revenues'), expected.get('revenues'))
         self.assert_none_or_almost_equal(item.get('net_income'), expected.get('net_income'))
