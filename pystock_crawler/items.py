@@ -19,6 +19,7 @@ class ReportItem(Item):
     # Q1, Q2, Q3, or FY for annual report
     period_focus = Field()
 
+    fiscal_year = Field()
     end_date = Field()
 
     revenues = Field()

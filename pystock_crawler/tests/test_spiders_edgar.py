@@ -187,6 +187,7 @@ class EdgarSpiderTest(TestCaseBase):
               <dei:DocumentType contextRef="c1">10-Q</dei:DocumentType>
               <dei:DocumentFiscalPeriodFocus contextRef="c1">Q2</dei:DocumentFiscalPeriodFocus>
               <dei:DocumentPeriodEndDate contextRef="c1">2013-06-28</dei:DocumentPeriodEndDate>
+              <dei:DocumentFiscalYearFocus>2013</dei>
 
               <us-gaap:Revenues contextRef="c1">100</us-gaap:Revenues>
               <us-gaap:NetIncomeLoss contextRef="c1">200</us-gaap:NetIncomeLoss>
@@ -208,6 +209,7 @@ class EdgarSpiderTest(TestCaseBase):
             'amend': False,
             'doc_type': '10-Q',
             'period_focus': 'Q2',
+            'fiscal_year': 2013,
             'end_date': '2013-06-28',
             'revenues': 100.0,
             'net_income': 200.0,
