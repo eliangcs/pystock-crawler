@@ -1,6 +1,6 @@
 import re
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from scrapy import log
 from scrapy.contrib.loader import ItemLoader
 from scrapy.contrib.loader.processor import Compose, MapCompose, TakeFirst
@@ -626,10 +626,27 @@ class ReportItemLoader(XmlXPathItemLoader):
         }
         month_range = month_ranges.get(period_focus)
 
+        # Case 1: release Q1 around March, Q2 around June, ...
+        # This is what most companies do
         if date.month in month_range:
             if period_focus == 'FY' and date.month == 1:
                 return date.year - 1
             return date.year
+
+        # How many days left before 10-K's release?
+        days_left_table = {
+            'Q1': 270,
+            'Q2': 180,
+            'Q3': 90,
+            'FY': 0
+        }
+        days_left = days_left_table.get(period_focus)
+
+        # Other cases, assume end_date.year of its FY report equals to
+        # its fiscal_year
+        if days_left is not None:
+            fy_date = date + timedelta(days=days_left)
+            return fy_date.year
 
         return None
 
