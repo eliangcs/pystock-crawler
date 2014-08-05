@@ -164,6 +164,13 @@ def get_amend(values):
     return False
 
 
+def get_symbol(values):
+    if values:
+        symbols = map(lambda s: s.strip(), values[0].split(','))
+        return '/'.join(symbols)
+    return False
+
+
 def imd_max(imd_values):
     if imd_values:
         imd_value = max(imd_values)
@@ -376,7 +383,7 @@ class ReportItemLoader(XmlXPathItemLoader):
     default_output_processor = TakeFirst()
 
     symbol_in = MapCompose(ExtractText(), unicode.upper)
-    symbol_out = TakeFirst()
+    symbol_out = Compose(get_symbol)
 
     amend_in = MapCompose(ExtractText(), str_to_bool)
     amend_out = Compose(get_amend)

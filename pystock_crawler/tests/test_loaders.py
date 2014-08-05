@@ -1550,6 +1550,31 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash_flow_fin': -622000000
         })
 
+    def test_goog_20140630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1288776/000128877614000065/goog-20140630.xml')
+        self.assert_item(item, {
+            'symbol': 'GOOG/GOOGL',  # Two symbols, see issue #6
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'fiscal_year': 2014,
+            'end_date': '2014-06-30',
+            'revenues': 15955000000,
+            'op_income': 4258000000,
+            'net_income': 3422000000,
+            'eps_basic': 5.07,
+            'eps_diluted': 4.99,
+            'dividend': 0.0,
+            'assets': 121608000000,
+            'cur_assets': 77905000000,
+            'cur_liab': 17097000000,
+            'equity': 95749000000,
+            'cash': 19620000000,
+            'cash_flow_op': 10018000000,
+            'cash_flow_inv': -8487000000,
+            'cash_flow_fin': -640000000
+        })
+
     def test_gs_20090626(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/886982/000095012309029919/gs-20090626.xml')
         self.assert_item(item, {
