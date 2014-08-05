@@ -11,7 +11,7 @@ TEST_DIR = './test_data'
 
 
 # Scrapy runs on another process where working directory may be different with
-# the processing running the test. So we have to explicitly set PYTHONPATH to
+# the process running the test. So we have to explicitly set PYTHONPATH to
 # the absolute path of the current working directory for Scrapy process to be
 # able to locate pystock_crawler module.
 os.environ['PYTHONPATH'] = os.getcwd()
