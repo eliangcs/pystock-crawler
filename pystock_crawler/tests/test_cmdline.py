@@ -181,3 +181,13 @@ class CrawlReportsTest(CrawlTest):
         self.assertIn('MCD', content)
         self.assert_log()
         self.assert_cache()
+
+        # Check CSV header
+        expected_header = [
+            'symbol', 'end_date', 'amend', 'period_focus', 'fiscal_year', 'doc_type',
+            'revenues', 'op_income', 'net_income', 'eps_basic', 'eps_diluted', 'dividend',
+            'assets', 'cur_assets', 'cur_liab', 'cash', 'equity', 'cash_flow_op',
+            'cash_flow_inv', 'cash_flow_fin'
+        ]
+        head_line = content.split('\n')[0].rstrip()
+        self.assertEqual(head_line.split(','), expected_header)
