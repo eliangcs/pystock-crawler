@@ -60,7 +60,10 @@ class ExtractText(object):
 
     def __call__(self, value):
         if hasattr(value, 'select'):
-            return value.xpath('./text()')[0].extract()
+            try:
+                return value.xpath('./text()')[0].extract()
+            except IndexError:
+                return ''
         return unicode(value)
 
 
@@ -328,7 +331,7 @@ def is_member(context):
 def str_to_bool(value):
     if hasattr(value, 'lower'):
         value = value.lower()
-        return value and value != 'false' and value != '0'
+        return bool(value) and value != 'false' and value != '0'
     return bool(value)
 
 
