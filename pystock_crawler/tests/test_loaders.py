@@ -2904,6 +2904,31 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash_flow_fin': 605000000
         })
 
+    def test_plt_20130630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/914025/000091402513000049/plt-20130630.xml')
+        self.assert_item(item, {
+            'symbol': 'PLT',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q1',
+            'fiscal_year': 2014,
+            'end_date': '2013-06-30',
+            'revenues': 202818000,
+            'op_income': 35949000,
+            'net_income': 26953000,
+            'eps_basic': 0.63,
+            'eps_diluted': 0.62,
+            'dividend': 0.1,
+            'assets': 780520000,
+            'cur_assets': 568272000,
+            'cur_liab': 90121000,
+            'equity': 673569000,
+            'cash': 256343000,
+            'cash_flow_op': 34140000,
+            'cash_flow_inv': -4120000,
+            'cash_flow_fin': -2424000
+        })
+
     def test_qep_20110630(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/1108827/000119312511202252/qep-20110630.xml')
         self.assert_item(item, {
