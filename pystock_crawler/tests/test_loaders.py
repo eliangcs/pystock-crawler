@@ -848,6 +848,31 @@ class ReportItemLoaderTest(TestCaseBase):
             'cash_flow_fin': 185000000
         })
 
+    def test_cit_20100630(self):
+        item = parse_xml('http://www.sec.gov/Archives/edgar/data/1171825/000089109210003376/cit-20100331.xml')
+        self.assert_item(item, {
+            'symbol': 'CIT',
+            'amend': False,
+            'doc_type': '10-Q',
+            'period_focus': 'Q2',
+            'fiscal_year': 2010,
+            'end_date': '2010-06-30',
+            'revenues': 669500000,
+            'op_income': None,
+            'net_income': 142100000,
+            'eps_basic': 0.71,
+            'eps_diluted': 0.71,
+            'dividend': 0.0,
+            'assets': 54916800000,
+            'cur_assets': None,
+            'cur_liab': None,
+            'equity': 8633900000,
+            'cash': 1060700000,
+            'cash_flow_op': 178100000,
+            'cash_flow_inv': 7122800000,
+            'cash_flow_fin': -6218700000
+        })
+
     def test_csc_20120928(self):
         item = parse_xml('http://www.sec.gov/Archives/edgar/data/23082/000002308212000073/csc-20120928.xml')
         self.assert_item(item, {

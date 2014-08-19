@@ -689,7 +689,7 @@ class ReportItemLoader(XmlXPathItemLoader):
 
     def _get_period_focus(self, doc_end_date):
         try:
-            return self.selector.xpath('//dei:DocumentFiscalPeriodFocus/text()')[0].extract().upper()
+            return self.selector.xpath('//dei:DocumentFiscalPeriodFocus/text()')[0].extract().strip().upper()
         except IndexError:
             pass
 
