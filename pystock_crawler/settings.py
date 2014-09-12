@@ -47,6 +47,7 @@ COOKIES_ENABLED = False
 RETRY_TIMES = 4
 
 EXTENSIONS = {
+    'scrapy.contrib.throttle.AutoThrottle': None,
     'pystock_crawler.throttle.PassiveThrottle': 0
 }
 
