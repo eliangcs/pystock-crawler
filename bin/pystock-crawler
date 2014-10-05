@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 '''
 Usage:
-  pystock-crawler symbols <exchanges> (-o OUTPUT) [-l LOGFILE] [-w WORKING_DIR] [--sort]
-  pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD] [-l LOGFILE] [-w WORKING_DIR] [--sort]
-  pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]  [-l LOGFILE] [-w WORKING_DIR] [--sort]
+  pystock-crawler symbols <exchanges> (-o OUTPUT) [-l LOGFILE] [-w WORKING_DIR]
+                                      [--sort]
+  pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]
+                                   [-l LOGFILE] [-w WORKING_DIR] [--sort]
+  pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]
+                                    [-l LOGFILE] [-w WORKING_DIR]
+                                    [-b BATCH_SIZE] [--sort]
   pystock-crawler (-h | --help)
   pystock-crawler (-v | --version)
 
@@ -14,10 +18,12 @@ Options:
   -e YYYYMMDD     End date [default: ]
   -l LOGFILE      Log output [default: ]
   -w WORKING_DIR  Working directory [default: .]
+  -b BATCH_SIZE   Batch size [default: 500]
   --sort          Sort the result
 
 '''
 import codecs
+import math
 import os
 import sys
 import uuid
@@ -74,6 +80,36 @@ def run_scrapy_command(cmd):
         os.system(cmd)
 
 
+def count_symbols(symbols):
+    if os.path.exists(symbols):
+        # If `symbols` is a file
+        with open(symbols) as f:
+            count = 0
+            for line in f:
+                line = line.rstrip()
+                if line and not line.startswith('#'):
+                    count += 1
+        return count
+
+    # If `symbols` is a comma-separated string
+    return len(symbols.split(','))
+
+
+def merge_files(target, sources, ignore_header=False):
+    log.msg(u'Merging files to %s' % target)
+    with codecs.open(target, 'w', 'utf-8') as out:
+        for i, source in enumerate(sources):
+            with codecs.open(source, 'r', 'utf-8') as f:
+                if ignore_header and i > 0:
+                    f.next()  # Ignore CSV header
+                out.write(f.read())
+
+    # Delete source files
+    for filename in sources:
+        log.msg(u'Deleting %s' % filename)
+        os.remove(filename)
+
+
 def crawl_symbols(exchanges, output, log_file):
     command = 'scrapy crawl nasdaq -a exchanges="%s" -t symbollist' % exchanges
 
@@ -85,19 +121,40 @@ def crawl_symbols(exchanges, output, log_file):
     run_scrapy_command(command)
 
 
-def crawl(spider, symbols, start_date, end_date, output, log_file):
+def crawl(spider, symbols, start_date, end_date, output, log_file, batch_size):
     command = 'scrapy crawl %s -a symbols="%s" -t csv' % (spider, symbols)
 
     if start_date:
         command += ' -a startdate=%s' % start_date
     if end_date:
         command += ' -a enddate=%s' % end_date
-    if output:
-        command += ' -o "%s"' % output
     if log_file:
         command += ' -s LOG_FILE="%s"' % log_file
 
-    run_scrapy_command(command)
+    if spider == 'edgar':
+        # When crawling edgar filings, run the scrapy command batch by batch to
+        # work around issue #2
+        num_symbols = count_symbols(symbols)
+        num_batches = int(math.ceil(num_symbols / float(batch_size)))
+
+        # Store sub-files so we can merge them later
+        output_files = []
+
+        for i in xrange(num_batches):
+            start = i * batch_size
+            batch_cmd = command + ' -a limit=%d,%d' % (start, batch_size)
+            if output:
+                filename = '%s.%d' % (output, i + 1)
+                batch_cmd += ' -o "%s"' % filename
+                output_files.append(filename)
+
+            run_scrapy_command(batch_cmd)
+
+        merge_files(output, output_files, ignore_header=True)
+    else:
+        if output:
+            command += ' -o "%s"' % output
+        run_scrapy_command(command)
 
 
 def sort_symbols(filename):
@@ -157,6 +214,7 @@ def main():
     end_date = args.get('-e')
     output = args.get('-o')
     log_file = args.get('-l')
+    batch_size = args.get('-b')
     sorting = args.get('--sort')
     working_dir = args.get('-w')
 
@@ -175,6 +233,13 @@ def main():
         log_file = os.path.abspath(log_file)
 
     try:
+        batch_size = int(batch_size)
+        if batch_size <= 0:
+            raise ValueError
+    except ValueError:
+        raise ValueError("BATCH_SIZE must be a positive integer, input is '%s'" % batch_size)
+
+    try:
         os.chdir(working_dir)
     except OSError as err:
         sys.stderr.write('%s\n' % err)
@@ -182,7 +247,7 @@ def main():
 
     if spider:
         log.start(logfile=log_file)
-        crawl(spider, symbols, start_date, end_date, output, log_file)
+        crawl(spider, symbols, start_date, end_date, output, log_file, batch_size)
         if sorting and output:
             sort_csv(output)
     elif args['symbols']:
