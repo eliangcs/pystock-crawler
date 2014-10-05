@@ -19,6 +19,7 @@ class PassiveThrottle(object):
             raise NotConfigured
 
         self.debug = crawler.settings.getbool("PASSIVETHROTTLE_DEBUG")
+        self.stats = crawler.stats
         crawler.signals.connect(self._spider_opened, signal=signals.spider_opened)
         crawler.signals.connect(self._response_downloaded, signal=signals.response_downloaded)
 
@@ -30,6 +31,8 @@ class PassiveThrottle(object):
         self.mindelay = self._min_delay(spider)
         self.maxdelay = self._max_delay(spider)
         self.retry_http_codes = self._retry_http_codes()
+
+        self.stats.set_value('delay_count', 0)
 
     def _min_delay(self, spider):
         s = self.crawler.settings
@@ -67,6 +70,7 @@ class PassiveThrottle(object):
             new_delay = max(new_delay, self.mindelay)
             new_delay = min(new_delay, self.maxdelay)
             slot.delay = new_delay
+            self.stats.inc_value('delay_count')
         elif response.status == 200:
             new_delay = max(slot.delay / 2, self.mindelay)
             if new_delay < 0.01:
