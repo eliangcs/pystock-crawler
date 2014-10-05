@@ -9,8 +9,9 @@ from pystock_crawler.loaders import ReportItemLoader
 
 class URLGenerator(object):
 
-    def __init__(self, symbols, start_date='', end_date=''):
-        self.symbols = symbols
+    def __init__(self, symbols, start_date='', end_date='', start=0, count=None):
+        end = start + count if count is not None else None
+        self.symbols = symbols[start:end]
         self.start_date = start_date
         self.end_date = end_date
 
@@ -36,9 +37,11 @@ class EdgarSpider(CrawlSpider):
         symbols_arg = kwargs.get('symbols')
         start_date = kwargs.get('startdate', '')
         end_date = kwargs.get('enddate', '')
+        limit_arg = kwargs.get('limit', '')
 
         utils.check_date_arg(start_date, 'startdate')
         utils.check_date_arg(end_date, 'enddate')
+        start, count = utils.parse_limit_arg(limit_arg)
 
         if symbols_arg:
             if os.path.exists(symbols_arg):
@@ -47,7 +50,7 @@ class EdgarSpider(CrawlSpider):
             else:
                 # inline symbols in command
                 symbols = symbols_arg.split(',')
-            self.start_urls = URLGenerator(symbols, start_date, end_date)
+            self.start_urls = URLGenerator(symbols, start_date, end_date, start, count)
         else:
             self.start_urls = []
 
