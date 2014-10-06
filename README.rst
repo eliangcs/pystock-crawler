@@ -61,7 +61,7 @@ Ubuntu, for example, you can install them like this::
 
 See `Scrapy's installation guide`_ for more details.
 
-After installing prerequisites, you can install then ``pystock-crawler`` with
+After installing prerequisites, you can then install ``pystock-crawler`` with
 ``pip``::
 
     (sudo) pip install pystock-crawler
