@@ -15,7 +15,7 @@ including:
 
 * Ticker symbols listed in NYSE and NASDAQ from `NASDAQ`_
 * Daily prices from `Yahoo Finance`_
-* Fundamentals from 10-Q and 10-K filings on `SEC EDGAR`_
+* Fundamentals from 10-Q and 10-K filings (XBRL) on `SEC EDGAR`_
 
 
 Example Output
@@ -53,16 +53,18 @@ Prerequisites:
 * Python 2.7
 
 ``pystock-crawler`` is based on Scrapy_, so you will also need to install
-prerequisites such as lxml_ and libffi_ for Scrapy and its dependencies. See
-`Scrapy's installation guide`_ for more details.
+prerequisites such as lxml_ and libffi_ for Scrapy and its dependencies. On
+Ubuntu, for example, you can install them like this::
 
-Install with `virtualenv`_ (recommended)::
+    sudo apt-get update
+    sudo apt-get install -y gcc python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev build-essential
 
-    pip install pystock-crawler
+See `Scrapy's installation guide`_ for more details.
 
-Or do system-wide installation::
+After installing prerequisites, you can install then ``pystock-crawler`` with
+``pip``::
 
-    sudo pip install pystock-crawler
+    (sudo) pip install pystock-crawler
 
 
 Quickstart
@@ -96,9 +98,13 @@ Usage
 Type ``pystock-crawler -h`` to see command help::
 
     Usage:
-      pystock-crawler symbols <exchanges> (-o OUTPUT) [-l LOGFILE] [-w WORKING_DIR] [--sort]
-      pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD] [-l LOGFILE] [-w WORKING_DIR] [--sort]
-      pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]  [-l LOGFILE] [-w WORKING_DIR] [--sort]
+      pystock-crawler symbols <exchanges> (-o OUTPUT) [-l LOGFILE] [-w WORKING_DIR]
+                                          [--sort]
+      pystock-crawler prices <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]
+                                       [-l LOGFILE] [-w WORKING_DIR] [--sort]
+      pystock-crawler reports <symbols> (-o OUTPUT) [-s YYYYMMDD] [-e YYYYMMDD]
+                                        [-l LOGFILE] [-w WORKING_DIR]
+                                        [-b BATCH_SIZE] [--sort]
       pystock-crawler (-h | --help)
       pystock-crawler (-v | --version)
 
@@ -109,6 +115,7 @@ Type ``pystock-crawler -h`` to see command help::
       -e YYYYMMDD     End date [default: ]
       -l LOGFILE      Log output [default: ]
       -w WORKING_DIR  Working directory [default: .]
+      -b BATCH_SIZE   Batch size [default: 500]
       --sort          Sort the result
 
 There are three commands available:
@@ -148,6 +155,11 @@ the working directory. The cache can save your time by avoid downloading the
 same web pages. However, the cache can be quite huge. If you don't need it,
 just delete the ``.scrapy`` directory after you've done crawling.
 
+``-b`` option is only available to ``pystock-crawler reports`` command. It
+allows you to split a large symbol list into smaller batches. This is actually
+a workaround for an unresolved bug (#2). Normally you don't have to specify
+this option. Default value (500) works just fine.
+
 The rows in the output file are in an arbitrary order by default. Use
 ``--sort`` option to sort them by symbols and dates. But if you have a large
 output file, don't use --sort because it will be slow and eat a lot of memory.
@@ -174,11 +186,11 @@ Then run the test::
 
     py.test
 
-This will download the test data (a lot of XML files) from from `SEC EDGAR`_
-on the fly, so it will take some time and disk space. The test data is saved
-to ``pystock_crawler/tests/sample_data`` directory. It can be reused on the
-next time you run the test. If you don't need them, just delete the
-``sample_data`` directory.
+This will download the test data (a lot of XML/XBRL files) from from
+`SEC EDGAR`_ on the fly, so it will take some time and disk space. The test
+data is saved to ``pystock_crawler/tests/sample_data`` directory. It can be
+reused on the next time you run the test. If you don't need them, just delete
+the ``sample_data`` directory.
 
 
 .. _libffi: https://sourceware.org/libffi/
