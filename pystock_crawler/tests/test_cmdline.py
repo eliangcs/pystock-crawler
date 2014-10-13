@@ -191,3 +191,17 @@ class CrawlReportsTest(CrawlTest):
         ]
         head_line = content.split('\n')[0].rstrip()
         self.assertEqual(head_line.split(','), expected_header)
+
+    def test_merge_empty_results(self):
+        # Ridiculous date range (1800/1/1) -> empty result
+        r = run('./bin/pystock-crawler reports KO,MCD -o %(output)s -l %(log_file)s -w %(working_dir)s '
+                '-s 18000101 -e 18000101 -b 1' % self.args)
+        self.assertEqual(r.status_code, 0)
+
+        content = self.get_output_content()
+        self.assertFalse(content)
+
+        # Make sure subfiles are deleted
+        filename = self.args['output']
+        self.assertFalse(os.path.exists(os.path.join('%s.1' % filename)))
+        self.assertFalse(os.path.exists(os.path.join('%s.2' % filename)))

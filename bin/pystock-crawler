@@ -101,7 +101,10 @@ def merge_files(target, sources, ignore_header=False):
         for i, source in enumerate(sources):
             with codecs.open(source, 'r', 'utf-8') as f:
                 if ignore_header and i > 0:
-                    f.next()  # Ignore CSV header
+                    try:
+                        f.next()  # Ignore CSV header
+                    except StopIteration:
+                        break  # Empty file
                 out.write(f.read())
 
     # Delete source files
