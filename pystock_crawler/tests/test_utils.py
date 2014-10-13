@@ -28,6 +28,16 @@ class UtilsTest(TestCaseBase):
         with self.assertRaises(ValueError):
             utils.check_date_arg('20140132')
 
+    def test_parse_limit_arg(self):
+        self.assertEqual(utils.parse_limit_arg(''), (0, None))
+        self.assertEqual(utils.parse_limit_arg('11,22'), (11, 22))
+
+        with self.assertRaises(ValueError):
+            utils.parse_limit_arg('11,22,33')
+
+        with self.assertRaises(ValueError):
+            utils.parse_limit_arg('abc')
+
     def test_load_symbols(self):
         try:
             filename = os.path.join(SAMPLE_DATA_DIR, 'test_symbols.txt')
