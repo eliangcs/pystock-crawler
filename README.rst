@@ -13,7 +13,7 @@ pystock-crawler
 ``pystock-crawler`` is a utility for crawling historical data of US stocks,
 including:
 
-* Ticker symbols listed in NYSE and NASDAQ from `NASDAQ`_
+* Ticker symbols listed in NYSE, NASDAQ or AMEX from `NASDAQ.com`_
 * Daily prices from `Yahoo Finance`_
 * Fundamentals from 10-Q and 10-K filings (XBRL) on `SEC EDGAR`_
 
@@ -70,26 +70,27 @@ After installing prerequisites, you can then install ``pystock-crawler`` with
 Quickstart
 ----------
 
-**Example 1.** Google's and Yahoo's daily prices ordered by date::
+**Example 1.** Fetch Google's and Yahoo's daily prices ordered by date::
 
     pystock-crawler prices GOOG,YHOO -o out.csv --sort
 
-**Example 2.** Daily prices of all companies listed in ``./symbols.txt``::
+**Example 2.** Fetch daily prices of all companies listed in
+``./symbols.txt``::
 
     pystock-crawler prices ./symbols.txt -o out.csv
 
-**Example 3.** Facebook's fundamentals during 2013::
+**Example 3.** Fetch Facebook's fundamentals during 2013::
 
     pystock-crawler reports FB -o out.csv -s 20130101 -e 20131231
 
-**Example 4.** Fundamentals all companies in ``./nyse.txt`` and direct the
-logs to ``./crawling.log``::
+**Example 4.** Fetch fundamentals of all companies in ``./nyse.txt`` and direct
+the log to ``./crawling.log``::
 
     pystock-crawler reports ./nyse.txt -o out.csv -l ./crawling.log
 
-**Example 5.** All ticker symbols in NYSE and NASDAQ::
+**Example 5.** Fetch all ticker symbols in NYSE, NASDAQ and AMEX::
 
-    pystock-crawler symbols NYSE,NASDAQ -o out.txt
+    pystock-crawler symbols NYSE,NASDAQ,AMEX -o out.txt
 
 
 Usage
@@ -125,7 +126,7 @@ There are three commands available:
 * ``pystock-crawler reports`` grabs fundamentals
 
 ``<exchanges>`` is a comma-separated string that specifies the stock exchanges
-you want to include. Only NYSE and NASDAQ are supported.
+you want to include. Current, NYSE, NASDAQ and AMEX are supported.
 
 The output file of ``pystock-crawler symbols`` can be used for ``<symbols>``
 argument in ``pystock-crawler prices`` and ``pystock-crawler reports``
@@ -195,7 +196,7 @@ the ``sample_data`` directory.
 
 .. _libffi: https://sourceware.org/libffi/
 .. _lxml: http://lxml.de/
-.. _NASDAQ: http://www.nasdaq.com/
+.. _NASDAQ.com: http://www.nasdaq.com/
 .. _Scrapy: http://scrapy.org/
 .. _Scrapy's installation guide: http://doc.scrapy.org/en/latest/intro/install.html
 .. _SEC EDGAR: http://www.sec.gov/edgar/searchedgar/companysearch.html
