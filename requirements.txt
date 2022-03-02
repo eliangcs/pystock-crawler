@@ -1,4 +1,4 @@
 docopt==0.6.2
 leveldb==0.193
-Scrapy==0.24.4
+Scrapy==1.8.2
 service-identity==1.0.0
